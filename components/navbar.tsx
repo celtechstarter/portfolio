@@ -7,6 +7,7 @@ const navLinks = [
   { label: "Projekte", href: "#projekte" },
   { label: "Skills", href: "#skills" },
   { label: "Kontakt", href: "#kontakt" },
+  { label: "Devlog", href: "/devlog" },
 ]
 
 export function Navbar() {
