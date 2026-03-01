@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { ArrowDown, Github } from "lucide-react"
 
 export function Hero() {
@@ -10,6 +11,19 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-3xl text-center">
+        {/* Profilbild */}
+        <div className="mb-6 flex justify-center">
+          <div className="relative h-[150px] w-[150px] rounded-full ring-2 ring-primary/30 ring-offset-4 ring-offset-background">
+            <Image
+              src="/cel.jpg"
+              alt="Marcel Welk"
+              fill
+              className="rounded-full object-cover"
+              priority
+            />
+          </div>
+        </div>
+
         <p className="mb-4 font-mono text-sm tracking-widest text-primary uppercase">
           IT-Techniker & Developer
         </p>
