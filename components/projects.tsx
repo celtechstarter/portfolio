@@ -1,4 +1,4 @@
-import { ExternalLink, Github, Sparkles, Brain, Clock } from "lucide-react"
+import { ExternalLink, Github, Sparkles, Brain, Clock, Briefcase } from "lucide-react"
 
 interface Project {
   title: string
@@ -28,6 +28,15 @@ const projects: Project[] = [
     icon: <Brain size={24} />,
     liveUrl: "https://promptcrafter.vercel.app",
     githubUrl: "https://github.com/celtechstarter/promptcrafter",
+  },
+  {
+    title: "Marcel CV Boost",
+    description:
+      "Barrierearme Bewerbungshilfe-Plattform. Upload von Bewerbungsunterlagen, Buchungssystem für Beratungstermine und Admin-Dashboard. DSGVO-konform mit Supabase-Backend.",
+    tags: ["React", "TypeScript", "Supabase", "Tailwind CSS"],
+    icon: <Briefcase size={24} />,
+    liveUrl: "https://marcel-cv-boost.lovable.app",
+    githubUrl: "https://github.com/celtechstarter/marcel-cv-boost",
   },
   {
     title: "Coming Soon",
