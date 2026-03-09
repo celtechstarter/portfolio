@@ -1,4 +1,4 @@
-import { ExternalLink, Github, Sparkles, Brain, Clock, Briefcase } from "lucide-react"
+import { ExternalLink, Github, Sparkles, Brain, Clock, Briefcase, Send, Lock } from "lucide-react"
 
 interface Project {
   title: string
@@ -7,6 +7,7 @@ interface Project {
   icon: React.ReactNode
   liveUrl?: string
   githubUrl?: string
+  githubPrivate?: boolean
   comingSoon?: boolean
 }
 
@@ -25,9 +26,9 @@ const projects: Project[] = [
     description:
       "KI-gestützter Bewerbungsgenerator. Lebenslauf hochladen, Stellenanzeige einfügen, fertiges Anschreiben in 5 Minuten.",
     tags: ["React", "TypeScript", "KI", "Vercel"],
-    icon: <FileText size={24} />,
-    liveUrl: "https://bewerbungspilot.vercel.app",
-    isPrivate: true,
+    icon: <Send size={24} />,
+    liveUrl: "https://bewerbungspilot.vercel.app/",
+    githubPrivate: true,
   },
   {
     title: "Marcel CV Boost",
@@ -132,6 +133,13 @@ function ProjectCard({ project }: { project: Project }) {
               <Github size={14} />
               GitHub
             </a>
+          )}
+          {project.githubPrivate && (
+            <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground/40 cursor-not-allowed select-none">
+              <Github size={14} />
+              <Lock size={12} />
+              Privat
+            </span>
           )}
         </div>
       )}
