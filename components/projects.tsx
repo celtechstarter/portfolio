@@ -1,4 +1,4 @@
-import { ExternalLink, Github, Sparkles, Brain, Clock, Briefcase, Send, Lock } from "lucide-react"
+import { ExternalLink, Github, Sparkles, Brain, Clock, Briefcase, Send, Lock, FileText } from "lucide-react"
 
 interface Project {
   title: string
