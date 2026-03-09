@@ -21,13 +21,13 @@ const projects: Project[] = [
     githubUrl: "https://github.com/celtechstarter/poke-scan-v2",
   },
   {
-    title: "PromptCrafter",
+    title: "BewerbungsPilot",
     description:
-      "KI-Lernplattform für Prompt Engineering. Entwickelt beim $40k Hackathon in 48 Stunden.",
-    tags: ["React", "Node.js", "Gemini API", "Vercel"],
-    icon: <Brain size={24} />,
-    liveUrl: "https://promptcrafter.vercel.app",
-    githubUrl: "https://github.com/celtechstarter/promptcrafter",
+      "KI-gestützter Bewerbungsgenerator. Lebenslauf hochladen, Stellenanzeige einfügen, fertiges Anschreiben in 5 Minuten.",
+    tags: ["React", "TypeScript", "KI", "Vercel"],
+    icon: <FileText size={24} />,
+    liveUrl: "https://bewerbungspilot.vercel.app",
+    isPrivate: true,
   },
   {
     title: "Marcel CV Boost",
@@ -37,6 +37,15 @@ const projects: Project[] = [
     icon: <Briefcase size={24} />,
     liveUrl: "https://marcel-cv-boost.lovable.app",
     githubUrl: "https://github.com/celtechstarter/marcel-cv-boost",
+  },
+  {
+    title: "PromptCrafter",
+    description:
+      "KI-Lernplattform für Prompt Engineering. Entwickelt beim $40k Hackathon in 48 Stunden.",
+    tags: ["React", "Node.js", "Gemini API", "Vercel"],
+    icon: <Brain size={24} />,
+    liveUrl: "https://promptcrafter.vercel.app",
+    githubUrl: "https://github.com/celtechstarter/promptcrafter",
   },
   {
     title: "Coming Soon",
