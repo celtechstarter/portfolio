@@ -24,7 +24,7 @@ const contactLinks = [
 export function Contact() {
   return (
     <section id="kontakt" className="px-6 py-24 md:py-32">
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-4xl">
         <div className="mb-16 text-center">
           <p className="mb-2 font-mono text-sm tracking-widest text-primary uppercase">
             Kontakt
@@ -43,12 +43,12 @@ export function Contact() {
               rel={link.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
               className="group flex items-center gap-4 rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary/20">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary/20">
                 {link.icon}
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="text-sm text-muted-foreground">{link.label}</p>
-                <p className="font-medium text-foreground">{link.value}</p>
+                <p className="font-medium text-foreground truncate">{link.value}</p>
               </div>
             </a>
           ))}
