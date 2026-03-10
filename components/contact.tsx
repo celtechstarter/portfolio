@@ -1,4 +1,4 @@
-import { Mail, Github } from "lucide-react"
+import { Mail, Github, Linkedin } from "lucide-react"
 
 const contactLinks = [
   {
@@ -6,6 +6,12 @@ const contactLinks = [
     value: "marcel.welk87@gmail.com",
     href: "mailto:marcel.welk87@gmail.com",
     icon: <Mail size={24} />,
+  },
+  {
+    label: "LinkedIn",
+    value: "Marcel Welk",
+    href: "https://www.linkedin.com/in/marcel-welk-572a412ab/",
+    icon: <Linkedin size={24} />,
   },
   {
     label: "GitHub",
@@ -28,7 +34,7 @@ export function Contact() {
           </h2>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-3">
           {contactLinks.map((link) => (
             <a
               key={link.label}

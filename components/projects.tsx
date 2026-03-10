@@ -1,4 +1,4 @@
-import { ExternalLink, Github, Sparkles, Brain, Clock, Briefcase, Send, Lock, FileText } from "lucide-react"
+import { ExternalLink, Github, Sparkles, Brain, Briefcase, Send, Lock } from "lucide-react"
 
 interface Project {
   title: string
@@ -47,14 +47,6 @@ const projects: Project[] = [
     icon: <Brain size={24} />,
     liveUrl: "https://promptcrafter.vercel.app",
     githubUrl: "https://github.com/celtechstarter/promptcrafter",
-  },
-  {
-    title: "Coming Soon",
-    description:
-      "Neues Projekt in Arbeit. Bleib dran für Updates!",
-    tags: ["TBA"],
-    icon: <Clock size={24} />,
-    comingSoon: true,
   },
 ]
 

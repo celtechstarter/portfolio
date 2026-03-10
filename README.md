@@ -2,7 +2,7 @@
 
 Mein persönliches Portfolio als IT-Techniker & Developer.
 
-**Live:** [marcel-welk.vercel.app](https://marcel-welk.vercel.app) *(URL kommt nach Deploy)*
+**Live:** [portfolio-fawn-seven-37.vercel.app](https://portfolio-fawn-seven-37.vercel.app)
 
 ---
 
@@ -50,7 +50,3 @@ portfolio/
 ## 📝 Lizenz
 
 MIT
-
----
-
-*Gebaut mit KI-Tools 🤖*

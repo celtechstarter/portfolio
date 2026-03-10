@@ -29,9 +29,9 @@ const skillCategories: SkillCategory[] = [
     skills: ["React", "TypeScript", "Tailwind", "Node.js"],
   },
   {
-    title: "KI-Tools",
+    title: "Automation & KI",
     icon: <Bot size={20} />,
-    skills: ["Claude", "ChatGPT", "Perplexity", "Gemini"],
+    skills: ["API-Integration", "Prompt Engineering", "KI-Workflows", "RAG-Pipelines"],
   },
   {
     title: "Cloud",
