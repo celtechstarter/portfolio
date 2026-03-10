@@ -1,4 +1,4 @@
-import { ExternalLink, Github, Sparkles, Brain, Briefcase, Send, Lock } from "lucide-react"
+import { ExternalLink, Github, Sparkles, Brain, Briefcase, Send, Lock, Headset, Construction } from "lucide-react"
 
 interface Project {
   title: string
@@ -9,6 +9,7 @@ interface Project {
   githubUrl?: string
   githubPrivate?: boolean
   comingSoon?: boolean
+  wip?: boolean
 }
 
 const projects: Project[] = [
@@ -29,6 +30,14 @@ const projects: Project[] = [
     icon: <Send size={24} />,
     liveUrl: "https://bewerbungspilot.vercel.app/",
     githubPrivate: true,
+  },
+  {
+    title: "CELDESK",
+    description:
+      "IT-Service-Portal mit Ticketsystem, Asset-Verwaltung, Wissensdatenbank und Onboarding-Checklisten. Inkl. Dashboard, Dark Mode und Detail-Panels — wie Zendesk, selbst gebaut.",
+    tags: ["React", "TypeScript", "Supabase", "Tailwind CSS"],
+    icon: <Headset size={24} />,
+    wip: true,
   },
   {
     title: "Marcel CV Boost",
@@ -76,7 +85,7 @@ export function Projects() {
 function ProjectCard({ project }: { project: Project }) {
   return (
     <div
-      className={`group relative flex flex-col rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 ${
+      className={`group relative flex flex-col rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 ${
         project.comingSoon ? "opacity-60" : ""
       }`}
     >
@@ -102,7 +111,7 @@ function ProjectCard({ project }: { project: Project }) {
         ))}
       </div>
 
-      {!project.comingSoon && (
+      {!project.comingSoon && !project.wip && (
         <div className="flex items-center gap-4 border-t border-border pt-4">
           {project.liveUrl && (
             <a
@@ -133,6 +142,12 @@ function ProjectCard({ project }: { project: Project }) {
               Privat
             </span>
           )}
+        </div>
+      )}
+      {project.wip && (
+        <div className="flex items-center gap-2 border-t border-border pt-4">
+          <Construction size={14} className="text-primary" />
+          <span className="text-sm font-medium text-primary">In Entwicklung</span>
         </div>
       )}
     </div>

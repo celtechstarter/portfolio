@@ -4,9 +4,9 @@ import { ArrowDown, Github, ChevronDown, ChevronUp } from "lucide-react"
 export function Hero() {
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
-      {/* Subtle gradient background */}
+      {/* Subtle dot grid background */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/4 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-[120px]" />
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-border/50" />
       </div>
 
