@@ -1,5 +1,8 @@
+"use client"
+
+import { useState } from "react"
 import Image from "next/image"
-import { ExternalLink, Github, Sparkles, Brain, Briefcase, Send, Lock, Headset, Construction } from "lucide-react"
+import { ExternalLink, Github, Sparkles, Brain, Briefcase, Send, Lock, Headset, Construction, X } from "lucide-react"
 
 interface Project {
   title: string
@@ -67,6 +70,8 @@ const projects: Project[] = [
 ]
 
 export function Projects() {
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null)
+
   return (
     <section id="projekte" className="px-6 py-24 md:py-32">
       <div className="mx-auto max-w-4xl">
@@ -81,26 +86,61 @@ export function Projects() {
 
         <div className="flex flex-col gap-6">
           {projects.map((project) => (
-            <ProjectCard key={project.title} project={project} />
+            <ProjectCard key={project.title} project={project} onImageClick={setLightboxImage} />
           ))}
         </div>
       </div>
+
+      {/* Lightbox Modal */}
+      {lightboxImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-6"
+          onClick={() => setLightboxImage(null)}
+        >
+          <button
+            onClick={() => setLightboxImage(null)}
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
+            aria-label="Bild schließen"
+          >
+            <X size={28} />
+          </button>
+          <div className="relative max-h-[85vh] max-w-[90vw] overflow-hidden rounded-xl shadow-2xl">
+            <Image
+              src={lightboxImage.src}
+              alt={lightboxImage.alt}
+              width={1280}
+              height={720}
+              className="h-auto max-h-[85vh] w-auto object-contain"
+            />
+          </div>
+        </div>
+      )}
     </section>
   )
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({ project, onImageClick }: { project: Project; onImageClick: (img: { src: string; alt: string }) => void }) {
   return (
     <div className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 sm:flex-row">
       {/* Thumbnail */}
-      <div className="relative h-48 w-full shrink-0 overflow-hidden bg-secondary sm:h-auto sm:w-64">
+      <div
+        className={`relative h-48 w-full shrink-0 overflow-hidden bg-secondary sm:h-auto sm:w-64 ${project.image ? "cursor-pointer" : ""}`}
+        onClick={() => project.image && onImageClick({ src: project.image, alt: project.title })}
+      >
         {project.image ? (
-          <Image
-            src={project.image}
-            alt={project.title}
-            fill
-            className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-          />
+          <>
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/30">
+              <span className="rounded-lg bg-black/60 px-3 py-1.5 text-xs font-medium text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                Vergrößern
+              </span>
+            </div>
+          </>
         ) : (
           <div className="flex h-full items-center justify-center text-primary">
             {project.icon}
