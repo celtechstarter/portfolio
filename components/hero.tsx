@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { ArrowDown, Github } from "lucide-react"
+import { ArrowDown, Github, ChevronDown, ChevronUp } from "lucide-react"
 
 export function Hero() {
   return (
@@ -25,14 +25,13 @@ export function Hero() {
         </div>
 
         <p className="mb-4 font-mono text-sm tracking-widest text-primary uppercase">
-          IT-Techniker & Developer
+          Angehender IT-Fachmann
         </p>
         <h1 className="mb-6 text-5xl font-bold tracking-tight text-foreground md:text-7xl text-balance">
           Marcel Welk
         </h1>
         <p className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-          Ich baue Web-Apps mit KI-Tools. 7 Jahre Gameserver-Admin, jetzt Cloud
-          & Web Development.
+          7 Jahre Gameserver-Administration, Weiterbildung in Cloud & Web Development, und seitdem bau ich alles was mir in die Finger kommt.
         </p>
 
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -53,7 +52,30 @@ export function Hero() {
             GitHub
           </a>
         </div>
+
+        {/* Über mich - Collapsible */}
+        <AboutToggle />
       </div>
     </section>
+  )
+}
+
+function AboutToggle() {
+  return (
+    <details className="group mx-auto mt-10 max-w-lg">
+      <summary className="flex cursor-pointer items-center justify-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary list-none">
+        <span className="group-open:hidden inline-flex items-center gap-1.5">
+          Über mich
+          <ChevronDown size={14} />
+        </span>
+        <span className="hidden group-open:inline-flex items-center gap-1.5">
+          Weniger anzeigen
+          <ChevronUp size={14} />
+        </span>
+      </summary>
+      <p className="mt-4 text-sm leading-relaxed text-muted-foreground animate-in fade-in slide-in-from-top-2 duration-300">
+        Mit 16 hab ich angefangen Gameserver zu betreiben — Linux, Netzwerke und Troubleshooting hab ich mir dabei selbst beigebracht. Nach einer zertifizierten Weiterbildung in Cloud & Web Development (AWS, Azure, LPIC-1) baue ich jetzt Webapps mit React und TypeScript. Mein Ziel: ein Einstieg in den IT-Support, wo ich technisches Verständnis und Problemlösungskompetenz zusammenbringen kann.
+      </p>
+    </details>
   )
 }
