@@ -1,25 +1,54 @@
-import { Mail, Github, Linkedin } from "lucide-react"
+"use client"
+
+import { useState } from "react"
+import { Mail, Github, Linkedin, Copy, Check } from "lucide-react"
 
 const contactLinks = [
   {
     label: "Email",
     value: "marcel.welk87@gmail.com",
     href: "mailto:marcel.welk87@gmail.com",
+    copyValue: "marcel.welk87@gmail.com",
     icon: <Mail size={24} />,
   },
   {
     label: "LinkedIn",
     value: "Marcel Welk",
     href: "https://www.linkedin.com/in/marcel-welk-572a412ab/",
+    copyValue: "https://www.linkedin.com/in/marcel-welk-572a412ab/",
     icon: <Linkedin size={24} />,
   },
   {
     label: "GitHub",
     value: "celtechstarter",
     href: "https://github.com/celtechstarter",
+    copyValue: "https://github.com/celtechstarter",
     icon: <Github size={24} />,
   },
 ]
+
+function CopyButton({ value }: { value: string }) {
+  const [copied, setCopied] = useState(false)
+
+  function handleCopy(e: React.MouseEvent) {
+    e.preventDefault()
+    e.stopPropagation()
+    navigator.clipboard.writeText(value).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    })
+  }
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="shrink-0 rounded-md p-1.5 text-muted-foreground/50 transition-colors hover:bg-primary/10 hover:text-primary"
+      aria-label="Kopieren"
+    >
+      {copied ? <Check size={14} className="text-primary" /> : <Copy size={14} />}
+    </button>
+  )
+}
 
 export function Contact() {
   return (
@@ -36,21 +65,26 @@ export function Contact() {
 
         <div className="grid gap-4 sm:grid-cols-3">
           {contactLinks.map((link) => (
-            <a
+            <div
               key={link.label}
-              href={link.href}
-              target={link.href.startsWith("mailto") ? undefined : "_blank"}
-              rel={link.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-              className="group flex items-center gap-4 rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5"
+              className="group flex items-center gap-3 rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5"
             >
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary/20">
-                {link.icon}
-              </div>
-              <div className="min-w-0">
-                <p className="text-sm text-muted-foreground">{link.label}</p>
-                <p className="font-medium text-foreground truncate">{link.value}</p>
-              </div>
-            </a>
+              <a
+                href={link.href}
+                target={link.href.startsWith("mailto") ? undefined : "_blank"}
+                rel={link.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+                className="flex min-w-0 flex-1 items-center gap-4"
+              >
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary/20">
+                  {link.icon}
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm text-muted-foreground">{link.label}</p>
+                  <p className="break-all font-medium text-foreground">{link.value}</p>
+                </div>
+              </a>
+              <CopyButton value={link.copyValue} />
+            </div>
           ))}
         </div>
       </div>
