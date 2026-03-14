@@ -85,7 +85,7 @@ function AboutToggle() {
         </p>
 
         <p>
-          Mein Werkzeug dafür: KI. Ich arbeite täglich mit Claude, Claude Code, Gemini, Kimi und anderen Modellen. Aber nicht so wie man sich das vielleicht vorstellt. Ich betreibe kein aufwändiges Prompt Engineering. Ich öffne einfach ein Gespräch und lege meine Gedanken ab. Die einzige Anweisung die ich jeder KI gebe: Sei kritisch mit meinen Ideen. Sag mir wenn ich falsch denke. Zeig mir andere Perspektiven.
+          Mein Werkzeug dafür: KI. Ob Claude, ChatGPT, Gemini, DeepSeek oder Open Source Modelle wie Llama und Kimi, ist mir erstmal egal. Ich schau mir an, welches Modell für mein aktuelles Problem oder Projekt am meisten Sinn macht, was es kostet und wo die Stärken liegen. Dann nehme ich einfach das richtige Werkzeug. Sich in neue Tools und Modelle einzuarbeiten ist für mich kein Aufwand, sondern normal. Das Feld ändert sich ständig und genau das finde ich gut.
         </p>
 
         <p>
