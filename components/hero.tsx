@@ -1,5 +1,8 @@
+"use client"
+
+import { useState } from "react"
 import Image from "next/image"
-import { ArrowDown, Github, ChevronDown, ChevronUp } from "lucide-react"
+import { ArrowDown, Github, ChevronDown, ChevronUp, Info } from "lucide-react"
 
 export function Hero() {
   return (
@@ -25,13 +28,13 @@ export function Hero() {
         </div>
 
         <p className="mb-4 font-mono text-sm tracking-widest text-primary uppercase">
-          Angehender IT-Fachmann
+          Builder. Problemlöser. KI Nerd.
         </p>
         <h1 className="mb-6 text-5xl font-bold tracking-tight text-foreground md:text-7xl text-balance">
           Marcel Welk
         </h1>
         <p className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-          7 Jahre Gameserver-Administration, Weiterbildung in Cloud & Web Development, und seitdem bau ich alles was mir in die Finger kommt.
+          Ich baue Webapps, löse IT Probleme und benutze KI nicht als Spielerei, sondern als tägliches Werkzeug. Mein Kopf braucht ständig neue Probleme, und in der IT gehen die zum Glück nie aus.
         </p>
 
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -61,11 +64,13 @@ export function Hero() {
 }
 
 function AboutToggle() {
+  const [paretoOpen, setParetoOpen] = useState(false)
+
   return (
     <details className="group mx-auto mt-10 max-w-lg">
       <summary className="flex cursor-pointer items-center justify-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary list-none">
         <span className="group-open:hidden inline-flex items-center gap-1.5">
-          Über mich
+          Mehr anzeigen
           <ChevronDown size={14} />
         </span>
         <span className="hidden group-open:inline-flex items-center gap-1.5">
@@ -73,9 +78,64 @@ function AboutToggle() {
           <ChevronUp size={14} />
         </span>
       </summary>
-      <p className="mt-4 text-sm leading-relaxed text-muted-foreground animate-in fade-in slide-in-from-top-2 duration-300">
-        Mit 16 hab ich angefangen Gameserver zu betreiben — Linux, Netzwerke und Troubleshooting hab ich mir dabei selbst beigebracht. Nach einer zertifizierten Weiterbildung in Cloud & Web Development (AWS, Azure, LPIC-1) baue ich jetzt Webapps mit React und TypeScript. Mein Ziel: ein Einstieg in den IT-Support, wo ich technisches Verständnis und Problemlösungskompetenz zusammenbringen kann.
-      </p>
+
+      <div className="mt-4 space-y-4 text-left text-sm leading-relaxed text-muted-foreground animate-in fade-in slide-in-from-top-2 duration-300">
+        <p>
+          Mein Kopf arbeitet am besten wenn er an fünf Sachen gleichzeitig denkt. Das klingt chaotisch, ist es manchmal auch, aber genau das macht mich gut in dem was ich tue. Ich mach abends den Rechner aus, leg mich hin, und nach zwei Stunden fällt mir plötzlich ein wie ich das Problem von vorhin lösen kann. Dann steh ich wieder auf, setz mich an den PC und bin im Tunnel. Im positiven Sinn. Da fließen tausend Ideen gleichzeitig und ich muss die alle festhalten bevor sie wieder weg sind.
+        </p>
+
+        <p>
+          Mein Werkzeug dafür: KI. Ich arbeite täglich mit Claude, Claude Code, Gemini, Kimi und anderen Modellen. Aber nicht so wie man sich das vielleicht vorstellt. Ich betreibe kein aufwändiges Prompt Engineering. Ich öffne einfach ein Gespräch und lege meine Gedanken ab. Die einzige Anweisung die ich jeder KI gebe: Sei kritisch mit meinen Ideen. Sag mir wenn ich falsch denke. Zeig mir andere Perspektiven.
+        </p>
+
+        <p>
+          Und dann passiert was Interessantes. Beim Schreiben meiner Gedanken fallen mir meistens schon die Lösungen ein. Die KI ist dabei weniger Codegenerator und mehr Sparringspartner. Ich nutze oft mehrere KIs parallel mit dem gleichen Problem, weil jedes Modell anders denkt. Am Ende vom Tag nehme ich mir von allem das Beste, kombiniere es und baue daraus etwas das besser ist als jede einzelne Antwort.
+        </p>
+
+        <p>
+          Mein Arbeitsprinzip: Schnell bauen, schnell testen, schnell lernen. Mein IT Lehrer hat mir mal das Pareto Prinzip erklärt und ich hab es für mich weitergedreht. Nicht Perfektion, sondern Impact. Erst den Kern treffen, dann schauen ob mehr nötig ist. Meistens reicht der Kern.{" "}
+          <button
+            onClick={() => setParetoOpen(!paretoOpen)}
+            className="inline-flex items-center gap-1 rounded border border-primary/30 px-1.5 py-0.5 text-xs text-primary/70 hover:border-primary hover:text-primary transition-colors font-mono"
+            aria-expanded={paretoOpen}
+          >
+            <Info size={10} />
+            Was ist das?
+          </button>
+        </p>
+
+        <div
+          className={`overflow-hidden transition-all duration-300 ease-in-out ${
+            paretoOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="rounded-lg border border-border/50 bg-muted/30 p-4 text-xs leading-relaxed space-y-2">
+            <p className="font-medium text-foreground/80">Das Pareto Prinzip (die 80/20 Regel)</p>
+            <p>
+              Das Pareto Prinzip sagt, dass man mit 20% des Aufwands 80% des Ergebnisses erreicht. In der IT bedeutet das: 20% des Codes sind für 80% der Funktionalität verantwortlich. 20% der Bugs verursachen 80% der Abstürze. Wer die richtigen 20% findet, spart massiv Zeit.
+            </p>
+            <p>
+              Ich wende das doppelt an: Die 20% der 20% finden, also den absoluten Kern. Inspiriert hat mich dabei auch die Arbeitsweise von Peter Steinberger, dem Gründer von PSPDFKit und OpenClaw, der heute bei OpenAI arbeitet. Sein Ansatz: Nicht jede Codezeile selber lesen, sondern KI Agenten orchestrieren und sich auf Architektur und das Gesamtbild konzentrieren. Schnell ausliefern statt endlos perfektionieren. Diese Denkweise hab ich für mich übernommen.
+            </p>
+          </div>
+        </div>
+
+        <p>
+          Für meine eigenen Projekte heißt das: Code auf GitHub pushen. Wenn es funktioniert, gut. Wenn nicht, dann kommt der Teil der mir am meisten Spaß macht. Problemlösung. Wie krieg ich das hin? Woran liegt es? Da geh ich voll drauf. Das ist so was von mein Ding. In Teams und professionellen Umgebungen arbeite ich natürlich strukturierter, das sind verschiedene Welten.
+        </p>
+
+        <p>
+          Ich setze meine Projekte auf verschiedenen Wegen um. Manchmal lokal mit VSCode und Claude Code, manchmal auf meinem eigenen VPS Server, deployed wird über Vercel, Code liegt auf GitHub. Ich probiere ständig neue Tools aus und lerne dabei. Nicht weil ich muss, sondern weil ich Bock drauf habe.
+        </p>
+
+        <p>
+          Ich hab mir über die Jahre viel Wissen angeeignet und vieles davon auch wieder vergessen. Aber wenn ich das Wissen brauche, weiß ich wo ich es finde und wie ich es abfrage. Man kann sich nicht alles merken. Muss man auch nicht. Wenn man einmal die Grundlagen verstanden hat, reicht das aus um jedes Problem kreativ zu lösen.
+        </p>
+
+        <p>
+          Ich suche keinen Arbeitgeber der alte Strukturen abarbeitet. Ich suche ein Unternehmen das modern denkt, neue Wege ausprobiert und mit jemandem klarkommt, der manchmal fünf Ideen gleichzeitig hat. Wenn das passt, dann kriegt das Unternehmen einen Mitarbeiter der nicht aufhört Probleme zu lösen bis sie gelöst sind.
+        </p>
+      </div>
     </details>
   )
 }
