@@ -5,6 +5,7 @@ import { Skills } from "@/components/skills"
 import { Contact } from "@/components/contact"
 import { Footer } from "@/components/footer"
 import { FloatingThoughts } from "@/components/floating-thoughts"
+import { GitHubActivity } from "@/components/github-activity"
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
           <Hero />
           <Projects />
           <Skills />
+          <GitHubActivity />
           <Contact />
         </main>
         <Footer />
