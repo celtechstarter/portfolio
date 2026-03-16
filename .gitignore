@@ -4,17 +4,29 @@ node_modules/
 # Next.js
 .next/
 out/
+next-env.d.ts
 
 # Environment
+.env
+.env.local
+.env.production
 .env*.local
+
+# TypeScript
+*.tsbuildinfo
 
 # OS
 .DS_Store
 Thumbs.db
+*.swp
+*.swo
 
 # IDE
 .vscode/
 .idea/
+
+# Deployment
+.vercel/
 
 # Misc
 .claude/
