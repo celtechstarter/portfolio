@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from "react"
-import Image from "next/image"
 import { Github, ExternalLink } from "lucide-react"
 
 // TODO: Werte aus https://github.com/celtechstarter manuell aktualisieren
@@ -72,13 +71,11 @@ export function GitHubActivity() {
               GitHub Aktivität laden...
             </div>
           ) : (
-            <Image
+            <img // eslint-disable-line @next/next/no-img-element
               src="https://ghchart.rshah.org/CF9336/celtechstarter"
               alt="GitHub Contribution Graph von celtechstarter"
-              width={800}
-              height={128}
               className="w-full rounded-xl"
-              style={{ filter: "opacity(0.85)" }}
+              style={{ maxWidth: "100%", filter: "opacity(0.85)" }}
               onError={() => setImgError(true)}
             />
           )}
