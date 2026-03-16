@@ -119,6 +119,15 @@ const entries: DevlogEntry[] = [
       "Set-Code-Erkennung verbessert, Vintage-Karten-Support eingebaut, Multi-Zonen-Scan implementiert. Erkennungsgenauigkeit durch intensives Prompt-Engineering auf ein neues Niveau gebracht. Deployment.",
     pdf: "/docs/Daily_PokeScan_Tag7_24-02-2026.pdf",
   },
+  {
+    project: "Poke-Scan V2",
+    color: PROJECT_COLORS["Poke-Scan V2"],
+    day: 8,
+    date: "16.03.2026",
+    title: "Großer Cleanup: 130+ Dateien raus",
+    description:
+      "Kompletter Projekt-Cleanup durchgeführt. 130+ tote Dateien gelöscht.",
+  },
 
   // ── Portfolio ─────────────────────────────────────────────────────────────
   {
@@ -162,6 +171,17 @@ const entries: DevlogEntry[] = [
       "Canvas-basierte Floating-Thoughts-Animation gebaut: IT-Begriffe schweben durch den Raum, verbinden sich bei Mausnähe. Insider-Witze, mehrere Sprachen. GitHub-Activity-Bereich und Devlog-Timeline eingebaut. Copy-Buttons bei Kontakt-Karten.",
     problemSolved:
       "Z-Index-Konflikte zwischen Canvas-Animation und Content-Overlay → Fixed positioning mit isolierten Stacking Contexts",
+  },
+  {
+    project: "Portfolio",
+    color: PROJECT_COLORS["Portfolio"],
+    day: 6,
+    date: "16.03.2026",
+    title: "Lebenslauf-Seite & Clean Code",
+    description:
+      "Eigene Lebenslauf-Seite gebaut mit Timeline-Design, Profilbild und Skills als Badge-Pills. Neue \"Meine Arbeitsweise\" Section für ehrliche Darstellung des KI-Workflows. Favicon aus Profilbild erstellt, SEO Meta-Tags und OpenGraph-Daten eingerichtet. Danach kompletter Cleanup: ungenutzte Komponenten und Dependencies entfernt, Dead Code und console.logs bereinigt.",
+    problemSolved:
+      "Inline-Lebenslauf wirkt professioneller als ein eingebetteter PDF-Viewer",
   },
 
   // ── CelDesk ───────────────────────────────────────────────────────────────
