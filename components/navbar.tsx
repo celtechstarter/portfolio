@@ -3,16 +3,22 @@
 import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
 
-const navLinks = [
-  { label: "Projekte", href: "#projekte" },
-  { label: "Skills", href: "#skills" },
-  { label: "Kontakt", href: "#kontakt" },
-  { label: "Devlog", href: "/devlog" },
+const NAV_LINKS = [
+  { label: "Projekte", href: "#projekte", isHash: true },
+  { label: "Skills", href: "#skills", isHash: true },
+  { label: "Kontakt", href: "#kontakt", isHash: true },
+  { label: "Devlog", href: "/devlog", isHash: false },
+  { label: "Lebenslauf", href: "/lebenslauf", isHash: false },
 ]
 
-export function Navbar() {
+export function Navbar({ basePath = "" }: { basePath?: string }) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+
+  const navLinks = NAV_LINKS.map((link) => ({
+    ...link,
+    href: link.isHash ? `${basePath}${link.href}` : link.href,
+  }))
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -30,7 +36,7 @@ export function Navbar() {
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a
-          href="#"
+          href="/"
           className="font-mono text-lg font-bold tracking-tight text-primary"
         >
           {"<MW />"}
