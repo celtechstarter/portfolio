@@ -4,6 +4,17 @@ import {
   Bot,
   Cloud,
   Award,
+  Terminal,
+  Box,
+  Layers,
+  Globe,
+  GitBranch,
+  Code,
+  FileCode,
+  GitFork,
+  Key,
+  Server,
+  Palette,
 } from "lucide-react"
 
 interface SkillCategory {
@@ -16,6 +27,26 @@ interface Certificate {
   title: string
   issuer: string
 }
+
+interface SkillIcon {
+  name: string
+  icon: React.ReactNode
+  color: string
+}
+
+const skillIcons: SkillIcon[] = [
+  { name: "Linux", icon: <Terminal size={22} />, color: "#c89336" },
+  { name: "Docker", icon: <Box size={22} />, color: "#378ADD" },
+  { name: "AWS", icon: <Layers size={22} />, color: "#EF9F27" },
+  { name: "Azure", icon: <Globe size={22} />, color: "#378ADD" },
+  { name: "CI/CD", icon: <GitBranch size={22} />, color: "#1D9E75" },
+  { name: "React", icon: <Code size={22} />, color: "#D4537E" },
+  { name: "TypeScript", icon: <FileCode size={22} />, color: "#5B8FD8" },
+  { name: "Git", icon: <GitFork size={22} />, color: "#5DCAA5" },
+  { name: "SSH", icon: <Key size={22} />, color: "#c89336" },
+  { name: "Node.js", icon: <Server size={22} />, color: "#5DCAA5" },
+  { name: "Tailwind", icon: <Palette size={22} />, color: "#5B8FD8" },
+]
 
 const skillCategories: SkillCategory[] = [
   {
@@ -58,6 +89,21 @@ export function Skills() {
           <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl text-balance">
             Skills & Tools
           </h2>
+        </div>
+
+        {/* Icon Grid */}
+        <div className="mb-14 grid grid-cols-4 gap-3 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-11">
+          {skillIcons.map((item) => (
+            <div
+              key={item.name}
+              className="flex flex-col items-center gap-2 rounded-lg border border-border bg-card/50 p-3 transition-all duration-200 hover:border-primary/30 hover:bg-card"
+            >
+              <div style={{ color: item.color }}>{item.icon}</div>
+              <span className="font-mono text-[10px] leading-tight text-center text-muted-foreground">
+                {item.name}
+              </span>
+            </div>
+          ))}
         </div>
 
         {/* Skill Categories */}

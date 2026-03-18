@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import { ArrowDown, Github, ChevronDown, ChevronUp, Info } from "lucide-react"
+import { motion } from "framer-motion"
 
 export function Hero() {
   return (
@@ -14,6 +15,32 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-3xl text-center">
+        {/* Availability Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-8 inline-flex flex-col items-center gap-2 rounded-xl border border-border/20 bg-emerald-500/5 px-5 py-3"
+        >
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
+            <div className="flex items-center gap-2">
+              <span className="status-dot" />
+              <span className="text-[13px] font-medium text-emerald-400">Verfügbar für neue Herausforderungen</span>
+            </div>
+            <div className="flex flex-wrap justify-center gap-1.5">
+              {["IT-Support", "Cloud Admin", "Linux Sysadmin", "Junior DevOps"].map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded border border-border/30 px-1.5 py-0.5 font-mono text-xs text-muted-foreground"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+          <p className="text-xs text-muted-foreground/60">Dortmund · Vor Ort bevorzugt, Remote möglich</p>
+        </motion.div>
+
         {/* Profilbild */}
         <div className="mb-6 flex justify-center">
           <div className="relative h-[150px] w-[150px] rounded-full ring-2 ring-primary/30 ring-offset-4 ring-offset-background">

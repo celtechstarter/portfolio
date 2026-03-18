@@ -4,6 +4,8 @@ import { useState } from "react"
 import Image from "next/image"
 import { ExternalLink, Github, Sparkles, Brain, Briefcase, Send, Lock, Headset, Construction, X } from "lucide-react"
 
+type ProjectStatus = "aktiv" | "fertig" | "in_arbeit"
+
 interface Project {
   title: string
   description: string
@@ -15,6 +17,7 @@ interface Project {
   githubPrivate?: boolean
   comingSoon?: boolean
   wip?: boolean
+  status?: ProjectStatus
 }
 
 const projects: Project[] = [
@@ -27,6 +30,7 @@ const projects: Project[] = [
     image: "/projects/pokescan.png",
     liveUrl: "https://poke-scan-v2.vercel.app",
     githubUrl: "https://github.com/celtechstarter/poke-scan-v2",
+    status: "aktiv",
   },
   {
     title: "BewerbungsPilot",
@@ -37,6 +41,7 @@ const projects: Project[] = [
     image: "/projects/bewerbungspilot.png",
     liveUrl: "https://bewerbungspilot.vercel.app/",
     githubPrivate: true,
+    status: "fertig",
   },
   {
     title: "CELDESK",
@@ -46,6 +51,7 @@ const projects: Project[] = [
     icon: <Headset size={24} />,
     image: "/projects/celdesk.png",
     wip: true,
+    status: "in_arbeit",
   },
   {
     title: "Marcel CV Boost",
@@ -56,6 +62,7 @@ const projects: Project[] = [
     image: "/projects/cvboost.png",
     liveUrl: "https://marcel-cv-boost.lovable.app",
     githubUrl: "https://github.com/celtechstarter/marcel-cv-boost",
+    status: "fertig",
   },
   {
     title: "PromptCrafter",
@@ -66,8 +73,49 @@ const projects: Project[] = [
     image: "/projects/promptcrafter.png",
     liveUrl: "https://promptcrafter.vercel.app",
     githubUrl: "https://github.com/celtechstarter/promptcrafter",
+    status: "fertig",
   },
 ]
+
+function StatusBadge({ status }: { status: ProjectStatus }) {
+  if (status === "aktiv") {
+    return (
+      <div className="flex items-center gap-1.5">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <circle cx="7" cy="7" r="5" fill="#1D9E75" opacity="0.25">
+            <animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.25;0;0.25" dur="2s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="7" cy="7" r="3.5" fill="#1D9E75" />
+        </svg>
+        <span className="font-mono text-xs" style={{ color: "#1D9E75" }}>aktiv</span>
+      </div>
+    )
+  }
+
+  if (status === "fertig") {
+    return (
+      <div className="flex items-center gap-1.5">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <circle cx="7" cy="7" r="6" stroke="#378ADD" strokeWidth="1.5" />
+          <path d="M4.5 7L6.5 9L9.5 5" stroke="#378ADD" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        <span className="font-mono text-xs" style={{ color: "#378ADD" }}>fertig</span>
+      </div>
+    )
+  }
+
+  return (
+    <div className="flex items-center gap-1.5">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <circle cx="7" cy="7" r="5" stroke="#EF9F27" strokeWidth="1.5" strokeDasharray="3.5 2">
+          <animateTransform attributeName="transform" type="rotate" from="0 7 7" to="360 7 7" dur="2.5s" repeatCount="indefinite" />
+        </circle>
+      </svg>
+      <span className="font-mono text-xs" style={{ color: "#EF9F27" }}>in arbeit</span>
+    </div>
+  )
+}
 
 export function Projects() {
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null)
@@ -150,9 +198,14 @@ function ProjectCard({ project, onImageClick }: { project: Project; onImageClick
 
       {/* Content */}
       <div className="flex flex-1 flex-col p-6">
-        <h3 className="mb-2 text-lg font-semibold text-foreground">
-          {project.title}
-        </h3>
+        {/* Title + Status Badge */}
+        <div className="mb-2 flex items-center justify-between gap-3">
+          <h3 className="text-lg font-semibold text-foreground">
+            {project.title}
+          </h3>
+          {project.status && <StatusBadge status={project.status} />}
+        </div>
+
         <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground">
           {project.description}
         </p>

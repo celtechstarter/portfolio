@@ -1,92 +1,65 @@
 "use client"
 
-import { useState } from "react"
-import { Mail, Github, Linkedin, Copy, Check } from "lucide-react"
-
-const contactLinks = [
-  {
-    label: "Email",
-    value: "marcel.welk87@gmail.com",
-    href: "mailto:marcel.welk87@gmail.com",
-    copyValue: "marcel.welk87@gmail.com",
-    icon: <Mail size={24} />,
-  },
-  {
-    label: "LinkedIn",
-    value: "Marcel Welk",
-    href: "https://www.linkedin.com/in/marcel-welk-572a412ab/",
-    copyValue: "https://www.linkedin.com/in/marcel-welk-572a412ab/",
-    icon: <Linkedin size={24} />,
-  },
-  {
-    label: "GitHub",
-    value: "celtechstarter",
-    href: "https://github.com/celtechstarter",
-    copyValue: "https://github.com/celtechstarter",
-    icon: <Github size={24} />,
-  },
-]
-
-function CopyButton({ value }: { value: string }) {
-  const [copied, setCopied] = useState(false)
-
-  function handleCopy(e: React.MouseEvent) {
-    e.preventDefault()
-    e.stopPropagation()
-    navigator.clipboard.writeText(value).then(() => {
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    })
-  }
-
-  return (
-    <button
-      onClick={handleCopy}
-      className="shrink-0 rounded-md p-1.5 text-muted-foreground/50 transition-colors hover:bg-primary/10 hover:text-primary"
-      aria-label="Kopieren"
-    >
-      {copied ? <Check size={14} className="text-primary" /> : <Copy size={14} />}
-    </button>
-  )
-}
+import { useRef } from "react"
+import { Mail, Github, Linkedin, FileText } from "lucide-react"
+import { motion, useInView } from "framer-motion"
 
 export function Contact() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-80px" })
+
   return (
     <section id="kontakt" className="px-6 py-24 md:py-32">
       <div className="mx-auto max-w-4xl">
-        <div className="mb-16 text-center">
-          <p className="mb-2 font-mono text-sm tracking-widest text-primary uppercase">
-            Kontakt
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6 }}
+          className="rounded-2xl border border-border bg-card/50 p-8 text-center lg:p-12"
+        >
+          <p className="mb-3 font-mono text-xs tracking-widest text-primary uppercase">Kontakt</p>
+          <h2 className="mb-3 text-2xl font-bold text-foreground">Interesse geweckt?</h2>
+          <p className="mb-8 text-muted-foreground">
+            Ich freue mich über eine Nachricht — per E-Mail, GitHub oder LinkedIn.
           </p>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl text-balance">
-            Lass uns reden
-          </h2>
-        </div>
 
-        <div className="grid gap-4 sm:grid-cols-3">
-          {contactLinks.map((link) => (
-            <div
-              key={link.label}
-              className="group flex items-center gap-3 rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5"
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="mailto:marcel.welk87@gmail.com"
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20"
             >
-              <a
-                href={link.href}
-                target={link.href.startsWith("mailto") ? undefined : "_blank"}
-                rel={link.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-                className="flex min-w-0 flex-1 items-center gap-4"
-              >
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary/20">
-                  {link.icon}
-                </div>
-                <div className="min-w-0">
-                  <p className="text-sm text-muted-foreground">{link.label}</p>
-                  <p className="break-all font-medium text-foreground">{link.value}</p>
-                </div>
-              </a>
-              <CopyButton value={link.copyValue} />
-            </div>
-          ))}
-        </div>
+              <Mail size={16} />
+              E-Mail schreiben
+            </a>
+            <a
+              href="https://github.com/celtechstarter"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground transition-all hover:border-primary/50 hover:text-primary"
+            >
+              <Github size={16} />
+              GitHub ansehen
+            </a>
+            <a
+              href="https://linkedin.com/in/marcel-welk-572a412ab/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground transition-all hover:border-primary/50 hover:text-primary"
+            >
+              <Linkedin size={16} />
+              LinkedIn
+            </a>
+            <a
+              href="/lebenslauf.pdf"
+              download
+              className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground transition-all hover:border-primary/50 hover:text-primary"
+            >
+              <FileText size={16} />
+              Lebenslauf (PDF)
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   )

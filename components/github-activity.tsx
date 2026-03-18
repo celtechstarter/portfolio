@@ -1,14 +1,56 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Github, ExternalLink } from "lucide-react"
+import { useInView, animate } from "framer-motion"
 
-// TODO: Werte aus https://github.com/celtechstarter manuell aktualisieren
 const stats = [
-  { value: "15", label: "Public Repos" },
-  { value: "200+", label: "Commits 2026" },
-  { value: "4", label: "Projekte deployed" },
+  { value: 15, display: "15", label: "Public Repos" },
+  { value: 200, display: "200+", label: "Commits 2026" },
+  { value: 4, display: "4", label: "Projekte deployed" },
 ]
+
+function AnimatedCounter({ value, display, label }: { value: number; display: string; label: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true })
+  const [count, setCount] = useState("0")
+  const hasAnimated = useRef(false)
+
+  useEffect(() => {
+    if (isInView && !hasAnimated.current) {
+      hasAnimated.current = true
+      const suffix = display.endsWith("+") ? "+" : ""
+      const controls = animate(0, value, {
+        duration: 1.5,
+        ease: "easeOut",
+        onUpdate(latest) {
+          setCount(Math.round(latest).toString() + suffix)
+        },
+        onComplete() {
+          setCount(display)
+        },
+      })
+      return () => controls.stop()
+    }
+  }, [isInView, value, display])
+
+  return (
+    <div ref={ref} className="rounded-xl border border-border/20 bg-card/30 px-6 py-8 text-center">
+      <p
+        className="font-mono text-3xl font-bold sm:text-4xl md:text-5xl"
+        style={{ color: "rgba(207, 147, 54, 0.95)" }}
+      >
+        {count}
+      </p>
+      <p
+        className="mt-2 font-mono text-xs tracking-wider"
+        style={{ color: "rgba(255,255,255,0.35)" }}
+      >
+        {label}
+      </p>
+    </div>
+  )
+}
 
 export function GitHubActivity() {
   const [imgError, setImgError] = useState(false)
@@ -32,23 +74,10 @@ export function GitHubActivity() {
           </h2>
         </div>
 
-        {/* Stats */}
-        <div className="mb-10 grid grid-cols-3 gap-4 sm:gap-8">
+        {/* Animated Stats */}
+        <div className="mb-10 grid grid-cols-3 gap-4 sm:gap-6">
           {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <p
-                className="font-mono text-3xl font-bold sm:text-4xl md:text-5xl"
-                style={{ color: "rgba(207, 147, 54, 0.95)" }}
-              >
-                {stat.value}
-              </p>
-              <p
-                className="mt-2 font-mono text-xs tracking-wider"
-                style={{ color: "rgba(255,255,255,0.35)" }}
-              >
-                {stat.label}
-              </p>
-            </div>
+            <AnimatedCounter key={stat.label} value={stat.value} display={stat.display} label={stat.label} />
           ))}
         </div>
 
