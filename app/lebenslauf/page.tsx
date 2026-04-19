@@ -11,6 +11,7 @@ import {
 } from "lucide-react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import { ProtectedContactLinks } from "@/components/protected-contact-links"
 
 export const metadata: Metadata = {
   title: "Lebenslauf | Marcel Welk",
@@ -152,53 +153,7 @@ export default function LebenslaufPage() {
                     </span>
                   </div>
 
-                  {/* Contact row */}
-                  <div className="flex flex-wrap justify-center gap-x-5 gap-y-2.5 md:justify-start">
-                    <a
-                      href="tel:+4915111589926"
-                      className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-primary"
-                    >
-                      <Phone size={13} />
-                      +49 151 11589926
-                    </a>
-                    <a
-                      href="mailto:marcel.welk87@gmail.com"
-                      className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-primary"
-                    >
-                      <Mail size={13} />
-                      marcel.welk87@gmail.com
-                    </a>
-                    <a
-                      href="https://marcel-welk.vercel.app"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-primary"
-                    >
-                      <Globe size={13} />
-                      marcel-welk.vercel.app
-                    </a>
-                    <a
-                      href="https://github.com/celtechstarter"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-primary"
-                    >
-                      <Github size={13} />
-                      github.com/celtechstarter
-                    </a>
-                  </div>
-
-                  {/* PDF download */}
-                  <div className="mt-7 flex justify-center md:justify-start">
-                    <a
-                      href="/lebenslauf.pdf"
-                      download
-                      className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20"
-                    >
-                      <Download size={15} />
-                      PDF herunterladen
-                    </a>
-                  </div>
+                  <ProtectedContactLinks />
                 </div>
               </div>
             </div>
@@ -630,8 +585,6 @@ export default function LebenslaufPage() {
 
         </div>
       </main>
-
-      <Footer />
     </>
   )
 }

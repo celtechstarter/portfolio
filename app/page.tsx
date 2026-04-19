@@ -4,7 +4,6 @@ import { Projects } from "@/components/projects"
 import { Skills } from "@/components/skills"
 import { WorkflowSteps } from "@/components/workflow"
 import { Contact } from "@/components/contact"
-import { Footer } from "@/components/footer"
 import { GitHubActivity } from "@/components/github-activity"
 
 export default function Home() {
@@ -19,7 +18,6 @@ export default function Home() {
         <GitHubActivity />
         <Contact />
       </main>
-      <Footer />
     </>
   )
 }

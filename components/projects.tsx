@@ -24,8 +24,8 @@ const projects: Project[] = [
   {
     title: "Poke-Scan V2",
     description:
-      "Pokemon-Karten Scanner mit KI-Vision. Foto machen, Preis erfahren. Läuft auf Desktop und Handy.",
-    tags: ["React", "TypeScript", "NVIDIA NIM", "Vercel"],
+      "Pokemon-Karten Scanner. Lovable-Abhängigkeiten komplett entfernt, OCR durch echte KI Vision ersetzt (Tag 03).",
+    tags: ["React", "TypeScript", "KI Vision", "Vercel"],
     icon: <Sparkles size={24} />,
     image: "/projects/pokescan.png",
     liveUrl: "https://poke-scan-v2.vercel.app",
@@ -122,7 +122,7 @@ export function Projects() {
 
   return (
     <section id="projekte" className="px-6 py-24 md:py-32">
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-6xl">
         <div className="mb-16 text-center">
           <p className="mb-2 font-mono text-sm tracking-widest text-primary uppercase">
             Portfolio
@@ -132,9 +132,14 @@ export function Projects() {
           </h2>
         </div>
 
-        <div className="flex flex-col gap-6">
-          {projects.map((project) => (
-            <ProjectCard key={project.title} project={project} onImageClick={setLightboxImage} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
+            <ProjectCard 
+              key={project.title} 
+              project={project} 
+              index={index}
+              onImageClick={setLightboxImage} 
+            />
           ))}
         </div>
       </div>
@@ -167,54 +172,61 @@ export function Projects() {
   )
 }
 
-function ProjectCard({ project, onImageClick }: { project: Project; onImageClick: (img: { src: string; alt: string }) => void }) {
+function ProjectCard({ project, index, onImageClick }: { project: Project; index: number; onImageClick: (img: { src: string; alt: string }) => void }) {
+  // Bento-Box layout logic
+  const isLarge = index === 0 || index === 3;
+  const colSpanClass = isLarge ? "md:col-span-2 lg:col-span-2" : "col-span-1";
+  const layoutClass = isLarge ? "md:flex-row" : "flex-col";
+
   return (
-    <div className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 sm:flex-row">
+    <div className={`glass-card glow-border group flex overflow-hidden rounded-2xl h-full transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(249,115,22,0.15)] ${colSpanClass} ${layoutClass}`}>
       {/* Thumbnail */}
       <div
-        className={`relative h-48 w-full shrink-0 overflow-hidden bg-secondary sm:h-auto sm:w-64 ${project.image ? "cursor-pointer" : ""}`}
+        className={`relative w-full shrink-0 overflow-hidden bg-black/60 p-4 sm:p-5 flex items-center justify-center ${isLarge ? 'md:w-1/2 aspect-video md:aspect-auto' : 'aspect-video'} ${project.image ? "cursor-pointer" : ""}`}
         onClick={() => project.image && onImageClick({ src: project.image, alt: project.title })}
       >
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        
         {project.image ? (
-          <>
+          <div className="relative h-full w-full overflow-hidden rounded-lg border border-white/10 shadow-2xl transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-1">
             <Image
               src={project.image}
               alt={project.title}
               fill
-              className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
             />
-            <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/30">
-              <span className="rounded-lg bg-black/60 px-3 py-1.5 text-xs font-medium text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/50">
+              <span className="rounded-lg bg-black/60 backdrop-blur-md px-3 py-1.5 text-xs font-medium text-white opacity-0 transition-all duration-300 group-hover:opacity-100 border border-white/10 translate-y-4 group-hover:translate-y-0">
                 Vergrößern
               </span>
             </div>
-          </>
+          </div>
         ) : (
-          <div className="flex h-full items-center justify-center text-primary">
+          <div className="flex h-full items-center justify-center text-primary/50 transition-all duration-500 group-hover:text-primary group-hover:scale-110">
             {project.icon}
           </div>
         )}
       </div>
 
       {/* Content */}
-      <div className="flex flex-1 flex-col p-6">
+      <div className={`flex flex-1 flex-col p-6 z-10 relative bg-gradient-to-b from-transparent to-black/20 ${isLarge ? 'md:w-1/2 justify-center' : ''}`}>
         {/* Title + Status Badge */}
-        <div className="mb-2 flex items-center justify-between gap-3">
-          <h3 className="text-lg font-semibold text-foreground">
+        <div className="mb-3 flex items-start justify-between gap-3">
+          <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
             {project.title}
           </h3>
-          {project.status && <StatusBadge status={project.status} />}
+          {project.status && <div className="mt-1"><StatusBadge status={project.status} /></div>}
         </div>
 
-        <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground">
+        <p className="mb-6 flex-1 text-sm leading-relaxed text-muted-foreground">
           {project.description}
         </p>
 
-        <div className="mb-4 flex flex-wrap gap-2">
+        <div className="mb-6 flex flex-wrap gap-2">
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-secondary px-3 py-1 font-mono text-xs text-muted-foreground"
+              className="rounded-full bg-white/5 border border-white/10 px-3 py-1 font-mono text-[10px] sm:text-xs text-muted-foreground backdrop-blur-sm group-hover:border-white/20 transition-colors"
             >
               {tag}
             </span>
@@ -222,13 +234,13 @@ function ProjectCard({ project, onImageClick }: { project: Project; onImageClick
         </div>
 
         {!project.comingSoon && !project.wip && (
-          <div className="flex items-center gap-4 border-t border-border pt-4">
+          <div className="flex items-center gap-4 border-t border-border/50 pt-4 mt-auto">
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-primary"
+                className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-all hover:text-primary hover:gap-2"
               >
                 <ExternalLink size={14} />
                 Live Demo
@@ -239,15 +251,14 @@ function ProjectCard({ project, onImageClick }: { project: Project; onImageClick
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-primary"
+                className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-all hover:text-foreground hover:gap-2"
               >
                 <Github size={14} />
                 GitHub
               </a>
             )}
             {project.githubPrivate && (
-              <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground/40 cursor-not-allowed select-none">
-                <Github size={14} />
+              <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground/50 cursor-not-allowed select-none">
                 <Lock size={12} />
                 Privat
               </span>
@@ -255,7 +266,7 @@ function ProjectCard({ project, onImageClick }: { project: Project; onImageClick
           </div>
         )}
         {project.wip && (
-          <div className="flex items-center gap-2 border-t border-border pt-4">
+          <div className="flex items-center gap-2 border-t border-border/50 pt-4 mt-auto">
             <Construction size={14} className="text-primary" />
             <span className="text-sm font-medium text-primary">In Entwicklung</span>
           </div>
@@ -264,3 +275,4 @@ function ProjectCard({ project, onImageClick }: { project: Project; onImageClick
     </div>
   )
 }
+
