@@ -36,10 +36,7 @@ function AnimatedCounter({ value, display, label }: { value: number; display: st
 
   return (
     <div ref={ref} className="rounded-xl border border-border/20 bg-card/30 px-6 py-8 text-center">
-      <p
-        className="font-mono text-3xl font-bold sm:text-4xl md:text-5xl"
-        style={{ color: "rgba(207, 147, 54, 0.95)" }}
-      >
+      <p className="font-mono text-3xl font-bold sm:text-4xl md:text-5xl text-primary">
         {count}
       </p>
       <p
@@ -60,16 +57,10 @@ export function GitHubActivity() {
       <div className="mx-auto max-w-4xl">
         {/* Header */}
         <div className="mb-16 text-center">
-          <p
-            className="mb-2 font-mono text-sm tracking-widest uppercase"
-            style={{ color: "rgba(207, 147, 54, 0.7)" }}
-          >
+          <p className="mb-2 font-mono text-sm tracking-widest text-primary uppercase">
             Open Source
           </p>
-          <h2
-            className="text-3xl font-bold tracking-tight md:text-4xl text-balance"
-            style={{ color: "rgba(207, 147, 54, 1)" }}
-          >
+          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl text-balance">
             GitHub Aktivität
           </h2>
         </div>
@@ -82,29 +73,20 @@ export function GitHubActivity() {
         </div>
 
         {/* Divider */}
-        <div
-          className="mb-10 h-px"
-          style={{ background: "rgba(207, 147, 54, 0.12)" }}
-        />
+        <div className="mb-10 h-px bg-primary/10" />
 
         {/* Contribution Graph */}
         <div>
           {imgError ? (
-            <div
-              className="flex items-center justify-center rounded-xl py-12 font-mono text-sm"
-              style={{
-                border: "1px solid rgba(207, 147, 54, 0.15)",
-                color: "rgba(255,255,255,0.25)",
-              }}
-            >
+            <div className="flex items-center justify-center rounded-xl py-12 font-mono text-sm border border-primary/20 text-white/25">
               GitHub Aktivität laden...
             </div>
           ) : (
             <img // eslint-disable-line @next/next/no-img-element
-              src="https://ghchart.rshah.org/CF9336/celtechstarter"
+              src="https://ghchart.rshah.org/f97316/celtechstarter"
               alt="GitHub Contribution Graph von celtechstarter"
-              className="w-full rounded-xl"
-              style={{ maxWidth: "100%", filter: "opacity(0.85)" }}
+              className="w-full rounded-xl opacity-85"
+              style={{ maxWidth: "100%" }}
               onError={() => setImgError(true)}
             />
           )}
@@ -115,16 +97,7 @@ export function GitHubActivity() {
               href="https://github.com/celtechstarter"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-mono text-xs transition-colors duration-200"
-              style={{ color: "rgba(207, 147, 54, 0.45)" }}
-              onMouseEnter={(e) =>
-                ((e.currentTarget as HTMLAnchorElement).style.color =
-                  "rgba(207, 147, 54, 0.9)")
-              }
-              onMouseLeave={(e) =>
-                ((e.currentTarget as HTMLAnchorElement).style.color =
-                  "rgba(207, 147, 54, 0.45)")
-              }
+              className="inline-flex items-center gap-2 font-mono text-xs text-primary/50 hover:text-primary transition-colors duration-200"
             >
               <Github size={13} />
               Auf GitHub ansehen

@@ -11,11 +11,18 @@ export function Contact() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-80px" })
   const [showEmail, setShowEmail] = useState(false)
+  const [isCopied, setIsCopied] = useState(false)
 
   const handleEmailClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
     if (!showEmail) {
-      e.preventDefault()
       setShowEmail(true)
+    } else {
+      navigator.clipboard.writeText(atob(ENCODED_EMAIL))
+      setIsCopied(true)
+      setTimeout(() => {
+        setIsCopied(false)
+      }, 2000)
     }
   }
 
@@ -42,7 +49,7 @@ export function Contact() {
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 cursor-pointer"
             >
               <Mail size={16} />
-              {showEmail ? atob(ENCODED_EMAIL) : "E-Mail anzeigen"}
+              {showEmail ? (isCopied ? "Kopiert! ✓" : atob(ENCODED_EMAIL)) : "E-Mail anzeigen"}
             </a>
             <a
               href="https://github.com/celtechstarter"

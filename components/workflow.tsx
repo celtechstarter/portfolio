@@ -22,14 +22,14 @@ export function WorkflowSteps() {
             Der Workflow
           </p>
           <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl text-balance">
-            Neural Network Process
+            Mein Entwicklungs-Workflow
           </h2>
         </div>
 
         <div ref={ref} className="relative flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4">
           {nodes.map((node, i) => (
             <div key={node.id} className="relative flex-1 w-full md:w-auto flex flex-col items-center">
-              
+
               {/* Connecting Line */}
               {i < nodes.length - 1 && (
                 <div className="hidden md:block absolute top-8 left-[60%] right-[-40%] h-[1px] bg-white/10 z-0">
@@ -60,7 +60,7 @@ export function WorkflowSteps() {
                   <div className="absolute inset-2 rounded-full bg-gradient-to-br from-primary/30 to-transparent blur-sm" />
                   <span className="relative font-mono text-sm font-bold text-primary">{node.id}</span>
                 </div>
-                
+
                 <h3 className="mb-1 font-semibold text-foreground text-center group-hover:text-primary transition-colors">{node.title}</h3>
                 <p className="text-xs text-muted-foreground text-center font-mono">{node.desc}</p>
               </motion.div>
