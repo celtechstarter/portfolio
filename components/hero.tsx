@@ -5,7 +5,15 @@ import Image from "next/image"
 import { ArrowDown, Github, ChevronDown, ChevronUp, Info, Cpu } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
-function MagneticButton({ children, className, href, target, rel }: any) {
+interface MagneticButtonProps {
+  children: React.ReactNode
+  className?: string
+  href: string
+  target?: string
+  rel?: string
+}
+
+function MagneticButton({ children, className, href, target, rel }: MagneticButtonProps) {
   const ref = useRef<HTMLAnchorElement>(null)
   const [position, setPosition] = useState({ x: 0, y: 0 })
 
@@ -63,8 +71,11 @@ export function Hero() {
         >
           <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
             <div className="flex items-center gap-2">
-              <span className="status-dot" />
-              <span className="text-[13px] font-medium text-amber-400">Verfügbar für neue Herausforderungen</span>
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+              </span>
+              <span className="text-[13px] font-medium text-emerald-400">Verfügbar für neue Herausforderungen</span>
             </div>
             <div className="flex flex-wrap justify-center gap-2">
               {['Webentwicklung', 'KI-Automatisierung', 'Rapid Prototyping', 'Junior DevOps', 'Cloud Basics', 'IT-Support', 'Freelance'].map((tag) => (
@@ -77,7 +88,7 @@ export function Hero() {
               ))}
             </div>
           </div>
-          <p className="text-xs text-muted-foreground/60">Dortmund · Vor Ort bevorzugt, Remote möglich</p>
+          <p className="text-xs text-muted-foreground/60">Dortmund · Remote bevorzugt, vor Ort möglich</p>
         </motion.div>
 
         {/* Profilbild */}

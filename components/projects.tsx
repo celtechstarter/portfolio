@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { ExternalLink, Github, Sparkles, Brain, Briefcase, Send, Lock, Headset, Construction, X } from "lucide-react"
+import { ExternalLink, Github, Sparkles, Brain, Briefcase, Send, Lock, Headset, Construction, X, Globe } from "lucide-react"
 
 type ProjectStatus = "aktiv" | "fertig" | "in_arbeit"
 
@@ -18,9 +18,10 @@ interface Project {
   comingSoon?: boolean
   wip?: boolean
   status?: ProjectStatus
+  badge?: string
 }
 
-const projects: Project[] = [
+const aiProjects: Project[] = [
   {
     title: "Poke-Scan V2",
     description:
@@ -64,16 +65,41 @@ const projects: Project[] = [
     githubUrl: "https://github.com/celtechstarter/marcel-cv-boost",
     status: "fertig",
   },
+]
+
+const webProjects: Project[] = [
   {
-    title: "PromptCrafter",
+    title: "Coaching Knobling",
     description:
-      "KI-Lernplattform für Prompt Engineering. Entwickelt beim $40k Hackathon in 48 Stunden.",
-    tags: ["React", "Node.js", "Gemini API", "Vercel"],
-    icon: <Brain size={24} />,
-    image: "/projects/promptcrafter.png",
-    liveUrl: "https://promptcrafter.vercel.app",
-    githubUrl: "https://github.com/celtechstarter/promptcrafter",
+      "Moderner Webauftritt für ein Coaching-Unternehmen. Fokus auf seriöses Design und klare Nutzerführung.",
+    tags: ["Next.js", "Tailwind CSS", "UI/UX", "Vercel"],
+    icon: <Globe size={24} />,
+    image: "/projects/coachknobling.png",
+    liveUrl: "https://coaching-knobling.vercel.app/",
     status: "fertig",
+    badge: "Freelance Projekt",
+  },
+  {
+    title: "Hawaii Cards",
+    description:
+      "Landingpage und digitaler Katalog für ein Sammelkarten-Business. Visuell ansprechende Produktpräsentation.",
+    tags: ["Webentwicklung", "Responsive Design", "Asset-Optimierung"],
+    icon: <Globe size={24} />,
+    image: "/projects/hawaiicards.png",
+    liveUrl: "https://hawaii-cards.vercel.app/",
+    status: "fertig",
+    badge: "Freelance Projekt",
+  },
+  {
+    title: "Gesunder Fuß",
+    description:
+      "Lokaler Webauftritt für eine Praxis im Gesundheitsbereich. Fokus auf Übersichtlichkeit und lokale Sichtbarkeit.",
+    tags: ["Lokale SEO", "Clean Design", "Mobile First"],
+    icon: <Globe size={24} />,
+    image: "/projects/gesunderfuss.png",
+    liveUrl: "https://gesunderfuss.vercel.app/",
+    status: "fertig",
+    badge: "Freelance Projekt",
   },
 ]
 
@@ -122,26 +148,50 @@ export function Projects() {
 
   return (
     <section id="projekte" className="px-6 py-24 md:py-32">
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-16 text-center">
-          <p className="mb-2 font-mono text-sm tracking-widest text-primary uppercase">
-            Portfolio
-          </p>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl text-balance">
-            Meine Projekte
-          </h2>
+      <div className="mx-auto max-w-6xl space-y-24">
+
+        {/* Sektion 1: KI & App Development */}
+        <div>
+          <div className="mb-16 text-center">
+            <p className="mb-2 font-mono text-sm tracking-widest text-primary uppercase">
+              KI & App Development
+            </p>
+            <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl text-balance">
+              Eigene Projekte & Tools
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {aiProjects.map((project) => (
+              <ProjectCard
+                key={project.title}
+                project={project}
+                onImageClick={setLightboxImage}
+              />
+            ))}
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <ProjectCard 
-              key={project.title} 
-              project={project} 
-              index={index}
-              onImageClick={setLightboxImage} 
-            />
-          ))}
+        {/* Sektion 2: Webdesign & Referenzen */}
+        <div>
+          <div className="mb-16 text-center">
+            <p className="mb-2 font-mono text-sm tracking-widest text-primary uppercase">
+              Webdesign & Referenzen
+            </p>
+            <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl text-balance">
+              Kundenprojekte
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {webProjects.map((project) => (
+              <ProjectCard
+                key={project.title}
+                project={project}
+                onImageClick={setLightboxImage}
+              />
+            ))}
+          </div>
         </div>
+
       </div>
 
       {/* Lightbox Modal */}
@@ -172,44 +222,46 @@ export function Projects() {
   )
 }
 
-function ProjectCard({ project, index, onImageClick }: { project: Project; index: number; onImageClick: (img: { src: string; alt: string }) => void }) {
-  // Bento-Box layout logic
-  const isLarge = index === 0 || index === 3;
-  const colSpanClass = isLarge ? "md:col-span-2 lg:col-span-2" : "col-span-1";
-  const layoutClass = isLarge ? "md:flex-row" : "flex-col";
-
+function ProjectCard({ project, onImageClick }: { project: Project; onImageClick: (img: { src: string; alt: string }) => void }) {
   return (
-    <div className={`glass-card glow-border group flex overflow-hidden rounded-2xl h-full transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(249,115,22,0.15)] ${colSpanClass} ${layoutClass}`}>
+    <div className="glass-card glow-border group flex flex-col overflow-hidden rounded-2xl h-full transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(249,115,22,0.15)]">
       {/* Thumbnail */}
       <div
-        className={`relative w-full shrink-0 overflow-hidden bg-black/60 p-4 sm:p-5 flex items-center justify-center ${isLarge ? 'md:w-1/2 aspect-video md:aspect-auto' : 'aspect-video'} ${project.image ? "cursor-pointer" : ""}`}
+        className={`relative w-full shrink-0 overflow-hidden bg-black/60 aspect-video flex items-center justify-center ${project.image ? "cursor-pointer" : ""}`}
         onClick={() => project.image && onImageClick({ src: project.image, alt: project.title })}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
+
         {project.image ? (
-          <div className="relative h-full w-full overflow-hidden rounded-lg border border-white/10 shadow-2xl transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-1">
+          <>
             <Image
               src={project.image}
               alt={project.title}
               fill
               className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
             />
-            <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/50">
+            <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/50 z-20 pointer-events-none">
               <span className="rounded-lg bg-black/60 backdrop-blur-md px-3 py-1.5 text-xs font-medium text-white opacity-0 transition-all duration-300 group-hover:opacity-100 border border-white/10 translate-y-4 group-hover:translate-y-0">
                 Vergrößern
               </span>
             </div>
-          </div>
+          </>
         ) : (
-          <div className="flex h-full items-center justify-center text-primary/50 transition-all duration-500 group-hover:text-primary group-hover:scale-110">
+          <div className="flex h-full w-full items-center justify-center text-primary/50 transition-all duration-500 group-hover:text-primary group-hover:scale-110">
             {project.icon}
           </div>
         )}
       </div>
 
       {/* Content */}
-      <div className={`flex flex-1 flex-col p-6 z-10 relative bg-gradient-to-b from-transparent to-black/20 ${isLarge ? 'md:w-1/2 justify-center' : ''}`}>
+      <div className="flex flex-1 flex-col p-6 z-10 relative bg-gradient-to-b from-transparent to-black/20">
+        {/* Badge */}
+        {project.badge && (
+          <span className="mb-3 inline-block w-fit rounded-full border border-primary/30 bg-primary/10 px-3 py-0.5 font-mono text-[10px] text-primary uppercase tracking-wider">
+            {project.badge}
+          </span>
+        )}
+
         {/* Title + Status Badge */}
         <div className="mb-3 flex items-start justify-between gap-3">
           <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
@@ -275,4 +327,3 @@ function ProjectCard({ project, index, onImageClick }: { project: Project; index
     </div>
   )
 }
-
