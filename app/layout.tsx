@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     siteName: 'Marcel Welk – Webdesign & Webentwicklung',
     images: [
       {
-        url: '/og-image.png',
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Marcel Welk – Webdesign & Webentwicklung aus Dortmund',
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Marcel Welk | Webdesign & Webentwicklung Dortmund',
     description: 'Professionelles Webdesign und individuelle Webentwicklung aus Dortmund. Modern, schnell und zielgerichtet.',
-    images: ['/og-image.png'],
+    images: ['/og-image.jpg'],
   },
   icons: {
     icon: [

@@ -10,14 +10,14 @@ export const metadata: Metadata = {
     description:
       "Chronologische Entwicklungs-Logs aus Dortmund: UI/UX-Entscheidungen, KI-Integration, Debugging und Deployments – so entstehen digitale Lösungen.",
     url: "https://marcelwelk.de/devlog",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Devlog – Marcel Welk Dortmund" }],
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Devlog – Marcel Welk Dortmund" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Devlog | Marcel Welk",
     description:
       "Webdesign & Webentwicklung aus Dortmund: Ehrliche Build-Logs – so entstehen moderne digitale Lösungen.",
-    images: ["/og-image.png"],
+    images: ["/og-image.jpg"],
   },
 }
 

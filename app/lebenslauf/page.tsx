@@ -22,13 +22,13 @@ export const metadata: Metadata = {
     description:
       "Marcel Welk – Freelance Webdesigner & Webentwickler aus Dortmund. Projekte, Skills und digitale Lösungen auf einen Blick.",
     url: "https://marcelwelk.de/lebenslauf",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Lebenslauf Marcel Welk – Webdesign & Webentwicklung Dortmund" }],
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Lebenslauf Marcel Welk – Webdesign & Webentwicklung Dortmund" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Lebenslauf | Marcel Welk",
     description: "Freelance Webdesigner & Webentwickler aus Dortmund – Skills, Projekte und digitale Lösungen.",
-    images: ["/og-image.png"],
+    images: ["/og-image.jpg"],
   },
 }
 
