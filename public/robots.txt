@@ -3,6 +3,8 @@ Allow: /
 Disallow: /lebenslauf.pdf
 Disallow: /*.pdf$
 Disallow: /docs/
+Disallow: /impressum
+Disallow: /datenschutz
 
 # Block common scraper bots
 User-agent: GPTBot

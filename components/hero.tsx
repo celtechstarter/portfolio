@@ -40,7 +40,7 @@ function MagneticButton({ children, className, href, target, rel }: any) {
 }
 
 export function Hero() {
-  const slogan = "Builder. Problemlöser. KI Nerd."
+  const slogan = "Builder. Problemlöser. KINerd."
 
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
@@ -66,11 +66,11 @@ export function Hero() {
               <span className="status-dot" />
               <span className="text-[13px] font-medium text-amber-400">Verfügbar für neue Herausforderungen</span>
             </div>
-            <div className="flex flex-wrap justify-center gap-1.5">
-              {["IT-Support", "Cloud Admin", "Linux Sysadmin", "Junior DevOps"].map((tag) => (
+            <div className="flex flex-wrap justify-center gap-2">
+              {['Webentwicklung', 'KI-Automatisierung', 'Rapid Prototyping', 'Junior DevOps', 'Cloud Basics', 'IT-Support', 'Freelance'].map((tag) => (
                 <span
                   key={tag}
-                  className="rounded border border-border/30 px-1.5 py-0.5 font-mono text-xs text-muted-foreground"
+                  className="rounded-md border border-border/30 bg-black/20 px-2 py-1 font-mono text-xs text-muted-foreground transition-all duration-300 hover:border-primary/50 hover:bg-primary/5 hover:text-primary"
                 >
                   {tag}
                 </span>
@@ -134,7 +134,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 1.0 }}
           className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty"
         >
-          Ich baue Webapps, löse IT Probleme und benutze KI nicht als Spielerei, sondern als tägliches Werkzeug. Mein Kopf braucht ständig neue Probleme, und in der IT gehen die zum Glück nie aus.
+          Fokussiert auf effiziente Entwicklung und moderne KI-Workflows. Ich schließe die Lücke zwischen Idee und fertigem Deployment.
         </motion.p>
 
         <motion.div 

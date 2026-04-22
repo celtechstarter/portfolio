@@ -8,8 +8,8 @@ const _inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const _jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains-mono' })
 
 export const metadata: Metadata = {
-  title: 'Marcel Welk | IT-Techniker & Entwickler',
-  description: 'IT-Techniker und Entwickler aus Deutschland. Spezialisiert auf Cloud Administration, Linux, Web Development mit React & TypeScript und KI-gestützte Automatisierung. Portfolio mit Projekten zu AI Agentic Engineering, DevOps und modernen Webapplikationen.',
+  title: 'Marcel Welk | Builder. Problemlöser. KINerd.',
+  description: 'Leidenschaftlicher Entwickler mit Fokus auf KI-gestützte Effizienz. Ich baue Lösungen, die funktionieren – direkt, ehrlich und technisch am Puls der Zeit.',
   keywords: ['Marcel Welk', 'IT-Techniker', 'Entwickler', 'IT-Support', 'Cloud Administration', 'Linux', 'DevOps', 'React', 'TypeScript', 'Portfolio', 'AI Agentic Engineering', 'KI', 'Automatisierung', 'AWS', 'Azure', 'Vercel'],
   authors: [{ name: 'Marcel Welk' }],
   robots: {
@@ -26,8 +26,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Marcel Welk | IT-Techniker & Entwickler',
-    description: 'IT-Techniker und Entwickler. Cloud Administration, Linux, React, TypeScript und KI-gestützte Automatisierung.',
+    title: 'Marcel Welk | Builder. Problemlöser. KINerd.',
+    description: 'Leidenschaftlicher Entwickler mit Fokus auf KI-gestützte Effizienz. Ich baue Lösungen, die funktionieren – direkt, ehrlich und technisch am Puls der Zeit.',
     type: 'website',
     locale: 'de_DE',
     url: 'https://marcel-welk.vercel.app',
