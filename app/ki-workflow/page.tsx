@@ -2,23 +2,22 @@ import type { Metadata } from "next"
 import KiWorkflowClient from "./KiWorkflowClient"
 
 export const metadata: Metadata = {
-  title: "KI-Workflow | Marcel Welk – Webentwicklung Dortmund",
+  title: "KI-Workflow",
   description:
-    "Wie ich als Webentwickler aus Dortmund KI-Agenten, Agentic Engineering und moderne Tools wie Claude Code, v0.app und Vercel einsetze, um Ideen blitzschnell in funktionierende Produkte zu verwandeln.",
+    "Wie ich als Webdesigner und Webentwickler aus Dortmund KI-Agenten, moderne Tools und digitale Lösungen einsetze, um Projekte von der Idee bis zum Deployment zu bringen.",
   openGraph: {
-    title: "KI-Workflow | Marcel Welk – Webentwicklung Dortmund",
+    title: "KI-Workflow | Marcel Welk",
     description:
-      "Mein digitales Hauptquartier: ADHS als Hyperfokus-Motor, KI als Navigator. Vom Konzept zum Deployment – so arbeitet ein Webentwickler aus Dortmund mit KI-Agenten.",
-    url: "https://marcel-welk.de/ki-workflow",
-    siteName: "Marcel Welk Portfolio",
-    locale: "de_DE",
-    type: "website",
+      "Ehrlicher Einblick in meinen Workflow: ADHS als Hyperfokus-Motor, KI als Navigator. Webdesign & Webentwicklung aus Dortmund – effizient und modern.",
+    url: "https://marcelwelk.de/ki-workflow",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "KI-Workflow – Marcel Welk Dortmund" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "KI-Workflow | Marcel Welk – Webentwicklung Dortmund",
+    title: "KI-Workflow | Marcel Welk",
     description:
-      "Agentic Engineering aus Dortmund: Claude Code, v0.app, Vercel & mehr. Ehrlicher Einblick in meinen KI-gestützten Entwicklungs-Workflow.",
+      "Webdesign & Webentwicklung aus Dortmund: So nutze ich KI-Agenten, v0.app und moderne Tools für digitale Lösungen.",
+    images: ["/og-image.png"],
   },
 }
 

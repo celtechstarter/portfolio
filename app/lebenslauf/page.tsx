@@ -14,9 +14,22 @@ import { Footer } from "@/components/footer"
 import { ProtectedContactLinks } from "@/components/protected-contact-links"
 
 export const metadata: Metadata = {
-  title: "Lebenslauf | Marcel Welk",
+  title: "Lebenslauf",
   description:
-    "Lebenslauf von Marcel Welk — IT-Techniker, Cloud & Web-Entwickler. Projekte, Zertifikate und Fähigkeiten.",
+    "Lebenslauf von Marcel Welk – Freelance Webdesigner & Webentwickler aus Dortmund. Projekte, Fähigkeiten in UI/UX Design, Responsive Design, React, Next.js und KI-gestützter Entwicklung.",
+  openGraph: {
+    title: "Lebenslauf | Marcel Welk",
+    description:
+      "Marcel Welk – Freelance Webdesigner & Webentwickler aus Dortmund. Projekte, Skills und digitale Lösungen auf einen Blick.",
+    url: "https://marcelwelk.de/lebenslauf",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Lebenslauf Marcel Welk – Webdesign & Webentwicklung Dortmund" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Lebenslauf | Marcel Welk",
+    description: "Freelance Webdesigner & Webentwickler aus Dortmund – Skills, Projekte und digitale Lösungen.",
+    images: ["/og-image.png"],
+  },
 }
 
 // ─── Local helper components ─────────────────────────────────────────────────
