@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react"
 const NAV_LINKS = [
   { label: "Projekte", href: "#projekte", isHash: true },
   { label: "Skills", href: "#skills", isHash: true },
+  { label: "FAQ", href: "#faq", isHash: true },
   { label: "Kontakt", href: "#kontakt", isHash: true },
   { label: "Devlog", href: "/devlog", isHash: false },
   { label: "Lebenslauf", href: "/lebenslauf", isHash: false },

@@ -5,6 +5,7 @@ import { Skills } from "@/components/skills"
 import { WorkflowSteps } from "@/components/workflow"
 import { Contact } from "@/components/contact"
 import { GitHubActivity } from "@/components/github-activity"
+import { FAQ } from "@/components/faq"
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         <Skills />
         <WorkflowSteps />
         <GitHubActivity />
+        <FAQ />
         <Contact />
       </main>
     </>
