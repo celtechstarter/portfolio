@@ -25,5 +25,19 @@ export const metadata: Metadata = {
 }
 
 export default function DevlogPage() {
-  return <DevlogClient />
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://marcelwelk.de" },
+      { "@type": "ListItem", position: 2, name: "Devlog", item: "https://marcelwelk.de/devlog" },
+    ],
+  }
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <DevlogClient />
+    </>
+  )
 }
