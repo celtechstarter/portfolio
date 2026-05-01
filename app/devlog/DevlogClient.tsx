@@ -254,6 +254,48 @@ const entries: DevlogEntry[] = [
     problemSolved:
       "PokeScan V2 zeigte 7s weißen Ladebildschirm → pro-Projekt waitMs eingeführt, pokescan bekommt 10s Wartezeit vor Aufnahmestart",
   },
+  {
+    project: "Portfolio",
+    color: PROJECT_COLORS["Portfolio"],
+    day: 14,
+    date: "01.05.2026",
+    title: "FAQ-Sektion & GEO-Optimierung",
+    description:
+      "FAQ-Bereich mit 10 Fragen und Antworten auf der Homepage eingebaut. Accordion-Design mit Framer Motion Animationen. Wichtig: FAQPage JSON-LD Schema direkt im Component hinterlegt – damit können KI-Suchen wie ChatGPT, Perplexity und Gemini die Inhalte strukturiert auslesen und in Antworten einbinden. Navbar-Link auf #faq ergänzt. Inhalt fokussiert auf One-Pager für Unternehmen mit schlechtem SEO/GEO, eigenes Scanning-Tool und KI-Tool-Auswahl.",
+  },
+  {
+    project: "Portfolio",
+    color: PROJECT_COLORS["Portfolio"],
+    day: 15,
+    date: "01.05.2026",
+    title: "Scratch-Schutz für Datenschutzerklärung",
+    description:
+      "Den Verantwortlicher-Block in der Datenschutzerklärung (Name, Adresse, E-Mail) mit dem gleichen Canvas-Rubbelfeld-Prinzip wie im Impressum geschützt. Neue Komponente ScratchVerantwortlicher gebaut – kompakt (100px), auf die drei relevanten Felder reduziert. Daten kommen weiterhin ausschließlich aus der serverseitigen /api/contact Route.",
+    problemSolved:
+      "Datenschutz zeigte Kontaktdaten im Klartext im HTML-Quelltext → Rubbelfeld verhindert automatisches Auslesen durch Scraper",
+  },
+  {
+    project: "Portfolio",
+    color: PROJECT_COLORS["Portfolio"],
+    day: 16,
+    date: "02.05.2026",
+    title: "Security-Hardening: CSP, Bot-Schutz & Rate-Limit",
+    description:
+      "Content Security Policy Header ergänzt – blockiert das Laden externer Skripte von fremden Domains (XSS-Schutz). robots.ts um Trainings-Bots erweitert: GPTBot, Google-Extended, CCBot, anthropic-ai und Bytespider gesperrt. Wichtige Unterscheidung: Trainings-Crawler blockiert, GEO-Crawler (PerplexityBot, ChatGPT-User) weiterhin erlaubt – SEO/GEO bleibt intakt. /api/contact mit Rate-Limit abgesichert: max. 20 Anfragen pro IP pro Minute. /lebenslauf.pdf und /api/ für alle Crawler gesperrt.",
+    problemSolved:
+      "Trainings-Bots vs. Suchbots sind unterschiedliche User-Agents – gezieltes Blockieren möglich ohne GEO-Sichtbarkeit zu verlieren",
+  },
+  {
+    project: "Portfolio",
+    color: PROJECT_COLORS["Portfolio"],
+    day: 17,
+    date: "02.05.2026",
+    title: "Next.js Update & Schema-Upgrade",
+    description:
+      "npm audit aufgedeckt: Next.js 16.1.6 hatte 5 aktive CVEs (HTTP Request Smuggling, DoS, CSRF-Bypass). Update auf 16.2.4 alle kritischen Lücken geschlossen. JSON-LD Schemas grundlegend ausgebaut: WebSite Schema neu ergänzt, Person Schema um description, knowsLanguage, hasOccupation und alumniOf (Techstarter) erweitert, LocalBusiness um serviceType und areaServed NRW ergänzt. BreadcrumbList auf /devlog und /lebenslauf hinzugefügt. Alle Schemas mit @id verknüpft – KI-Systeme können Zusammenhänge zwischen Entitäten verstehen.",
+    problemSolved:
+      "npm audit zeigte high-severity CVEs in Next.js → npm audit fix --force auf 16.2.4 aktualisiert, verbleibende postcss-Warnung ist bekanntes False Positive (nur Build-Tool, kein Runtime-Code)",
+  },
 
   // ── CelDesk ───────────────────────────────────────────────────────────────
   {
