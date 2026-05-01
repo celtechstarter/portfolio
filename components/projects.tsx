@@ -150,7 +150,7 @@ function StatusBadge({ status }: { status: ProjectStatus }) {
 }
 
 export function Projects() {
-  const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null)
+  const [lightboxMedia, setLightboxMedia] = useState<{ src: string; alt: string; isVideo?: boolean } | null>(null)
 
   return (
     <section id="projekte" className="px-6 py-24 md:py-32">
@@ -171,7 +171,7 @@ export function Projects() {
               <ProjectCard
                 key={project.title}
                 project={project}
-                onImageClick={setLightboxImage}
+                onMediaClick={setLightboxMedia}
               />
             ))}
           </div>
@@ -192,7 +192,7 @@ export function Projects() {
               <ProjectCard
                 key={project.title}
                 project={project}
-                onImageClick={setLightboxImage}
+                onMediaClick={setLightboxMedia}
               />
             ))}
           </div>
@@ -201,26 +201,43 @@ export function Projects() {
       </div>
 
       {/* Lightbox Modal */}
-      {lightboxImage && (
+      {lightboxMedia && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-6"
-          onClick={() => setLightboxImage(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-6"
+          onClick={() => setLightboxMedia(null)}
         >
           <button
-            onClick={() => setLightboxImage(null)}
+            onClick={() => setLightboxMedia(null)}
             className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
-            aria-label="Bild schließen"
+            aria-label="Schließen"
           >
             <X size={28} />
           </button>
-          <div className="relative max-h-[85vh] max-w-[90vw] overflow-hidden rounded-xl shadow-2xl">
-            <Image
-              src={lightboxImage.src}
-              alt={lightboxImage.alt}
-              width={1280}
-              height={720}
-              className="h-auto max-h-[85vh] w-auto object-contain"
-            />
+          <div
+            className="relative max-h-[85vh] max-w-[90vw] overflow-hidden rounded-xl shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {lightboxMedia.isVideo ? (
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                controls
+                className="h-auto max-h-[85vh] w-auto rounded-xl"
+                style={{ maxWidth: "90vw" }}
+              >
+                <source src={lightboxMedia.src} type="video/webm" />
+              </video>
+            ) : (
+              <Image
+                src={lightboxMedia.src}
+                alt={lightboxMedia.alt}
+                width={1280}
+                height={720}
+                className="h-auto max-h-[85vh] w-auto object-contain"
+              />
+            )}
           </div>
         </div>
       )}
@@ -228,26 +245,38 @@ export function Projects() {
   )
 }
 
-function ProjectCard({ project, onImageClick }: { project: Project; onImageClick: (img: { src: string; alt: string }) => void }) {
+function ProjectCard({ project, onMediaClick }: { project: Project; onMediaClick: (media: { src: string; alt: string; isVideo?: boolean }) => void }) {
+  const hasMedia = !!(project.video || project.image)
+
   return (
     <div className="glass-card glow-border group flex flex-col overflow-hidden rounded-2xl h-full transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(249,115,22,0.15)]">
       {/* Thumbnail */}
       <div
-        className={`relative w-full shrink-0 overflow-hidden bg-black/60 aspect-video flex items-center justify-center ${project.image && !project.video ? "cursor-pointer" : ""}`}
-        onClick={() => project.image && !project.video && onImageClick({ src: project.image, alt: project.title })}
+        className={`relative w-full shrink-0 overflow-hidden bg-black/60 aspect-video flex items-center justify-center ${hasMedia ? "cursor-pointer" : ""}`}
+        onClick={() => {
+          if (project.video) onMediaClick({ src: project.video, alt: project.title, isVideo: true })
+          else if (project.image) onMediaClick({ src: project.image, alt: project.title })
+        }}
       >
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
 
         {project.video ? (
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-          >
-            <source src={project.video} type="video/webm" />
-          </video>
+          <>
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+            >
+              <source src={project.video} type="video/webm" />
+            </video>
+            <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/50 z-20 pointer-events-none">
+              <span className="rounded-lg bg-black/60 backdrop-blur-md px-3 py-1.5 text-xs font-medium text-white opacity-0 transition-all duration-300 group-hover:opacity-100 border border-white/10 translate-y-4 group-hover:translate-y-0">
+                Größer ansehen
+              </span>
+            </div>
+          </>
         ) : project.image ? (
           <>
             <Image
