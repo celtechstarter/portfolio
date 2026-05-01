@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "KI-Workflow & Automatisierung",
   description:
     "Wie ich als Webdesigner und Webentwickler aus Dortmund KI-Agenten, moderne Tools und digitale Lösungen einsetze, um Projekte von der Idee bis zum Deployment zu bringen.",
+  alternates: {
+    canonical: 'https://marcelwelk.de/ki-workflow',
+  },
   openGraph: {
     title: "KI-Workflow | Marcel Welk",
     description:

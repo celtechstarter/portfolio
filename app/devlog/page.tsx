@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Devlog – Projekte & Builds",
   description:
     "Mein Build Journal: Ehrliche Einblicke in die Entwicklung meiner Webdesign- und Webentwicklungs-Projekte aus Dortmund – von der ersten Zeile Code bis zum Live-Deployment.",
+  alternates: {
+    canonical: 'https://marcelwelk.de/devlog',
+  },
   openGraph: {
     title: "Devlog | Marcel Welk",
     description:

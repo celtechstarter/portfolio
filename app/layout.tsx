@@ -34,6 +34,9 @@ export const metadata: Metadata = {
     'Webseite erstellen Dortmund',
     'Webprojekte NRW',
   ],
+  alternates: {
+    canonical: 'https://marcelwelk.de',
+  },
   authors: [{ name: 'Marcel Welk', url: 'https://marcelwelk.de' }],
   creator: 'Marcel Welk',
   robots: {

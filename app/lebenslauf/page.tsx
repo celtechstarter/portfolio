@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Lebenslauf – IT & Webentwicklung",
   description:
     "Lebenslauf von Marcel Welk – Freelance Webdesigner & Webentwickler aus Dortmund. Projekte, Skills in Web-Entwicklung, KI-Integration, React, Next.js und modernen Deployment-Workflows.",
+  alternates: {
+    canonical: 'https://marcelwelk.de/lebenslauf',
+  },
   openGraph: {
     title: "Lebenslauf | Marcel Welk",
     description:
