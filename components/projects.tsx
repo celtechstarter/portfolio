@@ -12,6 +12,7 @@ interface Project {
   tags: string[]
   icon: React.ReactNode
   image?: string
+  video?: string
   liveUrl?: string
   githubUrl?: string
   githubPrivate?: boolean
@@ -29,6 +30,7 @@ const aiProjects: Project[] = [
     tags: ["React", "TypeScript", "KI Vision", "Vercel"],
     icon: <Sparkles size={24} />,
     image: "/projects/pokescan.png",
+    video: "/projects/pokescan.webm",
     liveUrl: "https://poke-scan-v2.vercel.app",
     githubUrl: "https://github.com/celtechstarter/poke-scan-v2",
     status: "aktiv",
@@ -40,6 +42,7 @@ const aiProjects: Project[] = [
     tags: ["React", "TypeScript", "KI", "Vercel"],
     icon: <Send size={24} />,
     image: "/projects/bewerbungspilot.png",
+    video: "/projects/bewerbungspilot.webm",
     liveUrl: "https://bewerbungspilot.vercel.app/",
     githubPrivate: true,
     status: "fertig",
@@ -75,6 +78,7 @@ const webProjects: Project[] = [
     tags: ["Next.js", "Tailwind CSS", "UI/UX", "Vercel"],
     icon: <Globe size={24} />,
     image: "/projects/coachknobling.png",
+    video: "/projects/coachknobling.webm",
     liveUrl: "https://coaching-knobling.vercel.app/",
     status: "fertig",
     badge: "Freelance Projekt",
@@ -86,6 +90,7 @@ const webProjects: Project[] = [
     tags: ["Webentwicklung", "Responsive Design", "Asset-Optimierung"],
     icon: <Globe size={24} />,
     image: "/projects/hawaiicards.png",
+    video: "/projects/hawaiicards.webm",
     liveUrl: "https://hawaii-cards.vercel.app/",
     status: "fertig",
     badge: "Freelance Projekt",
@@ -97,6 +102,7 @@ const webProjects: Project[] = [
     tags: ["Lokale SEO", "Clean Design", "Mobile First"],
     icon: <Globe size={24} />,
     image: "/projects/gesunderfuss.png",
+    video: "/projects/gesunderfuss.webm",
     liveUrl: "https://gesunderfuss.vercel.app/",
     status: "fertig",
     badge: "Freelance Projekt",
@@ -227,12 +233,22 @@ function ProjectCard({ project, onImageClick }: { project: Project; onImageClick
     <div className="glass-card glow-border group flex flex-col overflow-hidden rounded-2xl h-full transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(249,115,22,0.15)]">
       {/* Thumbnail */}
       <div
-        className={`relative w-full shrink-0 overflow-hidden bg-black/60 aspect-video flex items-center justify-center ${project.image ? "cursor-pointer" : ""}`}
-        onClick={() => project.image && onImageClick({ src: project.image, alt: project.title })}
+        className={`relative w-full shrink-0 overflow-hidden bg-black/60 aspect-video flex items-center justify-center ${project.image && !project.video ? "cursor-pointer" : ""}`}
+        onClick={() => project.image && !project.video && onImageClick({ src: project.image, alt: project.title })}
       >
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
 
-        {project.image ? (
+        {project.video ? (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+          >
+            <source src={project.video} type="video/webm" />
+          </video>
+        ) : project.image ? (
           <>
             <Image
               src={project.image}
