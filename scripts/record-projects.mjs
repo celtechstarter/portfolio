@@ -9,11 +9,11 @@ const outputDir = join(__dirname, '../public/projects')
 mkdirSync(outputDir, { recursive: true })
 
 const projects = [
-  { name: 'pokescan',         url: 'https://poke-scan-v2.vercel.app' },
-  { name: 'bewerbungspilot',  url: 'https://bewerbungspilot.vercel.app' },
-  { name: 'coachknobling',    url: 'https://coaching-knobling.vercel.app' },
-  { name: 'hawaiicards',      url: 'https://hawaii-cards.vercel.app' },
-  { name: 'gesunderfuss',     url: 'https://gesunderfuss.vercel.app' },
+  { name: 'pokescan',         url: 'https://poke-scan-v2.vercel.app',        waitMs: 10000 },
+  { name: 'bewerbungspilot',  url: 'https://bewerbungspilot.vercel.app',     waitMs: 3000 },
+  { name: 'coachknobling',    url: 'https://coaching-knobling.vercel.app',   waitMs: 3000 },
+  { name: 'hawaiicards',      url: 'https://hawaii-cards.vercel.app',        waitMs: 3000 },
+  { name: 'gesunderfuss',     url: 'https://gesunderfuss.vercel.app',        waitMs: 3000 },
 ]
 
 async function recordProject(project) {
@@ -36,8 +36,8 @@ async function recordProject(project) {
     await page.goto(project.url, { waitUntil: 'domcontentloaded', timeout: 30000 })
   }
 
-  // Wait for page to fully render
-  await page.waitForTimeout(2000)
+  // Wait for page to fully render (per-project wait time)
+  await page.waitForTimeout(project.waitMs ?? 3000)
 
   // Scroll slowly from top to bottom (~4 seconds)
   await page.evaluate(async () => {
