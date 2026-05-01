@@ -1,22 +1,11 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import Link from "next/link"
 import { ArrowLeft, ShieldCheck } from "lucide-react"
 import { motion } from "framer-motion"
+import { ScratchVerantwortlicher } from "@/components/ScratchVerantwortlicher"
 
 export default function DatenschutzClient() {
-  const [email, setEmail] = useState("...")
-  const [address, setAddress] = useState("...")
-
-  useEffect(() => {
-    fetch('/api/contact')
-      .then(r => r.json())
-      .then(data => {
-        setEmail(data.email)
-        setAddress(data.address)
-      })
-  }, [])
   return (
     <div className="min-h-screen bg-black text-foreground relative selection:bg-primary/30 px-6 py-24">
       {/* Background Aurora */}
@@ -62,11 +51,7 @@ export default function DatenschutzClient() {
             <h2 className="text-lg font-bold text-white mt-8 mb-3 border-b border-white/10 pb-2">
               1. Verantwortlicher
             </h2>
-            <p>
-              Marcel Welk<br />
-              {address}<br />
-              E-Mail: {email}
-            </p>
+            <ScratchVerantwortlicher />
 
             {/* 2 */}
             <h2 className="text-lg font-bold text-white mt-8 mb-3 border-b border-white/10 pb-2">
