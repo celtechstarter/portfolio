@@ -1,10 +1,22 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { ArrowLeft, ShieldCheck } from "lucide-react"
 import { motion } from "framer-motion"
 
 export default function DatenschutzClient() {
+  const [email, setEmail] = useState("...")
+  const [address, setAddress] = useState("...")
+
+  useEffect(() => {
+    fetch('/api/contact')
+      .then(r => r.json())
+      .then(data => {
+        setEmail(data.email)
+        setAddress(data.address)
+      })
+  }, [])
   return (
     <div className="min-h-screen bg-black text-foreground relative selection:bg-primary/30 px-6 py-24">
       {/* Background Aurora */}
@@ -52,9 +64,8 @@ export default function DatenschutzClient() {
             </h2>
             <p>
               Marcel Welk<br />
-              Kornacker 14<br />
-              44319 Dortmund<br />
-              E-Mail: {typeof window !== "undefined" ? atob("bWFyY2VsLndlbGs4N0BnbWFpbC5jb20=") : "wird geladen..."}
+              {address}<br />
+              E-Mail: {email}
             </p>
 
             {/* 2 */}

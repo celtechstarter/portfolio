@@ -26,63 +26,67 @@ export function ScratchImpressum() {
   useEffect(() => {
     if (!contact) return
 
-    const textCanvas = textCanvasRef.current
-    if (textCanvas) {
-      const ctx = textCanvas.getContext("2d")
-      if (ctx) {
-        const dpr = window.devicePixelRatio || 1
-        const rect = textCanvas.getBoundingClientRect()
+    // Use requestAnimationFrame to ensure the canvas has been laid out
+    requestAnimationFrame(() => {
+      const textCanvas = textCanvasRef.current
+      if (textCanvas) {
+        const ctx = textCanvas.getContext("2d")
+        if (ctx) {
+          const dpr = window.devicePixelRatio || 1
+          const rect = textCanvas.getBoundingClientRect()
+          if (rect.width === 0) return
 
-        textCanvas.width = rect.width * dpr
-        textCanvas.height = rect.height * dpr
-        ctx.scale(dpr, dpr)
-
-        ctx.clearRect(0, 0, rect.width, rect.height)
-
-        ctx.fillStyle = "#f97316"
-        ctx.font = "bold 18px monospace"
-        ctx.fillText("Name:", 20, 40)
-        ctx.fillStyle = "#ffffff"
-        ctx.fillText(contact.name, 80, 40)
-
-        ctx.fillStyle = "#f97316"
-        ctx.font = "bold 16px monospace"
-        ctx.fillText("Anschrift:", 20, 80)
-        ctx.fillStyle = "#a3a3a3"
-        ctx.font = "16px monospace"
-        ctx.fillText(contact.address, 130, 80)
-
-        ctx.fillStyle = "#f97316"
-        ctx.font = "bold 16px monospace"
-        ctx.fillText("Telefon:", 20, 120)
-        ctx.fillStyle = "#ffffff"
-        ctx.fillText(contact.phoneFormatted, 110, 120)
-      }
-    }
-
-    const canvas = canvasRef.current
-    if (canvas && !isScratched) {
-      const ctx = canvas.getContext("2d")
-      if (ctx) {
-        const dpr = window.devicePixelRatio || 1
-        const rect = canvas.getBoundingClientRect()
-
-        if (canvas.width !== rect.width * dpr) {
-          canvas.width = rect.width * dpr
-          canvas.height = rect.height * dpr
+          textCanvas.width = rect.width * dpr
+          textCanvas.height = rect.height * dpr
           ctx.scale(dpr, dpr)
+          ctx.clearRect(0, 0, rect.width, rect.height)
 
-          ctx.fillStyle = "#2a2a2a"
-          ctx.fillRect(0, 0, rect.width, rect.height)
+          ctx.fillStyle = "#f97316"
+          ctx.font = `bold ${Math.round(rect.width * 0.03)}px monospace`
+          ctx.fillText("Name:", 20, 40)
+          ctx.fillStyle = "#ffffff"
+          ctx.fillText(contact.name, 90, 40)
 
-          ctx.fillStyle = "#555555"
-          ctx.font = "bold 16px sans-serif"
-          ctx.textAlign = "center"
-          ctx.textBaseline = "middle"
-          ctx.fillText("Hier rubbeln (Scratch-Off)", rect.width / 2, rect.height / 2)
+          ctx.fillStyle = "#f97316"
+          ctx.font = `bold ${Math.round(rect.width * 0.028)}px monospace`
+          ctx.fillText("Anschrift:", 20, 85)
+          ctx.fillStyle = "#a3a3a3"
+          ctx.font = `${Math.round(rect.width * 0.028)}px monospace`
+          ctx.fillText(contact.address, 140, 85)
+
+          ctx.fillStyle = "#f97316"
+          ctx.font = `bold ${Math.round(rect.width * 0.028)}px monospace`
+          ctx.fillText("Telefon:", 20, 130)
+          ctx.fillStyle = "#ffffff"
+          ctx.fillText(contact.phoneFormatted, 115, 130)
         }
       }
-    }
+
+      if (!isScratched) {
+        const canvas = canvasRef.current
+        if (canvas) {
+          const ctx = canvas.getContext("2d")
+          if (ctx) {
+            const dpr = window.devicePixelRatio || 1
+            const rect = canvas.getBoundingClientRect()
+            if (rect.width === 0) return
+
+            canvas.width = rect.width * dpr
+            canvas.height = rect.height * dpr
+            ctx.scale(dpr, dpr)
+
+            ctx.fillStyle = "#2a2a2a"
+            ctx.fillRect(0, 0, rect.width, rect.height)
+
+            ctx.fillStyle = "#555555"
+            ctx.font = "bold 16px sans-serif"
+            ctx.textAlign = "center"
+            ctx.textBaseline = "middle"
+            ctx.fillText("Hier rubbeln (Scratch-Off)", rect.width / 2, rect.height / 2)
+          }
+        }
+      }
+    })
   }, [contact, isScratched])
 
   const scratch = (x: number, y: number) => {
@@ -90,7 +94,6 @@ export function ScratchImpressum() {
     if (!canvas) return
     const ctx = canvas.getContext("2d")
     if (!ctx) return
-
     ctx.globalCompositeOperation = "destination-out"
     ctx.beginPath()
     ctx.arc(x, y, 25, 0, Math.PI * 2)
@@ -101,18 +104,14 @@ export function ScratchImpressum() {
     if (isScratched) return
     setIsDrawing(true)
     const rect = canvasRef.current?.getBoundingClientRect()
-    if (rect) {
-      scratch(e.clientX - rect.left, e.clientY - rect.top)
-    }
+    if (rect) scratch(e.clientX - rect.left, e.clientY - rect.top)
     e.currentTarget.setPointerCapture(e.pointerId)
   }
 
   const handlePointerMove = (e: React.PointerEvent) => {
     if (!isDrawing || isScratched) return
     const rect = canvasRef.current?.getBoundingClientRect()
-    if (rect) {
-      scratch(e.clientX - rect.left, e.clientY - rect.top)
-    }
+    if (rect) scratch(e.clientX - rect.left, e.clientY - rect.top)
   }
 
   const handlePointerUp = (e: React.PointerEvent) => {
@@ -125,9 +124,7 @@ export function ScratchImpressum() {
     const canvas = canvasRef.current
     if (canvas) {
       const ctx = canvas.getContext("2d")
-      if (ctx) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
-      }
+      if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height)
     }
     if (contact) setScreenReaderData(contact)
   }
