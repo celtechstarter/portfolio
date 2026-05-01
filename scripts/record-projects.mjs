@@ -39,12 +39,12 @@ async function recordProject(project) {
   // Wait for page to fully render (per-project wait time)
   await page.waitForTimeout(project.waitMs ?? 3000)
 
-  // Scroll slowly from top to bottom (~4 seconds)
+  // Scroll slowly from top to bottom (~8 seconds)
   await page.evaluate(async () => {
     await new Promise(resolve => {
       const total = document.body.scrollHeight - window.innerHeight
       if (total <= 0) { resolve(); return }
-      const steps = 80
+      const steps = 160
       const step = total / steps
       let current = 0
       const interval = setInterval(() => {
@@ -52,7 +52,7 @@ async function recordProject(project) {
         window.scrollTo({ top: current, behavior: 'instant' })
         if (current >= total) {
           clearInterval(interval)
-          setTimeout(resolve, 800)
+          setTimeout(resolve, 1200)
         }
       }, 50)
     })
