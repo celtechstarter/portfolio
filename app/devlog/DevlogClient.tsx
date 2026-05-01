@@ -210,6 +210,48 @@ const entries: DevlogEntry[] = [
     problemSolved:
       "export const metadata funktioniert nicht in 'use client' Dateien → Server-Wrapper-Pattern: page.tsx als Server Component, UI-Logik in *Client.tsx ausgelagert",
   },
+  {
+    project: "Portfolio",
+    color: PROJECT_COLORS["Portfolio"],
+    day: 10,
+    date: "01.05.2026",
+    title: "Domain-Migration & SEO-Relaunch",
+    description:
+      "Komplette Migration auf marcelwelk.de abgeschlossen. Canonical-Tags auf allen Seiten explizit gesetzt – Next.js setzt diese nicht automatisch, was Google dazu veranlasst hatte die www-Version als kanonisch zu wählen. Sitemap bereinigt: Impressum und Datenschutz raus (waren in robots.ts als disallowed markiert – Widerspruch behoben). Page-Titles aller Unterseiten für SEO erweitert. Google Search Console eingerichtet, Sitemap submitted.",
+    problemSolved:
+      "Google indexierte www.marcelwelk.de statt marcelwelk.de → alternates.canonical auf allen Seiten ergänzt, Vercel www-Redirect auf 308 Permanent gesetzt",
+  },
+  {
+    project: "Portfolio",
+    color: PROJECT_COLORS["Portfolio"],
+    day: 11,
+    date: "01.05.2026",
+    title: "Security-Audit: Kontaktdaten & HTTP-Headers",
+    description:
+      "Vollständiger Sicherheits-Audit durchgeführt. Kritischer Fund: Telefonnummer, E-Mail und Adresse waren als Base64 im öffentlichen GitHub-Code — Base64 ist kein Schutz, trivial decodierbar. Lösung: Server-API-Route /api/contact gebaut, Daten in Umgebungsvariablen ausgelagert (.env.local, Vercel Settings). Straßenadresse aus JSON-LD entfernt. Fehlende HTTP Security-Headers ergänzt: X-Frame-Options (Clickjacking), X-Content-Type-Options, Referrer-Policy, Permissions-Policy.",
+    problemSolved:
+      "atob() im Client-Bundle ist faktisch öffentlich → alle sensiblen Daten auf serverseitige Env-Variablen umgestellt, API-Route liefert Daten nur auf Anfrage",
+  },
+  {
+    project: "Portfolio",
+    color: PROJECT_COLORS["Portfolio"],
+    day: 12,
+    date: "01.05.2026",
+    title: "Cleanup & MW Favicon",
+    description:
+      "Projekt-Cleanup: drei ungenutzte Dateien gelöscht (alte og-image.png, Duplikat in /projects/, nicht referenzierte apple-icon.png). MW Monogramm-Favicon als SVG erstellt – skaliert verlustfrei auf jede Größe. Ersetzt das Profilbild-Favicon, das bei 16x16px als unklarer Fleck wirkte. Google zeigt das neue Icon in den Suchergebnissen neben der URL.",
+  },
+  {
+    project: "Portfolio",
+    color: PROJECT_COLORS["Portfolio"],
+    day: 13,
+    date: "01.05.2026",
+    title: "Automatische Projekt-Videos mit Playwright",
+    description:
+      "Playwright-Script entwickelt das alle Projektseiten automatisch öffnet, durchscrollt und als WebM-Video aufnimmt. 5 Videos in einem Durchlauf generiert (1280×720). Video-Lightbox in Projekt-Karten eingebaut: Hover zeigt 'Größer ansehen', Klick öffnet Modal mit Browser-Controls. Scroll-Geschwindigkeit auf ~8 Sekunden optimiert. Script per npm run record jederzeit neu ausführbar.",
+    problemSolved:
+      "PokeScan V2 zeigte 7s weißen Ladebildschirm → pro-Projekt waitMs eingeführt, pokescan bekommt 10s Wartezeit vor Aufnahmestart",
+  },
 
   // ── CelDesk ───────────────────────────────────────────────────────────────
   {
