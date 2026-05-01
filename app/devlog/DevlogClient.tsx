@@ -1,6 +1,8 @@
 "use client"
 
-import { Download, Wrench } from "lucide-react"
+import { useState } from "react"
+import { Download, Wrench, ChevronDown } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
 import { Navbar } from "@/components/navbar"
 
 interface DevlogEntry {
@@ -274,7 +276,166 @@ const entries: DevlogEntry[] = [
   },
 ]
 
+function EntryCard({ entry, isLast }: { entry: DevlogEntry; isLast: boolean }) {
+  const [open, setOpen] = useState(false)
+  const rgb = entry.color
+  const key = `${entry.project}-${entry.day}`
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.2 }}
+      className="relative flex gap-6"
+    >
+      {/* Timeline dot */}
+      <div className="relative mt-1 shrink-0">
+        <div
+          className="flex h-[22px] w-[22px] items-center justify-center rounded-full border-2 bg-background transition-colors duration-200"
+          style={{ borderColor: open ? `rgba(${rgb}, 0.9)` : `rgba(${rgb}, 0.4)` }}
+        >
+          <div
+            className="h-2 w-2 rounded-full transition-all duration-200"
+            style={{ background: `rgba(${rgb}, ${open ? 1 : 0.6})` }}
+          />
+        </div>
+      </div>
+
+      {/* Card */}
+      <div className={`flex-1 ${!isLast ? "pb-8 border-b border-border/20" : ""}`}>
+        {/* Clickable header */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="w-full text-left group/btn"
+        >
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex-1 min-w-0">
+              {/* Badges row */}
+              <div className="mb-2 flex flex-wrap items-center gap-2">
+                <span
+                  className="rounded-full px-2.5 py-0.5 font-mono text-[10px] font-bold tracking-wider uppercase"
+                  style={{
+                    color: `rgba(${rgb}, 0.9)`,
+                    background: `rgba(${rgb}, 0.1)`,
+                    border: `1px solid rgba(${rgb}, 0.2)`,
+                  }}
+                >
+                  {entry.project}
+                </span>
+                {entry.inDevelopment && (
+                  <span className="rounded-full border border-purple-400/20 px-2 py-0.5 font-mono text-[10px] text-purple-400/60 tracking-wide">
+                    In Entwicklung
+                  </span>
+                )}
+                <span
+                  className="font-mono text-[10px] font-bold tracking-widest uppercase"
+                  style={{ color: `rgba(${rgb}, 0.4)` }}
+                >
+                  Tag {String(entry.day).padStart(2, "0")}
+                </span>
+                {entry.date && (
+                  <span className="font-mono text-[10px] text-muted-foreground/40">
+                    {entry.date}
+                  </span>
+                )}
+              </div>
+              {/* Title */}
+              <p className="text-sm font-semibold leading-snug text-foreground group-hover/btn:text-primary transition-colors duration-150">
+                {entry.title}
+              </p>
+            </div>
+            {/* Chevron */}
+            <ChevronDown
+              size={15}
+              className="mt-0.5 shrink-0 text-muted-foreground/40 transition-transform duration-300 group-hover/btn:text-muted-foreground"
+              style={{ transform: open ? "rotate(180deg)" : "rotate(0deg)" }}
+            />
+          </div>
+        </button>
+
+        {/* Expandable content */}
+        <AnimatePresence initial={false}>
+          {open && (
+            <motion.div
+              key={key}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
+              className="overflow-hidden"
+            >
+              <div className="pt-3 space-y-3">
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {entry.description}
+                </p>
+
+                {entry.problemSolved && (
+                  <div
+                    className="flex items-start gap-2 rounded-lg px-3 py-2"
+                    style={{
+                      background: `rgba(${rgb}, 0.05)`,
+                      border: `1px solid rgba(${rgb}, 0.18)`,
+                    }}
+                  >
+                    <Wrench
+                      size={13}
+                      className="mt-0.5 shrink-0"
+                      style={{ color: `rgba(${rgb}, 0.65)` }}
+                    />
+                    <p
+                      className="font-mono text-xs leading-relaxed"
+                      style={{ color: `rgba(${rgb}, 0.65)` }}
+                    >
+                      {entry.problemSolved}
+                    </p>
+                  </div>
+                )}
+
+                {entry.pdf && (
+                  <a
+                    href={entry.pdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 font-mono text-xs transition-all duration-200"
+                    style={{
+                      color: `rgba(${rgb}, 0.6)`,
+                      border: `1px solid rgba(${rgb}, 0.2)`,
+                    }}
+                    onMouseEnter={(e) => {
+                      const el = e.currentTarget as HTMLAnchorElement
+                      el.style.color = `rgba(${rgb}, 1)`
+                      el.style.borderColor = `rgba(${rgb}, 0.5)`
+                      el.style.background = `rgba(${rgb}, 0.05)`
+                    }}
+                    onMouseLeave={(e) => {
+                      const el = e.currentTarget as HTMLAnchorElement
+                      el.style.color = `rgba(${rgb}, 0.6)`
+                      el.style.borderColor = `rgba(${rgb}, 0.2)`
+                      el.style.background = "transparent"
+                    }}
+                  >
+                    <Download size={11} />
+                    Daily Report PDF
+                  </a>
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.div>
+  )
+}
+
 export default function DevlogClient() {
+  const [activeFilter, setActiveFilter] = useState<string | null>(null)
+
+  const filtered = activeFilter
+    ? entries.filter(e => e.project === activeFilter)
+    : entries
+
   return (
     <>
       <Navbar basePath="/" />
@@ -283,7 +444,7 @@ export default function DevlogClient() {
         <div className="mx-auto max-w-2xl">
 
           {/* Header */}
-          <div className="mb-16 text-center">
+          <div className="mb-12 text-center">
             <p className="mb-2 font-mono text-xs tracking-widest text-primary uppercase">
               Build Journal
             </p>
@@ -295,160 +456,74 @@ export default function DevlogClient() {
             </p>
           </div>
 
-          {/* Legend */}
-          <div className="mb-14 flex flex-wrap justify-center gap-x-6 gap-y-3 rounded-xl border border-border px-6 py-4">
-            {Object.entries(PROJECT_COLORS).map(([name, rgb]) => (
-              <div key={name} className="flex items-center gap-2">
-                <div
-                  className="h-2 w-2 rounded-full"
-                  style={{ background: `rgba(${rgb}, 0.9)` }}
-                />
-                <span
-                  className="font-mono text-xs"
-                  style={{ color: `rgba(${rgb}, 0.8)` }}
+          {/* Filter tabs */}
+          <div className="mb-10 flex flex-wrap justify-center gap-2">
+            <button
+              onClick={() => setActiveFilter(null)}
+              className={`rounded-full border px-4 py-1.5 font-mono text-xs transition-all duration-200 ${
+                activeFilter === null
+                  ? "border-white/20 bg-white/10 text-white"
+                  : "border-border/30 text-muted-foreground hover:border-white/20 hover:text-foreground"
+              }`}
+            >
+              Alle ({entries.length})
+            </button>
+            {Object.entries(PROJECT_COLORS).map(([name, rgb]) => {
+              const count = entries.filter(e => e.project === name).length
+              const isActive = activeFilter === name
+              return (
+                <button
+                  key={name}
+                  onClick={() => setActiveFilter(isActive ? null : name)}
+                  className="rounded-full border px-4 py-1.5 font-mono text-xs transition-all duration-200"
+                  style={isActive ? {
+                    background: `rgba(${rgb}, 0.15)`,
+                    borderColor: `rgba(${rgb}, 0.6)`,
+                    color: `rgba(${rgb}, 1)`,
+                  } : {
+                    borderColor: `rgba(${rgb}, 0.25)`,
+                    color: `rgba(${rgb}, 0.55)`,
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive) {
+                      (e.currentTarget as HTMLButtonElement).style.color = `rgba(${rgb}, 0.9)`
+                      ;(e.currentTarget as HTMLButtonElement).style.borderColor = `rgba(${rgb}, 0.5)`
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) {
+                      (e.currentTarget as HTMLButtonElement).style.color = `rgba(${rgb}, 0.55)`
+                      ;(e.currentTarget as HTMLButtonElement).style.borderColor = `rgba(${rgb}, 0.25)`
+                    }
+                  }}
                 >
-                  {name}
-                </span>
-              </div>
-            ))}
+                  {name} ({count})
+                </button>
+              )
+            })}
           </div>
 
           {/* Timeline */}
           <div className="relative">
-            <div className="absolute left-[11px] top-0 bottom-0 w-px bg-border/50" />
-
-            <div className="flex flex-col gap-10">
-              {entries.map((entry, idx) => {
-                const rgb = entry.color
-                const isLast = idx === entries.length - 1
-
-                return (
-                  <div key={`${entry.project}-${entry.day}`} className="relative flex gap-6">
-
-                    {/* Dot */}
-                    <div className="relative mt-1 shrink-0">
-                      <div
-                        className="flex h-[22px] w-[22px] items-center justify-center rounded-full border-2 bg-background"
-                        style={{ borderColor: `rgba(${rgb}, 0.6)` }}
-                      >
-                        <div
-                          className="h-2 w-2 rounded-full"
-                          style={{ background: `rgba(${rgb}, 0.9)` }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Content */}
-                    <div className={`flex-1 pb-2 ${!isLast ? "border-b border-border/30 pb-10" : ""}`}>
-
-                      {/* Project badge row */}
-                      <div className="mb-2 flex items-center justify-between gap-3">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span
-                            className="rounded-full px-2.5 py-0.5 font-mono text-[10px] font-bold tracking-wider uppercase"
-                            style={{
-                              color: `rgba(${rgb}, 0.9)`,
-                              background: `rgba(${rgb}, 0.1)`,
-                              border: `1px solid rgba(${rgb}, 0.2)`,
-                            }}
-                          >
-                            {entry.project}
-                          </span>
-                          {entry.inDevelopment && (
-                            <span className="rounded-full border border-purple-400/20 px-2 py-0.5 font-mono text-[10px] text-purple-400/60 tracking-wide">
-                              In Entwicklung
-                            </span>
-                          )}
-                        </div>
-
-                        {/* PDF download */}
-                        {entry.pdf && (
-                          <a
-                            href={entry.pdf}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex shrink-0 items-center gap-1.5 rounded-md px-2.5 py-1 font-mono text-xs transition-all duration-200"
-                            style={{
-                              color: `rgba(${rgb}, 0.45)`,
-                              border: `1px solid rgba(${rgb}, 0.12)`,
-                            }}
-                            onMouseEnter={(e) => {
-                              const el = e.currentTarget as HTMLAnchorElement
-                              el.style.color = `rgba(${rgb}, 0.9)`
-                              el.style.borderColor = `rgba(${rgb}, 0.45)`
-                              el.style.background = `rgba(${rgb}, 0.05)`
-                            }}
-                            onMouseLeave={(e) => {
-                              const el = e.currentTarget as HTMLAnchorElement
-                              el.style.color = `rgba(${rgb}, 0.45)`
-                              el.style.borderColor = `rgba(${rgb}, 0.12)`
-                              el.style.background = "transparent"
-                            }}
-                          >
-                            <Download size={11} />
-                            PDF
-                          </a>
-                        )}
-                      </div>
-
-                      {/* Day + date */}
-                      <div className="mb-2 flex items-center gap-3">
-                        <span
-                          className="font-mono text-xs font-bold tracking-widest uppercase"
-                          style={{ color: `rgba(${rgb}, 0.45)` }}
-                        >
-                          Tag {String(entry.day).padStart(2, "0")}
-                        </span>
-                        {entry.date && (
-                          <span className="font-mono text-xs text-muted-foreground/50">
-                            {entry.date}
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Title */}
-                      <h2 className="mb-2 text-base font-semibold leading-snug text-foreground">
-                        {entry.title}
-                      </h2>
-
-                      {/* Description */}
-                      <p className="text-sm leading-relaxed text-muted-foreground">
-                        {entry.description}
-                      </p>
-
-                      {/* Problem solved */}
-                      {entry.problemSolved && (
-                        <div
-                          className="mt-3 flex items-start gap-2 rounded-lg px-3 py-2"
-                          style={{
-                            background: `rgba(${rgb}, 0.05)`,
-                            border: `1px solid rgba(${rgb}, 0.18)`,
-                          }}
-                        >
-                          <Wrench
-                            size={13}
-                            className="mt-0.5 shrink-0"
-                            style={{ color: `rgba(${rgb}, 0.65)` }}
-                          />
-                          <p
-                            className="font-mono text-xs leading-relaxed"
-                            style={{ color: `rgba(${rgb}, 0.65)` }}
-                          >
-                            {entry.problemSolved}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )
-              })}
+            <div className="absolute left-[11px] top-0 bottom-0 w-px bg-border/30" />
+            <div className="flex flex-col gap-6">
+              <AnimatePresence mode="popLayout">
+                {filtered.map((entry, idx) => (
+                  <EntryCard
+                    key={`${entry.project}-${entry.day}`}
+                    entry={entry}
+                    isLast={idx === filtered.length - 1}
+                  />
+                ))}
+              </AnimatePresence>
             </div>
           </div>
 
-          {/* Footer note */}
+          {/* Footer */}
           <div className="mt-16 text-center font-mono text-xs text-muted-foreground/30">
-            // {entries.length} Einträge · {Object.keys(PROJECT_COLORS).length} Projekte
+            // {filtered.length} von {entries.length} Einträgen · {Object.keys(PROJECT_COLORS).length} Projekte
           </div>
+
         </div>
       </div>
     </>
