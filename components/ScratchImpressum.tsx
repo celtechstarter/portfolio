@@ -3,11 +3,10 @@
 import React, { useRef, useEffect, useState } from "react"
 import { ShieldAlert, Eye } from "lucide-react"
 
-// Base64 encoded sensitive data for bot protection
-const DATA = {
-  name: "TWFyY2VsIFdlbGs=",
-  address: "S29ybmFja2VyIDE0LCA0NDMxOSBEb3J0bXVuZA==",
-  phone: "MDE1MSAvIDExNSA4OTkgMjY="
+type ContactData = {
+  name: string
+  address: string
+  phoneFormatted: string
 }
 
 export function ScratchImpressum() {
@@ -15,67 +14,67 @@ export function ScratchImpressum() {
   const textCanvasRef = useRef<HTMLCanvasElement>(null)
   const [isScratched, setIsScratched] = useState(false)
   const [isDrawing, setIsDrawing] = useState(false)
-  
-  // State to hold decoded data for screenreaders (only populated when button is clicked)
-  const [screenReaderData, setScreenReaderData] = useState<{name: string, address: string, phone: string} | null>(null)
+  const [contact, setContact] = useState<ContactData | null>(null)
+  const [screenReaderData, setScreenReaderData] = useState<ContactData | null>(null)
 
   useEffect(() => {
-    // Decode at runtime only
-    const decodedName = atob(DATA.name)
-    const decodedAddress = atob(DATA.address)
-    const decodedPhone = atob(DATA.phone)
+    fetch('/api/contact')
+      .then(r => r.json())
+      .then((data: ContactData) => setContact(data))
+  }, [])
 
-    // Draw the text layer (bottom)
+  useEffect(() => {
+    if (!contact) return
+
     const textCanvas = textCanvasRef.current
     if (textCanvas) {
       const ctx = textCanvas.getContext("2d")
       if (ctx) {
         const dpr = window.devicePixelRatio || 1
         const rect = textCanvas.getBoundingClientRect()
-        
+
         textCanvas.width = rect.width * dpr
         textCanvas.height = rect.height * dpr
         ctx.scale(dpr, dpr)
 
         ctx.clearRect(0, 0, rect.width, rect.height)
-        
-        ctx.fillStyle = "#f97316" // Orange
+
+        ctx.fillStyle = "#f97316"
         ctx.font = "bold 18px monospace"
         ctx.fillText("Name:", 20, 40)
         ctx.fillStyle = "#ffffff"
-        ctx.fillText(decodedName, 80, 40)
+        ctx.fillText(contact.name, 80, 40)
 
         ctx.fillStyle = "#f97316"
         ctx.font = "bold 16px monospace"
         ctx.fillText("Anschrift:", 20, 80)
         ctx.fillStyle = "#a3a3a3"
         ctx.font = "16px monospace"
-        ctx.fillText(decodedAddress, 130, 80)
+        ctx.fillText(contact.address, 130, 80)
 
         ctx.fillStyle = "#f97316"
         ctx.font = "bold 16px monospace"
         ctx.fillText("Telefon:", 20, 120)
         ctx.fillStyle = "#ffffff"
-        ctx.fillText(decodedPhone, 110, 120)
+        ctx.fillText(contact.phoneFormatted, 110, 120)
       }
     }
 
-    // Draw the silver scratch layer (top)
     const canvas = canvasRef.current
     if (canvas && !isScratched) {
       const ctx = canvas.getContext("2d")
       if (ctx) {
         const dpr = window.devicePixelRatio || 1
         const rect = canvas.getBoundingClientRect()
-        
+
         if (canvas.width !== rect.width * dpr) {
           canvas.width = rect.width * dpr
           canvas.height = rect.height * dpr
           ctx.scale(dpr, dpr)
-          
+
           ctx.fillStyle = "#2a2a2a"
           ctx.fillRect(0, 0, rect.width, rect.height)
-          
+
           ctx.fillStyle = "#555555"
           ctx.font = "bold 16px sans-serif"
           ctx.textAlign = "center"
@@ -84,7 +83,7 @@ export function ScratchImpressum() {
         }
       }
     }
-  }, [isScratched])
+  }, [contact, isScratched])
 
   const scratch = (x: number, y: number) => {
     const canvas = canvasRef.current
@@ -130,18 +129,13 @@ export function ScratchImpressum() {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
       }
     }
-    // Set data for screenreaders
-    setScreenReaderData({
-      name: atob(DATA.name),
-      address: atob(DATA.address),
-      phone: atob(DATA.phone)
-    })
+    if (contact) setScreenReaderData(contact)
   }
 
   return (
     <div className="max-w-2xl mx-auto w-full p-6 sm:p-8 rounded-2xl border border-white/10 bg-black/40 shadow-2xl relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
-      
+
       <div className="mb-6 flex items-center gap-3 text-primary relative z-10">
         <ShieldAlert size={24} />
         <h2 className="font-bold text-2xl text-white">Impressum</h2>
@@ -151,15 +145,12 @@ export function ScratchImpressum() {
       </p>
 
       <div className="relative w-full h-[180px] rounded-xl overflow-hidden border border-white/10 bg-black/80 select-none shadow-[inset_0_0_20px_rgba(0,0,0,1)] z-10">
-        {/* Layer 1: Text */}
-        <canvas 
-          ref={textCanvasRef} 
+        <canvas
+          ref={textCanvasRef}
           className="absolute inset-0 w-full h-full"
           style={{ width: '100%', height: '100%' }}
           aria-hidden="true"
         />
-        
-        {/* Layer 2: Scratch Off */}
         <canvas
           ref={canvasRef}
           onPointerDown={handlePointerDown}
@@ -172,12 +163,11 @@ export function ScratchImpressum() {
         />
       </div>
 
-      {/* Screenreader Accessible Data (Hidden until revealed) */}
       {screenReaderData && (
         <div className="sr-only" aria-live="polite">
           <p>Name: {screenReaderData.name}</p>
           <p>Anschrift: {screenReaderData.address}</p>
-          <p>Telefon: {screenReaderData.phone}</p>
+          <p>Telefon: {screenReaderData.phoneFormatted}</p>
         </div>
       )}
 

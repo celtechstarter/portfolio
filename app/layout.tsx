@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { Footer } from '@/components/footer'
+import { FloatingNav } from '@/components/floating-nav'
 
 const _inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const _jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains-mono' })
@@ -135,7 +136,6 @@ export default function RootLayout({
                 telephone: "",
                 address: {
                   "@type": "PostalAddress",
-                  streetAddress: "Kornacker 14",
                   addressLocality: "Dortmund",
                   postalCode: "44319",
                   addressCountry: "DE",
@@ -158,6 +158,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <FloatingNav />
         <Analytics />
       </body>
     </html>

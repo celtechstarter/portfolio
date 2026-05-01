@@ -1,22 +1,13 @@
 import type { Metadata } from "next"
 import Image from "next/image"
-import {
-  Phone,
-  Mail,
-  Globe,
-  Github,
-  Download,
-  ExternalLink,
-  MapPin,
-} from "lucide-react"
+import { Github, ExternalLink, MapPin, ChevronDown } from "lucide-react"
 import { Navbar } from "@/components/navbar"
-import { Footer } from "@/components/footer"
 import { ProtectedContactLinks } from "@/components/protected-contact-links"
 
 export const metadata: Metadata = {
-  title: "Lebenslauf",
+  title: "Lebenslauf – IT & Webentwicklung",
   description:
-    "Lebenslauf von Marcel Welk – Freelance Webdesigner & Webentwickler aus Dortmund. Projekte, Fähigkeiten in UI/UX Design, Responsive Design, React, Next.js und KI-gestützter Entwicklung.",
+    "Lebenslauf von Marcel Welk – Freelance Webdesigner & Webentwickler aus Dortmund. Projekte, Skills in Web-Entwicklung, KI-Integration, React, Next.js und modernen Deployment-Workflows.",
   openGraph: {
     title: "Lebenslauf | Marcel Welk",
     description:
@@ -47,12 +38,19 @@ function SectionHeader({ label, title }: { label: string; title: string }) {
         <div
           className="h-px flex-1"
           style={{
-            background:
-              "linear-gradient(to right, rgba(230,138,46,0.35), transparent)",
+            background: "linear-gradient(to right, rgba(230,138,46,0.35), transparent)",
           }}
         />
       </div>
     </div>
+  )
+}
+
+function SubSectionHeader({ title }: { title: string }) {
+  return (
+    <p className="mb-5 font-mono text-xs tracking-widest text-primary uppercase">
+      {title}
+    </p>
   )
 }
 
@@ -77,17 +75,16 @@ function StatusBadge({
   color,
 }: {
   label: string
-  color: "green" | "blue" | "purple"
+  color: "green" | "blue" | "purple" | "orange"
 }) {
   const styles = {
     green: "border-green-500/30 bg-green-500/10 text-green-400",
     blue: "border-blue-400/30 bg-blue-400/10 text-blue-300",
     purple: "border-purple-400/30 bg-purple-400/10 text-purple-300",
+    orange: "border-primary/30 bg-primary/10 text-primary",
   }
   return (
-    <span
-      className={`rounded-full border px-2.5 py-0.5 font-mono text-xs ${styles[color]}`}
-    >
+    <span className={`rounded-full border px-2.5 py-0.5 font-mono text-xs ${styles[color]}`}>
       {label}
     </span>
   )
@@ -100,11 +97,7 @@ function TimelineDot({ active = false }: { active?: boolean }) {
         active ? "border-primary" : "border-border"
       }`}
     >
-      <div
-        className={`h-2 w-2 rounded-full ${
-          active ? "bg-primary" : "bg-muted-foreground/40"
-        }`}
-      />
+      <div className={`h-2 w-2 rounded-full ${active ? "bg-primary" : "bg-muted-foreground/40"}`} />
     </div>
   )
 }
@@ -122,6 +115,79 @@ function BulletList({ items }: { items: string[] }) {
   )
 }
 
+function ProjectCard({
+  title,
+  year,
+  badge,
+  badgeColor,
+  subtitle,
+  links,
+  description,
+  bullets,
+  tags,
+}: {
+  title: string
+  year: string
+  badge: string
+  badgeColor: "green" | "blue" | "purple" | "orange"
+  subtitle?: string
+  links?: { href: string; label: string; icon: "external" | "github" }[]
+  description?: string
+  bullets?: string[]
+  tags: string[]
+}) {
+  return (
+    <details className="group rounded-xl border border-border bg-card transition-colors duration-300 hover:border-primary/40">
+      <summary className="flex cursor-pointer list-none items-center gap-2.5 p-5">
+        <div className="flex flex-1 flex-wrap items-center gap-2.5">
+          <h3 className="text-base font-semibold text-foreground">{title}</h3>
+          <span className="font-mono text-xs text-muted-foreground">{year}</span>
+          <StatusBadge label={badge} color={badgeColor} />
+        </div>
+        <ChevronDown
+          size={16}
+          className="shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180"
+        />
+      </summary>
+
+      <div className="border-t border-border/50 px-5 pb-5 pt-4">
+        {subtitle && (
+          <p className="mb-3 text-sm text-muted-foreground">{subtitle}</p>
+        )}
+        {links && links.length > 0 && (
+          <div className="mb-4 flex flex-wrap gap-4">
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs text-primary transition-colors hover:text-primary/80"
+              >
+                {l.icon === "external" ? (
+                  <ExternalLink size={12} />
+                ) : (
+                  <Github size={12} />
+                )}
+                {l.label}
+              </a>
+            ))}
+          </div>
+        )}
+        {description && (
+          <p className="mb-4 text-sm text-muted-foreground">{description}</p>
+        )}
+        {bullets && <BulletList items={bullets} />}
+        <div className={`flex flex-wrap gap-2 ${bullets ? "mt-4" : ""}`}>
+          {tags.map((tag) => (
+            <Tag key={tag}>{tag}</Tag>
+          ))}
+        </div>
+      </div>
+    </details>
+  )
+}
+
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 export default function LebenslaufPage() {
@@ -136,8 +202,6 @@ export default function LebenslaufPage() {
           <section>
             <div className="rounded-2xl border border-border bg-card p-8">
               <div className="flex flex-col gap-8 md:flex-row md:items-start">
-
-                {/* Profile image */}
                 <div className="flex shrink-0 justify-center md:justify-start">
                   <div className="relative h-[160px] w-[160px] rounded-full ring-2 ring-primary/30 ring-offset-4 ring-offset-background">
                     <Image
@@ -150,22 +214,17 @@ export default function LebenslaufPage() {
                     />
                   </div>
                 </div>
-
-                {/* Info */}
                 <div className="flex flex-1 flex-col text-center md:text-left">
                   <h1 className="mb-1 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
                     Marcel Welk
                   </h1>
                   <p className="mb-3 font-mono text-sm text-primary">
-                    IT-Techniker · Cloud &amp; Web-Entwickler · AI Enthusiast
+                    Freelance Webdesigner &amp; Webentwickler · KI-Nerd
                   </p>
                   <div className="mb-5 flex items-center justify-center gap-1.5 md:justify-start">
                     <MapPin size={13} className="text-muted-foreground" />
-                    <span className="text-sm text-muted-foreground">
-                      Dortmund, Deutschland
-                    </span>
+                    <span className="text-sm text-muted-foreground">Dortmund, Deutschland</span>
                   </div>
-
                   <ProtectedContactLinks />
                 </div>
               </div>
@@ -176,170 +235,125 @@ export default function LebenslaufPage() {
           <section>
             <SectionHeader label="Profil" title="Über mich" />
             <p className="text-base leading-relaxed text-muted-foreground">
-              IT-Techniker und Entwickler aus Dortmund mit Schwerpunkt auf
-              Linux-Administration, Cloud-Infrastruktur und Web-Entwicklung.
-              Nach meiner Weiterbildung zum Cloud &amp; Web-Experten bei
-              Techstarter setze ich auf einen praxisorientierten Ansatz: Ich
-              baue echte Projekte, nutze moderne KI-Tools als
-              Produktivitätsmultiplikator und dokumentiere meinen Lernprozess
-              öffentlich. Aktuell suche ich eine Stelle im Bereich IT-Support,
-              Cloud Administration, Linux Sysadmin oder Junior DevOps.
+              Freelance Webdesigner und Webentwickler aus Dortmund mit Fokus auf
+              moderne Web-Entwicklung, KI-Integration und schnelle Umsetzung
+              digitaler Projekte. Nach meiner Weiterbildung zum Cloud &amp;
+              Web-Experten bei Techstarter baue ich echte Produkte — von der
+              Idee bis zum Live-Deployment. Ich kombiniere strategische Planung
+              mit KI-Tools als Produktivitätsmultiplikator und arbeite nach dem
+              Prinzip: schnell bauen, schnell testen, schnell lernen. Aktuell
+              verfügbar für Freelance-Projekte sowie Festanstellungen im Bereich
+              Webentwicklung, KI-Automatisierung oder Junior DevOps.
             </p>
           </section>
 
           {/* ── 3. Projekte ────────────────────────────────────────────────── */}
           <section>
             <SectionHeader label="Portfolio" title="Projekte" />
-            <div className="flex flex-col gap-5">
 
-              {/* Poke-Scan V2 */}
-              <div className="rounded-xl border border-border bg-card p-6 transition-colors duration-300 hover:border-primary/40">
-                <div className="mb-3 flex flex-wrap items-center gap-2.5">
-                  <h3 className="text-lg font-semibold text-foreground">
-                    Poke-Scan V2
-                  </h3>
-                  <span className="font-mono text-xs text-muted-foreground">
-                    2025–2026
-                  </span>
-                  <StatusBadge label="Aktives Projekt" color="green" />
-                </div>
-                <p className="mb-3 text-sm text-muted-foreground">
-                  Pokémon-Karten Scanner mit KI-Integration
-                </p>
-                <div className="mb-4 flex flex-wrap gap-4">
-                  <a
-                    href="https://poke-scan-v2.vercel.app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs text-primary transition-colors hover:text-primary/80"
-                  >
-                    <ExternalLink size={12} />
-                    Live: poke-scan-v2.vercel.app
-                  </a>
-                  <a
-                    href="https://github.com/celtechstarter/poke-scan-v2"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-primary"
-                  >
-                    <Github size={12} />
-                    GitHub
-                  </a>
-                </div>
-                <BulletList
-                  items={[
-                    "VPS-Server konfiguriert (Ubuntu mit SSH)",
-                    "Docker Container für Backend-Services erstellt",
-                    "OpenClaw Agent (KI-Automatisierung) installiert und konfiguriert",
+            {/* KI & App-Projekte */}
+            <div className="mb-10">
+              <SubSectionHeader title="KI & App Development" />
+              <div className="flex flex-col gap-3">
+                <ProjectCard
+                  title="Poke-Scan V2"
+                  year="2025–2026"
+                  badge="Aktives Projekt"
+                  badgeColor="green"
+                  subtitle="Pokémon-Karten Scanner mit KI-Vision Integration"
+                  links={[
+                    { href: "https://poke-scan-v2.vercel.app", label: "poke-scan-v2.vercel.app", icon: "external" },
+                    { href: "https://github.com/celtechstarter/poke-scan-v2", label: "GitHub", icon: "github" },
+                  ]}
+                  bullets={[
+                    "Lovable-Abhängigkeiten entfernt, OCR durch echte KI Vision API ersetzt",
+                    "VPS-Server konfiguriert (Ubuntu mit SSH), Docker Container für Backend",
                     "Vercel Deployment mit GitHub Actions CI/CD",
                     "Supabase PostgreSQL Datenbank eingerichtet",
                     "API-Integration (NVIDIA NIM, Kimi K2.5 Vision API)",
-                    "Mobile Bug selbstständig debuggt und gefixt",
                     "Komplettes Projekt von 0 auf produktiv gebracht",
                   ]}
+                  tags={["React", "TypeScript", "KI Vision", "Docker", "PostgreSQL", "CI/CD", "Vercel"]}
                 />
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {[
-                    "Linux VPS",
-                    "Docker",
-                    "SSH",
-                    "Git",
-                    "CI/CD",
-                    "React",
-                    "TypeScript",
-                    "PostgreSQL",
-                  ].map((tag) => (
-                    <Tag key={tag}>{tag}</Tag>
-                  ))}
-                </div>
+                <ProjectCard
+                  title="BewerbungsPilot"
+                  year="2025"
+                  badge="Fertig"
+                  badgeColor="blue"
+                  subtitle="KI-gestützter Bewerbungsgenerator — in unter 2 Tagen gebaut"
+                  links={[
+                    { href: "https://bewerbungspilot.vercel.app", label: "bewerbungspilot.vercel.app", icon: "external" },
+                  ]}
+                  description="Lebenslauf hochladen, Stellenanzeige einfügen, fertiges Anschreiben in 5 Minuten. Vollständige Web-App als persönlicher Speed-Benchmark."
+                  tags={["Next.js", "TypeScript", "KI", "Vercel"]}
+                />
+                <ProjectCard
+                  title="CELDESK"
+                  year="2025–2026"
+                  badge="In Entwicklung"
+                  badgeColor="orange"
+                  description="IT-Service-Portal mit Ticketsystem, Asset-Verwaltung, Wissensdatenbank und Onboarding-Checklisten — inkl. Dashboard und Dark Mode. Eigenbau nach dem Vorbild von Zendesk."
+                  tags={["React", "TypeScript", "Supabase", "Tailwind CSS"]}
+                />
+                <ProjectCard
+                  title="Marcel CV Boost"
+                  year="2025"
+                  badge="Fertig"
+                  badgeColor="blue"
+                  description="Barrierearme Bewerbungshilfe-Plattform. Upload von Bewerbungsunterlagen, Buchungssystem für Beratungstermine und Admin-Dashboard. DSGVO-konform mit Supabase-Backend."
+                  tags={["React", "TypeScript", "Supabase", "Tailwind CSS"]}
+                />
+                <ProjectCard
+                  title="PromptCrafter"
+                  year="2024"
+                  badge="Hackathon"
+                  badgeColor="purple"
+                  description={`KI-gesteuerte Lernplattform, entstanden im 48h Hackathon "$40k Build Challenge". React Frontend mit Node.js Backend, deployed auf Google Cloud & Vercel.`}
+                  tags={["React", "Node.js", "Google Cloud", "Vercel"]}
+                />
               </div>
+            </div>
 
-              {/* BewerbungsPilot */}
-              <div className="rounded-xl border border-border bg-card p-6 transition-colors duration-300 hover:border-primary/40">
-                <div className="mb-3 flex flex-wrap items-center gap-2.5">
-                  <h3 className="text-lg font-semibold text-foreground">
-                    BewerbungsPilot
-                  </h3>
-                  <span className="font-mono text-xs text-muted-foreground">
-                    2025
-                  </span>
-                  <StatusBadge label="Fertig" color="blue" />
-                </div>
-                <p className="mb-3 text-sm text-muted-foreground">
-                  KI-gestützte Bewerbungsplattform — in unter 2 Tagen gebaut
-                </p>
-                <div className="mb-4">
-                  <a
-                    href="https://bewerbungspilot.vercel.app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs text-primary transition-colors hover:text-primary/80"
-                  >
-                    <ExternalLink size={12} />
-                    bewerbungspilot.vercel.app
-                  </a>
-                </div>
-                <p className="mb-4 text-sm text-muted-foreground">
-                  Vollständige Web-App für KI-gestütztes
-                  Bewerbungsmanagement als persönlicher Speed-Benchmark.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {["Next.js", "TypeScript", "Vercel"].map((tag) => (
-                    <Tag key={tag}>{tag}</Tag>
-                  ))}
-                </div>
-              </div>
-
-              {/* Coaching-Website */}
-              <div className="rounded-xl border border-border bg-card p-6 transition-colors duration-300 hover:border-primary/40">
-                <div className="mb-3 flex flex-wrap items-center gap-2.5">
-                  <h3 className="text-lg font-semibold text-foreground">
-                    Coaching-Website
-                  </h3>
-                  <span className="font-mono text-xs text-muted-foreground">
-                    2026
-                  </span>
-                  <StatusBadge label="Kundenprojekt" color="purple" />
-                </div>
-                <p className="mb-3 text-sm text-muted-foreground">
-                  Professionelle Website für Python &amp; Linux Trainer
-                </p>
-                <p className="mb-4 text-sm text-muted-foreground">
-                  Kompletter Website-Relaunch für einen freiberuflichen
-                  Trainer. Design, Entwicklung und Deployment.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {["Next.js", "TypeScript", "Tailwind CSS", "Vercel"].map(
-                    (tag) => (
-                      <Tag key={tag}>{tag}</Tag>
-                    )
-                  )}
-                </div>
-              </div>
-
-              {/* PromptCrafter */}
-              <div className="rounded-xl border border-border bg-card p-6 transition-colors duration-300 hover:border-primary/40">
-                <div className="mb-3 flex flex-wrap items-center gap-2.5">
-                  <h3 className="text-lg font-semibold text-foreground">
-                    PromptCrafter
-                  </h3>
-                  <span className="font-mono text-xs text-muted-foreground">
-                    2024
-                  </span>
-                </div>
-                <p className="mb-3 text-sm text-muted-foreground">
-                  KI-gesteuerte Lernplattform (48h Hackathon &quot;$40k Build
-                  Challenge&quot;)
-                </p>
-                <p className="mb-4 text-sm text-muted-foreground">
-                  React Frontend mit Node.js Backend, deployed auf Google
-                  Cloud &amp; Vercel.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {["React", "Node.js", "Google Cloud"].map((tag) => (
-                    <Tag key={tag}>{tag}</Tag>
-                  ))}
-                </div>
+            {/* Freelance / Kundenprojekte */}
+            <div>
+              <SubSectionHeader title="Freelance & Kundenprojekte" />
+              <div className="flex flex-col gap-3">
+                <ProjectCard
+                  title="Coaching Knobling"
+                  year="2026"
+                  badge="Kundenprojekt"
+                  badgeColor="purple"
+                  subtitle="Moderner Webauftritt für ein Coaching-Unternehmen"
+                  links={[
+                    { href: "https://coaching-knobling.vercel.app/", label: "coaching-knobling.vercel.app", icon: "external" },
+                  ]}
+                  description="Kompletter Website-Relaunch. Design, Entwicklung und Deployment. Fokus auf seriöses Design und klare Nutzerführung. Referenzprojekt für lokales Webdesign & Deployment."
+                  tags={["Next.js", "TypeScript", "Tailwind CSS", "Vercel"]}
+                />
+                <ProjectCard
+                  title="Hawaii Cards"
+                  year="2025"
+                  badge="Kundenprojekt"
+                  badgeColor="purple"
+                  subtitle="Landingpage und digitaler Katalog für ein Sammelkarten-Business"
+                  links={[
+                    { href: "https://hawaii-cards.vercel.app/", label: "hawaii-cards.vercel.app", icon: "external" },
+                  ]}
+                  description="Visuell ansprechende Produktpräsentation mit Fokus auf Responsive Design und Asset-Optimierung."
+                  tags={["Webentwicklung", "Responsive Design", "Asset-Optimierung"]}
+                />
+                <ProjectCard
+                  title="Gesunder Fuß"
+                  year="2025"
+                  badge="Kundenprojekt"
+                  badgeColor="purple"
+                  subtitle="Lokaler Webauftritt für eine Praxis im Gesundheitsbereich"
+                  links={[
+                    { href: "https://gesunderfuss.vercel.app/", label: "gesunderfuss.vercel.app", icon: "external" },
+                  ]}
+                  description="Fokus auf Übersichtlichkeit, lokale SEO und Mobile-First Design."
+                  tags={["Lokale SEO", "Clean Design", "Mobile First"]}
+                />
               </div>
             </div>
           </section>
@@ -350,43 +364,31 @@ export default function LebenslaufPage() {
             <div className="relative">
               <div className="absolute left-[10px] top-0 bottom-0 w-px bg-border/50" />
               <div className="flex flex-col gap-10">
-
-                {/* Techstarter */}
                 <div className="relative pl-9">
                   <TimelineDot active />
                   <div className="mb-1 flex flex-wrap items-center gap-3">
-                    <h3 className="font-semibold text-foreground">
-                      Techstarter GmbH
-                    </h3>
-                    <span className="font-mono text-xs text-muted-foreground">
-                      2024–2025
-                    </span>
+                    <h3 className="font-semibold text-foreground">Techstarter GmbH</h3>
+                    <span className="font-mono text-xs text-muted-foreground">2024–2025</span>
                   </div>
                   <p className="mb-3 font-mono text-sm text-primary">
                     Expert:in für Cloud- und Webentwicklung
                   </p>
                   <BulletList
                     items={[
-                      "Windows und Linux Systemadministration",
+                      "Web-Entwicklung: JavaScript, TypeScript, React, Next.js",
+                      "Cloud-Infrastruktur (AWS, Azure) und Linux-Administration",
                       "Virtuelle Maschinen und Container (Docker)",
-                      "Cloud-Infrastruktur (AWS, Azure)",
-                      "Netzwerk-Administration (TCP/IP, DNS, DHCP)",
                       "CI/CD, Git, Automatisierung",
                       "Infrastructure as Code (Terraform, Ansible)",
+                      "Netzwerk-Administration (TCP/IP, DNS, DHCP)",
                     ]}
                   />
                 </div>
-
-                {/* Bosch Berufskolleg */}
                 <div className="relative pl-9">
                   <TimelineDot />
                   <div className="mb-1 flex flex-wrap items-center gap-3">
-                    <h3 className="font-semibold text-foreground">
-                      Robert Bosch Berufskolleg
-                    </h3>
-                    <span className="font-mono text-xs text-muted-foreground">
-                      2004–2006
-                    </span>
+                    <h3 className="font-semibold text-foreground">Robert Bosch Berufskolleg</h3>
+                    <span className="font-mono text-xs text-muted-foreground">2004–2006</span>
                   </div>
                   <p className="font-mono text-sm text-muted-foreground">
                     Fachschule für Technik, Fachrichtung Elektrotechnik
@@ -402,17 +404,11 @@ export default function LebenslaufPage() {
             <div className="relative">
               <div className="absolute left-[10px] top-0 bottom-0 w-px bg-border/50" />
               <div className="flex flex-col gap-8">
-
-                {/* Grünbau */}
                 <div className="relative pl-9">
                   <TimelineDot active />
                   <div className="mb-1 flex flex-wrap items-center gap-3">
-                    <h3 className="font-semibold text-foreground">
-                      Grünbau gGmbH Kreativwerkstatt
-                    </h3>
-                    <span className="font-mono text-xs text-muted-foreground">
-                      Dortmund · 2019–2024
-                    </span>
+                    <h3 className="font-semibold text-foreground">Grünbau gGmbH Kreativwerkstatt</h3>
+                    <span className="font-mono text-xs text-muted-foreground">Dortmund · 2019–2024</span>
                   </div>
                   <BulletList
                     items={[
@@ -422,31 +418,15 @@ export default function LebenslaufPage() {
                     ]}
                   />
                 </div>
-
-                {/* Compact entries */}
                 {[
-                  {
-                    name: "Medienhaus Lensing Druck",
-                    location: "Dortmund",
-                    period: "2017",
-                  },
-                  {
-                    name: "Diakonisches Werk Dortmund",
-                    location: "Dortmund",
-                    period: "2011–2012",
-                  },
-                  {
-                    name: "Jugendzentrum Scharnhorst",
-                    location: "Dortmund",
-                    period: "2008–2009",
-                  },
+                  { name: "Medienhaus Lensing Druck", location: "Dortmund", period: "2017" },
+                  { name: "Diakonisches Werk Dortmund", location: "Dortmund", period: "2011–2012" },
+                  { name: "Jugendzentrum Scharnhorst", location: "Dortmund", period: "2008–2009" },
                 ].map((entry) => (
                   <div key={entry.name} className="relative pl-9">
                     <TimelineDot />
                     <div className="flex flex-wrap items-center gap-3">
-                      <h3 className="font-semibold text-foreground">
-                        {entry.name}
-                      </h3>
+                      <h3 className="font-semibold text-foreground">{entry.name}</h3>
                       <span className="font-mono text-xs text-muted-foreground">
                         {entry.location} · {entry.period}
                       </span>
@@ -478,57 +458,27 @@ export default function LebenslaufPage() {
             <div className="grid gap-5 sm:grid-cols-2">
               {[
                 {
-                  title: "Betriebssysteme",
-                  skills: [
-                    "Windows 10/11 (Installation, Konfiguration, Troubleshooting)",
-                    "Linux/Ubuntu Server & Desktop (LPIC-1 zertifiziert)",
-                  ],
-                },
-                {
-                  title: "Virtualisierung & Server",
-                  skills: [
-                    "VPS-Server einrichten und verwalten",
-                    "Docker Container",
-                    "SSH Remote-Administration",
-                    "Server-Monitoring und Wartung",
-                  ],
-                },
-                {
-                  title: "Tools & Technologien",
-                  skills: [
-                    "Git & GitHub",
-                    "CI/CD mit GitHub Actions",
-                    "Vercel Deployment",
-                    "Supabase / PostgreSQL",
-                  ],
-                },
-                {
-                  title: "Entwicklung",
-                  skills: [
-                    "JavaScript, TypeScript, React, Next.js",
-                    "Python (Grundlagen)",
-                    "Tailwind CSS",
-                    "REST APIs",
-                  ],
+                  title: "Web-Entwicklung",
+                  skills: ["JavaScript & TypeScript", "React & Next.js", "Tailwind CSS", "REST APIs", "Python (Grundlagen)"],
                 },
                 {
                   title: "KI & Automatisierung",
-                  skills: [
-                    "Claude (Strategie & Planung)",
-                    "Claude Code (Implementierung)",
-                    "v0.dev (UI-Generierung)",
-                    "AI Agentic Engineering",
-                    "Fast Prototyping mit KI-Unterstützung",
-                  ],
+                  skills: ["Claude (Strategie & Planung)", "Claude Code (Implementierung)", "v0.dev (UI-Generierung)", "AI Agentic Engineering", "Fast Prototyping mit KI"],
+                },
+                {
+                  title: "Cloud & DevOps",
+                  skills: ["Linux/Ubuntu Server (LPIC-1 zertifiziert)", "Docker Container", "AWS & Azure Basics", "CI/CD mit GitHub Actions", "SSH Remote-Administration"],
+                },
+                {
+                  title: "Tools & Deployment",
+                  skills: ["Git & GitHub", "Vercel Deployment", "Supabase / PostgreSQL", "VPS-Server Administration"],
                 },
               ].map((category) => (
                 <div
                   key={category.title}
                   className="rounded-xl border border-border bg-card p-5 transition-colors duration-300 hover:border-primary/30"
                 >
-                  <h3 className="mb-3 text-sm font-semibold text-foreground">
-                    {category.title}
-                  </h3>
+                  <h3 className="mb-3 text-sm font-semibold text-foreground">{category.title}</h3>
                   <div className="flex flex-wrap gap-2">
                     {category.skills.map((skill) => (
                       <Tag key={skill}>{skill}</Tag>
@@ -552,9 +502,7 @@ export default function LebenslaufPage() {
                   className="flex items-center gap-3 rounded-xl border border-border bg-card px-6 py-4"
                 >
                   <span className="font-semibold text-foreground">{lang}</span>
-                  <span className="font-mono text-xs text-muted-foreground">
-                    {level}
-                  </span>
+                  <span className="font-mono text-xs text-muted-foreground">{level}</span>
                 </div>
               ))}
             </div>
@@ -588,10 +536,11 @@ export default function LebenslaufPage() {
                 Ich arbeite nach dem Prinzip &quot;Fast Prototyping mit KI
                 &amp; Learning by Doing&quot;. Mein Workflow kombiniert
                 strategische Planung mit Claude, UI-Generierung über v0.dev
-                und Implementierung via Claude Code. Ich verstehe nicht immer
-                jeden Codeblock sofort — aber ich lerne durch Bauen, Debuggen
-                und Dokumentieren. Ehrlichkeit über den eigenen Skill-Level
-                ist mir wichtiger als aufgeblasene Selbstdarstellung.
+                und Implementierung via Claude Code — von der Idee bis zum
+                fertigen Deployment. Ich schließe die Lücke zwischen Idee und
+                Live-Produkt so schnell wie möglich. Ehrlichkeit über den
+                eigenen Skill-Level ist mir wichtiger als aufgeblasene
+                Selbstdarstellung.
               </p>
             </div>
           </section>

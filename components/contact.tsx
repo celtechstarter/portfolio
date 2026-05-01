@@ -4,21 +4,20 @@ import { useRef, useState } from "react"
 import { Mail, Github, Linkedin, FileText } from "lucide-react"
 import { motion, useInView } from "framer-motion"
 
-// Base64 encoded email for bot protection
-const ENCODED_EMAIL = "bWFyY2VsLndlbGs4N0BnbWFpbC5jb20="
-
 export function Contact() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-80px" })
-  const [showEmail, setShowEmail] = useState(false)
+  const [email, setEmail] = useState<string | null>(null)
   const [isCopied, setIsCopied] = useState(false)
 
-  const handleEmailClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleEmailClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
-    if (!showEmail) {
-      setShowEmail(true)
+    if (!email) {
+      const res = await fetch('/api/contact')
+      const data = await res.json()
+      setEmail(data.email)
     } else {
-      navigator.clipboard.writeText(atob(ENCODED_EMAIL))
+      navigator.clipboard.writeText(email)
       setIsCopied(true)
       setTimeout(() => {
         setIsCopied(false)
@@ -44,12 +43,12 @@ export function Contact() {
 
           <div className="flex flex-wrap items-center justify-center gap-3 relative z-10">
             <a
-              href={showEmail ? `mailto:${atob(ENCODED_EMAIL)}` : "#"}
+              href={email ? `mailto:${email}` : "#"}
               onClick={handleEmailClick}
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 cursor-pointer"
             >
               <Mail size={16} />
-              {showEmail ? (isCopied ? "Kopiert! ✓" : atob(ENCODED_EMAIL)) : "E-Mail anzeigen"}
+              {email ? (isCopied ? "Kopiert! ✓" : email) : "E-Mail anzeigen"}
             </a>
             <a
               href="https://github.com/celtechstarter"
@@ -69,10 +68,6 @@ export function Contact() {
               <Linkedin size={16} />
               LinkedIn
             </a>
-            
-            {/* Simple honeypot protection for the PDF link. 
-                Instead of href="/lebenslauf.pdf" which crawlers easily follow, 
-                we use a click handler to trigger the download programmatically. */}
             <button
               onClick={() => {
                 const link = document.createElement('a');

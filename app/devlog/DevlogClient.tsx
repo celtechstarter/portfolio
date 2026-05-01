@@ -1,6 +1,7 @@
 "use client"
 
 import { Download, Wrench } from "lucide-react"
+import { Navbar } from "@/components/navbar"
 
 interface DevlogEntry {
   project: string
@@ -233,213 +234,181 @@ const entries: DevlogEntry[] = [
 
 export default function DevlogClient() {
   return (
-    <main
-      className="min-h-screen px-6 py-24"
-      style={{ background: "#0c0b09" }}
-    >
-      <div className="mx-auto max-w-2xl">
+    <>
+      <Navbar basePath="/" />
 
-        {/* Header */}
-        <div className="mb-16 text-center">
-          <p
-            className="mb-2 font-mono text-sm tracking-widest uppercase"
-            style={{ color: "rgba(207, 147, 54, 0.7)" }}
-          >
-            Build Journal
-          </p>
-          <h1
-            className="mb-4 text-3xl font-bold tracking-tight md:text-4xl"
-            style={{ color: "rgba(207, 147, 54, 1)" }}
-          >
-            Development Log
-          </h1>
-          <p className="font-mono text-sm" style={{ color: "rgba(255,255,255,0.4)" }}>
-            Alle Projekte · Chronologisch · Ehrlich geloggt
-          </p>
-        </div>
+      <div className="min-h-screen px-6 pb-24 pt-28">
+        <div className="mx-auto max-w-2xl">
 
-        {/* Legend */}
-        <div
-          className="mb-14 flex flex-wrap justify-center gap-x-6 gap-y-3 rounded-xl px-6 py-4"
-          style={{ border: "1px solid rgba(255,255,255,0.06)" }}
-        >
-          {Object.entries(PROJECT_COLORS).map(([name, rgb]) => (
-            <div key={name} className="flex items-center gap-2">
-              <div
-                className="h-2 w-2 rounded-full"
-                style={{ background: `rgba(${rgb}, 0.9)` }}
-              />
-              <span
-                className="font-mono text-xs"
-                style={{ color: `rgba(${rgb}, 0.7)` }}
-              >
-                {name}
-              </span>
-            </div>
-          ))}
-        </div>
+          {/* Header */}
+          <div className="mb-16 text-center">
+            <p className="mb-2 font-mono text-xs tracking-widest text-primary uppercase">
+              Build Journal
+            </p>
+            <h1 className="mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+              Development Log
+            </h1>
+            <p className="font-mono text-sm text-muted-foreground">
+              Alle Projekte · Chronologisch · Ehrlich geloggt
+            </p>
+          </div>
 
-        {/* Timeline */}
-        <div className="relative">
-          <div
-            className="absolute left-[11px] top-0 bottom-0 w-px"
-            style={{ background: "rgba(255,255,255,0.08)" }}
-          />
+          {/* Legend */}
+          <div className="mb-14 flex flex-wrap justify-center gap-x-6 gap-y-3 rounded-xl border border-border px-6 py-4">
+            {Object.entries(PROJECT_COLORS).map(([name, rgb]) => (
+              <div key={name} className="flex items-center gap-2">
+                <div
+                  className="h-2 w-2 rounded-full"
+                  style={{ background: `rgba(${rgb}, 0.9)` }}
+                />
+                <span
+                  className="font-mono text-xs"
+                  style={{ color: `rgba(${rgb}, 0.8)` }}
+                >
+                  {name}
+                </span>
+              </div>
+            ))}
+          </div>
 
-          <div className="flex flex-col gap-10">
-            {entries.map((entry, idx) => {
-              const rgb = entry.color
-              const isLast = idx === entries.length - 1
+          {/* Timeline */}
+          <div className="relative">
+            <div className="absolute left-[11px] top-0 bottom-0 w-px bg-border/50" />
 
-              return (
-                <div key={`${entry.project}-${entry.day}`} className="relative flex gap-6">
+            <div className="flex flex-col gap-10">
+              {entries.map((entry, idx) => {
+                const rgb = entry.color
+                const isLast = idx === entries.length - 1
 
-                  {/* Dot */}
-                  <div className="relative flex-shrink-0 mt-1">
-                    <div
-                      className="h-[22px] w-[22px] rounded-full border-2 flex items-center justify-center"
-                      style={{
-                        background: "#0c0b09",
-                        borderColor: `rgba(${rgb}, 0.6)`,
-                      }}
-                    >
+                return (
+                  <div key={`${entry.project}-${entry.day}`} className="relative flex gap-6">
+
+                    {/* Dot */}
+                    <div className="relative mt-1 shrink-0">
                       <div
-                        className="h-2 w-2 rounded-full"
-                        style={{ background: `rgba(${rgb}, 0.9)` }}
-                      />
+                        className="flex h-[22px] w-[22px] items-center justify-center rounded-full border-2 bg-background"
+                        style={{ borderColor: `rgba(${rgb}, 0.6)` }}
+                      >
+                        <div
+                          className="h-2 w-2 rounded-full"
+                          style={{ background: `rgba(${rgb}, 0.9)` }}
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Content */}
-                  <div className={`flex-1 pb-2 ${!isLast ? "border-b border-white/[0.04] pb-10" : ""}`}>
+                    {/* Content */}
+                    <div className={`flex-1 pb-2 ${!isLast ? "border-b border-border/30 pb-10" : ""}`}>
 
-                    {/* Project badge row */}
-                    <div className="flex items-center justify-between gap-3 mb-2">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span
-                          className="font-mono text-[10px] font-bold tracking-wider uppercase rounded-full px-2.5 py-0.5"
-                          style={{
-                            color: `rgba(${rgb}, 0.9)`,
-                            background: `rgba(${rgb}, 0.1)`,
-                            border: `1px solid rgba(${rgb}, 0.2)`,
-                          }}
-                        >
-                          {entry.project}
-                        </span>
-                        {entry.inDevelopment && (
+                      {/* Project badge row */}
+                      <div className="mb-2 flex items-center justify-between gap-3">
+                        <div className="flex flex-wrap items-center gap-2">
                           <span
-                            className="font-mono text-[10px] tracking-wide rounded-full px-2 py-0.5"
+                            className="rounded-full px-2.5 py-0.5 font-mono text-[10px] font-bold tracking-wider uppercase"
                             style={{
-                              color: "rgba(167, 139, 250, 0.6)",
-                              border: "1px solid rgba(167, 139, 250, 0.15)",
+                              color: `rgba(${rgb}, 0.9)`,
+                              background: `rgba(${rgb}, 0.1)`,
+                              border: `1px solid rgba(${rgb}, 0.2)`,
                             }}
                           >
-                            In Entwicklung
+                            {entry.project}
+                          </span>
+                          {entry.inDevelopment && (
+                            <span className="rounded-full border border-purple-400/20 px-2 py-0.5 font-mono text-[10px] text-purple-400/60 tracking-wide">
+                              In Entwicklung
+                            </span>
+                          )}
+                        </div>
+
+                        {/* PDF download */}
+                        {entry.pdf && (
+                          <a
+                            href={entry.pdf}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex shrink-0 items-center gap-1.5 rounded-md px-2.5 py-1 font-mono text-xs transition-all duration-200"
+                            style={{
+                              color: `rgba(${rgb}, 0.45)`,
+                              border: `1px solid rgba(${rgb}, 0.12)`,
+                            }}
+                            onMouseEnter={(e) => {
+                              const el = e.currentTarget as HTMLAnchorElement
+                              el.style.color = `rgba(${rgb}, 0.9)`
+                              el.style.borderColor = `rgba(${rgb}, 0.45)`
+                              el.style.background = `rgba(${rgb}, 0.05)`
+                            }}
+                            onMouseLeave={(e) => {
+                              const el = e.currentTarget as HTMLAnchorElement
+                              el.style.color = `rgba(${rgb}, 0.45)`
+                              el.style.borderColor = `rgba(${rgb}, 0.12)`
+                              el.style.background = "transparent"
+                            }}
+                          >
+                            <Download size={11} />
+                            PDF
+                          </a>
+                        )}
+                      </div>
+
+                      {/* Day + date */}
+                      <div className="mb-2 flex items-center gap-3">
+                        <span
+                          className="font-mono text-xs font-bold tracking-widest uppercase"
+                          style={{ color: `rgba(${rgb}, 0.45)` }}
+                        >
+                          Tag {String(entry.day).padStart(2, "0")}
+                        </span>
+                        {entry.date && (
+                          <span className="font-mono text-xs text-muted-foreground/50">
+                            {entry.date}
                           </span>
                         )}
                       </div>
 
-                      {/* PDF download */}
-                      {entry.pdf && (
-                        <a
-                          href={entry.pdf}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex flex-shrink-0 items-center gap-1.5 rounded-md px-2.5 py-1 font-mono text-xs transition-all duration-200"
+                      {/* Title */}
+                      <h2 className="mb-2 text-base font-semibold leading-snug text-foreground">
+                        {entry.title}
+                      </h2>
+
+                      {/* Description */}
+                      <p className="text-sm leading-relaxed text-muted-foreground">
+                        {entry.description}
+                      </p>
+
+                      {/* Problem solved */}
+                      {entry.problemSolved && (
+                        <div
+                          className="mt-3 flex items-start gap-2 rounded-lg px-3 py-2"
                           style={{
-                            color: `rgba(${rgb}, 0.45)`,
-                            border: `1px solid rgba(${rgb}, 0.12)`,
-                          }}
-                          onMouseEnter={(e) => {
-                            const el = e.currentTarget as HTMLAnchorElement
-                            el.style.color = `rgba(${rgb}, 0.9)`
-                            el.style.borderColor = `rgba(${rgb}, 0.45)`
-                            el.style.background = `rgba(${rgb}, 0.05)`
-                          }}
-                          onMouseLeave={(e) => {
-                            const el = e.currentTarget as HTMLAnchorElement
-                            el.style.color = `rgba(${rgb}, 0.45)`
-                            el.style.borderColor = `rgba(${rgb}, 0.12)`
-                            el.style.background = "transparent"
+                            background: `rgba(${rgb}, 0.05)`,
+                            border: `1px solid rgba(${rgb}, 0.18)`,
                           }}
                         >
-                          <Download size={11} />
-                          PDF
-                        </a>
+                          <Wrench
+                            size={13}
+                            className="mt-0.5 shrink-0"
+                            style={{ color: `rgba(${rgb}, 0.65)` }}
+                          />
+                          <p
+                            className="font-mono text-xs leading-relaxed"
+                            style={{ color: `rgba(${rgb}, 0.65)` }}
+                          >
+                            {entry.problemSolved}
+                          </p>
+                        </div>
                       )}
                     </div>
-
-                    {/* Day + date */}
-                    <div className="flex items-center gap-3 mb-2">
-                      <span
-                        className="font-mono text-xs font-bold tracking-widest uppercase"
-                        style={{ color: `rgba(${rgb}, 0.45)` }}
-                      >
-                        Tag {String(entry.day).padStart(2, "0")}
-                      </span>
-                      {entry.date && (
-                        <span
-                          className="font-mono text-xs"
-                          style={{ color: "rgba(255,255,255,0.25)" }}
-                        >
-                          {entry.date}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Title */}
-                    <h2
-                      className="mb-2 font-mono text-base font-semibold leading-snug"
-                      style={{ color: "rgba(255,255,255,0.85)" }}
-                    >
-                      {entry.title}
-                    </h2>
-
-                    {/* Description */}
-                    <p
-                      className="font-mono text-sm leading-relaxed"
-                      style={{ color: "rgba(255,255,255,0.45)" }}
-                    >
-                      {entry.description}
-                    </p>
-
-                    {/* Problem solved */}
-                    {entry.problemSolved && (
-                      <div
-                        className="mt-3 flex items-start gap-2 rounded-lg px-3 py-2"
-                        style={{
-                          background: `rgba(${rgb}, 0.05)`,
-                          border: `1px solid rgba(${rgb}, 0.18)`,
-                        }}
-                      >
-                        <Wrench
-                          size={13}
-                          className="mt-0.5 flex-shrink-0"
-                          style={{ color: `rgba(${rgb}, 0.65)` }}
-                        />
-                        <p
-                          className="font-mono text-xs leading-relaxed"
-                          style={{ color: `rgba(${rgb}, 0.65)` }}
-                        >
-                          {entry.problemSolved}
-                        </p>
-                      </div>
-                    )}
                   </div>
-                </div>
-              )
-            })}
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Footer note */}
+          <div className="mt-16 text-center font-mono text-xs text-muted-foreground/30">
+            // {entries.length} Einträge · {Object.keys(PROJECT_COLORS).length} Projekte
           </div>
         </div>
-
-        {/* Footer */}
-        <div
-          className="mt-16 text-center font-mono text-xs"
-          style={{ color: "rgba(255,255,255,0.15)" }}
-        >
-          // {entries.length} Einträge · {Object.keys(PROJECT_COLORS).length} Projekte
-        </div>
       </div>
-    </main>
+    </>
   )
 }

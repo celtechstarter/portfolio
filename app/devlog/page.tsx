@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import DevlogClient from "./DevlogClient"
 
 export const metadata: Metadata = {
-  title: "Devlog",
+  title: "Devlog – Projekte & Builds",
   description:
     "Mein Build Journal: Ehrliche Einblicke in die Entwicklung meiner Webdesign- und Webentwicklungs-Projekte aus Dortmund – von der ersten Zeile Code bis zum Live-Deployment.",
   openGraph: {

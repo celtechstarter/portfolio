@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import KiWorkflowClient from "./KiWorkflowClient"
 
 export const metadata: Metadata = {
-  title: "KI-Workflow",
+  title: "KI-Workflow & Automatisierung",
   description:
     "Wie ich als Webdesigner und Webentwickler aus Dortmund KI-Agenten, moderne Tools und digitale Lösungen einsetze, um Projekte von der Idee bis zum Deployment zu bringen.",
   openGraph: {
