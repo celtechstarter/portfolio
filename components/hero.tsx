@@ -145,7 +145,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 1.0 }}
           className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty"
         >
-          Fokussiert auf effiziente Entwicklung und moderne KI-Workflows. Ich schließe die Lücke zwischen Idee und fertigem Deployment.
+          Webentwickler &amp; KI-Spezialist aus Dortmund — von der Idee bis zum fertigen Deployment.
         </motion.p>
 
         <motion.div 
