@@ -81,7 +81,7 @@ const webProjects: Project[] = [
     video: "/projects/coachknobling.webm",
     liveUrl: "https://coaching-knobling.vercel.app/",
     status: "fertig",
-    badge: "Freelance Projekt",
+    badge: "Lernprojekt",
   },
   {
     title: "Hawaii Cards",
@@ -93,7 +93,7 @@ const webProjects: Project[] = [
     video: "/projects/hawaiicards.webm",
     liveUrl: "https://hawaii-cards.vercel.app/",
     status: "fertig",
-    badge: "Freelance Projekt",
+    badge: "Lernprojekt",
   },
   {
     title: "Gesunder Fuß",
@@ -105,7 +105,7 @@ const webProjects: Project[] = [
     video: "/projects/gesunderfuss.webm",
     liveUrl: "https://gesunderfuss.vercel.app/",
     status: "fertig",
-    badge: "Freelance Projekt",
+    badge: "Lernprojekt",
   },
 ]
 
