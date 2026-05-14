@@ -9,13 +9,13 @@ export const metadata: Metadata = {
   description:
     "Lebenslauf von Marcel Welk – Freelance Webdesigner & Webentwickler aus Dortmund. Projekte, Skills in Web-Entwicklung, KI-Integration, React, Next.js und modernen Deployment-Workflows.",
   alternates: {
-    canonical: 'https://marcelwelk.de/lebenslauf',
+    canonical: 'https://www.marcelwelk.de/lebenslauf',
   },
   openGraph: {
     title: "Lebenslauf | Marcel Welk",
     description:
       "Marcel Welk – Freelance Webdesigner & Webentwickler aus Dortmund. Projekte, Skills und digitale Lösungen auf einen Blick.",
-    url: "https://marcelwelk.de/lebenslauf",
+    url: "https://www.marcelwelk.de/lebenslauf",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Lebenslauf Marcel Welk – Webdesign & Webentwicklung Dortmund" }],
   },
   twitter: {
@@ -198,8 +198,8 @@ export default function LebenslaufPage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://marcelwelk.de" },
-      { "@type": "ListItem", position: 2, name: "Lebenslauf", item: "https://marcelwelk.de/lebenslauf" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.marcelwelk.de" },
+      { "@type": "ListItem", position: 2, name: "Lebenslauf", item: "https://www.marcelwelk.de/lebenslauf" },
     ],
   }
   return (

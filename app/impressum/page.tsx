@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Impressum | Marcel Welk",
     description: "Impressum – Marcel Welk, Webdesign & Webentwicklung Dortmund.",
-    url: "https://marcelwelk.de/impressum",
+    url: "https://www.marcelwelk.de/impressum",
   },
   robots: {
     index: false,

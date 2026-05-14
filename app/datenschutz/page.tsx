@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Datenschutzerklärung | Marcel Welk",
     description: "DSGVO-konforme Datenschutzerklärung – Marcel Welk, Webdesign & Webentwicklung Dortmund.",
-    url: "https://marcelwelk.de/datenschutz",
+    url: "https://www.marcelwelk.de/datenschutz",
   },
   robots: {
     index: false,

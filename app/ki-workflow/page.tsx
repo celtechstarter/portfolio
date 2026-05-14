@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   description:
     "Wie ich als Webdesigner und Webentwickler aus Dortmund KI-Agenten, moderne Tools und digitale Lösungen einsetze, um Projekte von der Idee bis zum Deployment zu bringen.",
   alternates: {
-    canonical: 'https://marcelwelk.de/ki-workflow',
+    canonical: 'https://www.marcelwelk.de/ki-workflow',
   },
   openGraph: {
     title: "KI-Workflow | Marcel Welk",
     description:
       "Ehrlicher Einblick in meinen Workflow: ADHS als Hyperfokus-Motor, KI als Navigator. Webdesign & Webentwicklung aus Dortmund – effizient und modern.",
-    url: "https://marcelwelk.de/ki-workflow",
+    url: "https://www.marcelwelk.de/ki-workflow",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "KI-Workflow – Marcel Welk Dortmund" }],
   },
   twitter: {
