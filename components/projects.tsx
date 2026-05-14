@@ -26,7 +26,7 @@ const aiProjects: Project[] = [
   {
     title: "Poke-Scan V2",
     description:
-      "Pokemon-Karten Scanner. Lovable-Abhängigkeiten komplett entfernt, OCR durch echte KI Vision ersetzt (Tag 03).",
+      "Pokémon-Karten per Foto scannen und Marktwert ermitteln. KI-Vision API ersetzt klassisches OCR — die KI sieht die Karte wie ein Mensch, nicht nur den Text.",
     tags: ["React", "TypeScript", "KI Vision", "Vercel"],
     icon: <Sparkles size={24} />,
     image: "/projects/pokescan.png",
@@ -38,7 +38,7 @@ const aiProjects: Project[] = [
   {
     title: "BewerbungsPilot",
     description:
-      "KI-gestützter Bewerbungsgenerator. Lebenslauf hochladen, Stellenanzeige einfügen, fertiges Anschreiben in 5 Minuten.",
+      "Lebenslauf hochladen, Stellenanzeige einfügen — fertiges Anschreiben in unter 5 Minuten. Gebaut als persönlicher Speed-Benchmark: Idee bis Deployment in 2 Tagen.",
     tags: ["React", "TypeScript", "KI", "Vercel"],
     icon: <Send size={24} />,
     image: "/projects/bewerbungspilot.png",
@@ -50,7 +50,7 @@ const aiProjects: Project[] = [
   {
     title: "CELDESK",
     description:
-      "IT-Service-Portal mit Ticketsystem, Asset-Verwaltung, Wissensdatenbank und Onboarding-Checklisten. Inkl. Dashboard, Dark Mode und Detail-Panels — wie Zendesk, selbst gebaut.",
+      "Eigenbau IT-Helpdesk mit Ticketsystem, Asset-Verwaltung und Wissensdatenbank. Zeigt dass ich nicht nur Webseiten baue sondern auch interne IT-Tools verstehe.",
     tags: ["React", "TypeScript", "Supabase", "Tailwind CSS"],
     icon: <Headset size={24} />,
     image: "/projects/celdesk.png",
@@ -60,7 +60,7 @@ const aiProjects: Project[] = [
   {
     title: "Marcel CV Boost",
     description:
-      "Barrierearme Bewerbungshilfe-Plattform. Upload von Bewerbungsunterlagen, Buchungssystem für Beratungstermine und Admin-Dashboard. DSGVO-konform mit Supabase-Backend.",
+      "Bewerbungshilfe-Plattform mit Terminbuchung und Admin-Dashboard. DSGVO-konform mit Supabase-Backend — mein erstes Projekt mit echtem Auth-System.",
     tags: ["React", "TypeScript", "Supabase", "Tailwind CSS"],
     icon: <Briefcase size={24} />,
     image: "/projects/cvboost.png",
@@ -74,7 +74,7 @@ const webProjects: Project[] = [
   {
     title: "Coaching Knobling",
     description:
-      "Moderner Webauftritt für ein Coaching-Unternehmen. Fokus auf seriöses Design und klare Nutzerführung.",
+      "Webauftritt als Dankeschön für meinen IT-Coach, der mir Programmieren, AWS, CI/CD und Cloud Computing beigebracht hat. Er bietet Python- und IT-Kurse an — die Seite präsentiert sein Kursangebot. Kostenlos umgesetzt mit Next.js, Tailwind und Vercel.",
     tags: ["Next.js", "Tailwind CSS", "UI/UX", "Vercel"],
     icon: <Globe size={24} />,
     image: "/projects/coachknobling.png",
@@ -86,7 +86,7 @@ const webProjects: Project[] = [
   {
     title: "Hawaii Cards",
     description:
-      "Landingpage und digitaler Katalog für ein Sammelkarten-Business. Visuell ansprechende Produktpräsentation.",
+      "Landingpage und digitaler Katalog für ein Sammelkarten-Business — ehrenamtlich umgesetzt. Fokus auf visuelles Design und Mobile-First.",
     tags: ["Webentwicklung", "Responsive Design", "Asset-Optimierung"],
     icon: <Globe size={24} />,
     image: "/projects/hawaiicards.png",
@@ -98,7 +98,7 @@ const webProjects: Project[] = [
   {
     title: "Gesunder Fuß",
     description:
-      "Lokaler Webauftritt für eine Praxis im Gesundheitsbereich. Fokus auf Übersichtlichkeit und lokale Sichtbarkeit.",
+      "Lokaler Webauftritt für eine Gesundheitspraxis — ehrenamtlich umgesetzt. Fokus auf lokale SEO und übersichtliche Navigation.",
     tags: ["Lokale SEO", "Clean Design", "Mobile First"],
     icon: <Globe size={24} />,
     image: "/projects/gesunderfuss.png",
