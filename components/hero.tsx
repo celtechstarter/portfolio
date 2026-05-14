@@ -224,7 +224,7 @@ function AboutToggle() {
         </p>
 
         <p>
-          Mein Arbeitsprinzip: Schnell bauen, schnell testen, schnell lernen. Mein IT Lehrer hat mir mal das Pareto Prinzip erklärt und ich hab es für mich weitergedreht. Nicht Perfektion, sondern Impact. Erst den Kern treffen, dann schauen ob mehr nötig ist. Meistens reicht der Kern.{" "}
+          Mein Arbeitsprinzip: Schnell bauen, schnell testen, schnell lernen. Mein Senior-Trainer Suheib hat mir mal das Pareto Prinzip erklärt — und zwar so: Er selbst wollte früher in seiner Ausbildung alles wissen, jede Codezeile auswendig können. Bis sein damaliger IT-Senior ihm sagte: Du musst nicht alles wissen. Hauptsache du weißt wie du durch Recherche ans Ziel kommst. Wenn du die Grundlagen verstehst, kannst du alles andere leicht umsetzen. Das hat Suheib an mich weitergegeben und ich hab es für mich weitergedreht. Nicht Perfektion, sondern Impact. Erst den Kern treffen, dann schauen ob mehr nötig ist. Meistens reicht der Kern.{" "}
           <button
             onClick={(e) => {
               e.preventDefault();
@@ -266,15 +266,7 @@ function AboutToggle() {
         </p>
 
         <p>
-          Ich setze meine Projekte auf verschiedenen Wegen um. Manchmal lokal mit VSCode und Claude Code, manchmal auf meinem eigenen VPS Server, deployed wird über Vercel, Code liegt auf GitHub. Ich probiere ständig neue Tools aus und lerne dabei. Nicht weil ich muss, sondern weil ich Bock drauf habe.
-        </p>
-
-        <p>
-          Ich hab mir über die Jahre viel Wissen angeeignet und vieles davon auch wieder vergessen. Aber wenn ich das Wissen brauche, weiß ich wo ich es finde und wie ich es abfrage. Man kann sich nicht alles merken. Muss man auch nicht. Wenn man einmal die Grundlagen verstanden hat, reicht das aus um jedes Problem kreativ zu lösen.
-        </p>
-
-        <p>
-          Ich suche keinen Arbeitgeber der alte Strukturen abarbeitet. Ich suche ein Unternehmen das modern denkt, neue Wege ausprobiert und mit jemandem klarkommt, der manchmal fünf Ideen gleichzeitig hat. Wenn das passt, dann kriegt das Unternehmen einen Mitarbeiter der nicht aufhört Probleme zu lösen bis sie gelöst sind.
+          Ich setze meine Projekte auf verschiedenen Wegen um. Lokal mit VSCode und Claude Code, für Server-Sachen kenne ich mich mit Linux, SSH und Docker aus. Deployed wird über Vercel, Code liegt auf GitHub. Ich probiere ständig neue Tools aus und lerne dabei. Nicht weil ich muss, sondern weil ich Bock drauf habe.
         </p>
       </div>
     </details>
