@@ -5,8 +5,14 @@ export default function robots(): MetadataRoute.Robots {
 
   return {
     rules: [
-      // Alle Crawler erlaubt (inkl. KI-Indexer für GEO)
-      // Nur echte Scraper/SEO-Spammer blockieren
+      // KI-Crawler explizit freigegeben (GEO – Generative Engine Optimization)
+      { userAgent: "GPTBot",         allow: "/" },
+      { userAgent: "Google-Extended", allow: "/" },
+      { userAgent: "anthropic-ai",   allow: "/" },
+      { userAgent: "PerplexityBot",  allow: "/" },
+      { userAgent: "CCBot",          allow: "/" },
+      { userAgent: "Bytespider",     allow: "/" },
+      // Alle anderen Crawler
       {
         userAgent: "*",
         allow: "/",
