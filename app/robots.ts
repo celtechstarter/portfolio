@@ -1,19 +1,12 @@
 import type { MetadataRoute } from "next"
 
 export default function robots(): MetadataRoute.Robots {
-  const base = "https://marcelwelk.de"
+  const base = "https://www.marcelwelk.de"
 
   return {
     rules: [
-      // Trainings-Crawler blockieren (schadet SEO/GEO nicht)
-      { userAgent: "GPTBot",        disallow: ["/"] },
-      { userAgent: "Google-Extended", disallow: ["/"] },
-      { userAgent: "CCBot",         disallow: ["/"] },
-      { userAgent: "anthropic-ai",  disallow: ["/"] },
-      { userAgent: "Bytespider",    disallow: ["/"] },
-      { userAgent: "omgili",        disallow: ["/"] },
-      { userAgent: "omgilibot",     disallow: ["/"] },
-      // Alle anderen (inkl. Googlebot, Bing, Perplexity, ChatGPT-User)
+      // Alle Crawler erlaubt (inkl. KI-Indexer für GEO)
+      // Nur echte Scraper/SEO-Spammer blockieren
       {
         userAgent: "*",
         allow: "/",
