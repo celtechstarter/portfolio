@@ -177,14 +177,14 @@ export function Projects() {
           </div>
         </div>
 
-        {/* Sektion 2: Webdesign & Referenzen */}
+        {/* Sektion 2: Webdesign & Lernprojekte */}
         <div>
           <div className="mb-16 text-center">
             <p className="mb-2 font-mono text-sm tracking-widest text-primary uppercase">
-              Webdesign & Referenzen
+              Webdesign & Lernprojekte
             </p>
             <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl text-balance">
-              Kundenprojekte
+              Lernprojekte & Referenzen
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
