@@ -9,7 +9,7 @@ const _inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const _jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains-mono' })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://marcelwelk.de'),
+  metadataBase: new URL('https://www.marcelwelk.de'),
   title: {
     default: 'Marcel Welk | Webdesign & Webentwicklung Dortmund',
     template: '%s | Marcel Welk',
@@ -35,14 +35,13 @@ export const metadata: Metadata = {
     'Webprojekte NRW',
   ],
   alternates: {
-    canonical: 'https://marcelwelk.de',
+    canonical: 'https://www.marcelwelk.de',
   },
-  authors: [{ name: 'Marcel Welk', url: 'https://marcelwelk.de' }],
+  authors: [{ name: 'Marcel Welk', url: 'https://www.marcelwelk.de' }],
   creator: 'Marcel Welk',
   robots: {
     index: true,
     follow: true,
-    nocache: true,
     googleBot: {
       index: true,
       follow: true,
@@ -57,7 +56,7 @@ export const metadata: Metadata = {
     description: 'Professionelles Webdesign und individuelle Webentwicklung aus Dortmund. Von der ersten Idee bis zur fertigen Online-Präsenz – modern, schnell und zielgerichtet.',
     type: 'website',
     locale: 'de_DE',
-    url: 'https://marcelwelk.de',
+    url: 'https://www.marcelwelk.de',
     siteName: 'Marcel Welk – Webdesign & Webentwicklung',
     images: [
       {
@@ -105,26 +104,27 @@ export default function RootLayout({
               {
                 "@context": "https://schema.org",
                 "@type": "WebSite",
-                "@id": "https://marcelwelk.de/#website",
+                "@id": "https://www.marcelwelk.de/#website",
                 name: "Marcel Welk – Webdesign & Webentwicklung Dortmund",
-                url: "https://marcelwelk.de",
-                description: "Freelance Webdesigner & Webentwickler aus Dortmund. Spezialisiert auf moderne One-Pager, KI-Integration und SEO/GEO-Optimierung.",
+                url: "https://www.marcelwelk.de",
+                description: "Freelance Webentwickler & KI-Integrationsspezialist aus Dortmund. Spezialisiert auf moderne One-Pager, KI-Integration und SEO/GEO-Optimierung.",
                 inLanguage: "de-DE",
                 publisher: {
-                  "@id": "https://marcelwelk.de/#person",
+                  "@id": "https://www.marcelwelk.de/#person",
                 },
               },
               {
                 "@context": "https://schema.org",
                 "@type": "Person",
-                "@id": "https://marcelwelk.de/#person",
+                "@id": "https://www.marcelwelk.de/#person",
                 name: "Marcel Welk",
-                jobTitle: "Freelance Webdesigner & Webentwickler",
+                jobTitle: "Freelance Webentwickler & KI-Integrationsspezialist",
                 description: "KI-Nerd und Webentwickler aus Dortmund. Spezialisiert auf moderne One-Pager für Unternehmen mit schlechtem SEO/GEO, KI-Integration und schnelle Umsetzung digitaler Projekte.",
-                url: "https://marcelwelk.de",
-                image: "https://marcelwelk.de/cel.jpg",
+                url: "https://www.marcelwelk.de",
+                image: "https://www.marcelwelk.de/cel.jpg",
                 sameAs: [
                   "https://github.com/celtechstarter",
+                  "https://linkedin.com/in/marcel-welk-572a412ab/",
                 ],
                 address: {
                   "@type": "PostalAddress",
@@ -147,18 +147,20 @@ export default function RootLayout({
                   "KI-Integration",
                   "KI-Agenten",
                   "Agentic Engineering",
+                  "Claude Code",
+                  "Workflow-Automatisierung",
                   "Vercel",
                   "Tailwind CSS",
                 ],
                 knowsLanguage: ["de", "en"],
                 hasOccupation: {
                   "@type": "Occupation",
-                  name: "Freelance Webentwickler",
+                  name: "Freelance Webentwickler & KI-Integrationsspezialist",
                   occupationLocation: {
                     "@type": "City",
                     name: "Dortmund",
                   },
-                  skills: "Next.js, React, TypeScript, Tailwind CSS, KI-Integration, SEO, GEO",
+                  skills: "Next.js, React, TypeScript, Tailwind CSS, KI-Integration, Claude Code, Workflow-Automatisierung, SEO, GEO",
                 },
                 alumniOf: {
                   "@type": "Organization",
@@ -169,11 +171,11 @@ export default function RootLayout({
               {
                 "@context": "https://schema.org",
                 "@type": "LocalBusiness",
-                "@id": "https://marcelwelk.de/#business",
+                "@id": "https://www.marcelwelk.de/#business",
                 name: "Marcel Welk – Webdesign & Webentwicklung Dortmund",
-                description: "Freelance Webdesigner & Webentwickler aus Dortmund. Moderne One-Pager, KI-Integration und SEO/GEO-Optimierung für Unternehmen in NRW.",
-                url: "https://marcelwelk.de",
-                image: "https://marcelwelk.de/og-image.jpg",
+                description: "Freelance Webentwickler & KI-Integrationsspezialist aus Dortmund. Moderne One-Pager, KI-Integration und SEO/GEO-Optimierung für Unternehmen in NRW.",
+                url: "https://www.marcelwelk.de",
+                image: "https://www.marcelwelk.de/og-image.jpg",
                 address: {
                   "@type": "PostalAddress",
                   addressLocality: "Dortmund",
@@ -198,7 +200,40 @@ export default function RootLayout({
                 paymentAccepted: "Überweisung",
                 openingHours: "Mo-Fr 09:00-18:00",
                 founder: {
-                  "@id": "https://marcelwelk.de/#person",
+                  "@id": "https://www.marcelwelk.de/#person",
+                },
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "ProfessionalService",
+                "@id": "https://www.marcelwelk.de/#service",
+                name: "Marcel Welk – Webentwicklung & KI",
+                description: "Freelance Webentwicklung, KI-Integration und Workflow-Automatisierung. Remote und vor Ort in Dortmund und NRW.",
+                url: "https://www.marcelwelk.de",
+                image: "https://www.marcelwelk.de/og-image.jpg",
+                provider: {
+                  "@id": "https://www.marcelwelk.de/#person",
+                },
+                areaServed: [
+                  { "@type": "City", name: "Dortmund" },
+                  { "@type": "State", name: "Nordrhein-Westfalen" },
+                  { "@type": "Country", name: "Deutschland" },
+                ],
+                serviceType: [
+                  "Webentwicklung",
+                  "KI-Integration",
+                  "Automatisierung",
+                  "SEO-Optimierung",
+                  "GEO-Optimierung",
+                ],
+                hasOfferCatalog: {
+                  "@type": "OfferCatalog",
+                  name: "Webentwicklung & KI-Services",
+                  itemListElement: [
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Webentwicklung (Next.js / React)" } },
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "KI-Integration & Automatisierung" } },
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "SEO & GEO-Optimierung" } },
+                  ],
                 },
               },
             ]),
