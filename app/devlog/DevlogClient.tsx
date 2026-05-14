@@ -297,6 +297,18 @@ const entries: DevlogEntry[] = [
       "npm audit zeigte high-severity CVEs in Next.js → npm audit fix --force auf 16.2.4 aktualisiert, verbleibende postcss-Warnung ist bekanntes False Positive (nur Build-Tool, kein Runtime-Code)",
   },
 
+  {
+    project: "Portfolio",
+    color: PROJECT_COLORS["Portfolio"],
+    day: 18,
+    date: "14.05.2026",
+    title: "SEO/GEO-Audit: KI-Crawler freigegeben & www konsolidiert",
+    description:
+      "Portfolio durch Lovable SEO Spark laufen lassen und war überrascht wie viele stille Probleme drinsteckten. Ergebnisse mit Claude besprochen, Fix-Plan gemacht, Claude Code hat alles umgesetzt. www vs. non-www war überall inkonsistent – der Code hat auf marcelwelk.de gezeigt, die Live-Seite läuft auf www.marcelwelk.de. Canonical-Tags, OG-URLs, Sitemap, robots.ts – alles hat auf die falsche Version gezeigt. Für Google sind das zwei verschiedene Seiten, Duplicate-Content-Risiko. Alle KI-Crawler waren blockiert: GPTBot, anthropic-ai, Google-Extended, CCBot – alle auf disallow. Als jemand der sich als KI-Nerd positioniert ungefähr so sinnvoll wie ein Elektriker der seinen eigenen Strom abschaltet. 'Dortmund' kam im sichtbaren Hero-Text nicht vor, nur in einem winzigen grauen Micro-Text – für Google praktisch unsichtbar. JSON-LD Schema war veraltet: jobTitle noch auf 'Freelance Webdesigner', LinkedIn fehlte in sameAs, Claude Code und Workflow-Automatisierung komplett vergessen. nocache stand im robots Meta-Tag und hat den Snippet-Refresh von Google verzögert. Fix: Alles auf www vereinheitlicht, AI-Crawler komplett freigegeben, Hero-Subheadline auf 'Webentwickler & KI-Spezialist aus Dortmund' angepasst, JSON-LD aktualisiert, ProfessionalService-Schema neu ergänzt, nocache raus. GEO ist für mich wichtiger als klassisches SEO – wenn jemand einen KI-Assistenten fragt 'Webentwickler Dortmund KI' will ich dort auftauchen. Erkenntnis: SEO und GEO sind zwei verschiedene Spiele. Klassische Optimierung reicht nicht mehr.",
+    problemSolved:
+      "marcelwelk.de und www.marcelwelk.de wurden von Google als zwei separate Seiten behandelt → alle URLs auf www.marcelwelk.de konsolidiert. KI-Crawler waren durch robots.ts komplett gesperrt → freigegeben, da GEO-Sichtbarkeit für die eigene Positionierung als KI-Entwickler entscheidend ist",
+  },
+
   // ── CelDesk ───────────────────────────────────────────────────────────────
   {
     project: "CelDesk",
