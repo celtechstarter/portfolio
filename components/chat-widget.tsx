@@ -71,6 +71,9 @@ export function ChatWidget() {
   const bottomRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
+  // Stable session ID — generated once per widget mount, never changes
+  const sessionId = useRef(crypto.randomUUID())
+
   // Contact form state
   const [showContactForm, setShowContactForm] = useState(false)
   const [contactData, setContactData] = useState<ContactData>({ name: '', email: '', message: '' })
@@ -112,7 +115,7 @@ export function ChatWidget() {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: newMessages }),
+        body: JSON.stringify({ messages: newMessages, sessionId: sessionId.current }),
       })
 
       const data = await res.json() as { message?: string; error?: string }

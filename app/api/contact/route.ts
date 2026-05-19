@@ -100,16 +100,30 @@ export async function POST(request: NextRequest) {
   const safeMessage = message.trim()
 
   // 5. Send email via Resend — target email stays server-side only
+  // Resend v2+ returns { data, error } instead of throwing
+  if (!process.env.RESEND_API_KEY) {
+    console.error('[contact/route] RESEND_API_KEY is not set')
+    return NextResponse.json({ error: 'Server-Konfigurationsfehler.' }, { status: 500 })
+  }
+
   try {
     const resend = new Resend(process.env.RESEND_API_KEY)
-    await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: 'noreply@marcelwelk.de',
       to: 'marcel.welk87@gmail.com',
       subject: '📬 Neue Kontaktnachricht auf marcelwelk.de',
       text: `Name: ${safeName}\nEmail: ${safeEmail}\nNachricht:\n${safeMessage}\n\n---\nGesendet über MARCEL.AI · marcelwelk.de`,
     })
+    if (error) {
+      console.error('[contact/route] Resend API error:', JSON.stringify(error))
+      return NextResponse.json(
+        { error: 'Email konnte nicht gesendet werden. Bitte versuche es später.' },
+        { status: 502 }
+      )
+    }
+    console.log('[contact/route] Email sent, id:', data?.id)
   } catch (err) {
-    console.error('[contact/route] Resend error:', err)
+    console.error('[contact/route] Resend exception:', err)
     return NextResponse.json(
       { error: 'Email konnte nicht gesendet werden. Bitte versuche es später.' },
       { status: 502 }

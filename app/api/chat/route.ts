@@ -57,16 +57,31 @@ SPRACHE & STIL:
 
 
 // ---------------------------------------------------------------------------
-// Resend — fire-and-forget chat notification (lazy init avoids build errors)
+// Session deduplication — only email once per session
 // ---------------------------------------------------------------------------
-async function sendChatNotification(firstMessage: string): Promise<void> {
+const seenSessions = new Set<string>()
+
+// ---------------------------------------------------------------------------
+// Resend — fire-and-forget chat notification (lazy init avoids build errors)
+// Resend v2+ returns { data, error } instead of throwing — handle both
+// ---------------------------------------------------------------------------
+async function sendChatNotification(sessionId: string, firstMessage: string): Promise<void> {
+  if (seenSessions.has(sessionId)) return
+  seenSessions.add(sessionId)
+
   const resend = new Resend(process.env.RESEND_API_KEY)
-  await resend.emails.send({
+  const { data, error } = await resend.emails.send({
     from: 'noreply@marcelwelk.de',
     to: 'marcel.welk87@gmail.com',
     subject: '💬 Jemand chattet auf marcelwelk.de',
     text: `Neue Chat-Session gestartet!\n\nErste Nachricht:\n${firstMessage}\n\n---\nMARCEL.AI · marcelwelk.de`,
   })
+  if (error) {
+    console.error('[chat/route] Resend error:', error)
+    seenSessions.delete(sessionId) // allow retry on failure
+  } else {
+    console.log('[chat/route] Chat notification sent, id:', data?.id)
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -125,7 +140,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Ungültige Anfrage' }, { status: 400 })
   }
 
-  const { messages } = body as Record<string, unknown>
+  const { messages, sessionId } = body as Record<string, unknown>
 
   // 4. Validate messages array
   if (!Array.isArray(messages) || messages.length === 0) {
@@ -164,9 +179,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Letzte Nachricht muss vom Nutzer sein' }, { status: 400 })
   }
 
-  // 8. Fire-and-forget email on first message of session
-  if (validated.length === 1) {
-    sendChatNotification(validated[0].content).catch(console.error)
+  // 8. Fire-and-forget email — once per session via sessionId deduplication
+  if (typeof sessionId === 'string' && sessionId.length > 0) {
+    sendChatNotification(sessionId, validated[validated.length - 1].content).catch(console.error)
   }
 
   // 9. Call Anthropic — no streaming, key never leaves server
