@@ -56,6 +56,12 @@ function TypingDots() {
 // ---------------------------------------------------------------------------
 // Main component
 // ---------------------------------------------------------------------------
+interface ContactData {
+  name: string
+  email: string
+  message: string
+}
+
 export function ChatWidget() {
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([])
@@ -64,6 +70,13 @@ export function ChatWidget() {
   const [error, setError] = useState<string | null>(null)
   const bottomRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+
+  // Contact form state
+  const [showContactForm, setShowContactForm] = useState(false)
+  const [contactData, setContactData] = useState<ContactData>({ name: '', email: '', message: '' })
+  const [contactErrors, setContactErrors] = useState<Partial<ContactData & { submit: string }>>({})
+  const [contactSubmitting, setContactSubmitting] = useState(false)
+  const [contactSuccess, setContactSuccess] = useState(false)
 
   const userMessageCount = messages.filter(m => m.role === 'user').length
   const sessionLimitReached = userMessageCount >= SESSION_LIMIT
@@ -116,6 +129,45 @@ export function ChatWidget() {
       setMessages(snapshot)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const submitContact = async () => {
+    const errors: Partial<ContactData & { submit: string }> = {}
+    if (!contactData.name.trim()) errors.name = 'Name ist erforderlich'
+    if (!contactData.email.trim()) errors.email = 'Email ist erforderlich'
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactData.email)) errors.email = 'Ungültige Email-Adresse'
+    if (!contactData.message.trim()) errors.message = 'Nachricht ist erforderlich'
+
+    if (Object.keys(errors).length > 0) {
+      setContactErrors(errors)
+      return
+    }
+
+    setContactSubmitting(true)
+    setContactErrors({})
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(contactData),
+      })
+      const data = await res.json() as { success?: boolean; error?: string }
+      if (!res.ok) {
+        setContactErrors({ submit: data.error ?? 'Fehler beim Senden. Bitte versuche es erneut.' })
+        return
+      }
+      setContactSuccess(true)
+      setTimeout(() => {
+        setContactSuccess(false)
+        setShowContactForm(false)
+        setContactData({ name: '', email: '', message: '' })
+      }, 3000)
+    } catch {
+      setContactErrors({ submit: 'Verbindungsfehler. Bitte versuche es erneut.' })
+    } finally {
+      setContactSubmitting(false)
     }
   }
 
@@ -188,9 +240,153 @@ export function ChatWidget() {
             </div>
 
             {/* ------------------------------------------------------------- */}
-            {/* Message list                                                   */}
+            {/* Message list / Contact form                                    */}
             {/* ------------------------------------------------------------- */}
             <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
+
+              {/* ---- Contact form view ---- */}
+              {showContactForm && (
+                <>
+                  {contactSuccess ? (
+                    <div
+                      className="flex flex-col items-center justify-center h-full gap-3 text-center"
+                      style={{ minHeight: '240px' }}
+                    >
+                      <span style={{ fontSize: 32 }}>✅</span>
+                      <p style={{ color: 'rgba(255,255,255,0.82)', fontFamily: 'monospace', fontSize: 13, lineHeight: 1.6 }}>
+                        Nachricht gesendet!{' '}
+                        <span style={{ color: COPPER }}>Marcel meldet sich bei dir.</span>
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col gap-3 pt-1">
+                      <p style={{ color: COPPER, fontFamily: 'monospace', fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                        Nachricht hinterlassen
+                      </p>
+
+                      {/* Name */}
+                      <div className="flex flex-col gap-1">
+                        <input
+                          type="text"
+                          placeholder="Name *"
+                          maxLength={100}
+                          value={contactData.name}
+                          onChange={e => setContactData(d => ({ ...d, name: e.target.value }))}
+                          className="w-full outline-none"
+                          style={{
+                            background: 'rgba(255,255,255,0.05)',
+                            border: `0.5px solid ${contactErrors.name ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.1)'}`,
+                            borderRadius: 10,
+                            padding: '9px 12px',
+                            color: 'white',
+                            fontFamily: 'monospace',
+                            fontSize: 12,
+                          }}
+                          onFocus={e => { e.currentTarget.style.borderColor = 'rgba(207,147,54,0.5)' }}
+                          onBlur={e => { e.currentTarget.style.borderColor = contactErrors.name ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.1)' }}
+                        />
+                        {contactErrors.name && (
+                          <span style={{ color: '#f87171', fontFamily: 'monospace', fontSize: 10 }}>{contactErrors.name}</span>
+                        )}
+                      </div>
+
+                      {/* Email */}
+                      <div className="flex flex-col gap-1">
+                        <input
+                          type="email"
+                          placeholder="Email *"
+                          value={contactData.email}
+                          onChange={e => setContactData(d => ({ ...d, email: e.target.value }))}
+                          className="w-full outline-none"
+                          style={{
+                            background: 'rgba(255,255,255,0.05)',
+                            border: `0.5px solid ${contactErrors.email ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.1)'}`,
+                            borderRadius: 10,
+                            padding: '9px 12px',
+                            color: 'white',
+                            fontFamily: 'monospace',
+                            fontSize: 12,
+                          }}
+                          onFocus={e => { e.currentTarget.style.borderColor = 'rgba(207,147,54,0.5)' }}
+                          onBlur={e => { e.currentTarget.style.borderColor = contactErrors.email ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.1)' }}
+                        />
+                        {contactErrors.email && (
+                          <span style={{ color: '#f87171', fontFamily: 'monospace', fontSize: 10 }}>{contactErrors.email}</span>
+                        )}
+                      </div>
+
+                      {/* Message */}
+                      <div className="flex flex-col gap-1">
+                        <textarea
+                          placeholder="Nachricht *"
+                          maxLength={1000}
+                          rows={4}
+                          value={contactData.message}
+                          onChange={e => setContactData(d => ({ ...d, message: e.target.value }))}
+                          className="w-full outline-none resize-none"
+                          style={{
+                            background: 'rgba(255,255,255,0.05)',
+                            border: `0.5px solid ${contactErrors.message ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.1)'}`,
+                            borderRadius: 10,
+                            padding: '9px 12px',
+                            color: 'white',
+                            fontFamily: 'monospace',
+                            fontSize: 12,
+                          }}
+                          onFocus={e => { e.currentTarget.style.borderColor = 'rgba(207,147,54,0.5)' }}
+                          onBlur={e => { e.currentTarget.style.borderColor = contactErrors.message ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.1)' }}
+                        />
+                        <div className="flex justify-between">
+                          {contactErrors.message ? (
+                            <span style={{ color: '#f87171', fontFamily: 'monospace', fontSize: 10 }}>{contactErrors.message}</span>
+                          ) : <span />}
+                          <span style={{ color: contactData.message.length > 900 ? '#f87171' : 'rgba(255,255,255,0.25)', fontFamily: 'monospace', fontSize: 10 }}>
+                            {contactData.message.length}/1000
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Submit error */}
+                      {contactErrors.submit && (
+                        <div
+                          className="text-xs rounded-xl px-3.5 py-2.5"
+                          style={{
+                            background: 'rgba(239,68,68,0.09)',
+                            border: '0.5px solid rgba(239,68,68,0.25)',
+                            color: '#f87171',
+                            fontFamily: 'monospace',
+                          }}
+                        >
+                          {contactErrors.submit}
+                        </div>
+                      )}
+
+                      {/* Submit button */}
+                      <button
+                        onClick={submitContact}
+                        disabled={contactSubmitting}
+                        className="w-full py-2.5 rounded-xl transition-all"
+                        style={{
+                          background: COPPER,
+                          color: DARK,
+                          fontFamily: 'monospace',
+                          fontSize: 13,
+                          fontWeight: 600,
+                          opacity: contactSubmitting ? 0.6 : 1,
+                          cursor: contactSubmitting ? 'not-allowed' : 'pointer',
+                        }}
+                        onMouseEnter={e => { if (!contactSubmitting) e.currentTarget.style.filter = 'brightness(1.1)' }}
+                        onMouseLeave={e => { e.currentTarget.style.filter = 'none' }}
+                      >
+                        {contactSubmitting ? 'Wird gesendet…' : 'Absenden'}
+                      </button>
+                    </div>
+                  )}
+                </>
+              )}
+
+              {/* ---- Normal chat view ---- */}
+              {!showContactForm && <>
 
               {/* Welcome message + guided chips */}
               {messages.length === 0 && (
@@ -342,6 +538,7 @@ export function ChatWidget() {
               )}
 
               <div ref={bottomRef} />
+              </>}
             </div>
 
             {/* ------------------------------------------------------------- */}
@@ -351,67 +548,99 @@ export function ChatWidget() {
               className="shrink-0 px-3 py-3"
               style={{ borderTop: `0.5px solid ${WIN_BORDER}`, background: 'rgba(207,147,54,0.025)' }}
             >
-              {!sessionLimitReached ? (
-                <div className="flex items-center gap-2">
-                  <div className="relative flex-1">
-                    <input
-                      ref={inputRef}
-                      type="text"
-                      value={input}
-                      onChange={e => setInput(e.target.value.slice(0, 500))}
-                      onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); send(input) } }}
-                      placeholder="Schreib eine Nachricht…"
-                      maxLength={500}
-                      disabled={loading}
-                      className="w-full outline-none"
-                      style={{
-                        background: 'rgba(255,255,255,0.05)',
-                        border: '0.5px solid rgba(255,255,255,0.1)',
-                        borderRadius: 12,
-                        padding: charCount > 400 ? '10px 52px 10px 14px' : '10px 14px',
-                        color: 'white',
-                        fontFamily: 'monospace',
-                        fontSize: 13,
-                        opacity: loading ? 0.5 : 1,
-                        transition: 'border-color 0.15s',
-                      }}
-                      onFocus={e => { e.currentTarget.style.borderColor = 'rgba(207,147,54,0.5)' }}
-                      onBlur={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)' }}
-                    />
-                    {/* Character counter — appears after 400 chars */}
-                    {charCount > 400 && (
-                      <span
-                        className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
+              {showContactForm ? (
+                /* Back link when contact form is open */
+                <button
+                  onClick={() => { setShowContactForm(false); setContactErrors({}); setContactData({ name: '', email: '', message: '' }) }}
+                  className="w-full text-center text-xs py-1 transition-colors"
+                  style={{ color: COPPER, fontFamily: 'monospace', background: 'transparent', cursor: 'pointer' }}
+                  onMouseEnter={e => { e.currentTarget.style.opacity = '0.7' }}
+                  onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
+                >
+                  ← Zurück zum Chat
+                </button>
+              ) : !sessionLimitReached ? (
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center gap-2">
+                    <div className="relative flex-1">
+                      <input
+                        ref={inputRef}
+                        type="text"
+                        value={input}
+                        onChange={e => setInput(e.target.value.slice(0, 500))}
+                        onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); send(input) } }}
+                        placeholder="Schreib eine Nachricht…"
+                        maxLength={500}
+                        disabled={loading}
+                        className="w-full outline-none"
                         style={{
-                          fontSize: 10,
+                          background: 'rgba(255,255,255,0.05)',
+                          border: '0.5px solid rgba(255,255,255,0.1)',
+                          borderRadius: 12,
+                          padding: charCount > 400 ? '10px 52px 10px 14px' : '10px 14px',
+                          color: 'white',
                           fontFamily: 'monospace',
-                          color: charCount >= 500 ? '#f87171' : 'rgba(255,255,255,0.3)',
+                          fontSize: 13,
+                          opacity: loading ? 0.5 : 1,
+                          transition: 'border-color 0.15s',
                         }}
-                      >
-                        {charCount}/500
-                      </span>
-                    )}
+                        onFocus={e => { e.currentTarget.style.borderColor = 'rgba(207,147,54,0.5)' }}
+                        onBlur={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)' }}
+                      />
+                      {/* Character counter — appears after 400 chars */}
+                      {charCount > 400 && (
+                        <span
+                          className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
+                          style={{
+                            fontSize: 10,
+                            fontFamily: 'monospace',
+                            color: charCount >= 500 ? '#f87171' : 'rgba(255,255,255,0.3)',
+                          }}
+                        >
+                          {charCount}/500
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Send button */}
+                    <button
+                      onClick={() => send(input)}
+                      disabled={loading || !input.trim()}
+                      aria-label="Nachricht senden"
+                      className="shrink-0 flex items-center justify-center transition-all duration-150"
+                      style={{
+                        width: 42,
+                        height: 42,
+                        borderRadius: 12,
+                        background: COPPER,
+                        color: DARK,
+                        opacity: loading || !input.trim() ? 0.3 : 1,
+                        cursor: loading || !input.trim() ? 'not-allowed' : 'pointer',
+                      }}
+                      onMouseEnter={e => { if (!loading && input.trim()) e.currentTarget.style.filter = 'brightness(1.12)' }}
+                      onMouseLeave={e => { e.currentTarget.style.filter = 'none' }}
+                    >
+                      <Send size={16} />
+                    </button>
                   </div>
 
-                  {/* Send button */}
+                  {/* Contact form toggle button */}
                   <button
-                    onClick={() => send(input)}
-                    disabled={loading || !input.trim()}
-                    aria-label="Nachricht senden"
-                    className="shrink-0 flex items-center justify-center transition-all duration-150"
+                    onClick={() => setShowContactForm(true)}
+                    className="w-full text-center transition-colors"
                     style={{
-                      width: 42,
-                      height: 42,
-                      borderRadius: 12,
-                      background: COPPER,
-                      color: DARK,
-                      opacity: loading || !input.trim() ? 0.3 : 1,
-                      cursor: loading || !input.trim() ? 'not-allowed' : 'pointer',
+                      color: COPPER,
+                      fontFamily: 'monospace',
+                      fontSize: 10,
+                      background: 'transparent',
+                      cursor: 'pointer',
+                      opacity: 0.7,
+                      paddingBottom: 2,
                     }}
-                    onMouseEnter={e => { if (!loading && input.trim()) e.currentTarget.style.filter = 'brightness(1.12)' }}
-                    onMouseLeave={e => { e.currentTarget.style.filter = 'none' }}
+                    onMouseEnter={e => { e.currentTarget.style.opacity = '1' }}
+                    onMouseLeave={e => { e.currentTarget.style.opacity = '0.7' }}
                   >
-                    <Send size={16} />
+                    ✉️ Nachricht an Marcel hinterlassen
                   </button>
                 </div>
               ) : (

@@ -1,6 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { Resend } from 'resend'
+import { checkContactRateLimit } from '@/lib/rateLimit'
 
-// Simple in-memory rate limiter: max 20 requests per IP per minute
+// Allowed origins — same as chat route
+const ALLOWED_ORIGINS = [
+  'https://www.marcelwelk.de',
+  'http://localhost:3000',
+]
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+// Simple in-memory rate limiter: max 20 requests per IP per minute (for GET)
 const rateMap = new Map<string, { count: number; reset: number }>()
 
 function isRateLimited(ip: string): boolean {
@@ -31,4 +41,76 @@ export async function GET(req: NextRequest) {
     email: process.env.CONTACT_EMAIL ?? '',
     address: process.env.CONTACT_ADDRESS ?? '',
   })
+}
+
+export async function POST(request: NextRequest) {
+  // 1. Origin check
+  const origin = request.headers.get('origin')
+  if (!ALLOWED_ORIGINS.includes(origin ?? '')) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  }
+
+  // 2. Rate limiting (max 3 contact messages per IP per hour)
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
+  const rateCheck = checkContactRateLimit(ip)
+  if (rateCheck.limited) {
+    return NextResponse.json({ error: rateCheck.message }, { status: 429 })
+  }
+
+  // 3. Parse body
+  let body: unknown
+  try {
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ error: 'Ungültige Anfrage' }, { status: 400 })
+  }
+
+  if (!body || typeof body !== 'object' || Array.isArray(body)) {
+    return NextResponse.json({ error: 'Ungültige Anfrage' }, { status: 400 })
+  }
+
+  const { name, email, message } = body as Record<string, unknown>
+
+  // 4. Validate fields
+  if (typeof name !== 'string' || name.trim().length === 0) {
+    return NextResponse.json({ error: 'Name ist erforderlich' }, { status: 400 })
+  }
+  if (name.trim().length > 100) {
+    return NextResponse.json({ error: 'Name zu lang (max. 100 Zeichen)' }, { status: 400 })
+  }
+  if (typeof email !== 'string' || email.trim().length === 0) {
+    return NextResponse.json({ error: 'Email ist erforderlich' }, { status: 400 })
+  }
+  if (!EMAIL_REGEX.test(email.trim())) {
+    return NextResponse.json({ error: 'Ungültige Email-Adresse' }, { status: 400 })
+  }
+  if (typeof message !== 'string' || message.trim().length === 0) {
+    return NextResponse.json({ error: 'Nachricht ist erforderlich' }, { status: 400 })
+  }
+  if (message.trim().length > 1000) {
+    return NextResponse.json({ error: 'Nachricht zu lang (max. 1000 Zeichen)' }, { status: 400 })
+  }
+
+  const safeName = name.trim()
+  const safeEmail = email.trim()
+  const safeMessage = message.trim()
+
+  // 5. Send email via Resend — target email stays server-side only
+  try {
+    const resend = new Resend(process.env.RESEND_API_KEY)
+    await resend.emails.send({
+      from: 'noreply@marcelwelk.de',
+      to: 'marcel.welk87@gmail.com',
+      subject: '📬 Neue Kontaktnachricht auf marcelwelk.de',
+      text: `Name: ${safeName}\nEmail: ${safeEmail}\nNachricht:\n${safeMessage}\n\n---\nGesendet über MARCEL.AI · marcelwelk.de`,
+    })
+  } catch (err) {
+    console.error('[contact/route] Resend error:', err)
+    return NextResponse.json(
+      { error: 'Email konnte nicht gesendet werden. Bitte versuche es später.' },
+      { status: 502 }
+    )
+  }
+
+  return NextResponse.json({ success: true })
 }

@@ -3,6 +3,7 @@
 
 const hourlyMap = new Map<string, number[]>()
 const minutelyMap = new Map<string, number[]>()
+const contactHourlyMap = new Map<string, number[]>()
 
 export interface RateLimitResult {
   limited: boolean
@@ -31,6 +32,22 @@ export function checkRateLimit(ip: string): RateLimitResult {
   minutelyMap.set(ip, minutely)
   hourly.push(now)
   hourlyMap.set(ip, hourly)
+
+  return { limited: false }
+}
+
+// Stricter limit for contact form: max 3 per IP per hour
+export function checkContactRateLimit(ip: string): RateLimitResult {
+  const now = Date.now()
+  const ONE_HOUR = 60 * 60 * 1000
+
+  const hourly = (contactHourlyMap.get(ip) ?? []).filter(t => now - t < ONE_HOUR)
+  if (hourly.length >= 3) {
+    return { limited: true, message: 'Du hast bereits 3 Nachrichten in dieser Stunde gesendet. Bitte versuche es später erneut.' }
+  }
+
+  hourly.push(now)
+  contactHourlyMap.set(ip, hourly)
 
   return { limited: false }
 }

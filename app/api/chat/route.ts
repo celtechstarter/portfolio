@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
+import { Resend } from 'resend'
 import { checkRateLimit } from '@/lib/rateLimit'
 
 // ---------------------------------------------------------------------------
@@ -58,6 +59,19 @@ SPRACHE & STIL:
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 })
+
+// ---------------------------------------------------------------------------
+// Resend — fire-and-forget chat notification (lazy init avoids build errors)
+// ---------------------------------------------------------------------------
+async function sendChatNotification(firstMessage: string): Promise<void> {
+  const resend = new Resend(process.env.RESEND_API_KEY)
+  await resend.emails.send({
+    from: 'noreply@marcelwelk.de',
+    to: 'marcel.welk87@gmail.com',
+    subject: '💬 Jemand chattet auf marcelwelk.de',
+    text: `Neue Chat-Session gestartet!\n\nErste Nachricht:\n${firstMessage}\n\n---\nMARCEL.AI · marcelwelk.de`,
+  })
+}
 
 // ---------------------------------------------------------------------------
 // Allowed origins
@@ -143,7 +157,12 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Letzte Nachricht muss vom Nutzer sein' }, { status: 400 })
   }
 
-  // 8. Call Anthropic — no streaming, key never leaves server
+  // 8. Fire-and-forget email on first message of session
+  if (validated.length === 1) {
+    sendChatNotification(validated[0].content).catch(console.error)
+  }
+
+  // 9. Call Anthropic — no streaming, key never leaves server
   try {
     const response = await anthropic.messages.create({
       model: 'claude-sonnet-4-5',
