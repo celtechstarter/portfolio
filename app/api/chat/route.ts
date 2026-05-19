@@ -95,6 +95,15 @@ interface ChatMessage {
 // POST /api/chat
 // ---------------------------------------------------------------------------
 export async function POST(request: NextRequest) {
+  // 0. Guard: API key must be present
+  if (!process.env.ANTHROPIC_API_KEY) {
+    console.error('[chat/route] ANTHROPIC_API_KEY is not set in environment variables')
+    return NextResponse.json(
+      { error: 'Server-Konfigurationsfehler. Bitte kontaktiere Marcel.' },
+      { status: 500 }
+    )
+  }
+
   // 1. Origin check
   const origin = request.headers.get('origin')
   if (origin && !ALLOWED_ORIGINS.includes(origin)) {
@@ -178,7 +187,9 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ message: text })
   } catch (err) {
-    console.error('[chat/route] Anthropic API error:', err)
+    const message = err instanceof Error ? err.message : String(err)
+    const status = (err as Record<string, unknown>)?.status
+    console.error(`[chat/route] Anthropic API error — status: ${status ?? 'unknown'}, message: ${message}`)
     return NextResponse.json(
       { error: 'Der Assistent ist momentan nicht verfügbar. Bitte versuche es später.' },
       { status: 502 }
