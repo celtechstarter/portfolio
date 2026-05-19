@@ -53,12 +53,6 @@ SPRACHE & STIL:
 - Halte Antworten kurz: maximal 3 Sätze
 - Freundlich, direkt, professionell`
 
-// ---------------------------------------------------------------------------
-// Anthropic client — key bleibt serverseitig, nie im Browser
-// ---------------------------------------------------------------------------
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-})
 
 // ---------------------------------------------------------------------------
 // Resend — fire-and-forget chat notification (lazy init avoids build errors)
@@ -174,9 +168,10 @@ export async function POST(request: NextRequest) {
   }
 
   // 9. Call Anthropic — no streaming, key never leaves server
+  const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
   try {
     const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-5',
+      model: 'claude-sonnet-4-6',
       max_tokens: 300,
       system: SYSTEM_PROMPT,
       messages: validated,
