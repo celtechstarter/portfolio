@@ -5,7 +5,9 @@ import { checkContactRateLimit } from '@/lib/rateLimit'
 // Allowed origins — same as chat route
 const ALLOWED_ORIGINS = [
   'https://www.marcelwelk.de',
+  'https://marcelwelk.de',
   'http://localhost:3000',
+  'http://localhost:3001',
 ]
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -46,7 +48,7 @@ export async function GET(req: NextRequest) {
 export async function POST(request: NextRequest) {
   // 1. Origin check
   const origin = request.headers.get('origin')
-  if (!ALLOWED_ORIGINS.includes(origin ?? '')) {
+  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 

@@ -78,7 +78,9 @@ async function sendChatNotification(firstMessage: string): Promise<void> {
 // ---------------------------------------------------------------------------
 const ALLOWED_ORIGINS = [
   'https://www.marcelwelk.de',
+  'https://marcelwelk.de',
   'http://localhost:3000',
+  'http://localhost:3001',
 ]
 
 // ---------------------------------------------------------------------------
@@ -95,7 +97,7 @@ interface ChatMessage {
 export async function POST(request: NextRequest) {
   // 1. Origin check
   const origin = request.headers.get('origin')
-  if (!ALLOWED_ORIGINS.includes(origin ?? '')) {
+  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
