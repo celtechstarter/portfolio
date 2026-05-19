@@ -309,6 +309,18 @@ const entries: DevlogEntry[] = [
       "marcelwelk.de und www.marcelwelk.de wurden von Google als zwei separate Seiten behandelt → alle URLs auf www.marcelwelk.de konsolidiert. KI-Crawler waren durch robots.ts komplett gesperrt → freigegeben, da GEO-Sichtbarkeit für die eigene Positionierung als KI-Entwickler entscheidend ist",
   },
 
+  {
+    project: "Portfolio",
+    color: PROJECT_COLORS["Portfolio"],
+    day: 19,
+    date: "19.05.2026",
+    title: "MARCEL.AI – eigener KI-Chatbot live",
+    description:
+      "Heute war ein langer Tag voller 502 Fehler. Die Idee: Ein eigener KI-Chatbot auf der Portfolio-Seite, der Besucher direkt beantwortet wer ich bin und was ich kann. MARCEL.AI läuft jetzt unten rechts. Claude Code hat die komplette Architektur gebaut — Next.js API Route als Proxy damit der API Key nicht im Browser landet, Rate Limiting gegen Spam, Origin-Check gegen externe Aufrufe, und einen System Prompt der gegen Prompt Injection gesichert ist. Resend übernimmt die Email-Benachrichtigungen. Domain verifiziert, API Key eingetragen — wenn jemand den Chat startet kommt eine Email von noreply@marcelwelk.de an.",
+    problemSolved:
+      "Mehrere 502 Fehler hintereinander: Edge Runtime auf Vercel unterstützt @anthropic-ai/sdk nicht → export const runtime = 'nodejs' ergänzt. Falscher Modellname (claude-sonnet-4-5 existiert nicht) → auf claude-sonnet-4-6 korrigiert. Resend v6 wirft bei API-Fehlern keine Exception sondern gibt { data, error } zurück → silent fail gefixt. Email-Spam durch fehlenden Session-Check → sessionId per crypto.randomUUID() eingebaut.",
+  },
+
   // ── CelDesk ───────────────────────────────────────────────────────────────
   {
     project: "CelDesk",
