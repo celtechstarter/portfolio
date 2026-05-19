@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { Footer } from '@/components/footer'
 import { FloatingNav } from '@/components/floating-nav'
+import { ChatWidget } from '@/components/chat-widget'
 
 const _inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const _jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains-mono' })
@@ -246,6 +247,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <FloatingNav />
+        <ChatWidget />
         <Analytics />
       </body>
     </html>
