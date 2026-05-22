@@ -29,6 +29,7 @@ interface SkillCategory {
 interface Certificate {
   title: string
   issuer: string
+  url?: string
 }
 
 interface SkillIcon {
@@ -76,9 +77,11 @@ const skillCategories: SkillCategory[] = [
 
 const certificates: Certificate[] = [
   { title: "Cloud & Web Expert", issuer: "Techstarter" },
-  { title: "LPIC-1", issuer: "Linux" },
-  { title: "AWS re/Start", issuer: "Amazon Web Services" },
-  { title: "Azure Fundamentals", issuer: "Microsoft" },
+  { title: "LPIC-1", issuer: "Linux", url: "https://cs.lpi.org/caf/Xamman/certification/verify/LPI000601206/68tg2avpp5" },
+  { title: "AWS re/Start", issuer: "Amazon Web Services", url: "https://www.credly.com/badges/4ede2f7b-4d7f-4be0-983a-848926348c38/linked_in_profile" },
+  { title: "Azure Fundamentals", issuer: "Microsoft", url: "https://learn.microsoft.com/de-de/users/marcelwelk-5271/credentials/9641b0c7905438cd" },
+  { title: "Claude 101", issuer: "Anthropic", url: "https://verify.skilljar.com/c/wax4356idoe9" },
+  { title: "Claude Code 101", issuer: "Anthropic", url: "https://verify.skilljar.com/c/mc26kuoa47b2" },
 ]
 
 export function Skills() {
@@ -192,6 +195,17 @@ export function Skills() {
                 <p className="mt-1 font-mono text-xs text-muted-foreground">
                   {cert.issuer}
                 </p>
+                {cert.url && (
+                  <a
+                    href={cert.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 inline-block font-mono text-xs"
+                    style={{ color: "#CF9336" }}
+                  >
+                    Nachweis ansehen →
+                  </a>
+                )}
               </div>
             ))}
           </div>
