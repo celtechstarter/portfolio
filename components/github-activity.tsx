@@ -13,7 +13,7 @@ const stats = [
 function AnimatedCounter({ value, display, label }: { value: number; display: string; label: string }) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true })
-  const [count, setCount] = useState("0")
+  const [count, setCount] = useState(display)
   const hasAnimated = useRef(false)
 
   useEffect(() => {

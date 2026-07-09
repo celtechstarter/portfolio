@@ -8,27 +8,27 @@ const faqs = [
   {
     question: "Wer bist du und was machst du?",
     answer:
-      "Ich bin Marcel Welk, KI-Nerd und Webentwickler aus Dortmund. Ich baue moderne Websites und Web-Apps – mit einem starken Fokus auf KI-Integration, SEO/GEO-Optimierung und sauberen Code.",
+      "Ich bin Marcel Welk, KI-Nerd und Webentwickler aus Dortmund. Ich baue moderne Websites und Web-Apps – mit einem starken Fokus auf KI-Integration, SEO/GEO-Optimierung und sauberen Code. Aktuell suche ich eine Festanstellung im Bereich Webentwicklung, KI oder Cloud – dieses Portfolio ist mein Bewerbungs- und Übungsprojekt.",
   },
   {
     question: "Welche Art von Projekten machst du am liebsten?",
     answer:
-      "Mein Schwerpunkt liegt auf One-Pagern für Unternehmen, die eine veraltete Website haben oder kaum in Google und KI-Suchen sichtbar sind. Ich habe dafür sogar ein eigenes Scanning-Tool entwickelt, das den genauen SEO- und GEO-Status einer Website analysiert – bevor ich überhaupt anfange.",
+      "Projekte mit KI-Integration: Vision-APIs wie bei Poke-Scan V2, eigene Chatbots wie MARCEL.AI, Automatisierung. Und alles, wo ich schnell von der Idee zum Live-Deployment komme. Für SEO/GEO-Analysen habe ich mir ein eigenes Scanning-Tool gebaut, mit dem ich Websites auf ihre Sichtbarkeit untersuche.",
   },
   {
-    question: "Arbeitest du auch für kleine Unternehmen oder Selbstständige?",
+    question: "Nimmst du Kundenaufträge an?",
     answer:
-      "Ja, gerade kleine Unternehmen und Selbstständige profitieren am meisten. Viele haben veraltete Websites ohne SEO, keine KI-Sichtbarkeit und zahlen trotzdem zu viel für schlechte Ergebnisse. Genau da helfe ich.",
+      "Nein. Ich biete keine bezahlten Dienstleistungen an – ich suche eine Festanstellung. Die Websites in meinen Referenzen sind Lernprojekte, ehrenamtliche Arbeiten oder Freundschaftsdienste, mit denen ich Erfahrung und Referenzen aufgebaut habe.",
   },
   {
     question: "Was kostet eine Website bei dir?",
     answer:
-      "Die Preise sind individuell und hängen vom Umfang ab. Ein One-Pager startet günstiger als ein mehrseitiges Projekt mit Backend. Schreib mir einfach – ich schaue mir deine aktuelle Situation an und mache dir ein faires Angebot.",
+      "Nichts – ich verkaufe keine Websites. Ich kann sie bauen (siehe Projekte), aber diese Seite dient Trainings- und Übungszwecken. Wer mit mir arbeiten möchte, kann mir gerne ein Jobangebot schicken.",
   },
   {
-    question: "Wie lange dauert die Umsetzung einer Website?",
+    question: "Wie schnell setzt du Projekte um?",
     answer:
-      "Ein One-Pager ist oft in 1–2 Wochen fertig. Komplexere Projekte mit Buchungssystem, Backend oder KI-Integration dauern entsprechend länger. Nach dem ersten Gespräch bekommst du eine realistische Einschätzung.",
+      "BewerbungsPilot ging in 2 Tagen von der Idee bis zum Live-Deployment – als bewusster Speed-Benchmark. Möglich macht das mein KI-Workflow: Planung mit Claude, UI-Generierung mit v0, Implementierung mit Claude Code.",
   },
   {
     question: "Was bedeutet GEO – und warum ist das wichtig?",
@@ -46,9 +46,9 @@ const faqs = [
       "Ich nutze immer die neuesten und besten Tools – je nachdem, was das Projekt braucht. Ob Webentwicklung, Musik, Bilder, Videos oder Icons: Ich wähle das Tool, das für den jeweiligen Anwendungsfall am stärksten ist, nicht das, das ich immer schon kannte.",
   },
   {
-    question: "Kann ich meine bestehende Website verbessern lassen, ohne sie komplett neu zu bauen?",
+    question: "Warum sieht dieses Portfolio aus wie eine Agentur-Website?",
     answer:
-      "In vielen Fällen ja. Mit meinem Scanning-Tool analysiere ich zuerst, wo die größten Schwachstellen liegen – SEO, Ladezeit, Struktur, GEO-Readiness. Danach entscheiden wir gemeinsam, was sinnvoll ist.",
+      "Weil es gleichzeitig mein SEO/GEO-Übungsprojekt ist. Ich habe die Seite bewusst auf Sichtbarkeit für Begriffe wie Webdesign Dortmund optimiert, um klassisches SEO und Generative Engine Optimization in der Praxis zu lernen – mit strukturierten Daten, KI-Crawler-Steuerung und Datenschutz-Experimenten wie den freirubbelbaren Kontaktdaten. Das Ranking-Ergebnis ist Teil des Portfolios.",
   },
   {
     question: "Wie nehme ich Kontakt auf?",

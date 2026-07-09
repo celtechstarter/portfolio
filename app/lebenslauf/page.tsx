@@ -7,21 +7,21 @@ import { ProtectedContactLinks } from "@/components/protected-contact-links"
 export const metadata: Metadata = {
   title: "Lebenslauf – IT & Webentwicklung",
   description:
-    "Lebenslauf von Marcel Welk – Freelance Webdesigner & Webentwickler aus Dortmund. Projekte, Skills in Web-Entwicklung, KI-Integration, React, Next.js und modernen Deployment-Workflows.",
+    "Lebenslauf von Marcel Welk – Webentwickler & KI-Spezialist aus Dortmund. Projekte, Skills in Web-Entwicklung, KI-Integration, React, Next.js und modernen Deployment-Workflows.",
   alternates: {
     canonical: 'https://www.marcelwelk.de/lebenslauf',
   },
   openGraph: {
     title: "Lebenslauf | Marcel Welk",
     description:
-      "Marcel Welk – Freelance Webdesigner & Webentwickler aus Dortmund. Projekte, Skills und digitale Lösungen auf einen Blick.",
+      "Marcel Welk – Webentwickler & KI-Spezialist aus Dortmund. Projekte, Skills und digitale Lösungen auf einen Blick.",
     url: "https://www.marcelwelk.de/lebenslauf",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Lebenslauf Marcel Welk – Webdesign & Webentwicklung Dortmund" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Lebenslauf | Marcel Welk",
-    description: "Freelance Webdesigner & Webentwickler aus Dortmund – Skills, Projekte und digitale Lösungen.",
+    description: "Webentwickler & KI-Spezialist aus Dortmund – Skills, Projekte und digitale Lösungen.",
     images: ["/og-image.jpg"],
   },
 }
@@ -231,7 +231,7 @@ export default function LebenslaufPage() {
                     Marcel Welk
                   </h1>
                   <p className="mb-3 font-mono text-sm text-primary">
-                    Freelance Webdesigner &amp; Webentwickler · KI-Nerd
+                    Webentwickler &amp; KI-Spezialist · KI-Nerd
                   </p>
                   <div className="mb-5 flex items-center justify-center gap-1.5 md:justify-start">
                     <MapPin size={13} className="text-muted-foreground" />
@@ -247,15 +247,15 @@ export default function LebenslaufPage() {
           <section>
             <SectionHeader label="Profil" title="Über mich" />
             <p className="text-base leading-relaxed text-muted-foreground">
-              Freelance Webdesigner und Webentwickler aus Dortmund mit Fokus auf
+              Webentwickler und KI-Spezialist aus Dortmund mit Fokus auf
               moderne Web-Entwicklung, KI-Integration und schnelle Umsetzung
               digitaler Projekte. Nach meiner Weiterbildung zum Cloud &amp;
               Web-Experten bei Techstarter baue ich echte Produkte — von der
               Idee bis zum Live-Deployment. Ich kombiniere strategische Planung
               mit KI-Tools als Produktivitätsmultiplikator und arbeite nach dem
               Prinzip: schnell bauen, schnell testen, schnell lernen. Aktuell
-              verfügbar für Freelance-Projekte sowie Festanstellungen im Bereich
-              Webentwicklung, KI-Automatisierung oder Junior DevOps.
+              suche ich eine Festanstellung im Bereich Webentwicklung,
+              KI-Automatisierung, IT-Support oder Junior DevOps.
             </p>
           </section>
 
@@ -279,13 +279,13 @@ export default function LebenslaufPage() {
                   ]}
                   bullets={[
                     "Lovable-Abhängigkeiten entfernt, OCR durch echte KI Vision API ersetzt",
-                    "VPS-Server konfiguriert (Ubuntu mit SSH), Docker Container für Backend",
-                    "Vercel Deployment mit GitHub Actions CI/CD",
+                    "VPS-Server konfiguriert (Ubuntu mit SSH), Backend heute als Serverless Functions auf Vercel",
+                    "CI-Pipeline mit GitHub Actions (Lint, Type-Check, Build), Auto-Deploy über Vercel",
                     "Supabase PostgreSQL Datenbank eingerichtet",
-                    "API-Integration (NVIDIA NIM, Kimi K2.5 Vision API)",
+                    "KI-Vision mit Fallback-Kette: Gemini 2.5 Flash (primär), NVIDIA NIM – Llama 3.2 Vision & Phi-3.5 Vision",
                     "Komplettes Projekt von 0 auf produktiv gebracht",
                   ]}
-                  tags={["React", "TypeScript", "KI Vision", "Docker", "PostgreSQL", "CI/CD", "Vercel"]}
+                  tags={["React", "TypeScript", "KI Vision", "PostgreSQL", "CI/CD", "Vercel"]}
                 />
                 <ProjectCard
                   title="BewerbungsPilot"
@@ -326,26 +326,26 @@ export default function LebenslaufPage() {
               </div>
             </div>
 
-            {/* Freelance / Kundenprojekte */}
+            {/* Lern- & Referenzprojekte */}
             <div>
-              <SubSectionHeader title="Freelance & Kundenprojekte" />
+              <SubSectionHeader title="Lern- & Referenzprojekte" />
               <div className="flex flex-col gap-3">
                 <ProjectCard
                   title="Coaching Knobling"
                   year="2026"
-                  badge="Kundenprojekt"
+                  badge="Freundschaftsprojekt"
                   badgeColor="purple"
                   subtitle="Moderner Webauftritt für ein Coaching-Unternehmen"
                   links={[
                     { href: "https://coaching-knobling.vercel.app/", label: "coaching-knobling.vercel.app", icon: "external" },
                   ]}
-                  description="Kompletter Website-Relaunch. Design, Entwicklung und Deployment. Fokus auf seriöses Design und klare Nutzerführung. Referenzprojekt für lokales Webdesign & Deployment."
+                  description="Als Dankeschön für meinen IT-Lehrer Hubertus Knobling (Python, AWS, CI/CD, Azure) gebaut – kostenlos, als Freundschaftsdienst. Design, Entwicklung und Deployment, mit Fokus auf seriöses Design und klare Nutzerführung."
                   tags={["Next.js", "TypeScript", "Tailwind CSS", "Vercel"]}
                 />
                 <ProjectCard
                   title="Hawaii Cards"
                   year="2025"
-                  badge="Kundenprojekt"
+                  badge="Ehrenamtlich"
                   badgeColor="purple"
                   subtitle="Landingpage und digitaler Katalog für ein Sammelkarten-Business"
                   links={[
@@ -357,7 +357,7 @@ export default function LebenslaufPage() {
                 <ProjectCard
                   title="Gesunder Fuß"
                   year="2025"
-                  badge="Kundenprojekt"
+                  badge="Ehrenamtlich"
                   badgeColor="purple"
                   subtitle="Lokaler Webauftritt für eine Praxis im Gesundheitsbereich"
                   links={[
@@ -458,6 +458,9 @@ export default function LebenslaufPage() {
                 "LPIC-1 Linux (2024)",
                 "AWS re/Start Graduate (2024)",
                 "Azure Fundamentals AZ-900 (2024)",
+                "Claude 101 – Anthropic (2026)",
+                "Claude Code 101 – Anthropic (2026)",
+                "Introduction to Claude Cowork – Anthropic (2026)",
               ].map((cert) => (
                 <CertBadge key={cert}>{cert}</CertBadge>
               ))}

@@ -48,6 +48,14 @@ const aiProjects: Project[] = [
     status: "fertig",
   },
   {
+    title: "MARCEL.AI",
+    description:
+      "Eigener KI-Chatbot, der Besucherfragen zu mir beantwortet. Anthropic API über abgesicherten Next.js-Proxy, Rate-Limiting, E-Mail-Anbindung via Resend. Läuft live auf dieser Seite — einfach unten rechts ausprobieren.",
+    tags: ["React", "TypeScript", "Anthropic API", "Next.js"],
+    icon: <Brain size={24} />,
+    status: "aktiv",
+  },
+  {
     title: "CELDESK",
     description:
       "Eigenbau IT-Helpdesk mit Ticketsystem, Asset-Verwaltung und Wissensdatenbank. Zeigt dass ich nicht nur Webseiten baue sondern auch interne IT-Tools verstehe.",

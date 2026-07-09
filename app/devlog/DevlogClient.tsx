@@ -312,6 +312,17 @@ const entries: DevlogEntry[] = [
   {
     project: "Portfolio",
     color: PROJECT_COLORS["Portfolio"],
+    day: 20,
+    date: "09.07.2026",
+    title: "Vom Agentur-Look zum ehrlichen Bewerbungsportfolio",
+    description:
+      "Audit mit Claude ergab klare Widersprüche: Der Footer-Banner sagt 'keine bezahlten Dienstleistungen', während der Rest der Seite Freelance-Wording in Meta-Tags und Schemas hatte, ein LocalBusiness-Schema mit priceRange und openingHours, eine FAQ im Verkaufsmodus und 'Kundenprojekt'-Labels auf Lernprojekten. Alles zusammen ein klassischer Widerspruch zwischen ehrlicher Intention und gewachsenem Code. Tech-Claims im Lebenslauf gegen den echten Poke-Scan-V2-Code auf GitHub verifiziert und korrigiert: Kimi raus (war nie primär), Docker raus (kein Dockerfile im Repo), Gemini 2.5 Flash als primäres Vision-Modell rein, CI-Pipeline mit GitHub Actions korrekt beschrieben. Claude-Cowork-Zertifikat ergänzt. LocalBusiness- und ProfessionalService-Schemas komplett entfernt – deklarieren mich maschinenlesbar als Gewerbebetrieb. Freelance-Wording aus Hero, Lebenslauf-Titles, Keywords und JSON-LD entfernt.",
+    problemSolved:
+      "SEO/GEO-Übung und Bewerbungsportfolio vertragen sich – aber nur wenn die Seite selbst erklärt warum sie aussieht wie eine Agentur-Seite. Neue FAQ-Frage dazu ergänzt: 'Warum sieht dieses Portfolio aus wie eine Agentur-Website?'",
+  },
+  {
+    project: "Portfolio",
+    color: PROJECT_COLORS["Portfolio"],
     day: 19,
     date: "19.05.2026",
     title: "MARCEL.AI – eigener KI-Chatbot live",

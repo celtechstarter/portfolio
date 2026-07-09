@@ -82,6 +82,7 @@ const certificates: Certificate[] = [
   { title: "Azure Fundamentals", issuer: "Microsoft", url: "https://learn.microsoft.com/de-de/users/marcelwelk-5271/credentials/9641b0c7905438cd" },
   { title: "Claude 101", issuer: "Anthropic", url: "https://verify.skilljar.com/c/wax4356idoe9" },
   { title: "Claude Code 101", issuer: "Anthropic", url: "https://verify.skilljar.com/c/mc26kuoa47b2" },
+  { title: "Claude Cowork", issuer: "Anthropic", url: "https://verify.skilljar.com/c/5uwkjhqir3ix" },
 ]
 
 export function Skills() {
