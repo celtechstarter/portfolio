@@ -455,7 +455,7 @@ export default function LebenslaufPage() {
             <div className="flex flex-wrap gap-3">
               {[
                 "Expert:in für Cloud- und Webentwicklung (2025)",
-                "LPIC-1 Linux (2024)",
+                "LPI Linux Essentials (2024)",
                 "AWS re/Start Graduate (2024)",
                 "Azure Fundamentals AZ-900 (2024)",
                 "Claude 101 – Anthropic (2026)",
@@ -482,7 +482,7 @@ export default function LebenslaufPage() {
                 },
                 {
                   title: "Cloud & DevOps",
-                  skills: ["Linux/Ubuntu Server (LPIC-1 zertifiziert)", "Docker Container", "AWS & Azure Basics", "CI/CD mit GitHub Actions", "SSH Remote-Administration"],
+                  skills: ["Linux/Ubuntu Server (LPI-zertifiziert)", "Docker Container", "AWS & Azure Basics", "CI/CD mit GitHub Actions", "SSH Remote-Administration"],
                 },
                 {
                   title: "Tools & Deployment",

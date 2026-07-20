@@ -77,7 +77,7 @@ const skillCategories: SkillCategory[] = [
 
 const certificates: Certificate[] = [
   { title: "Cloud & Web Expert", issuer: "Techstarter" },
-  { title: "LPIC-1", issuer: "Linux", url: "https://cs.lpi.org/caf/Xamman/certification/verify/LPI000601206/68tg2avpp5" },
+  { title: "Linux Essentials", issuer: "Linux Professional Institute", url: "https://cs.lpi.org/caf/Xamman/certification/verify/LPI000601206/68tg2avpp5" },
   { title: "AWS re/Start", issuer: "Amazon Web Services", url: "https://www.credly.com/badges/4ede2f7b-4d7f-4be0-983a-848926348c38/linked_in_profile" },
   { title: "Azure Fundamentals", issuer: "Microsoft", url: "https://learn.microsoft.com/de-de/users/marcelwelk-5271/credentials/9641b0c7905438cd" },
   { title: "Claude 101", issuer: "Anthropic", url: "https://verify.skilljar.com/c/wax4356idoe9" },
