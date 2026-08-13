@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { ExternalLink, Github, Sparkles, Brain, Briefcase, Send, Lock, Headset, Construction, X, Globe } from "lucide-react"
+import { ExternalLink, Github, Sparkles, Brain, Briefcase, Send, Lock, Headset, Construction, X, Globe, HeartPulse } from "lucide-react"
 
 type ProjectStatus = "aktiv" | "fertig" | "in_arbeit"
 
@@ -75,6 +75,18 @@ const aiProjects: Project[] = [
     liveUrl: "https://marcel-cv-boost.lovable.app",
     githubUrl: "https://github.com/celtechstarter/marcel-cv-boost",
     status: "fertig",
+  },
+  {
+    title: "Therapieplatz Finder",
+    description:
+      "Web-App, die bei der Suche nach einem ambulanten Psychotherapieplatz hilft. Eigene Python-Pipeline scrapt und analysiert hunderte Praxen automatisch per KI, personalisierte Anfragen gehen direkt raus. Begleitet wird man dabei von Milo, einem eigenen KI-Assistenten.",
+    tags: ["Python", "Anthropic API", "Supabase", "Vercel"],
+    icon: <HeartPulse size={24} />,
+    image: "/projects/therapieplatzfinder.png",
+    video: "/projects/therapieplatzfinder.webm",
+    liveUrl: "https://therapieplatz-finder.de",
+    githubPrivate: true,
+    status: "aktiv",
   },
 ]
 

@@ -14,6 +14,7 @@ const projects = [
   { name: 'coachknobling',    url: 'https://coaching-knobling.vercel.app',   waitMs: 3000 },
   { name: 'hawaiicards',      url: 'https://hawaii-cards.vercel.app',        waitMs: 3000 },
   { name: 'gesunderfuss',     url: 'https://gesunderfuss.vercel.app',        waitMs: 3000 },
+  { name: 'therapieplatzfinder', url: 'https://therapieplatz-finder.de',     waitMs: 3000 },
 ]
 
 async function recordProject(project) {
