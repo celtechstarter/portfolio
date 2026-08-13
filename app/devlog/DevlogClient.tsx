@@ -18,6 +18,7 @@ interface DevlogEntry {
 }
 
 const PROJECT_COLORS: Record<string, string> = {
+  "Therapieplatz Finder": "15, 92, 82",
   "BewerbungsPilot": "74, 222, 128",
   "Poke-Scan V2":    "207, 147, 54",
   "Portfolio":       "96, 165, 250",
@@ -25,6 +26,98 @@ const PROJECT_COLORS: Record<string, string> = {
 }
 
 const entries: DevlogEntry[] = [
+  // ── Therapieplatz Finder ─────────────────────────────────────────────────
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 1,
+    date: "Ende Juni 2026",
+    title: "Idee & Architektur: eigene Python-Pipeline",
+    description:
+      "Ausgangspunkt war die eigene, mühsame Suche nach einem ambulanten Therapieplatz in Dortmund. Entschieden, das zu automatisieren statt es manuell durchzuackern. Architektur festgelegt: ein Scraper sammelt Praxisdaten, eine KI bewertet sie automatisch, ein Mailer verschickt personalisierte Anfragen. Python-Projekt mit Playwright, Anthropic API und Google API Client aufgesetzt.",
+  },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 2,
+    title: "Scraper gebaut: Playwright gegen echte Praxis-Seiten",
+    description:
+      "Automatisiertes Auslesen von hunderten Therapeuten-Profilen: Name, Adresse, Abrechnungsarten, Behandlungsschwerpunkte, freie Plätze. Rate-Limiting eingebaut, damit der Scraper nicht als Angriff gewertet wird, und Fortschrittsanzeige im Terminal für lange Läufe.",
+    problemSolved:
+      "Einzelne kaputte Profilseiten haben den kompletten Scraper-Lauf abgebrochen → jede Profil-Extraktion einzeln abgesichert, Lauf läuft robust weiter statt bei einem Fehler komplett zu stoppen",
+  },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 3,
+    title: "KI-Bewertung mit der Anthropic API",
+    description:
+      "Jedes gescrapte Profil geht automatisch durch Claude: Akzeptiert die Praxis gesetzlich Versicherte (auch implizit aus dem Freitext erkannt), passt das Angebot (Einzeltherapie, Erwachsene), wie hoch ist die Stadtteil-Priorität, gibt es freie Plätze. Nur Profile, die wirklich passen, landen in der finalen Liste — samt kurzer, nachvollziehbarer Begründung pro Entscheidung.",
+  },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 4,
+    title: "Vom CLI-Tool zur echten Web-App",
+    description:
+      "Aus dem Kommandozeilen-Tool eine richtige Web-App gemacht: Ergebnisliste mit Filtern nach Priorität/Kasse/freien Plätzen, Fortschrittsanzeige, editierbare Anfrage-Mails direkt in der Karte. Deployment auf Vercel, Backend als Serverless-Funktionen statt lokalem Server.",
+  },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 5,
+    date: "10.08.2026",
+    title: "Login-System & vollständiger Security-Audit",
+    description:
+      "Geteiltes Demo-Passwort durch echtes Login ersetzt: Supabase Auth mit Magic Link und Google-OAuth. Danach einen vollständigen Security-Audit von Backend und Web-App durchgeführt (Auth, API-Routen, XSS/CSRF), kritische und hohe Befunde direkt gefixt und eine dauerhafte Testsuite aufgebaut (pytest fürs Backend, Node-Tests für die Web-App).",
+    problemSolved:
+      "Kontaktdaten der Praxen waren ungeschützt über die API abrufbar → Auslieferung an ein gültiges, serverseitig geprüftes Login-Token gebunden",
+  },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 6,
+    date: "10.–12.08.2026",
+    title: "Bot-Schutz, echter E-Mail-Versand & Barrierefreiheit",
+    description:
+      "Cloudflare Turnstile vor den Login gesetzt, eigener SMTP-Provider für den Auth-Versand eingerichtet. Kern-Feature gebaut: echter E-Mail-Versand über Resend, damit Anfragen wirklich bei den Praxen ankommen — inklusive sicherer Test-Karte für den Selbstversuch ohne echte Praxis zu kontaktieren. Parallel WCAG 2.1 AA umgesetzt: Kontraste, Tastaturbedienung, ARIA-Labels, Vorlesefunktion per Web Speech API.",
+    problemSolved:
+      "Magic-Link-Login war ohne Bot-Schutz missbrauchbar (Security-Audit-Befund) → Cloudflare Turnstile vor Login und Registrierung ergänzt",
+  },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 7,
+    date: "09.–12.08.2026",
+    title: "Milo: eigener KI-Assistent als Begleiter",
+    description:
+      "Milo als KI-Assistent in die App gebaut: begleitet durch die Suche, beantwortet Fragen zur Nutzung, mit fester KI-Kennzeichnung gemäß EU AI Act Art. 50. Von einer Buttons-Leiste über mehrere Layout-Iterationen bis zur finalen, einklappbaren Chat-Figur mit echten Claude-API-Antworten.",
+    problemSolved:
+      "Erste Milo-Version überdeckte auf schmalen Handy-Bildschirmen Karten und Footer → mehrere Layout-Runden bis zur kompakten, einklappbaren Lösung",
+  },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 8,
+    date: "11.08.2026",
+    title: "Zweite Datenquelle & Email-Nachrecherche",
+    description:
+      "Offizielles KVWL-Arztregister als zweite Datenquelle eingebunden und mit den bestehenden Profilen dedupliziert — ohne gemeinsamen Schlüssel zwischen beiden Quellen, also über normalisierten Namen- und Adressabgleich. Fehlende E-Mail-Adressen gezielt nachrecherchiert, dabei automatisierte Suchtreffer stichprobenartig geprüft.",
+    problemSolved:
+      "Automatisierte Email-Suche lieferte vereinzelt falsche Treffer (z. B. große fremde Plattformen statt der echten Praxis-Adresse) → Domain-Filter und Dateiendungs-Prüfung ergänzt, bevor der nächste Batch lief",
+  },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 9,
+    date: "13.08.2026",
+    title: "Datenbank-Rebuild: kniffliger Dedup-Bug vor Go-Live gefunden",
+    description:
+      "Bestehende und neue Profile zu einem finalen Datensatz zusammengeführt — Nutzer-IDs bewusst stabil gehalten, weil der Fortschritt (kontaktiert/nicht kontaktiert) lokal im Browser der Nutzer:innen gespeichert wird. Beim Abgleich aufgefallen: zwei unterschiedliche Praxen im selben Gebäude hatten durch eine Kartendienst-Eigenheit dieselbe interne Kennung und wären beim Zusammenführen kollabiert.",
+    problemSolved:
+      "Zwei verschiedene Praxen teilten sich eine aus Koordinaten abgeleitete interne Kennung → Merge-Logik auf einen eindeutigen Verbund-Schlüssel umgestellt, Datenintegrität vor dem Deployment verifiziert statt danach einen stillen Datenfehler live zu haben",
+  },
+
   // ── BewerbungsPilot ──────────────────────────────────────────────────────
   {
     project: "BewerbungsPilot",
