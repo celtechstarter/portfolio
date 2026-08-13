@@ -78,7 +78,7 @@ export function Hero() {
               <span className="text-[13px] font-medium text-emerald-400">Verfügbar für neue Herausforderungen</span>
             </div>
             <div className="flex flex-wrap justify-center gap-2">
-              {['Webentwicklung', 'KI-Automatisierung', 'Rapid Prototyping', 'Junior DevOps', 'Cloud Basics', 'IT-Support', 'Prompt Engineering'].map((tag) => (
+              {['Webentwicklung', 'KI-Automatisierung', 'Agentic Engineering', 'Rapid Prototyping', 'Barrierefreiheit (WCAG)', 'GEO & SEO', 'Cloud & DevOps Basics', 'IT-Support'].map((tag) => (
                 <span
                   key={tag}
                   className="rounded-md border border-border/30 bg-black/20 px-2 py-1 font-mono text-xs text-muted-foreground transition-all duration-300 hover:border-primary/50 hover:bg-primary/5 hover:text-primary"
