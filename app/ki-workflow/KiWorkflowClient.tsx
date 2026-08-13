@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react"
 import { motion, useInView } from "framer-motion"
-import { Bot, Wand2, Code2, Rocket, Brain, Search, Server, Flame, Zap, Paintbrush, Speaker, Terminal } from "lucide-react"
+import { Bot, Wand2, Code2, Rocket, Brain, Search, Server, Flame, Terminal, ShieldCheck, Database } from "lucide-react"
 
 // ─── Spotlight Card ─────────────────────────────────────────────────────────
 function SpotlightCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
@@ -41,96 +41,96 @@ const pipeline = [
   {
     step: "01",
     title: "Strategie",
-    desc: "Analyse & Architektur-Planung",
+    desc: "Anforderungen klären, Architektur planen",
     tool: "Claude / Gemini",
     icon: <Brain size={20} className="text-orange-400" />,
   },
   {
     step: "02",
     title: "Prototyping",
-    desc: "Blitzschnelle UI-Generierung",
-    tool: "v0.app",
+    desc: "UI schnell zum Anfassen bringen",
+    tool: "v0.dev",
     icon: <Wand2 size={20} className="text-orange-400" />,
   },
   {
     step: "03",
     title: "Engineering",
-    desc: "Agentic Coding in der IDE",
-    tool: "Antigravity / Claude Code",
+    desc: "Agentic Coding, direkt im Code",
+    tool: "Claude Code / Cowork",
     icon: <Code2 size={20} className="text-orange-400" />,
   },
   {
     step: "04",
-    title: "Multimodal Assets",
-    desc: "Visuals & Branding",
-    tool: "Grok / Firefly",
-    icon: <Zap size={20} className="text-orange-400" />,
+    title: "Backend & KI-Integration",
+    desc: "Datenpipelines, KI-Features im Produkt",
+    tool: "Python / Anthropic API",
+    icon: <Bot size={20} className="text-orange-400" />,
   },
   {
     step: "05",
-    title: "Infrastructure",
-    desc: "Deployment & Monitoring",
-    tool: "Hostinger / Vercel",
+    title: "Deployment",
+    desc: "Live stellen, absichern, testen",
+    tool: "Vercel / Supabase",
     icon: <Rocket size={20} className="text-orange-400" />,
   },
 ]
 
 const arsenal = [
   {
-    eyebrow: "Coding-Duelle · Werkzeug-Check",
-    title: "Antigravity vs. VS Code",
+    eyebrow: "Agentic Coding · Täglich im Einsatz",
+    title: "Claude Code & Cowork",
     description:
-      "Ich nutze beide Welten. Nahtlose Google-Integration mit nahezu null API-Kosten vs. klassischer Stack mit maximaler Präzision durch Claude Code.",
-    tags: ["Antigravity", "VS Code", "Claude Code"],
+      "Mein Hauptwerkzeug für echte Projekte, nicht nur Demos: Claude Code für tiefe Codebase-Arbeit im Terminal, Cowork für Datei- und Rechercheaufgaben nebenher. Von der ersten Zeile bis zum fertigen Commit.",
+    tags: ["Claude Code", "Cowork", "VS Code"],
     icon: <Terminal size={26} />,
   },
   {
-    eyebrow: "Visual Engine · Multimodal",
-    title: "Multimodales Battle-Testing",
+    eyebrow: "Backend · Automatisierung",
+    title: "Python-Pipelines & Web-Scraping",
     description:
-      "Ich nutze Grok (Flux.1), Nano Banana und Google Stitch parallel. Ich nehme das Modell, das am Ende das beste Ergebnis liefert.",
-    tags: ["Grok / Flux.1", "Nano Banana", "Google Stitch"],
-    icon: <Paintbrush size={26} />,
-  },
-  {
-    eyebrow: "Vision & Audio",
-    title: "Llama/Kimi Vision & Suno",
-    description:
-      "Das Rückgrat meines Poke-Scanners und High-End Voiceovers. Damit meine Projekte sehen, hören und sprechen können.",
-    tags: ["Llama Vision", "Kimi", "Suno / ElevenLabs"],
-    icon: <Speaker size={26} />,
-  },
-  {
-    eyebrow: "The Lab · Tech Deep Dive",
-    title: "Hostinger VPS & OpenClaw",
-    description:
-      "Selbstgehostete Agenten via Telegram-Bot. Beweis, dass ich Linux, SSH und Server-Strukturen verstehe — nicht nur bunte Oberflächen.",
-    tags: ["Linux", "SSH", "Telegram Bot"],
+      "Playwright für automatisiertes Auslesen echter Webseiten, robuste Fehlerbehandlung für lange, unbeaufsichtigte Läufe, eigene Testsuite mit pytest. Kein Frontend-Bling, sondern Daten, die am Ende stimmen.",
+    tags: ["Python", "Playwright", "pytest"],
     icon: <Server size={26} />,
   },
   {
-    eyebrow: "Research · Wissen",
-    title: "Perplexity",
+    eyebrow: "KI-Integration · Anthropic API",
+    title: "KI direkt im Produkt",
     description:
-      "Mein Google-Killer für tiefgehende Recherche ohne SEO-Spam. Präzise, quellenbasierte Antworten für bessere Architektur-Entscheidungen.",
-    tags: ["AI Search", "Research", "No-Fluff"],
-    icon: <Search size={26} />,
+      "Nicht nur KI zum Bauen nutzen, sondern KI ins fertige Produkt einbauen: automatische Profil-Bewertung im Backend, ein eigener Chat-Assistent im Frontend — abgesichert gegen Prompt-Injection und mit Rate-Limiting.",
+    tags: ["Anthropic API", "Prompt Engineering", "Rate-Limiting"],
+    icon: <Bot size={26} />,
+  },
+  {
+    eyebrow: "Backend-as-a-Service",
+    title: "Supabase & Auth",
+    description:
+      "Login-Systeme mit Magic Link und OAuth, Datenbank, serverseitig geprüfte Tokens statt Klartext-Passwortvergleich. Kein selbstgebautes Auth-Rad — sondern der Teil, den man nicht falsch machen darf.",
+    tags: ["Supabase", "Auth", "PostgreSQL"],
+    icon: <Database size={26} />,
+  },
+  {
+    eyebrow: "Security-Mindset",
+    title: "Sicherheit ist kein Nachgedanke",
+    description:
+      "Vor größeren Änderungen: Wer könnte das missbrauchen, reicht die Eingabevalidierung? Eigene Security-Audits, Cloudflare Turnstile gegen Bots, CSP-Header, Rate-Limits — nicht weil ein Kunde es verlangt, sondern weil es dazugehört.",
+    tags: ["Security-Audits", "Cloudflare Turnstile", "CSP"],
+    icon: <ShieldCheck size={26} />,
   },
   {
     eyebrow: "UI · Beschleunigung",
-    title: "v0.app",
+    title: "v0.dev fürs Frontend",
     description:
-      "Der Gamechanger für das Frontend. KI-generierte UI-Komponenten, die ich direkt in Next.js integriere — kein Figma-Klick-Overhead.",
-    tags: ["Generative UI", "Next.js", "Tailwind CSS"],
+      "Der Gamechanger fürs Frontend-Tempo: KI-generierte UI-Komponenten, die ich direkt in Next.js integriere und weiterbaue — kein Figma-Klick-Overhead.",
+    tags: ["v0.dev", "Next.js", "Tailwind CSS"],
     icon: <Wand2 size={26} />,
   },
   {
-    eyebrow: "Strategie · LLMs",
-    title: "Claude & Gemini",
+    eyebrow: "Sichtbarkeit · SEO & GEO",
+    title: "SEO wird GEO",
     description:
-      "Meine Mentoren für Architektur-Entscheidungen. Ich pitche Ideen gegen beide Modelle und nehme die stärkste Antwort — egal welches Label draufsteht.",
-    tags: ["Claude", "Gemini", "Prompting"],
-    icon: <Brain size={26} />,
+      "Klassisches SEO reicht nicht mehr. Ich baue Seiten auch dafür, dass KI-Suchen wie ChatGPT oder Perplexity sie verstehen und zitieren — llms.txt, sauberes JSON-LD, gezielt freigegebene KI-Crawler statt pauschal alles zu sperren.",
+    tags: ["SEO", "GEO", "JSON-LD"],
+    icon: <Search size={26} />,
   },
 ]
 
@@ -172,7 +172,7 @@ export default function KiWorkflowClient() {
             <div className="mt-8 inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur-md">
               <Flame size={18} className="text-orange-400 shrink-0" />
               <p className="text-sm text-muted-foreground">
-                Kein Marketing-Bullshit. Nur Tools, die ich wirklich täglich nutze.
+                Kein Fanboy-Ranking. Ich nehme das Tool, das für die jeweilige Aufgabe passt — Label ist mir egal.
               </p>
             </div>
           </motion.div>
