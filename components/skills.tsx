@@ -71,7 +71,7 @@ const skillCategories: SkillCategory[] = [
   {
     title: "Meine Werkzeuge",
     icon: <Monitor size={24} />,
-    skills: ["Antigravity (KI-IDE)", "Claude Code (CLI)", "VS Code", "v0.app (AI UI/UX)", "Canva", "Vercel (Deployment)"],
+    skills: ["Claude Code (CLI)", "Cowork", "VS Code", "v0.app (AI UI/UX)", "Canva", "Vercel (Deployment)"],
   },
 ]
 

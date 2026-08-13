@@ -266,7 +266,7 @@ function AboutToggle() {
         </p>
 
         <p>
-          Ich setze meine Projekte auf verschiedenen Wegen um. Lokal mit VSCode und Claude Code, für Server-Sachen kenne ich mich mit Linux, SSH und Docker aus. Deployed wird über Vercel, Code liegt auf GitHub. Ich probiere ständig neue Tools aus und lerne dabei. Nicht weil ich muss, sondern weil ich Bock drauf habe.
+          Ich setze meine Projekte auf verschiedenen Wegen um. Lokal mit VSCode und Claude Code, für Server-Sachen kenne ich mich mit Linux und SSH aus. Docker hab ich mir in meiner Weiterbildung als Grundlage angeeignet und zuhause selbst genutzt, um mir n8n zu hosten und auszuprobieren. Deployed wird über Vercel, Code liegt auf GitHub. Ich probiere ständig neue Tools aus und lerne dabei. Nicht weil ich muss, sondern weil ich Bock drauf habe.
         </p>
       </div>
     </details>

@@ -23,6 +23,7 @@ const PROJECT_COLORS: Record<string, string> = {
   "Poke-Scan V2":    "207, 147, 54",
   "Portfolio":       "96, 165, 250",
   "CelDesk":         "167, 139, 250",
+  "SEO/GEO-Scanner": "244, 63, 94",
 }
 
 const entries: DevlogEntry[] = [
@@ -116,6 +117,18 @@ const entries: DevlogEntry[] = [
       "Bestehende und neue Profile zu einem finalen Datensatz zusammengeführt — Nutzer-IDs bewusst stabil gehalten, weil der Fortschritt (kontaktiert/nicht kontaktiert) lokal im Browser der Nutzer:innen gespeichert wird. Beim Abgleich aufgefallen: zwei unterschiedliche Praxen im selben Gebäude hatten durch eine Kartendienst-Eigenheit dieselbe interne Kennung und wären beim Zusammenführen kollabiert.",
     problemSolved:
       "Zwei verschiedene Praxen teilten sich eine aus Koordinaten abgeleitete interne Kennung → Merge-Logik auf einen eindeutigen Verbund-Schlüssel umgestellt, Datenintegrität vor dem Deployment verifiziert statt danach einen stillen Datenfehler live zu haben",
+  },
+
+  // ── SEO/GEO-Scanner ──────────────────────────────────────────────────────
+  {
+    project: "SEO/GEO-Scanner",
+    color: PROJECT_COLORS["SEO/GEO-Scanner"],
+    day: 1,
+    title: "Website-Audit-Tool aus Neugier gebaut — und wieder eingestampft",
+    description:
+      "Python-Script gebaut, das automatisiert lokale Dortmunder Unternehmens-Websites auf SSL, Impressum, DSGVO-Risiken (externe Fonts/Embeds), Mobil-Optimierung, Barrierefreiheit und veraltetes Design prüft und daraus einen Lead-Score errechnet. Auf eine echte Liste von 61 Firmen losgelassen, technisch lief es sauber durch. Die Idee dahinter — die Ergebnisse für Kaltakquise zu nutzen — danach bewusst verworfen: ungefragt Firmen anzuschreiben ist nicht meins.",
+    problemSolved:
+      "Ohne Login oder APIs objektiv vergleichbare Kriterien gebraucht, um Websites zu bewerten → eigene Heuristik aus SSL-Status, Meta-Viewport, img-alt-Tags, Copyright-Jahr und CMS-Fingerabdruck kombiniert zu einem einzigen Score statt Bauchgefühl",
   },
 
   // ── BewerbungsPilot ──────────────────────────────────────────────────────

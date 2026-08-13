@@ -13,7 +13,7 @@ const faqs = [
   {
     question: "Welche Art von Projekten machst du am liebsten?",
     answer:
-      "Projekte mit KI-Integration: Vision-APIs wie bei Poke-Scan V2, eigene Chatbots wie MARCEL.AI, Automatisierung. Und alles, wo ich schnell von der Idee zum Live-Deployment komme. Für SEO/GEO-Analysen habe ich mir ein eigenes Scanning-Tool gebaut, mit dem ich Websites auf ihre Sichtbarkeit untersuche.",
+      "Projekte mit KI-Integration: Vision-APIs wie bei Poke-Scan V2, eigene Chatbots wie MARCEL.AI, Automatisierung. Und alles, wo ich schnell von der Idee zum Live-Deployment komme. Für SEO/GEO-Analysen hab ich mir aus Neugier mal ein eigenes Scanning-Tool gebaut, das Websites automatisiert auf technische und rechtliche Schwachstellen prüft (SSL, Impressum, Barrierefreiheit, DSGVO). Die Idee, damit Kaltakquise zu machen, hab ich schnell wieder verworfen — Leute ungefragt anzuschreiben ist einfach nicht meins.",
   },
   {
     question: "Nimmst du Kundenaufträge an?",
