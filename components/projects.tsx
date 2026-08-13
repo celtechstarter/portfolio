@@ -24,6 +24,18 @@ interface Project {
 
 const aiProjects: Project[] = [
   {
+    title: "Therapieplatz Finder",
+    description:
+      "Findet automatisiert einen ambulanten Therapieplatz in Dortmund: eigene Scraping-Pipeline sammelt hunderte Praxen, eine KI prüft Kassenzulassung, Schwerpunkt und freie Plätze. Personalisierte Anfrage-Mails gehen automatisch raus, eine Mappe sammelt Nachweise für die Krankenkasse — begleitet von Milo, einem eigenen KI-Assistenten. Login-geschützt, barrierefrei nach WCAG 2.1 AA und DSGVO-konform gebaut.",
+    tags: ["Python", "Playwright", "Anthropic API", "Supabase", "Resend", "Cloudflare Turnstile", "SEO/GEO", "Vercel"],
+    icon: <HeartPulse size={24} />,
+    image: "/projects/therapieplatzfinder.png",
+    video: "/projects/therapieplatzfinder.webm",
+    liveUrl: "https://therapieplatz-finder.de",
+    githubPrivate: true,
+    status: "aktiv",
+  },
+  {
     title: "Poke-Scan V2",
     description:
       "Pokémon-Karten per Foto scannen und Marktwert ermitteln. KI-Vision API ersetzt klassisches OCR — die KI sieht die Karte wie ein Mensch, nicht nur den Text.",
@@ -75,18 +87,6 @@ const aiProjects: Project[] = [
     liveUrl: "https://marcel-cv-boost.lovable.app",
     githubUrl: "https://github.com/celtechstarter/marcel-cv-boost",
     status: "fertig",
-  },
-  {
-    title: "Therapieplatz Finder",
-    description:
-      "Web-App, die bei der Suche nach einem ambulanten Psychotherapieplatz hilft. Eigene Python-Pipeline scrapt und analysiert hunderte Praxen automatisch per KI, personalisierte Anfragen gehen direkt raus. Begleitet wird man dabei von Milo, einem eigenen KI-Assistenten.",
-    tags: ["Python", "Anthropic API", "Supabase", "Vercel"],
-    icon: <HeartPulse size={24} />,
-    image: "/projects/therapieplatzfinder.png",
-    video: "/projects/therapieplatzfinder.webm",
-    liveUrl: "https://therapieplatz-finder.de",
-    githubPrivate: true,
-    status: "aktiv",
   },
 ]
 
