@@ -26,8 +26,8 @@ const aiProjects: Project[] = [
   {
     title: "Therapieplatz Finder",
     description:
-      "Findet automatisiert einen ambulanten Therapieplatz in Dortmund: eigene Scraping-Pipeline sammelt hunderte Praxen, eine KI prüft Kassenzulassung, Schwerpunkt und freie Plätze. Personalisierte Anfrage-Mails gehen automatisch raus, eine Mappe sammelt Nachweise für die Krankenkasse — begleitet von Milo, einem eigenen KI-Assistenten. Login-geschützt, barrierefrei nach WCAG 2.1 AA und DSGVO-konform gebaut.",
-    tags: ["Python", "Playwright", "Anthropic API", "Supabase", "Resend", "Cloudflare Turnstile", "SEO/GEO", "Vercel"],
+      "Findet automatisiert einen ambulanten Therapieplatz in Dortmund: eigene Scraping-Pipeline sammelt hunderte Praxen aus mehreren Quellen, eine KI prüft Kassenzulassung, Schwerpunkt und freie Plätze. Personalisierte Anfrage-Mails gehen automatisch raus, eine Mappe sammelt Nachweise für die Krankenkasse — begleitet von Milo, einem eigenen KI-Assistenten. Login-geschützt, barrierefrei nach WCAG 2.1 AA und DSGVO-konform gebaut, mit CI-Pipeline, scharfer Content-Security-Policy und Sentry-Fehlermonitoring produktionsreif abgesichert.",
+    tags: ["Python", "Playwright", "Anthropic API", "Supabase", "Resend", "Cloudflare Turnstile", "Sentry", "GitHub Actions CI", "SEO/GEO", "Vercel"],
     icon: <HeartPulse size={24} />,
     image: "/projects/therapieplatzfinder.png",
     video: "/projects/therapieplatzfinder.webm",

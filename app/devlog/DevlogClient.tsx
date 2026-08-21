@@ -118,6 +118,59 @@ const entries: DevlogEntry[] = [
     problemSolved:
       "Zwei verschiedene Praxen teilten sich eine aus Koordinaten abgeleitete interne Kennung → Merge-Logik auf einen eindeutigen Verbund-Schlüssel umgestellt, Datenintegrität vor dem Deployment verifiziert statt danach einen stillen Datenfehler live zu haben",
   },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 10,
+    date: "19.08.2026",
+    title: "Kompletter Sicherheits- und DSGVO-Audit",
+    description:
+      "Sechsteiligen Audit über das ganze Projekt laufen lassen: Backend-Python (Scraper/Analyzer/Mailer), Webapp-API/Supabase, Frontend-Code, DSGVO-Compliance, Barrierefreiheit/Responsive und SEO/Repo-Hygiene — dazu die Supabase-Sicherheitswarnungen direkt in der Datenbank geprüft. Alle kritischen und hohen Befunde noch am selben Tag gefixt, Ergebnis in einem priorisierten Bericht dokumentiert.",
+    problemSolved:
+      "Die Datenschutzerklärung behauptete ein Löschversprechen (Milo-IP-Hash nach 24h), für das es technisch noch gar keinen Löschmechanismus gab → Selbst-Cleanup bei jedem Funktionsaufruf ergänzt, damit die Aussage wieder stimmt",
+  },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 11,
+    date: "19.–20.08.2026",
+    title: "Vierte Datenquelle live, drei weitere Scraper gebaut",
+    description:
+      "Nach ppndo.de als vierter Datenquelle (664 Praxen final) zwölf weitere mögliche Quellen-Websites auf Ergiebigkeit geprüft. Für drei geeignete (ptk-nrw.de, dptv.de, psychotherapiesuche.de) neue Scraper gebaut, jeweils erst die Nutzungsbedingungen geprüft, bevor programmiert wurde. Der finale Merge dieser drei Quellen in die Live-Daten läuft noch.",
+  },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 12,
+    date: "20.08.2026",
+    title: "Echte Lücke gefunden: 116117 braucht zwei Anrufe",
+    description:
+      "Eine kursierende TikTok/Insta-Anleitung zum Kostenerstattungsverfahren gegen die eigene App gegengecheckt. Fast alles war schon abgedeckt, bis auf eine echte Lücke: Die 116117 muss zweimal kontaktiert werden — einmal für den Ersttermin, dann noch einmal explizit, um aktiv um eine Vermittlung zu bitten. Erst der zweite Anruf löst die Wartezeit aus, nach der die 116117 schriftlich bestätigt, niemanden vermitteln zu können — ein starker Nachweis für die Krankenkasse.",
+    problemSolved:
+      "Die App kannte nur einen Tracker für den Ersttermin, keinen für den zweiten Vermittlungs-Anruf und keine Ablage für dessen Nachweis → eigenen Tracking-Schritt plus Datei-Upload ergänzt, taucht jetzt automatisch im Antragstext auf. Dazu einen neuen 'Anleitung'-Tab gebaut, der den kompletten Ablauf in 6 Schritten in einfacher Sprache erklärt",
+  },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 13,
+    date: "21.08.2026",
+    title: "Absicherung fürs Portfolio: CSP, CI-Pipeline & Fehlermonitoring",
+    description:
+      "Das Projekt ist nicht nur Hobby, sondern auch Bewerbungs-Portfolio — also robuster gegen einen plötzlichen Nutzeransturm gemacht. Content-Security-Policy von reinem Beobachtungsmodus auf echtes Blockieren umgestellt, eine GitHub-Actions-Pipeline eingerichtet, die bei jeder Änderung automatisch die komplette Testsuite laufen lässt, und Sentry für Live-Fehlermeldungen angebunden (self-gehostet, EU-Region, keine Freitext-Nutzerdaten).",
+    problemSolved:
+      "Die eigenen Testläufe schickten unbemerkt echte Events an das Live-Sentry-Projekt — 16 Fehlalarme, bevor mir das aufgefallen ist. Ursache gefunden (Tests wurden nie gemockt), Testumgebung sauber vom echten Versand getrennt und einen Regressionstest dafür ergänzt",
+  },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 14,
+    date: "21.08.2026",
+    title: "Große App-Datei aufgeteilt & Reichweite ausgebaut",
+    description:
+      "Die gewachsene, gut 3000 Zeilen lange app.js in sechs klar benannte Dateien aufgeteilt (Zustand, Hilfsfunktionen, UI-Bausteine, Ansichten, Aktionen, Rendering) — ohne Build-Schritt, nur klassische aufeinanderfolgende Script-Tags im Browser. Parallel die Reichweite ausgebaut: Ko-fi-Link und Instagram-Badge in den Footer aller Seiten integriert, ein Flyer zur Gesetzesänderung 2027 sowie erste Kurzvideos für TikTok und Instagram erstellt.",
+    problemSolved:
+      "Node-Testumgebung und Browser laden mehrere Script-Dateien unterschiedlich — ein erster Lösungsversuch erzeugte unsichtbar 'fremde' Objekte, die in Tests wie unterschiedliche Werte aussahen, obwohl sie inhaltlich identisch waren. Mit einer anderen Lade-Technik im selben Gültigkeitsbereich wie der Testcode gelöst, alle 250+ Tests wieder grün",
+  },
 
   // ── SEO/GEO-Scanner ──────────────────────────────────────────────────────
   {
