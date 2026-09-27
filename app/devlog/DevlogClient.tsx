@@ -246,6 +246,17 @@ const entries: DevlogEntry[] = [
     problemSolved:
       "Die Barrierefreiheits-Prüfung meldete Kontrastfehler, deren Messwerte zwischen den Läufen schwankten. Ursache: gemessen wurde mitten in einer Einblend-Animation, als die Karten noch halb durchsichtig waren → Test läuft jetzt mit reduzierten Animationen. Der einzige echte Fehler (Ko-fi-Abzeichen, Kontrast 3:1) ist behoben",
   },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 22,
+    date: "27.09.2026",
+    title: "Die Idee selbst hinterfragen lassen",
+    description:
+      "Nicht den Code, sondern die ganze Idee prüfen lassen: ähnliche Angebote, der Ablauf aus Sicht von Menschen in einer Krise, Design und Vermarktung. Ergebnis: Es gibt bereits vergleichbare Werkzeuge, und einige Stellen in der App machten mehr Druck als nötig. Daraufhin in vier parallelen Cloud-Sitzungen umgebaut: Praxen ansehen geht jetzt ohne Fragebogen und ohne Namen, der Name wird erst vor der ersten Anfrage abgefragt. Die Ergebnisliste ist ruhiger, jede Karte zeigt ehrlich, wie man die Praxis erreicht. Die Mappe trennt Warteliste, Erstgespräch und Therapieplatz und hat einen eigenen Schritt, um vorab mit einer Privatpraxis und der Kasse die Kosten zu klären. Krisenhilfe und Datenhinweise sind klarer beschrieben.",
+    problemSolved:
+      "Der Antragstext an die Krankenkasse behauptete „zahlreiche dokumentierte Kontaktversuche“, auch wenn noch kein einziger eingetragen war, und eine Erinnerungs-Mail meldete „genug Absagen gesammelt“ nach einer selbst ausgedachten Sollzahl → Antrag nennt jetzt nur echte Zahlen (Absagen, Warteliste, unbeantwortet und nicht erreicht getrennt), ohne Kontakte gibt es gar keinen Antragstext, und die Sollzahl samt Erinnerung ist komplett entfernt",
+  },
 
   // ── SEO/GEO-Scanner ──────────────────────────────────────────────────────
   {
