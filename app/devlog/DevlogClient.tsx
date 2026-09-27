@@ -171,6 +171,81 @@ const entries: DevlogEntry[] = [
     problemSolved:
       "Node-Testumgebung und Browser laden mehrere Script-Dateien unterschiedlich — ein erster Lösungsversuch erzeugte unsichtbar 'fremde' Objekte, die in Tests wie unterschiedliche Werte aussahen, obwohl sie inhaltlich identisch waren. Mit einer anderen Lade-Technik im selben Gültigkeitsbereich wie der Testcode gelöst, alle 250+ Tests wieder grün",
   },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 15,
+    date: "26.08.2026",
+    title: "Mehr Praxen, mehr Themen, bessere Anfrage",
+    description:
+      "Suchgebiet um Unna und Bönen erweitert und eine weitere Datenquelle angebunden. Nach der Dublettenbereinigung stehen 986 Einträge in der Datenbank. Der Fragebogen kennt jetzt deutlich mehr Krankheitsbilder, unter anderem ADHS, Sucht und Trauma, und zeigt auf den Karten alle Schwerpunkte einer Praxis. Die Anfrage-Mail fragt jetzt konkret nach der ungefähren Wartezeit statt allgemein nach freien Kapazitäten: Ein Hinweis aus der Praxis war, dass Krankenkassen ein bloßes „nicht erreicht“ nicht als Nachweis akzeptieren.",
+    problemSolved:
+      "Website-Links aus einer Datenquelle kamen ohne „https://“ an und führten deshalb auf eine nicht existierende Unterseite der eigenen App (404) → Links beim Einlesen normalisiert und einen Test für genau diesen Fall ergänzt",
+  },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 16,
+    date: "27.08.2026",
+    title: "Neues Gesicht für die Startseite",
+    description:
+      "Den oberen Bereich der Startseite nach einem vorher entworfenen Mockup neu gebaut und das Logo auf eine ruhigere Zwei-Kreise-Variante mit neuer Farbwelt umgestellt, auf allen Seiten einheitlich. In der Anfrage-Mail lassen sich die Stichworte zur Wartezeit jetzt direkt im Text anklicken, statt über zusätzliche Knöpfe und Kästen.",
+  },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 17,
+    date: "31.08.–03.09.2026",
+    title: "Umkreis-Filter und eigene Icons für jedes Thema",
+    description:
+      "Einen Kilometer-Schieberegler in die Ergebnisliste eingebaut, mit dem man festlegt, wie weit eine Praxis höchstens entfernt sein darf. Jedes Thema im Fragebogen und in der „Hilft bei“-Anzeige hat ein eigenes, schlichtes Icon bekommen, damit man die Liste schneller überfliegen kann.",
+    problemSolved:
+      "Milo, der KI-Helfer, hat Nutzer:innen einen Klickweg zum Eintragen einer Absage erklärt, den es so nicht gab → System-Prompt mit dem echten Ablauf der App abgeglichen und korrigiert",
+  },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 18,
+    date: "25.09.2026",
+    title: "Datenbank aufgeräumt",
+    description:
+      "Den Dubletten-Abgleich um einen Vergleich über Telefonnummer und E-Mail-Adresse erweitert. Dabei kamen 141 doppelte Einträge heraus, die unter leicht unterschiedlichen Namen aus verschiedenen Quellen stammten. Außerdem FAQ und Texte der Startseite so angepasst, dass sie nur noch die Städte nennen, die wirklich abgedeckt sind.",
+    problemSolved:
+      "Die Admin-Seite für gemeldete Praxis-Einträge war nicht erreichbar, weil im Code eine falsche Konto-Kennung hinterlegt war → korrigiert und die Meldungen nachträglich abgearbeitet",
+  },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 19,
+    date: "26.09.2026",
+    title: "Große Feature-Runde: Mehrfach-Anfragen, Erinnerungen, Widerspruch",
+    description:
+      "An einem Tag viele Wünsche umgesetzt: mehrere Praxen auf einmal anschreiben (jede bekommt einen eigenen, leicht unterschiedlichen Text), Themenfilter in der Liste, Feedback, Gästebuch und Kontaktformular. Dazu eine freiwillige Sicherung der Mappe im Konto, damit sie auf jedem Gerät da ist, und freiwillige Erinnerungs-Mails per Cronjob mit Abmelde-Link ohne Login. „Meine Mappe“ führt jetzt bis zum Ende: PTV 11 hochladen, auf die Antwort der Kasse warten und bei einer Ablehnung einen fertigen Widerspruchstext kopieren. Das Anschreiben passt sich außerdem an die Schwerpunkte der jeweiligen Praxis an.",
+    problemSolved:
+      "Mit dem Mehrfach-Versand war das Tageslimit von 6 Anfragen (Schutz vor Missbrauch) sofort aufgebraucht. Statt eines Bezahlmodells gibt es jetzt einen klaren Hinweis und eine Freischaltung über das Kontaktformular, die ich im Admin-Bereich mit einem Klick bestätige",
+  },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 20,
+    date: "26.09.2026",
+    title: "Externer Code-Review: 40 Befunde einzeln geprüft",
+    description:
+      "Das ganze Projekt von einem zweiten KI-Modell (ChatGPT) prüfen lassen, mit einer vorher geschriebenen Anleitung zu Zweck, Zielgruppe und Regeln. Jeden der 40 Befunde selbst im Code nachgeprüft, 35 stimmten. Die wichtigsten noch am selben Tag behoben: Milo schickt Texte mit Krisenbegriffen nie an den Server, die Widerspruchsfrist wird am Monatsende richtig berechnet (31. Januar plus ein Monat ist der 28. Februar, nicht der 3. März), die Fehlerüberwachung filtert Login-Tokens und E-Mail-Adressen heraus. Im Backend prüft der Filter die Approbation jetzt dreistufig, und beim Besuch von Praxis-Websites blockiert ein SSRF-Schutz Anfragen an interne Adressen.",
+    problemSolved:
+      "Eingeloggte Nutzer:innen konnten ihre eigenen Versand-Einträge in der Datenbank löschen und so das Tageslimit umgehen → Schreibrechte entzogen, ein fehlgeschlagener Versand wird nur noch serverseitig über eine abgesicherte Datenbankfunktion zurückgenommen. Nebenbei aufgefallen: interne Planungsdateien waren öffentlich abrufbar und sind jetzt vom Deployment ausgeschlossen",
+  },
+  {
+    project: "Therapieplatz Finder",
+    color: PROJECT_COLORS["Therapieplatz Finder"],
+    day: 21,
+    date: "26.–27.09.2026",
+    title: "Vier KI-Helfer parallel: Cloud-Sitzungen als kleines Team",
+    description:
+      "Mit geschenktem Guthaben für Claude Code in der Cloud die Arbeit aufgeteilt: sechs Cloud-Sitzungen mit klar abgegrenzten Aufgaben liefen parallel, ChatGPT lieferte eine Zweitmeinung, Claude Cowork schrieb die Anleitungen, prüfte jedes Ergebnis und führte alles zusammen. Ergebnisse: technisches SEO, ehrlichere Texte, eine Sicherheitsrichtlinie komplett ohne Inline-Skripte (über 150 Klick-Stellen auf Ereignis-Delegation umgebaut), drei Ratgeberseiten mit Quellen zu PTV 11, Widerspruch und Sprechstunde sowie echte Browser-Tests mit Playwright und automatischer Barrierefreiheits-Prüfung, die bei jedem Push in GitHub Actions laufen.",
+    problemSolved:
+      "Die Barrierefreiheits-Prüfung meldete Kontrastfehler, deren Messwerte zwischen den Läufen schwankten. Ursache: gemessen wurde mitten in einer Einblend-Animation, als die Karten noch halb durchsichtig waren → Test läuft jetzt mit reduzierten Animationen. Der einzige echte Fehler (Ko-fi-Abzeichen, Kontrast 3:1) ist behoben",
+  },
 
   // ── SEO/GEO-Scanner ──────────────────────────────────────────────────────
   {
