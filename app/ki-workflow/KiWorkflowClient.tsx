@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   Bot,
   Wand2,
@@ -138,6 +139,19 @@ export default function KiWorkflowClient() {
           </li>
         ))}
       </ol>
+      <section className="my-16 rounded-xl border border-border bg-card p-5 sm:p-8" aria-labelledby="automation-example">
+        <p className="eyebrow">Arbeitsprobe / Automatisierung</p>
+        <h2 id="automation-example" className="mb-5 text-2xl sm:text-3xl">Ein n8n-Prototyp – vom Datenabruf zum E-Mail-Bericht</h2>
+        <p className="mb-6 leading-relaxed text-muted-foreground">Ich habe einen n8n-Workflow aufgebaut und ausgeführt: Ein zeitgesteuerter HTTP-Abruf lädt eine Zahlen-Momentaufnahme, JavaScript bereitet sie auf, ein KI-Modell erstellt einen Bericht und Gmail versendet ihn. Mein Beitrag: den Ablauf konzipieren, die KI-gestützte Umsetzung koordinieren und den Testlauf dokumentieren.</p>
+        <figure className="mb-6">
+          <Image src="/bewerbung/atz-group/n8n-workflow.png" alt="n8n-Testlauf mit fünf erfolgreich durchlaufenen Schritten: Schedule Trigger, HTTP Request, JavaScript, Anthropic-Modell und Gmail-Versand" width={1400} height={480} className="h-auto w-full rounded-lg" />
+          <figcaption className="mt-3 text-sm text-muted-foreground">Dokumentierter Testlauf: alle fünf Schritte erfolgreich ausgeführt.</figcaption>
+        </figure>
+        <div className="grid gap-6 sm:grid-cols-2">
+          <div><h3 className="mb-2 font-semibold">Was der Test zeigt</h3><p className="text-sm leading-relaxed text-muted-foreground">Aus einer Daten-Momentaufnahme wurde ein Statusbericht erzeugt und per E-Mail verschickt. Das zeigt einen erfolgreichen Ablauf, aber keinen dauerhaft laufenden Betrieb und keine verifizierte Aussage über aktuell verfügbare Therapieplätze.</p></div>
+          <div><h3 className="mb-2 font-semibold">Was noch geplant ist</h3><p className="text-sm leading-relaxed text-muted-foreground">Die Momentaufnahme wird bislang manuell aktualisiert. Als Ausbau plane ich einen monatlichen Abgleich neuer Praxiseinträge mit E-Mail- oder Slack-Benachrichtigung und manueller Prüfung vor der Aufnahme ins Verzeichnis.</p></div>
+        </div>
+      </section>
       <div className="workflow-cards">
         {arsenal.map((card) => (
           <article key={card.title}>

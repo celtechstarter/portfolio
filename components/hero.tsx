@@ -33,7 +33,7 @@ export function Hero() {
         <figure className="hero-portrait">
           <div className="portrait-frame">
             <Image
-              src="/marcel-welk-portrait.png"
+              src="/marcel-welk-portrait-transparent.png"
               alt="Marcel Welk"
               fill
               priority

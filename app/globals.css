@@ -368,8 +368,8 @@ div[id] {
   position: relative;
   aspect-ratio: 1/1.04;
   overflow: hidden;
-  border-radius: 8px 8px 80px 8px;
-  background: var(--secondary);
+  border-radius: 0;
+  background: transparent;
 }
 .portrait-frame img {
   object-position: center 35%;

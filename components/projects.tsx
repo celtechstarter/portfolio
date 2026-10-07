@@ -32,6 +32,7 @@ interface Project {
   video?: string;
   liveUrl?: string;
   githubUrl?: string;
+  githubLabel?: string;
   githubPrivate?: boolean;
   comingSoon?: boolean;
   wip?: boolean;
@@ -59,6 +60,8 @@ const aiProjects: Project[] = [
     image: "/projects/therapieplatzfinder.png",
     video: "/projects/therapieplatzfinder.webm",
     liveUrl: "https://therapieplatz-finder.de",
+    githubUrl: "https://github.com/celtechstarter/therapieplatz-finder-backend",
+    githubLabel: "Backend auf GitHub",
     githubPrivate: true,
     status: "erprobung",
   },
@@ -367,12 +370,12 @@ function ProjectCard({
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Github size={14} /> GitHub
+              <Github size={14} /> {project.githubLabel || "GitHub"}
             </a>
           )}
           {project.githubPrivate && (
             <span>
-              <Lock size={12} /> Privates Repository
+              <Lock size={12} /> {project.githubUrl ? "Webapp-Repository privat" : "Privates Repository"}
             </span>
           )}
           {project.wip && (

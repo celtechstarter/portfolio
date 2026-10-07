@@ -29,7 +29,7 @@ try {
       });
       assert.equal(
         response.status(),
-        route === "/nicht-vorhanden" ? 404 : 200,
+        ["/nicht-vorhanden", "/bewerbung/atz-group"].includes(route) ? 404 : 200,
         route,
       );
       await page.waitForTimeout(1800);
