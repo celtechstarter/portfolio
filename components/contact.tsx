@@ -1,90 +1,113 @@
-"use client"
-
-import { useRef, useState } from "react"
-import { Mail, Github, Linkedin, FileText } from "lucide-react"
-import { motion, useInView } from "framer-motion"
-
+"use client";
+import { useState } from "react";
+import { ArrowUpRight, Mail, Copy, Check } from "lucide-react";
 export function Contact() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-80px" })
-  const [email, setEmail] = useState<string | null>(null)
-  const [isCopied, setIsCopied] = useState(false)
-
-  const handleEmailClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-    if (!email) {
-      const res = await fetch('/api/contact')
-      const data = await res.json()
-      setEmail(data.email)
-    } else {
-      navigator.clipboard.writeText(email)
-      setIsCopied(true)
-      setTimeout(() => {
-        setIsCopied(false)
-      }, 2000)
+  const [email, setEmail] = useState<string | null>(null),
+    [status, setStatus] = useState(""),
+    [loading, setLoading] = useState(false);
+  async function reveal() {
+    setLoading(true);
+    setStatus("");
+    try {
+      const r = await fetch("/api/contact");
+      if (!r.ok) throw new Error();
+      const d = await r.json();
+      if (typeof d.email !== "string") throw new Error();
+      setEmail(d.email);
+    } catch {
+      setStatus(
+        "Die Adresse konnte nicht geladen werden. Bitte versuche es erneut oder nutze LinkedIn.",
+      );
+    } finally {
+      setLoading(false);
     }
   }
-
+  async function copy() {
+    if (!email) return;
+    try {
+      await navigator.clipboard.writeText(email);
+      setStatus("E-Mail-Adresse kopiert.");
+    } catch {
+      setStatus("Bitte markiere und kopiere die angezeigte Adresse.");
+    }
+  }
   return (
-    <section id="kontakt" className="px-6 py-24 md:py-32">
-      <div className="mx-auto max-w-4xl">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
-          className="rounded-2xl border border-border bg-card/50 p-8 text-center lg:p-12 relative overflow-hidden"
-        >
-          <p className="mb-3 font-mono text-xs tracking-widest text-primary uppercase relative z-10">Kontakt</p>
-          <h2 className="mb-3 text-2xl font-bold text-foreground relative z-10">Gemeinsam nützliche Anwendungen entwickeln</h2>
-          <p className="mb-8 text-muted-foreground relative z-10">
-            Ich suche eine Festanstellung in KI-gestützter Produktentwicklung oder Automatisierung — bevorzugt remote. Mein Schwerpunkt: Anforderungen, KI-Workflows und Ergebnisprüfung. Ich freue mich über den Austausch per E-Mail oder LinkedIn.
+    <section id="kontakt" className="contact-section">
+      <div className="shell contact-grid">
+        <div>
+          <p className="eyebrow">
+            <span>08</span> Kontakt
           </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-3 relative z-10">
+          <h2>
+            Gute Ideen brauchen
+            <br />
+            jemanden, der sie
+            <br />
+            <em>weiterbringt.</em>
+          </h2>
+        </div>
+        <div className="contact-copy">
+          <span className="availability">
+            <i /> Offen für eine Festanstellung
+          </span>
+          <h3>Lernen wir uns kennen.</h3>
+          <p>
+            Ich suche eine Festanstellung in KI-gestützter Produktentwicklung
+            oder Automatisierung — bevorzugt remote. Mein Schwerpunkt:
+            Anforderungen, KI-Workflows und Ergebnisprüfung.
+          </p>
+          <div className="button-row">
+            {email ? (
+              <>
+                <a className="button button-primary" href={"mailto:" + email}>
+                  <Mail size={17} /> E-Mail schreiben
+                </a>
+                <button
+                  className="button button-secondary"
+                  onClick={copy}
+                  aria-label="E-Mail-Adresse kopieren"
+                >
+                  {status === "E-Mail-Adresse kopiert." ? (
+                    <Check size={17} />
+                  ) : (
+                    <Copy size={17} />
+                  )}
+                </button>
+              </>
+            ) : (
+              <button
+                className="button button-primary"
+                onClick={reveal}
+                disabled={loading}
+              >
+                <Mail size={17} />
+                {loading ? "Wird geladen …" : "E-Mail anzeigen"}
+              </button>
+            )}
+          </div>
+          {email && <p className="revealed-email">{email}</p>}
+          <p role="status" className="contact-status">
+            {status}
+          </p>
+          <div className="contact-links">
             <a
-              href={email ? `mailto:${email}` : "#"}
-              onClick={handleEmailClick}
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 cursor-pointer"
-            >
-              <Mail size={16} />
-              {email ? (isCopied ? "Kopiert! ✓" : email) : "E-Mail anzeigen"}
-            </a>
-            <a
-              href="https://github.com/celtechstarter"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground transition-all hover:border-primary/50 hover:text-primary"
-            >
-              <Github size={16} />
-              GitHub ansehen
-            </a>
-            <a
+              className="text-link"
               href="https://linkedin.com/in/marcel-welk-572a412ab/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground transition-all hover:border-primary/50 hover:text-primary"
             >
-              <Linkedin size={16} />
-              LinkedIn
+              LinkedIn <ArrowUpRight size={15} />
             </a>
-            <button
-              onClick={() => {
-                const link = document.createElement('a');
-                link.href = '/lebenslauf.pdf';
-                link.download = 'Lebenslauf_Marcel_Welk.pdf';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-              }}
-              className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground transition-all hover:border-primary/50 hover:text-primary"
+            <a
+              className="text-link"
+              href="/lebenslauf.pdf"
+              download="Lebenslauf_Marcel_Welk.pdf"
             >
-              <FileText size={16} />
-              Lebenslauf (PDF)
-            </button>
+              Lebenslauf (PDF) <ArrowUpRight size={15} />
+            </a>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
-  )
+  );
 }

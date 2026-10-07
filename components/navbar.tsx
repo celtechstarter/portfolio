@@ -1,90 +1,78 @@
-"use client"
-
-import { useState, useEffect } from "react"
-import { Menu, X } from "lucide-react"
-
-const NAV_LINKS = [
-  { label: "Projekte", href: "#projekte", isHash: true },
-  { label: "Skills", href: "#skills", isHash: true },
-  { label: "FAQ", href: "#faq", isHash: true },
-  { label: "Kontakt", href: "#kontakt", isHash: true },
-  { label: "Devlog", href: "/devlog", isHash: false },
-  { label: "Lebenslauf", href: "/lebenslauf", isHash: false },
-]
-
+"use client";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 export function Navbar({ basePath = "" }: { basePath?: string }) {
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
-
-  const navLinks = NAV_LINKS.map((link) => ({
-    ...link,
-    href: link.isHash ? `${basePath}${link.href}` : link.href,
-  }))
-
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  const home = pathname === "/" ? basePath : "/";
+  const links = [
+    { label: "Projekte", href: home + "#projekte" },
+    { label: "Arbeitsweise", href: "/ki-workflow" },
+    { label: "Über mich", href: home + "#ueber-mich" },
+    { label: "Lebenslauf", href: "/lebenslauf" },
+  ];
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener("scroll", onScroll)
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
-
+    const close = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", close);
+    return () => document.removeEventListener("keydown", close);
+  }, []);
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/70 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-background/20"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a
-          href="/"
-          className="font-mono text-lg font-bold tracking-tight text-primary"
-        >
-          {"<MW />"}
+    <header className="site-header">
+      <nav className="shell nav-inner" aria-label="Hauptnavigation">
+        <a href="/" className="brand" aria-label="Marcel Welk – Startseite">
+          <span className="brand-mark">
+            M<span>W</span>
+          </span>
+          <span className="brand-name">Marcel Welk</span>
         </a>
-
-        {/* Desktop */}
-        <ul className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="text-sm text-muted-foreground transition-colors hover:text-primary"
-              >
-                {link.label}
-              </a>
-            </li>
+        <div className="desktop-nav">
+          {links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              aria-current={pathname === link.href ? "page" : undefined}
+            >
+              {link.label}
+            </a>
           ))}
-        </ul>
-
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="text-foreground md:hidden"
-          aria-label={mobileOpen ? "Navigation schließen" : "Navigation öffnen"}
-        >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="border-b border-border/50 bg-background/90 backdrop-blur-xl md:hidden">
-          <ul className="flex flex-col gap-4 px-6 pb-6">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-sm text-muted-foreground transition-colors hover:text-primary"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <a className="button button-primary" href={home + "#kontakt"}>
+            Kontakt <ArrowUpRight size={16} />
+          </a>
         </div>
+        <button
+          className="mobile-menu-toggle"
+          aria-label={open ? "Navigation schließen" : "Navigation öffnen"}
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <X /> : <Menu />}
+        </button>
+      </nav>
+      {open && (
+        <nav
+          id="mobile-navigation"
+          className="mobile-navigation shell"
+          aria-label="Mobile Navigation"
+        >
+          {links.map((link) => (
+            <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
+              {link.label}
+            </a>
+          ))}
+          <a
+            className="button button-primary"
+            href={home + "#kontakt"}
+            onClick={() => setOpen(false)}
+          >
+            Kontakt aufnehmen <ArrowUpRight size={16} />
+          </a>
+          <p>Dortmund · Remote bevorzugt</p>
+        </nav>
       )}
-    </nav>
-  )
+    </header>
+  );
 }

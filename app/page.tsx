@@ -1,16 +1,14 @@
-import { Navbar } from "@/components/navbar"
-import { Hero } from "@/components/hero"
-import { Projects } from "@/components/projects"
-import { Skills } from "@/components/skills"
-import { WorkflowSteps } from "@/components/workflow"
-import { Contact } from "@/components/contact"
-import { GitHubActivity } from "@/components/github-activity"
-import { FAQ } from "@/components/faq"
+import { Hero } from "@/components/hero";
+import { Projects } from "@/components/projects";
+import { Skills } from "@/components/skills";
+import { WorkflowSteps } from "@/components/workflow";
+import { Contact } from "@/components/contact";
+import { GitHubActivity } from "@/components/github-activity";
+import { FAQ } from "@/components/faq";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
       <main>
         <Hero />
         <Projects />
@@ -21,5 +19,5 @@ export default function Home() {
         <Contact />
       </main>
     </>
-  )
+  );
 }

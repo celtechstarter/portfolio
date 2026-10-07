@@ -1,21 +1,31 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Phone, Mail, Globe, Github, Download, Copy, Check, Eye, MoveLeft } from "lucide-react"
+import { useState } from "react";
+import {
+  Phone,
+  Mail,
+  Globe,
+  Github,
+  Download,
+  Copy,
+  Check,
+  Eye,
+  MoveLeft,
+} from "lucide-react";
 
 type ContactData = {
-  phone: string
-  email: string
-}
+  phone: string;
+  email: string;
+};
 
-let contactCache: ContactData | null = null
+let contactCache: ContactData | null = null;
 
 async function fetchContact(): Promise<ContactData> {
   if (!contactCache) {
-    const res = await fetch('/api/contact')
-    contactCache = await res.json()
+    const res = await fetch("/api/contact");
+    contactCache = await res.json();
   }
-  return contactCache!
+  return contactCache!;
 }
 
 function RevealField({
@@ -24,34 +34,34 @@ function RevealField({
   getValue,
   isPhone,
 }: {
-  icon: React.ReactNode
-  label: string
-  getValue: () => Promise<string>
-  isPhone?: boolean
+  icon: React.ReactNode;
+  label: string;
+  getValue: () => Promise<string>;
+  isPhone?: boolean;
 }) {
-  const [value, setValue] = useState<string | null>(null)
-  const [copied, setCopied] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [value, setValue] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleReveal = async () => {
-    setLoading(true)
-    const v = await getValue()
-    setValue(v)
-    setLoading(false)
-  }
+    setLoading(true);
+    const v = await getValue();
+    setValue(v);
+    setLoading(false);
+  };
 
   const handleCopy = async () => {
-    if (!value) return
-    await navigator.clipboard.writeText(value)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+    if (!value) return;
+    await navigator.clipboard.writeText(value);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const handleClick = () => {
     if (isPhone && value) {
-      window.location.href = `tel:${value}`
+      window.location.href = `tel:${value}`;
     }
-  }
+  };
 
   if (!value) {
     return (
@@ -64,9 +74,9 @@ function RevealField({
         <span className="rounded border border-dashed border-muted-foreground/30 px-2 py-0.5 font-mono text-xs">
           {loading ? "..." : label}
         </span>
-        <Eye size={11} className="text-muted-foreground/40" />
+        <Eye size={11} className="text-muted-foreground" />
       </button>
-    )
+    );
   }
 
   return (
@@ -84,13 +94,13 @@ function RevealField({
         className="ml-0.5 text-muted-foreground transition-colors hover:text-primary"
       >
         {copied ? (
-          <Check size={13} className="text-green-400" />
+          <Check size={13} className="text-green-800" />
         ) : (
           <Copy size={13} />
         )}
       </button>
     </div>
-  )
+  );
 }
 
 export function ProtectedContactLinks() {
@@ -133,12 +143,12 @@ export function ProtectedContactLinks() {
       <div className="mt-7 flex flex-wrap items-center justify-center gap-3 md:justify-start">
         <button
           onClick={() => {
-            const link = document.createElement("a")
-            link.href = "/lebenslauf.pdf"
-            link.download = "Lebenslauf_Marcel_Welk.pdf"
-            document.body.appendChild(link)
-            link.click()
-            document.body.removeChild(link)
+            const link = document.createElement("a");
+            link.href = "/lebenslauf.pdf";
+            link.download = "Lebenslauf_Marcel_Welk.pdf";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
           }}
           className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 cursor-pointer"
         >
@@ -151,5 +161,5 @@ export function ProtectedContactLinks() {
         </span>
       </div>
     </>
-  )
+  );
 }

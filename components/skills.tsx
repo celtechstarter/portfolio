@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Monitor,
@@ -17,29 +17,28 @@ import {
   Key,
   Server,
   Palette,
-} from "lucide-react"
-import { motion } from "framer-motion"
+} from "lucide-react";
 
 interface SkillCategory {
-  title: string
-  icon: React.ReactNode
-  skills: string[]
+  title: string;
+  icon: React.ReactNode;
+  skills: string[];
 }
 
 interface Certificate {
-  title: string
-  issuer: string
-  url?: string
+  title: string;
+  issuer: string;
+  url?: string;
 }
 
 interface SkillIcon {
-  name: string
-  icon: React.ReactNode
-  color: string
+  name: string;
+  icon: React.ReactNode;
+  color: string;
 }
 
 const skillIcons: SkillIcon[] = [
-  { name: "Linux", icon: <Terminal size={22} />, color: "#f97316" }, // updated colors to match orange theme where possible, or keep original if specific tech colors
+  { name: "Linux", icon: <Terminal size={22} />, color: "#f97316" },
   { name: "Docker", icon: <Box size={22} />, color: "#378ADD" },
   { name: "AWS", icon: <Layers size={22} />, color: "#f97316" },
   { name: "Azure", icon: <Globe size={22} />, color: "#378ADD" },
@@ -50,172 +49,216 @@ const skillIcons: SkillIcon[] = [
   { name: "SSH", icon: <Key size={22} />, color: "#fbbf24" },
   { name: "Node.js", icon: <Server size={22} />, color: "#1D9E75" },
   { name: "Tailwind", icon: <Palette size={22} />, color: "#5B8FD8" },
-]
+];
 
 const skillCategories: SkillCategory[] = [
   {
     title: "Produkt & KI-Workflows",
     icon: <Bot size={24} />,
-    skills: ["Anforderungen strukturieren", "Nutzerabläufe planen", "Multi-Agent-Workflows", "n8n-Prototypen"],
+    skills: [
+      "Anforderungen strukturieren",
+      "Nutzerabläufe planen",
+      "Multi-Agent-Workflows",
+      "n8n-Prototypen",
+    ],
   },
   {
     title: "Technische Grundlagen",
     icon: <Code2 size={24} />,
-    skills: ["JavaScript & Python: Grundlagen", "Frontend & Backend: Grundlagen", "APIs, HTTP & JSON", "React / Next.js: KI-Projekte"],
+    skills: [
+      "JavaScript & Python: Grundlagen",
+      "Frontend & Backend: Grundlagen",
+      "APIs, HTTP & JSON",
+      "React / Next.js: KI-Projekte",
+    ],
   },
   {
     title: "Prüfung & Betrieb",
     icon: <Cloud size={24} />,
-    skills: ["Testfälle & KI-gestützte Reviews", "Dokumentation & Refactoring mit KI", "Linux / VPS: praktische Erfahrung", "AWS, Azure & Docker: Grundlagen"],
+    skills: [
+      "Testfälle & KI-gestützte Reviews",
+      "Dokumentation & Refactoring mit KI",
+      "Linux / VPS: praktische Erfahrung",
+      "AWS, Azure & Docker: Grundlagen",
+    ],
   },
   {
     title: "Meine Werkzeuge",
     icon: <Monitor size={24} />,
-    skills: ["Claude Code", "Claude Cowork", "ChatGPT", "Lovable", "n8n", "GitHub & Vercel"],
+    skills: [
+      "Claude Code",
+      "Claude Cowork",
+      "ChatGPT",
+      "Lovable",
+      "n8n",
+      "GitHub & Vercel",
+    ],
   },
-]
+];
 
 const certificates: Certificate[] = [
   { title: "Cloud- und Webentwicklung", issuer: "Techstarter · Weiterbildung" },
-  { title: "Linux Essentials", issuer: "Linux Professional Institute", url: "https://cs.lpi.org/caf/Xamman/certification/verify/LPI000601206/68tg2avpp5" },
-  { title: "AWS re/Start Graduate", issuer: "Amazon Web Services", url: "https://www.credly.com/badges/4ede2f7b-4d7f-4be0-983a-848926348c38/linked_in_profile" },
-  { title: "Azure Fundamentals", issuer: "Microsoft", url: "https://learn.microsoft.com/de-de/users/marcelwelk-5271/credentials/9641b0c7905438cd" },
-  { title: "Claude 101", issuer: "Anthropic · Kursabschluss", url: "https://verify.skilljar.com/c/wax4356idoe9" },
-  { title: "Claude Code 101", issuer: "Anthropic · Kursabschluss", url: "https://verify.skilljar.com/c/mc26kuoa47b2" },
-  { title: "Introduction to Claude Cowork", issuer: "Anthropic · Kursabschluss", url: "https://verify.skilljar.com/c/5uwkjhqir3ix" },
-]
+  {
+    title: "Linux Essentials",
+    issuer: "Linux Professional Institute",
+    url: "https://cs.lpi.org/caf/Xamman/certification/verify/LPI000601206/68tg2avpp5",
+  },
+  {
+    title: "AWS re/Start Graduate",
+    issuer: "Amazon Web Services",
+    url: "https://www.credly.com/badges/4ede2f7b-4d7f-4be0-983a-848926348c38/linked_in_profile",
+  },
+  {
+    title: "Azure Fundamentals",
+    issuer: "Microsoft",
+    url: "https://learn.microsoft.com/de-de/users/marcelwelk-5271/credentials/9641b0c7905438cd",
+  },
+  {
+    title: "Claude 101",
+    issuer: "Anthropic · Kursabschluss",
+    url: "https://verify.skilljar.com/c/wax4356idoe9",
+  },
+  {
+    title: "Claude Code 101",
+    issuer: "Anthropic · Kursabschluss",
+    url: "https://verify.skilljar.com/c/mc26kuoa47b2",
+  },
+  {
+    title: "Introduction to Claude Cowork",
+    issuer: "Anthropic · Kursabschluss",
+    url: "https://verify.skilljar.com/c/5uwkjhqir3ix",
+  },
+];
 
 export function Skills() {
-  // We duplicate the icons array a few times to ensure seamless infinite scrolling
-  const scrollIcons = [...skillIcons, ...skillIcons, ...skillIcons, ...skillIcons]
-
   return (
-    <section id="skills" className="relative px-6 py-24 md:py-32 overflow-hidden bg-black text-foreground">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
-      
-      <div className="relative z-10 mx-auto max-w-6xl">
-        <div className="mb-16 text-center">
-          <p className="mb-2 font-mono text-sm tracking-widest text-primary uppercase">
-            Grundlagen & Projektwerkzeuge
+    <section id="skills" className="skills-section">
+      <div className="shell">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">
+              <span>04</span> Kompetenzen & Werkzeuge
+            </p>
+            <h2>
+              Mein Beitrag.
+              <br />
+              <em>Meine Werkzeuge.</em>
+            </h2>
+          </div>
+          <p>
+            Konzeption, Agentenkoordination und Ergebnisprüfung. Technische
+            Grundlagen aus meiner Weiterbildung verbinde ich mit eigener
+            KI-gestützter Projektpraxis.
           </p>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl text-balance">
-            Kompetenzen & Werkzeuge
-          </h2>
         </div>
-
-        <p className="mb-8 text-center text-sm text-muted-foreground">
-          Die Technologien unten kommen in meiner Weiterbildung oder meinen KI-gestützt umgesetzten Projekten vor.
-          Mein Schwerpunkt liegt auf Konzeption, KI-gestützter Umsetzung und Ergebnisprüfung.
-        </p>
-        {/* Infinite Scrolling Marquee */}
-        <div className="mb-24 relative w-full overflow-hidden flex items-center">
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-          
-          <motion.div 
-            className="flex gap-4 min-w-max"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 30, ease: "linear", repeat: Infinity }}
-          >
-            {scrollIcons.map((item, i) => (
-              <div
-                key={`${item.name}-${i}`}
-                className="flex flex-col items-center justify-center gap-2 rounded-xl border border-white/5 bg-white/5 backdrop-blur-sm p-4 w-28 h-28 transition-all duration-300 hover:border-primary/50 hover:bg-white/10 hover:shadow-[0_0_15px_rgba(249,115,22,0.2)]"
-              >
-                <div style={{ color: item.color }} className="drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]">
-                  {item.icon}
-                </div>
-                <span className="font-mono text-[11px] leading-tight text-center text-muted-foreground mt-2">
-                  {item.name}
-                </span>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Neural Network Skill Categories */}
-        <div className="mb-24">
-          <h3 className="text-xl font-semibold text-center mb-12">Mein Beitrag und meine technische Grundlage</h3>
-          
-          <div className="relative flex flex-col md:flex-row items-stretch justify-center gap-12 md:gap-8">
-            {/* Desktop connecting line */}
-            <div className="hidden md:block absolute top-10 left-[10%] right-[10%] h-[1px] bg-white/10 z-0">
-               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/50 to-transparent animate-pulse" />
+        <div className="bento-grid">
+          <article className="bento-brief">
+            <p className="eyebrow">01 / Anforderungen verstehen</p>
+            <h3>
+              Aus einer Idee
+              <br />
+              werden klare Aufgaben.
+            </h3>
+            <p>
+              Ich strukturiere Ziele und Nutzerabläufe, bevor ich die Umsetzung
+              mit KI-Werkzeugen koordiniere.
+            </p>
+            <div className="brief-sheet">
+              <span className="brief-label">
+                So strukturiere ich ein Arbeitspaket
+              </span>
+              <h4>Ziel</h4>
+              <p>Welches Problem soll die Anwendung vereinfachen?</p>
+              <h4>Nutzerablauf</h4>
+              <p>Welche Schritte führen Menschen zu ihrem Ergebnis?</p>
+              <h4>Prüfkriterien</h4>
+              <ul>
+                <li>Verständliche Inhalte</li>
+                <li>Nachvollziehbare Bedienung</li>
+                <li>Überprüfbare Funktionen</li>
+              </ul>
             </div>
-
-            {skillCategories.map((category, i) => (
-              <motion.div 
-                key={category.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="relative z-10 flex-1 flex flex-col items-center w-full h-full"
-              >
-                {/* Node Orb */}
-                <div className="w-20 h-20 rounded-full bg-black border-2 border-primary/40 shadow-[0_0_20px_rgba(249,115,22,0.2)] flex items-center justify-center text-primary mb-6 relative group cursor-default shrink-0">
-                  <div className="absolute inset-0 bg-primary/10 rounded-full blur-md group-hover:bg-primary/30 transition-all duration-500" />
-                  <div className="relative z-10 group-hover:scale-110 transition-transform duration-300">
-                    {category.icon}
-                  </div>
-                  {/* Mobile connecting line */}
-                  {i < skillCategories.length - 1 && (
-                    <div className="block md:hidden absolute top-[100%] left-1/2 w-[1px] h-12 bg-white/10 z-0">
-                      <div className="absolute inset-0 bg-gradient-to-b from-primary/50 to-transparent" />
-                    </div>
+          </article>
+          <article className="bento-agents">
+            <p className="eyebrow">02 / KI-Agenten koordinieren</p>
+            <h3>
+              Passende Werkzeuge.
+              <br />
+              Klar verteilte Aufgaben.
+            </h3>
+            <p>
+              Ich teile Aufgaben auf und nutze weitere Modelle zur Gegenprüfung.
+            </p>
+            <div className="agent-flow">
+              <span>Konzeption</span>
+              <span aria-hidden="true">→</span>
+              <span>KI-Umsetzung</span>
+              <span aria-hidden="true">→</span>
+              <span>Review</span>
+            </div>
+            <div className="tag-list">
+              {[
+                "Claude Code",
+                "Claude Cowork",
+                "ChatGPT",
+                "Lovable",
+                "n8n",
+              ].map((t) => (
+                <span key={t}>{t}</span>
+              ))}
+            </div>
+          </article>
+          {skillCategories.slice(1, 3).map((category, i) => (
+            <article className="bento-small" key={category.title}>
+              <div className="bento-icon">{category.icon}</div>
+              <p className="eyebrow">0{i + 3} / Projektpraxis</p>
+              <h3>{category.title}</h3>
+              <ul>
+                {category.skills.map((skill) => (
+                  <li key={skill}>{skill}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+        <div className="tech-line">
+          <p>Technologien aus Weiterbildung und KI-Projekten</p>
+          <div>
+            {skillIcons.map((item) => (
+              <span key={item.name}>
+                {item.icon}
+                {item.name}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="certificates">
+          <div className="section-heading">
+            <h3>Weiterbildung & Zertifikate</h3>
+            <p>Technische Grundlagen und gezielte Weiterbildung.</p>
+          </div>
+          <div className="certificate-grid">
+            {certificates.map((cert) => (
+              <article key={cert.title}>
+                <Award size={19} />
+                <div>
+                  <h4>{cert.title}</h4>
+                  <p>{cert.issuer}</p>
+                  {cert.url && (
+                    <a
+                      href={cert.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Nachweis ansehen ↗
+                    </a>
                   )}
                 </div>
-
-                <div className="glass-card glow-border p-5 rounded-2xl w-full h-full text-center hover:border-primary/30 transition-colors flex flex-col">
-                  <h4 className="font-bold text-foreground mb-3">{category.title}</h4>
-                  <div className="flex flex-wrap justify-center gap-1.5">
-                    {category.skills.map(skill => (
-                      <span key={skill} className="px-2 py-1 rounded bg-white/5 border border-white/5 text-xs text-muted-foreground font-mono transition-colors hover:bg-white/10 hover:text-white">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Certificates */}
-        <div>
-          <div className="mb-8 flex items-center justify-center gap-3">
-            <Award size={20} className="text-primary" />
-            <h3 className="text-xl font-semibold text-foreground">
-              Weiterbildung & Zertifikate
-            </h3>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {certificates.map((cert) => (
-              <div
-                key={cert.title}
-                className="glass-card glow-border rounded-xl px-5 py-4 text-center group"
-              >
-                <p className="font-medium text-foreground group-hover:text-primary transition-colors">{cert.title}</p>
-                <p className="mt-1 font-mono text-xs text-muted-foreground">
-                  {cert.issuer}
-                </p>
-                {cert.url && (
-                  <a
-                    href={cert.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-2 inline-block font-mono text-xs"
-                    style={{ color: "#CF9336" }}
-                  >
-                    Nachweis ansehen →
-                  </a>
-                )}
-              </div>
+              </article>
             ))}
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

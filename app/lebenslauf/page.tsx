@@ -1,30 +1,37 @@
-import type { Metadata } from "next"
-import Image from "next/image"
-import { Github, ExternalLink, MapPin, ChevronDown } from "lucide-react"
-import { Navbar } from "@/components/navbar"
-import { ProtectedContactLinks } from "@/components/protected-contact-links"
+import type { Metadata } from "next";
+import Image from "next/image";
+import { Github, ExternalLink, MapPin, ChevronDown } from "lucide-react";
+import { ProtectedContactLinks } from "@/components/protected-contact-links";
 
 export const metadata: Metadata = {
   title: "Lebenslauf – KI-gestützte Produktentwicklung",
   description:
     "Lebenslauf von Marcel Welk – KI-gestützte Produktentwicklung und Automatisierung aus Dortmund. Projekte, Skills in Web-Entwicklung, KI-Integration, React, Next.js und modernen Deployment-Workflows.",
   alternates: {
-    canonical: 'https://www.marcelwelk.de/lebenslauf',
+    canonical: "https://www.marcelwelk.de/lebenslauf",
   },
   openGraph: {
     title: "Lebenslauf | Marcel Welk",
     description:
       "Marcel Welk – KI-gestützte Produktentwicklung und Automatisierung aus Dortmund. Projekte, Skills und digitale Lösungen auf einen Blick.",
     url: "https://www.marcelwelk.de/lebenslauf",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Lebenslauf Marcel Welk – Webdesign & Webentwicklung Dortmund" }],
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Lebenslauf Marcel Welk – Webdesign & Webentwicklung Dortmund",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Lebenslauf | Marcel Welk",
-    description: "KI-gestützte Produktentwicklung und Automatisierung aus Dortmund – Skills, Projekte und digitale Lösungen.",
+    description:
+      "KI-gestützte Produktentwicklung und Automatisierung aus Dortmund – Skills, Projekte und digitale Lösungen.",
     images: ["/og-image.jpg"],
   },
-}
+};
 
 // ─── Local helper components ─────────────────────────────────────────────────
 
@@ -41,12 +48,13 @@ function SectionHeader({ label, title }: { label: string; title: string }) {
         <div
           className="h-px flex-1"
           style={{
-            background: "linear-gradient(to right, rgba(230,138,46,0.35), transparent)",
+            background:
+              "linear-gradient(to right, rgba(230,138,46,0.35), transparent)",
           }}
         />
       </div>
     </div>
-  )
+  );
 }
 
 function SubSectionHeader({ title }: { title: string }) {
@@ -54,7 +62,7 @@ function SubSectionHeader({ title }: { title: string }) {
     <p className="mb-5 font-mono text-xs tracking-widest text-primary uppercase">
       {title}
     </p>
-  )
+  );
 }
 
 function Tag({ children }: { children: React.ReactNode }) {
@@ -62,7 +70,7 @@ function Tag({ children }: { children: React.ReactNode }) {
     <span className="rounded-full bg-secondary px-3 py-1 font-mono text-xs text-muted-foreground">
       {children}
     </span>
-  )
+  );
 }
 
 function CertBadge({ children }: { children: React.ReactNode }) {
@@ -70,27 +78,29 @@ function CertBadge({ children }: { children: React.ReactNode }) {
     <span className="rounded-lg border border-primary/25 bg-primary/8 px-3 py-2 font-mono text-xs text-primary">
       {children}
     </span>
-  )
+  );
 }
 
 function StatusBadge({
   label,
   color,
 }: {
-  label: string
-  color: "green" | "blue" | "purple" | "orange"
+  label: string;
+  color: "green" | "blue" | "purple" | "orange";
 }) {
   const styles = {
-    green: "border-green-500/30 bg-green-500/10 text-green-400",
+    green: "border-green-500/30 bg-green-500/10 text-green-300",
     blue: "border-blue-400/30 bg-blue-400/10 text-blue-300",
     purple: "border-purple-400/30 bg-purple-400/10 text-purple-300",
     orange: "border-primary/30 bg-primary/10 text-primary",
-  }
+  };
   return (
-    <span className={`rounded-full border px-2.5 py-0.5 font-mono text-xs ${styles[color]}`}>
+    <span
+      className={`rounded-full border px-2.5 py-0.5 font-mono text-xs ${styles[color]}`}
+    >
       {label}
     </span>
-  )
+  );
 }
 
 function TimelineDot({ active = false }: { active?: boolean }) {
@@ -100,9 +110,11 @@ function TimelineDot({ active = false }: { active?: boolean }) {
         active ? "border-primary" : "border-border"
       }`}
     >
-      <div className={`h-2 w-2 rounded-full ${active ? "bg-primary" : "bg-muted-foreground/40"}`} />
+      <div
+        className={`h-2 w-2 rounded-full ${active ? "bg-primary" : "bg-muted-foreground/40"}`}
+      />
     </div>
-  )
+  );
 }
 
 function BulletList({ items }: { items: string[] }) {
@@ -115,7 +127,7 @@ function BulletList({ items }: { items: string[] }) {
         </li>
       ))}
     </ul>
-  )
+  );
 }
 
 function ProjectCard({
@@ -129,22 +141,24 @@ function ProjectCard({
   bullets,
   tags,
 }: {
-  title: string
-  year: string
-  badge: string
-  badgeColor: "green" | "blue" | "purple" | "orange"
-  subtitle?: string
-  links?: { href: string; label: string; icon: "external" | "github" }[]
-  description?: string
-  bullets?: string[]
-  tags: string[]
+  title: string;
+  year: string;
+  badge: string;
+  badgeColor: "green" | "blue" | "purple" | "orange";
+  subtitle?: string;
+  links?: { href: string; label: string; icon: "external" | "github" }[];
+  description?: string;
+  bullets?: string[];
+  tags: string[];
 }) {
   return (
     <details className="group rounded-xl border border-border bg-card transition-colors duration-300 hover:border-primary/40">
       <summary className="flex cursor-pointer list-none items-center gap-2.5 p-5">
         <div className="flex flex-1 flex-wrap items-center gap-2.5">
           <h3 className="text-base font-semibold text-foreground">{title}</h3>
-          <span className="font-mono text-xs text-muted-foreground">{year}</span>
+          <span className="font-mono text-xs text-muted-foreground">
+            {year}
+          </span>
           <StatusBadge label={badge} color={badgeColor} />
         </div>
         <ChevronDown
@@ -188,7 +202,7 @@ function ProjectCard({
         </div>
       </div>
     </details>
-  )
+  );
 }
 
 // ─── Page ────────────────────────────────────────────────────────────────────
@@ -198,18 +212,29 @@ export default function LebenslaufPage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.marcelwelk.de" },
-      { "@type": "ListItem", position: 2, name: "Lebenslauf", item: "https://www.marcelwelk.de/lebenslauf" },
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.marcelwelk.de",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Lebenslauf",
+        item: "https://www.marcelwelk.de/lebenslauf",
+      },
     ],
-  }
+  };
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
-      <Navbar basePath="/" />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
 
-      <main className="min-h-screen px-6 pb-24 pt-28">
+      <main className="document-page min-h-screen px-6 pb-24 pt-28">
         <div className="mx-auto max-w-4xl space-y-20">
-
           {/* ── 1. Header Card ─────────────────────────────────────────────── */}
           <section>
             <div className="rounded-2xl border border-border bg-card p-8">
@@ -235,7 +260,9 @@ export default function LebenslaufPage() {
                   </p>
                   <div className="mb-5 flex items-center justify-center gap-1.5 md:justify-start">
                     <MapPin size={13} className="text-muted-foreground" />
-                    <span className="text-sm text-muted-foreground">Dortmund · Remote bevorzugt</span>
+                    <span className="text-sm text-muted-foreground">
+                      Dortmund · Remote bevorzugt
+                    </span>
                   </div>
                   <ProtectedContactLinks />
                 </div>
@@ -247,23 +274,30 @@ export default function LebenslaufPage() {
           <section>
             <SectionHeader label="Profil" title="Über mich" />
             <p className="text-base leading-relaxed text-muted-foreground">
-              Ich konzipiere menschenzentrierte Webanwendungen und koordiniere ihre Umsetzung
-              mit KI-Werkzeugen und Agenten. Mein Schwerpunkt liegt auf Anforderungen,
-              Nutzerabläufen, Aufgabenverteilung und Ergebnisprüfung. Die Programmierung
-              erfolgt KI-gestützt. Aus meiner Weiterbildung bringe ich technische Grundlagen
-              mit, die ich in eigenen Projekten praktisch einsetze. Ich suche eine Festanstellung
-              in KI-gestützter Produktentwicklung oder Automatisierung, bevorzugt remote,
-              mit Schwerpunkt auf Konzeption und Workflows statt manueller Programmierung.
+              Ich konzipiere menschenzentrierte Webanwendungen und koordiniere
+              ihre Umsetzung mit KI-Werkzeugen und Agenten. Mein Schwerpunkt
+              liegt auf Anforderungen, Nutzerabläufen, Aufgabenverteilung und
+              Ergebnisprüfung. Die Programmierung erfolgt KI-gestützt. Aus
+              meiner Weiterbildung bringe ich technische Grundlagen mit, die ich
+              in eigenen Projekten praktisch einsetze. Ich suche eine
+              Festanstellung in KI-gestützter Produktentwicklung oder
+              Automatisierung, bevorzugt remote, mit Schwerpunkt auf Konzeption
+              und Workflows statt manueller Programmierung.
             </p>
           </section>
 
           {/* ── 3. Projekte ────────────────────────────────────────────────── */}
           <section>
-            <SectionHeader label="Portfolio" title="KI-gestützt umgesetzte Projekte" />
+            <SectionHeader
+              label="Portfolio"
+              title="KI-gestützt umgesetzte Projekte"
+            />
             <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
-              Die folgenden Funktionen und Technologien beschreiben die Projektergebnisse.
-              Mein Beitrag umfasst Konzeption, Aufgabensteuerung, Erprobung und die Koordination von Tests und Reviews;
-              Code und technische Änderungen entstehen mit KI-Werkzeugen.
+              Die folgenden Funktionen und Technologien beschreiben die
+              Projektergebnisse. Mein Beitrag umfasst Konzeption,
+              Aufgabensteuerung, Erprobung und die Koordination von Tests und
+              Reviews; Code und technische Änderungen entstehen mit
+              KI-Werkzeugen.
             </p>
 
             {/* KI & App-Projekte */}
@@ -276,7 +310,13 @@ export default function LebenslaufPage() {
                   badge="In Erprobung"
                   badgeColor="green"
                   subtitle="Unterstützung bei Recherche, Kontaktaufnahme und Dokumentation der Therapieplatzsuche"
-                  links={[{ href: "https://therapieplatz-finder.de", label: "therapieplatz-finder.de", icon: "external" }]}
+                  links={[
+                    {
+                      href: "https://therapieplatz-finder.de",
+                      label: "therapieplatz-finder.de",
+                      icon: "external",
+                    },
+                  ]}
                   bullets={[
                     "Konzeption, Planung der Nutzerabläufe und Steuerung der KI-gestützten Umsetzung",
                     "Praxisinformationen aus mehreren Quellen aufbereitet; APIs, Suchfilter, E-Mail-Versand und Dokumentation integriert",
@@ -284,7 +324,14 @@ export default function LebenslaufPage() {
                     "Erprobung im ambulant betreuten Wohnen für die Arbeit mit Klient:innen; erste positive Rückmeldungen zur Unterstützung der Suche",
                     "Austausch mit einem Psychotherapeuten zu konkreten Verbesserungen",
                   ]}
-                  tags={["Python", "REST APIs", "Anthropic API", "Supabase", "Testing", "Vercel"]}
+                  tags={[
+                    "Python",
+                    "REST APIs",
+                    "Anthropic API",
+                    "Supabase",
+                    "Testing",
+                    "Vercel",
+                  ]}
                 />
                 <ProjectCard
                   title="n8n-Automatisierung"
@@ -292,7 +339,13 @@ export default function LebenslaufPage() {
                   badge="Prototyp"
                   badgeColor="orange"
                   description="n8n zunächst mit Docker selbst gehostet, anschließend einen Workflow in n8n Cloud aufgebaut und ausgeführt: zeitgesteuerter HTTP-Datenabruf, JavaScript-Verarbeitung, KI-Bericht und E-Mail-Versand. Ein monatlicher Datenabgleich mit Benachrichtigung und manueller Prüfung ist als Ausbau geplant."
-                  tags={["n8n", "Docker", "HTTP", "JavaScript", "Anthropic API"]}
+                  tags={[
+                    "n8n",
+                    "Docker",
+                    "HTTP",
+                    "JavaScript",
+                    "Anthropic API",
+                  ]}
                 />
                 <ProjectCard
                   title="Poke-Scan V2"
@@ -301,8 +354,16 @@ export default function LebenslaufPage() {
                   badgeColor="green"
                   subtitle="Pokémon-Karten Scanner mit KI-Vision Integration"
                   links={[
-                    { href: "https://poke-scan-v2.vercel.app", label: "poke-scan-v2.vercel.app", icon: "external" },
-                    { href: "https://github.com/celtechstarter/poke-scan-v2", label: "GitHub", icon: "github" },
+                    {
+                      href: "https://poke-scan-v2.vercel.app",
+                      label: "poke-scan-v2.vercel.app",
+                      icon: "external",
+                    },
+                    {
+                      href: "https://github.com/celtechstarter/poke-scan-v2",
+                      label: "GitHub",
+                      icon: "github",
+                    },
                   ]}
                   bullets={[
                     "Lovable-Abhängigkeiten entfernt, OCR durch echte KI Vision API ersetzt",
@@ -312,7 +373,14 @@ export default function LebenslaufPage() {
                     "KI-Vision mit Fallback-Kette: Gemini 2.5 Flash (primär), NVIDIA NIM – Llama 3.2 Vision & Phi-3.5 Vision",
                     "Komplettes Projekt von 0 auf produktiv gebracht",
                   ]}
-                  tags={["React", "TypeScript", "KI Vision", "PostgreSQL", "CI/CD", "Vercel"]}
+                  tags={[
+                    "React",
+                    "TypeScript",
+                    "KI Vision",
+                    "PostgreSQL",
+                    "CI/CD",
+                    "Vercel",
+                  ]}
                 />
                 <ProjectCard
                   title="BewerbungsPilot"
@@ -321,7 +389,11 @@ export default function LebenslaufPage() {
                   badgeColor="blue"
                   subtitle="KI-gestützte Erstellung von Anschreiben-Entwürfen"
                   links={[
-                    { href: "https://bewerbungspilot.vercel.app", label: "bewerbungspilot.vercel.app", icon: "external" },
+                    {
+                      href: "https://bewerbungspilot.vercel.app",
+                      label: "bewerbungspilot.vercel.app",
+                      icon: "external",
+                    },
                   ]}
                   description="Aus Lebenslauf und Stellenanzeige entsteht ein Entwurf, der persönlich geprüft und überarbeitet werden kann. Eigenes Projekt zur KI-gestützten Dokumentverarbeitung."
                   tags={["Next.js", "TypeScript", "KI", "Vercel"]}
@@ -364,7 +436,11 @@ export default function LebenslaufPage() {
                   badgeColor="purple"
                   subtitle="Moderner Webauftritt für ein Coaching-Unternehmen"
                   links={[
-                    { href: "https://coaching-knobling.vercel.app/", label: "coaching-knobling.vercel.app", icon: "external" },
+                    {
+                      href: "https://coaching-knobling.vercel.app/",
+                      label: "coaching-knobling.vercel.app",
+                      icon: "external",
+                    },
                   ]}
                   description="Als Dankeschön für meinen IT-Lehrer Hubertus Knobling (Python, AWS, CI/CD, Azure) gebaut – kostenlos, als Freundschaftsdienst. Design, Entwicklung und Deployment, mit Fokus auf seriöses Design und klare Nutzerführung."
                   tags={["Next.js", "TypeScript", "Tailwind CSS", "Vercel"]}
@@ -376,10 +452,18 @@ export default function LebenslaufPage() {
                   badgeColor="purple"
                   subtitle="Landingpage und digitaler Katalog für ein Sammelkarten-Business"
                   links={[
-                    { href: "https://hawaii-cards.vercel.app/", label: "hawaii-cards.vercel.app", icon: "external" },
+                    {
+                      href: "https://hawaii-cards.vercel.app/",
+                      label: "hawaii-cards.vercel.app",
+                      icon: "external",
+                    },
                   ]}
                   description="Visuell ansprechende Produktpräsentation mit Fokus auf Responsive Design und Asset-Optimierung."
-                  tags={["Webentwicklung", "Responsive Design", "Asset-Optimierung"]}
+                  tags={[
+                    "Webentwicklung",
+                    "Responsive Design",
+                    "Asset-Optimierung",
+                  ]}
                 />
                 <ProjectCard
                   title="Gesunder Fuß"
@@ -388,7 +472,11 @@ export default function LebenslaufPage() {
                   badgeColor="purple"
                   subtitle="Lokaler Webauftritt für eine Praxis im Gesundheitsbereich"
                   links={[
-                    { href: "https://gesunderfuss.vercel.app/", label: "gesunderfuss.vercel.app", icon: "external" },
+                    {
+                      href: "https://gesunderfuss.vercel.app/",
+                      label: "gesunderfuss.vercel.app",
+                      icon: "external",
+                    },
                   ]}
                   description="Fokus auf Übersichtlichkeit, lokale SEO und Mobile-First Design."
                   tags={["Lokale SEO", "Clean Design", "Mobile First"]}
@@ -399,15 +487,22 @@ export default function LebenslaufPage() {
 
           {/* ── 4. Bildung ─────────────────────────────────────────────────── */}
           <section>
-            <SectionHeader label="Qualifikationen" title="Bildung & Weiterbildung" />
+            <SectionHeader
+              label="Qualifikationen"
+              title="Bildung & Weiterbildung"
+            />
             <div className="relative">
               <div className="absolute left-[10px] top-0 bottom-0 w-px bg-border/50" />
               <div className="flex flex-col gap-10">
                 <div className="relative pl-9">
                   <TimelineDot active />
                   <div className="mb-1 flex flex-wrap items-center gap-3">
-                    <h3 className="font-semibold text-foreground">Techstarter GmbH</h3>
-                    <span className="font-mono text-xs text-muted-foreground">2024–2025</span>
+                    <h3 className="font-semibold text-foreground">
+                      Techstarter GmbH
+                    </h3>
+                    <span className="font-mono text-xs text-muted-foreground">
+                      2024–2025
+                    </span>
                   </div>
                   <p className="mb-3 font-mono text-sm text-primary">
                     Expert:in für Cloud- und Webentwicklung
@@ -426,8 +521,12 @@ export default function LebenslaufPage() {
                 <div className="relative pl-9">
                   <TimelineDot />
                   <div className="mb-1 flex flex-wrap items-center gap-3">
-                    <h3 className="font-semibold text-foreground">Robert Bosch Berufskolleg</h3>
-                    <span className="font-mono text-xs text-muted-foreground">2004–2006</span>
+                    <h3 className="font-semibold text-foreground">
+                      Robert Bosch Berufskolleg
+                    </h3>
+                    <span className="font-mono text-xs text-muted-foreground">
+                      2004–2006
+                    </span>
                   </div>
                   <p className="font-mono text-sm text-muted-foreground">
                     Fachschule für Technik, Fachrichtung Elektrotechnik
@@ -439,23 +538,40 @@ export default function LebenslaufPage() {
 
           {/* ── 5. Berufserfahrung ─────────────────────────────────────────── */}
           <section>
-            <SectionHeader label="Praxis" title="Praktische Erfahrung & weitere Stationen" />
+            <SectionHeader
+              label="Praxis"
+              title="Praktische Erfahrung & weitere Stationen"
+            />
             <div className="relative">
               <div className="absolute left-[10px] top-0 bottom-0 w-px bg-border/50" />
               <div className="flex flex-col gap-8">
                 <div className="relative pl-9">
                   <TimelineDot />
                   <div className="mb-1 flex flex-wrap items-center gap-3">
-                    <h3 className="font-semibold text-foreground">Gameserver-Administration · eigene Praxis</h3>
-                    <span className="font-mono text-xs text-muted-foreground">2017–2024</span>
+                    <h3 className="font-semibold text-foreground">
+                      Gameserver-Administration · eigene Praxis
+                    </h3>
+                    <span className="font-mono text-xs text-muted-foreground">
+                      2017–2024
+                    </span>
                   </div>
-                  <BulletList items={["Installation und Betreuung von Gameservern und VPS-Systemen", "Updates, Backups und Monitoring", "Unterstützung bei technischen Problemen"]} />
+                  <BulletList
+                    items={[
+                      "Installation und Betreuung von Gameservern und VPS-Systemen",
+                      "Updates, Backups und Monitoring",
+                      "Unterstützung bei technischen Problemen",
+                    ]}
+                  />
                 </div>
                 <div className="relative pl-9">
                   <TimelineDot active />
                   <div className="mb-1 flex flex-wrap items-center gap-3">
-                    <h3 className="font-semibold text-foreground">Grünbau gGmbH Kreativwerkstatt</h3>
-                    <span className="font-mono text-xs text-muted-foreground">Dortmund · 2019–2024</span>
+                    <h3 className="font-semibold text-foreground">
+                      Grünbau gGmbH Kreativwerkstatt
+                    </h3>
+                    <span className="font-mono text-xs text-muted-foreground">
+                      Dortmund · 2019–2024
+                    </span>
                   </div>
                   <BulletList
                     items={[
@@ -466,14 +582,28 @@ export default function LebenslaufPage() {
                   />
                 </div>
                 {[
-                  { name: "Medienhaus Lensing Druck", location: "Dortmund", period: "2017" },
-                  { name: "Diakonisches Werk Dortmund", location: "Dortmund", period: "2011–2012" },
-                  { name: "Jugendzentrum Scharnhorst", location: "Dortmund", period: "2008–2009" },
+                  {
+                    name: "Medienhaus Lensing Druck",
+                    location: "Dortmund",
+                    period: "2017",
+                  },
+                  {
+                    name: "Diakonisches Werk Dortmund",
+                    location: "Dortmund",
+                    period: "2011–2012",
+                  },
+                  {
+                    name: "Jugendzentrum Scharnhorst",
+                    location: "Dortmund",
+                    period: "2008–2009",
+                  },
                 ].map((entry) => (
                   <div key={entry.name} className="relative pl-9">
                     <TimelineDot />
                     <div className="flex flex-wrap items-center gap-3">
-                      <h3 className="font-semibold text-foreground">{entry.name}</h3>
+                      <h3 className="font-semibold text-foreground">
+                        {entry.name}
+                      </h3>
                       <span className="font-mono text-xs text-muted-foreground">
                         {entry.location} · {entry.period}
                       </span>
@@ -509,26 +639,50 @@ export default function LebenslaufPage() {
               {[
                 {
                   title: "Grundlagen & Projekttechnologien",
-                  skills: ["JavaScript / Python: Grundlagen", "Frontend / Backend: Grundlagen", "React / Next.js: KI-Projekte", "APIs, HTTP & JSON"],
+                  skills: [
+                    "JavaScript / Python: Grundlagen",
+                    "Frontend / Backend: Grundlagen",
+                    "React / Next.js: KI-Projekte",
+                    "APIs, HTTP & JSON",
+                  ],
                 },
                 {
                   title: "KI & Automatisierung",
-                  skills: ["Anforderungen & Nutzerabläufe", "Claude Code / Claude Cowork", "ChatGPT / Lovable", "Multi-Agent-Workflows", "n8n-Prototypen"],
+                  skills: [
+                    "Anforderungen & Nutzerabläufe",
+                    "Claude Code / Claude Cowork",
+                    "ChatGPT / Lovable",
+                    "Multi-Agent-Workflows",
+                    "n8n-Prototypen",
+                  ],
                 },
                 {
                   title: "Serverpraxis & Cloud-Grundlagen",
-                  skills: ["Linux/Ubuntu Server (praktische Erfahrung)", "Docker-Grundlagen", "AWS & Azure Basics", "GitHub Actions in KI-Projekten", "SSH Remote-Administration"],
+                  skills: [
+                    "Linux/Ubuntu Server (praktische Erfahrung)",
+                    "Docker-Grundlagen",
+                    "AWS & Azure Basics",
+                    "GitHub Actions in KI-Projekten",
+                    "SSH Remote-Administration",
+                  ],
                 },
                 {
                   title: "Prüfung & Weiterentwicklung",
-                  skills: ["Testkonzeption", "KI-gestützte Code- und Textreviews", "Dokumentation / Refactoring mit KI", "GitHub / Vercel"],
+                  skills: [
+                    "Testkonzeption",
+                    "KI-gestützte Code- und Textreviews",
+                    "Dokumentation / Refactoring mit KI",
+                    "GitHub / Vercel",
+                  ],
                 },
               ].map((category) => (
                 <div
                   key={category.title}
                   className="rounded-xl border border-border bg-card p-5 transition-colors duration-300 hover:border-primary/30"
                 >
-                  <h3 className="mb-3 text-sm font-semibold text-foreground">{category.title}</h3>
+                  <h3 className="mb-3 text-sm font-semibold text-foreground">
+                    {category.title}
+                  </h3>
                   <div className="flex flex-wrap gap-2">
                     {category.skills.map((skill) => (
                       <Tag key={skill}>{skill}</Tag>
@@ -545,14 +699,19 @@ export default function LebenslaufPage() {
             <div className="flex flex-wrap gap-4">
               {[
                 { lang: "Deutsch", level: "Muttersprache" },
-                { lang: "Englisch", level: "Gutes Lese- und Hörverständnis; mündliche Grundlagen" },
+                {
+                  lang: "Englisch",
+                  level: "Gutes Lese- und Hörverständnis; mündliche Grundlagen",
+                },
               ].map(({ lang, level }) => (
                 <div
                   key={lang}
                   className="flex flex-wrap items-center gap-3 rounded-xl border border-border bg-card px-6 py-4"
                 >
                   <span className="font-semibold text-foreground">{lang}</span>
-                  <span className="font-mono text-xs text-muted-foreground">{level}</span>
+                  <span className="font-mono text-xs text-muted-foreground">
+                    {level}
+                  </span>
                 </div>
               ))}
             </div>
@@ -583,17 +742,19 @@ export default function LebenslaufPage() {
             <SectionHeader label="Methodik" title="Meine Arbeitsweise" />
             <div className="rounded-xl border border-primary/20 bg-primary/5 p-6">
               <p className="text-base leading-relaxed text-muted-foreground">
-                Ich formuliere Anforderungen, wähle Modelle und verteile Aufgaben auf KI-Werkzeuge
-                und Agenten. Ich lasse Tests, technische Reviews und Prüfungen der Inhalte erstellen
-                und erweitern. Dokumentation und KI-gestütztes Refactoring gehören ebenso dazu.
-                Prüfaufträge, gemeldete Befunde und bestätigte Ergebnisse unterscheide ich voneinander.
-                Diesen Ablauf habe ich in eigenen Projekten entwickelt und möchte ihn im Team weiter ausbauen.
+                Ich formuliere Anforderungen, wähle Modelle und verteile
+                Aufgaben auf KI-Werkzeuge und Agenten. Ich lasse Tests,
+                technische Reviews und Prüfungen der Inhalte erstellen und
+                erweitern. Dokumentation und KI-gestütztes Refactoring gehören
+                ebenso dazu. Prüfaufträge, gemeldete Befunde und bestätigte
+                Ergebnisse unterscheide ich voneinander. Diesen Ablauf habe ich
+                in eigenen Projekten entwickelt und möchte ihn im Team weiter
+                ausbauen.
               </p>
             </div>
           </section>
-
         </div>
       </main>
     </>
-  )
+  );
 }

@@ -1,33 +1,60 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import { ExternalLink, Github, Sparkles, Brain, Briefcase, Send, Lock, Headset, Construction, X, Globe, HeartPulse } from "lucide-react"
+import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
+import {
+  ExternalLink,
+  Github,
+  Sparkles,
+  Brain,
+  Briefcase,
+  Send,
+  Lock,
+  Headset,
+  Construction,
+  X,
+  Globe,
+  HeartPulse,
+  Play,
+} from "lucide-react";
 
-type ProjectStatus = "aktiv" | "fertig" | "in_arbeit" | "erprobung"
+type ProjectStatus = "aktiv" | "fertig" | "in_arbeit" | "erprobung";
 
 interface Project {
-  title: string
-  description: string
-  tags: string[]
-  icon: React.ReactNode
-  image?: string
-  video?: string
-  liveUrl?: string
-  githubUrl?: string
-  githubPrivate?: boolean
-  comingSoon?: boolean
-  wip?: boolean
-  status?: ProjectStatus
-  badge?: string
+  title: string;
+  description: string;
+  contribution?: string;
+  practice?: string;
+  details?: string;
+  tags: string[];
+  icon: React.ReactNode;
+  image?: string;
+  video?: string;
+  liveUrl?: string;
+  githubUrl?: string;
+  githubPrivate?: boolean;
+  comingSoon?: boolean;
+  wip?: boolean;
+  status?: ProjectStatus;
+  badge?: string;
 }
 
 const aiProjects: Project[] = [
   {
     title: "Therapieplatz Finder",
     description:
-      "Unterstützt die ambulante Therapieplatzsuche mit Praxisinformationen, Suchfiltern, E-Mail-Versand und einer Dokumentation der Kontaktversuche. Mein Beitrag: Konzeption, Nutzerabläufe und Steuerung der KI-gestützten Umsetzung einschließlich Datenaufbereitung, Tests und Veröffentlichung. Die Anwendung wird im ambulant betreuten Wohnen für die Arbeit mit Klient:innen erprobt; erste Rückmeldungen beschreiben eine Erleichterung bei der Unterstützung der Suche.",
-    tags: ["Python", "Anthropic API", "Supabase", "Resend", "GitHub Actions", "Vercel"],
+      "Hilft Menschen, passende Therapiepraxen zu finden und ihre Kontaktversuche im Blick zu behalten.",
+    contribution: "Konzeption, Nutzerabläufe und Steuerung der KI-gestützten Umsetzung.",
+    practice: "Wird im ambulant betreuten Wohnen für die Arbeit mit Klient:innen erprobt.",
+    details: "Die Anwendung verbindet Praxisinformationen und Suchfilter mit E-Mail-Versand und einer Dokumentation der Kontaktversuche. Zur Umsetzung gehören Datenaufbereitung, Tests und Veröffentlichung. Erste Rückmeldungen aus der Erprobung beschreiben eine Erleichterung bei der Unterstützung der Suche.",
+    tags: [
+      "Python",
+      "Anthropic API",
+      "Supabase",
+      "Resend",
+      "GitHub Actions",
+      "Vercel",
+    ],
     icon: <HeartPulse size={24} />,
     image: "/projects/therapieplatzfinder.png",
     video: "/projects/therapieplatzfinder.webm",
@@ -88,7 +115,7 @@ const aiProjects: Project[] = [
     githubUrl: "https://github.com/celtechstarter/marcel-cv-boost",
     status: "fertig",
   },
-]
+];
 
 const webProjects: Project[] = [
   {
@@ -127,272 +154,234 @@ const webProjects: Project[] = [
     status: "fertig",
     badge: "Unentgeltliches Webprojekt",
   },
-]
+];
 
 function StatusBadge({ status }: { status: ProjectStatus }) {
-  if (status === "aktiv" || status === "erprobung") {
-    return (
-      <div className="flex items-center gap-1.5">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <circle cx="7" cy="7" r="5" fill="#1D9E75" opacity="0.25">
-            <animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite" />
-            <animate attributeName="opacity" values="0.25;0;0.25" dur="2s" repeatCount="indefinite" />
-          </circle>
-          <circle cx="7" cy="7" r="3.5" fill="#1D9E75" />
-        </svg>
-        <span className="font-mono text-xs" style={{ color: "#1D9E75" }}>{status === "erprobung" ? "In Erprobung" : "Veröffentlicht"}</span>
-      </div>
-    )
-  }
-
-  if (status === "fertig") {
-    return (
-      <div className="flex items-center gap-1.5">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <circle cx="7" cy="7" r="6" stroke="#378ADD" strokeWidth="1.5" />
-          <path d="M4.5 7L6.5 9L9.5 5" stroke="#378ADD" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-        <span className="font-mono text-xs" style={{ color: "#378ADD" }}>Veröffentlicht</span>
-      </div>
-    )
-  }
-
   return (
-    <div className="flex items-center gap-1.5">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <circle cx="7" cy="7" r="5" stroke="#EF9F27" strokeWidth="1.5" strokeDasharray="3.5 2">
-          <animateTransform attributeName="transform" type="rotate" from="0 7 7" to="360 7 7" dur="2.5s" repeatCount="indefinite" />
-        </circle>
-      </svg>
-      <span className="font-mono text-xs" style={{ color: "#EF9F27" }}>In Entwicklung</span>
-    </div>
-  )
+    <span
+      className={
+        "project-status " + (status === "in_arbeit" ? "status-wip" : "")
+      }
+    >
+      {status === "erprobung"
+        ? "In Erprobung"
+        : status === "in_arbeit"
+          ? "In Entwicklung"
+          : "Veröffentlicht"}
+    </span>
+  );
 }
-
+type Media = { src: string; alt: string; isVideo?: boolean };
 export function Projects() {
-  const [lightboxMedia, setLightboxMedia] = useState<{ src: string; alt: string; isVideo?: boolean } | null>(null)
-
+  const [media, setMedia] = useState<Media | null>(null);
+  const dialog = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    if (media) dialog.current?.showModal();
+  }, [media]);
+  function close() {
+    dialog.current?.close();
+    setMedia(null);
+  }
   return (
-    <section id="projekte" className="px-6 py-24 md:py-32">
-      <div className="mx-auto max-w-6xl space-y-24">
-
-        {/* Sektion 1: KI & App Development */}
-        <div>
-          <div className="mb-16 text-center">
-            <p className="mb-2 font-mono text-sm tracking-widest text-primary uppercase">
-              KI & App Development
+    <section id="projekte" className="projects-section">
+      <div className="shell">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">
+              <span>03</span> Ausgewählte Arbeit
             </p>
-            <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl text-balance">
-              KI-gestützt umgesetzte Projekte
+            <h2>
+              Ideen, die
+              <br />
+              <em>praktisch werden.</em>
             </h2>
           </div>
-          <p className="mb-8 text-sm text-muted-foreground text-center max-w-3xl mx-auto">
-            Ich konzipiere Funktionen, koordiniere KI-Werkzeuge und Agenten und erprobe die Ergebnisse.
-            Die Code-Umsetzung erfolgt KI-gestützt. Die Technologie-Tags beschreiben den jeweiligen Projektaufbau.
+          <p>
+            Ich konzipiere Funktionen, koordiniere KI-Werkzeuge und Agenten und
+            erprobe die Ergebnisse. Die Code-Umsetzung erfolgt KI-gestützt. Die
+            Technologie-Tags beschreiben den jeweiligen Projektaufbau.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {aiProjects.map((project) => (
-              <ProjectCard
-                key={project.title}
-                project={project}
-                onMediaClick={setLightboxMedia}
-              />
-            ))}
-          </div>
         </div>
-
-        {/* Sektion 2: Webdesign & Lernprojekte */}
-        <div>
-          <div className="mb-16 text-center">
-            <p className="mb-2 font-mono text-sm tracking-widest text-primary uppercase">
-              Webdesign & Lernprojekte
-            </p>
-            <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl text-balance">
-              Lernprojekte & Referenzen
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {webProjects.map((project) => (
-              <ProjectCard
-                key={project.title}
-                project={project}
-                onMediaClick={setLightboxMedia}
-              />
-            ))}
-          </div>
-        </div>
-
-      </div>
-
-      {/* Lightbox Modal */}
-      {lightboxMedia && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-6"
-          onClick={() => setLightboxMedia(null)}
-        >
-          <button
-            onClick={() => setLightboxMedia(null)}
-            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
-            aria-label="Schließen"
-          >
-            <X size={28} />
-          </button>
-          <div
-            className="relative max-h-[85vh] max-w-[90vw] overflow-hidden rounded-xl shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {lightboxMedia.isVideo ? (
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                controls
-                className="h-auto max-h-[85vh] w-auto rounded-xl"
-                style={{ maxWidth: "90vw" }}
-              >
-                <source src={lightboxMedia.src} type="video/webm" />
-              </video>
-            ) : (
-              <Image
-                src={lightboxMedia.src}
-                alt={lightboxMedia.alt}
-                width={1280}
-                height={720}
-                className="h-auto max-h-[85vh] w-auto object-contain"
-              />
-            )}
-          </div>
-        </div>
-      )}
-    </section>
-  )
-}
-
-function ProjectCard({ project, onMediaClick }: { project: Project; onMediaClick: (media: { src: string; alt: string; isVideo?: boolean }) => void }) {
-  const hasMedia = !!(project.video || project.image)
-
-  return (
-    <div className="glass-card glow-border group flex flex-col overflow-hidden rounded-2xl h-full transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(249,115,22,0.15)]">
-      {/* Thumbnail */}
-      <div
-        className={`relative w-full shrink-0 overflow-hidden bg-black/60 aspect-video flex items-center justify-center ${hasMedia ? "cursor-pointer" : ""}`}
-        onClick={() => {
-          if (project.video) onMediaClick({ src: project.video, alt: project.title, isVideo: true })
-          else if (project.image) onMediaClick({ src: project.image, alt: project.title })
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
-
-        {project.video ? (
-          <>
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-            >
-              <source src={project.video} type="video/webm" />
-            </video>
-            <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/50 z-20 pointer-events-none">
-              <span className="rounded-lg bg-black/60 backdrop-blur-md px-3 py-1.5 text-xs font-medium text-white opacity-0 transition-all duration-300 group-hover:opacity-100 border border-white/10 translate-y-4 group-hover:translate-y-0">
-                Größer ansehen
-              </span>
-            </div>
-          </>
-        ) : project.image ? (
-          <>
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+        <div className="project-grid">
+          {aiProjects.map((project, i) => (
+            <ProjectCard
+              key={project.title}
+              project={project}
+              featured={i === 0}
+              onMediaClick={setMedia}
             />
-            <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/50 z-20 pointer-events-none">
-              <span className="rounded-lg bg-black/60 backdrop-blur-md px-3 py-1.5 text-xs font-medium text-white opacity-0 transition-all duration-300 group-hover:opacity-100 border border-white/10 translate-y-4 group-hover:translate-y-0">
-                Vergrößern
-              </span>
-            </div>
-          </>
-        ) : (
-          <div className="flex h-full w-full items-center justify-center text-primary/50 transition-all duration-500 group-hover:text-primary group-hover:scale-110">
-            {project.icon}
-          </div>
-        )}
-      </div>
-
-      {/* Content */}
-      <div className="flex flex-1 flex-col p-6 z-10 relative bg-gradient-to-b from-transparent to-black/20">
-        {/* Badge */}
-        {project.badge && (
-          <span className="mb-3 inline-block w-fit rounded-full border border-primary/30 bg-primary/10 px-3 py-0.5 font-mono text-[10px] text-primary uppercase tracking-wider">
-            {project.badge}
-          </span>
-        )}
-
-        {/* Title + Status Badge */}
-        <div className="mb-3 flex items-start justify-between gap-3">
-          <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-            {project.title}
-          </h3>
-          {project.status && <div className="mt-1"><StatusBadge status={project.status} /></div>}
-        </div>
-
-        <p className="mb-6 flex-1 text-sm leading-relaxed text-muted-foreground">
-          {project.description}
-        </p>
-
-        <div className="mb-6 flex flex-wrap gap-2">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full bg-white/5 border border-white/10 px-3 py-1 font-mono text-[10px] sm:text-xs text-muted-foreground backdrop-blur-sm group-hover:border-white/20 transition-colors"
-            >
-              {tag}
-            </span>
           ))}
         </div>
-
-        {!project.comingSoon && !project.wip && (
-          <div className="flex items-center gap-4 border-t border-border/50 pt-4 mt-auto">
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-all hover:text-primary hover:gap-2"
-              >
-                <ExternalLink size={14} />
-                Live Demo
-              </a>
-            )}
-            {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-all hover:text-foreground hover:gap-2"
-              >
-                <Github size={14} />
-                GitHub
-              </a>
-            )}
-            {project.githubPrivate && (
-              <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground/50 cursor-not-allowed select-none">
-                <Lock size={12} />
-                Privat
-              </span>
-            )}
-          </div>
-        )}
-        {project.wip && (
-          <div className="flex items-center gap-2 border-t border-border/50 pt-4 mt-auto">
-            <Construction size={14} className="text-primary" />
-            <span className="text-sm font-medium text-primary">In Entwicklung</span>
-          </div>
-        )}
+        <div className="reference-heading">
+          <h3>Lernprojekte & Referenzen</h3>
+          <p>Weitere Webauftritte aus meiner Projektpraxis.</p>
+        </div>
+        <div className="reference-grid">
+          {webProjects.map((project) => (
+            <ProjectCard
+              key={project.title}
+              project={project}
+              onMediaClick={setMedia}
+            />
+          ))}
+        </div>
       </div>
-    </div>
-  )
+      <dialog
+        ref={dialog}
+        className="project-dialog"
+        aria-label={media ? "Projektvorschau: " + media.alt : "Projektvorschau"}
+        onCancel={close}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) close();
+        }}
+      >
+        {media && (
+          <>
+            <button
+              className="dialog-close"
+              onClick={close}
+              aria-label="Projektvorschau schließen"
+            >
+              <X size={22} />
+            </button>
+            <p>{media.alt}</p>
+            {media.isVideo ? (
+              <video
+                src={media.src}
+                controls
+                playsInline
+                preload="metadata"
+                aria-label={media.alt}
+              />
+            ) : (
+              <Image
+                src={media.src}
+                alt={media.alt}
+                width={1280}
+                height={720}
+              />
+            )}
+          </>
+        )}
+      </dialog>
+    </section>
+  );
+}
+function ProjectCard({
+  project,
+  featured = false,
+  onMediaClick,
+}: {
+  project: Project;
+  featured?: boolean;
+  onMediaClick: (media: Media) => void;
+}) {
+  const media = {
+    src: project.video || project.image || "",
+    alt: project.title,
+    isVideo: !!project.video,
+  };
+  return (
+    <article className={"project-card " + (featured ? "project-featured" : "")}>
+      {project.image && featured ? (
+        <div className="featured-media">
+          <div className="featured-browser">
+            <div className="featured-browser-bar" aria-hidden="true">
+              <div><i /><i /><i /></div>
+              <span>therapieplatz-finder.de</span>
+            </div>
+            <button className="featured-screen" onClick={() => onMediaClick(media)} aria-label={project.title + " – Vorschau öffnen"}>
+              <Image src={project.image} alt={"Ansicht von " + project.title} fill sizes="(max-width:760px) 90vw, 50vw" />
+              <span className="featured-play"><Play size={24} fill="currentColor" /><span>Projektvideo ansehen</span></span>
+            </button>
+          </div>
+          <p className="featured-caption">Einblick in die Anwendung · Aufnahme aus der Entwicklungsphase</p>
+        </div>
+      ) : project.image ? (
+        <button
+          className="project-preview"
+          onClick={() => onMediaClick(media)}
+          aria-label={project.title + " – Vorschau öffnen"}
+        >
+          <Image
+            src={project.image}
+            alt={"Ansicht von " + project.title}
+            fill
+            sizes={
+              featured
+                ? "(max-width:760px) 90vw, 55vw"
+                : "(max-width:760px) 90vw, 40vw"
+            }
+            className="object-cover object-top"
+          />
+          {project.video ? (
+            <span className="featured-play" aria-hidden="true">
+              <Play size={24} fill="currentColor" />
+              <span>Projektvideo ansehen</span>
+            </span>
+          ) : (
+            <span className="project-image-label">
+              Ansicht vergrößern <ExternalLink size={13} />
+            </span>
+          )}
+        </button>
+      ) : (
+        <div className="project-placeholder" aria-hidden="true">
+          {project.icon}
+          <span>{project.title}</span>
+        </div>
+      )}
+      <div className="project-content">
+        <div className="project-meta">
+          {project.status && <StatusBadge status={project.status} />}{" "}
+          {project.badge && <span>{project.badge}</span>}
+        </div>
+        <h3>{project.title}</h3>
+        <p>{project.description}</p>
+        {project.contribution && (
+          <dl className="project-facts">
+            <div><dt>Mein Beitrag</dt><dd>{project.contribution}</dd></div>
+            <div><dt>In der Praxis</dt><dd>{project.practice}</dd></div>
+          </dl>
+        )}
+        {project.details && (
+          <details className="project-details">
+            <summary>Mehr zum Projekt</summary>
+            <p>{project.details}</p>
+          </details>
+        )}
+        <div className="tag-list">
+          {project.tags.map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
+        </div>
+        <div className="project-links">
+          {project.liveUrl && (
+            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+              <ExternalLink size={14} /> Projekt öffnen
+            </a>
+          )}
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github size={14} /> GitHub
+            </a>
+          )}
+          {project.githubPrivate && (
+            <span>
+              <Lock size={12} /> Privates Repository
+            </span>
+          )}
+          {project.wip && (
+            <span>
+              <Construction size={13} /> In Entwicklung
+            </span>
+          )}
+        </div>
+      </div>
+    </article>
+  );
 }

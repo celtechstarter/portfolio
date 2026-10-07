@@ -1,30 +1,29 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Download, Wrench, ChevronDown } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Navbar } from "@/components/navbar"
+import { useState } from "react";
+import { Download, Wrench, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface DevlogEntry {
-  project: string
-  color: string
-  inDevelopment?: boolean
-  day: number
-  date?: string
-  title: string
-  description: string
-  problemSolved?: string
-  pdf?: string
+  project: string;
+  color: string;
+  inDevelopment?: boolean;
+  day: number;
+  date?: string;
+  title: string;
+  description: string;
+  problemSolved?: string;
+  pdf?: string;
 }
 
 const PROJECT_COLORS: Record<string, string> = {
-  "Therapieplatz Finder": "15, 92, 82",
-  "BewerbungsPilot": "74, 222, 128",
-  "Poke-Scan V2":    "207, 147, 54",
-  "Portfolio":       "96, 165, 250",
-  "CelDesk":         "167, 139, 250",
-  "SEO/GEO-Scanner": "244, 63, 94",
-}
+  "Therapieplatz Finder": "155, 203, 197",
+  BewerbungsPilot: "159, 211, 181",
+  "Poke-Scan V2": "230, 160, 124",
+  Portfolio: "155, 193, 228",
+  CelDesk: "203, 174, 230",
+  "SEO/GEO-Scanner": "237, 159, 175",
+};
 
 const entries: DevlogEntry[] = [
   // ── Therapieplatz Finder ─────────────────────────────────────────────────
@@ -406,7 +405,7 @@ const entries: DevlogEntry[] = [
     day: 4,
     title: "Kompletter Rewrite: Über mich",
     description:
-      "Den alten \"Angehender IT-Fachmann\"-Text komplett überarbeitet. Neuer Titel: \"Builder. Problemlöser. KI-Nerd.\" Ehrlicher Text über Arbeitsweise mit KI, Pareto-Prinzip-Infobutton eingebaut. Zusammen mit einem Kollegen die Richtung festgelegt.",
+      'Den alten "Angehender IT-Fachmann"-Text komplett überarbeitet. Neuer Titel: "Builder. Problemlöser. KI-Nerd." Ehrlicher Text über Arbeitsweise mit KI, Pareto-Prinzip-Infobutton eingebaut. Zusammen mit einem Kollegen die Richtung festgelegt.',
   },
   {
     project: "Portfolio",
@@ -425,7 +424,7 @@ const entries: DevlogEntry[] = [
     date: "16.03.2026",
     title: "Lebenslauf-Seite & Clean Code",
     description:
-      "Eigene Lebenslauf-Seite gebaut mit Timeline-Design, Profilbild und Skills als Badge-Pills. Neue \"Meine Arbeitsweise\" Section für ehrliche Darstellung des KI-Workflows. Favicon aus Profilbild erstellt, SEO Meta-Tags und OpenGraph-Daten eingerichtet. Danach kompletter Cleanup: ungenutzte Komponenten und Dependencies entfernt, Dead Code und console.logs bereinigt.",
+      'Eigene Lebenslauf-Seite gebaut mit Timeline-Design, Profilbild und Skills als Badge-Pills. Neue "Meine Arbeitsweise" Section für ehrliche Darstellung des KI-Workflows. Favicon aus Profilbild erstellt, SEO Meta-Tags und OpenGraph-Daten eingerichtet. Danach kompletter Cleanup: ungenutzte Komponenten und Dependencies entfernt, Dead Code und console.logs bereinigt.',
     problemSolved:
       "Inline-Lebenslauf wirkt professioneller als ein eingebetteter PDF-Viewer",
   },
@@ -435,7 +434,7 @@ const entries: DevlogEntry[] = [
     day: 7,
     title: "Bento-Redesign & Agentic Workflow",
     description:
-      "Kompletter Design-Pivot auf ein symmetrisches Bento-Grid für Projekte und Workflow. Den KI-Stack radikal ehrlich dokumentiert: Strategiewechsel zu Gemini/Antigravity und Gemini Agents als primäre \"Daily Driver\" (nahezu Null API-Kosten). Claude Code nur als Backup eingesetzt, wenn Gemini-Kontingente erschöpft waren.",
+      'Kompletter Design-Pivot auf ein symmetrisches Bento-Grid für Projekte und Workflow. Den KI-Stack radikal ehrlich dokumentiert: Strategiewechsel zu Gemini/Antigravity und Gemini Agents als primäre "Daily Driver" (nahezu Null API-Kosten). Claude Code nur als Backup eingesetzt, wenn Gemini-Kontingente erschöpft waren.',
   },
   {
     project: "Portfolio",
@@ -596,17 +595,17 @@ const entries: DevlogEntry[] = [
     description:
       "React-Projekt mit dem bewährten Stack aufgesetzt (React, TypeScript, Tailwind, Supabase). UI für das Ticketsystem gebaut: Dashboard mit Statistiken, Ticket-Erstellung, Status-Workflow (Offen → In Bearbeitung → Gelöst), Kategorien (Hardware, Software, Netzwerk). Backend-Anbindung an Supabase noch offen.",
   },
-]
+];
 
 function EntryCard({ entry, isLast }: { entry: DevlogEntry; isLast: boolean }) {
-  const [open, setOpen] = useState(false)
-  const rgb = entry.color
-  const key = `${entry.project}-${entry.day}`
+  const [open, setOpen] = useState(false);
+  const rgb = entry.color;
+  const key = `${entry.project}-${entry.day}`;
 
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 10 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.2 }}
@@ -616,7 +615,9 @@ function EntryCard({ entry, isLast }: { entry: DevlogEntry; isLast: boolean }) {
       <div className="relative mt-1 shrink-0">
         <div
           className="flex h-[22px] w-[22px] items-center justify-center rounded-full border-2 bg-background transition-colors duration-200"
-          style={{ borderColor: open ? `rgba(${rgb}, 0.9)` : `rgba(${rgb}, 0.4)` }}
+          style={{
+            borderColor: open ? `rgba(${rgb}, 0.9)` : `rgba(${rgb}, 0.4)`,
+          }}
         >
           <div
             className="h-2 w-2 rounded-full transition-all duration-200"
@@ -626,9 +627,12 @@ function EntryCard({ entry, isLast }: { entry: DevlogEntry; isLast: boolean }) {
       </div>
 
       {/* Card */}
-      <div className={`flex-1 ${!isLast ? "pb-8 border-b border-border/20" : ""}`}>
+      <div
+        className={`flex-1 ${!isLast ? "pb-8 border-b border-border/20" : ""}`}
+      >
         {/* Clickable header */}
         <button
+          aria-expanded={open}
           onClick={() => setOpen(!open)}
           className="w-full text-left group/btn"
         >
@@ -639,7 +643,7 @@ function EntryCard({ entry, isLast }: { entry: DevlogEntry; isLast: boolean }) {
                 <span
                   className="rounded-full px-2.5 py-0.5 font-mono text-[10px] font-bold tracking-wider uppercase"
                   style={{
-                    color: `rgba(${rgb}, 0.9)`,
+                    color: `rgba(${rgb}, 1)`,
                     background: `rgba(${rgb}, 0.1)`,
                     border: `1px solid rgba(${rgb}, 0.2)`,
                   }}
@@ -647,18 +651,18 @@ function EntryCard({ entry, isLast }: { entry: DevlogEntry; isLast: boolean }) {
                   {entry.project}
                 </span>
                 {entry.inDevelopment && (
-                  <span className="rounded-full border border-purple-400/20 px-2 py-0.5 font-mono text-[10px] text-purple-400/60 tracking-wide">
+                  <span className="rounded-full border border-purple-400/20 px-2 py-0.5 font-mono text-[10px] text-purple-800 tracking-wide">
                     In Entwicklung
                   </span>
                 )}
                 <span
                   className="font-mono text-[10px] font-bold tracking-widest uppercase"
-                  style={{ color: `rgba(${rgb}, 0.4)` }}
+                  style={{ color: `rgba(${rgb}, 1)` }}
                 >
                   Tag {String(entry.day).padStart(2, "0")}
                 </span>
                 {entry.date && (
-                  <span className="font-mono text-[10px] text-muted-foreground/40">
+                  <span className="font-mono text-[10px] text-muted-foreground">
                     {entry.date}
                   </span>
                 )}
@@ -671,7 +675,7 @@ function EntryCard({ entry, isLast }: { entry: DevlogEntry; isLast: boolean }) {
             {/* Chevron */}
             <ChevronDown
               size={15}
-              className="mt-0.5 shrink-0 text-muted-foreground/40 transition-transform duration-300 group-hover/btn:text-muted-foreground"
+              className="mt-0.5 shrink-0 text-muted-foreground transition-transform duration-300 group-hover/btn:text-muted-foreground"
               style={{ transform: open ? "rotate(180deg)" : "rotate(0deg)" }}
             />
           </div>
@@ -704,11 +708,11 @@ function EntryCard({ entry, isLast }: { entry: DevlogEntry; isLast: boolean }) {
                     <Wrench
                       size={13}
                       className="mt-0.5 shrink-0"
-                      style={{ color: `rgba(${rgb}, 0.65)` }}
+                      style={{ color: `rgba(${rgb}, 1)` }}
                     />
                     <p
                       className="font-mono text-xs leading-relaxed"
-                      style={{ color: `rgba(${rgb}, 0.65)` }}
+                      style={{ color: `rgba(${rgb}, 1)` }}
                     >
                       {entry.problemSolved}
                     </p>
@@ -722,20 +726,20 @@ function EntryCard({ entry, isLast }: { entry: DevlogEntry; isLast: boolean }) {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 font-mono text-xs transition-all duration-200"
                     style={{
-                      color: `rgba(${rgb}, 0.6)`,
+                      color: `rgba(${rgb}, 1)`,
                       border: `1px solid rgba(${rgb}, 0.2)`,
                     }}
                     onMouseEnter={(e) => {
-                      const el = e.currentTarget as HTMLAnchorElement
-                      el.style.color = `rgba(${rgb}, 1)`
-                      el.style.borderColor = `rgba(${rgb}, 0.5)`
-                      el.style.background = `rgba(${rgb}, 0.05)`
+                      const el = e.currentTarget as HTMLAnchorElement;
+                      el.style.color = `rgba(${rgb}, 1)`;
+                      el.style.borderColor = `rgba(${rgb}, 0.5)`;
+                      el.style.background = `rgba(${rgb}, 0.05)`;
                     }}
                     onMouseLeave={(e) => {
-                      const el = e.currentTarget as HTMLAnchorElement
-                      el.style.color = `rgba(${rgb}, 0.6)`
-                      el.style.borderColor = `rgba(${rgb}, 0.2)`
-                      el.style.background = "transparent"
+                      const el = e.currentTarget as HTMLAnchorElement;
+                      el.style.color = `rgba(${rgb}, 1)`;
+                      el.style.borderColor = `rgba(${rgb}, 0.2)`;
+                      el.style.background = "transparent";
                     }}
                   >
                     <Download size={11} />
@@ -748,25 +752,22 @@ function EntryCard({ entry, isLast }: { entry: DevlogEntry; isLast: boolean }) {
         </AnimatePresence>
       </div>
     </motion.div>
-  )
+  );
 }
 
 export default function DevlogClient() {
-  const [activeFilter, setActiveFilter] = useState<string | null>(null)
+  const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
   const filtered = activeFilter
-    ? entries.filter(e => e.project === activeFilter)
-    : entries
+    ? entries.filter((e) => e.project === activeFilter)
+    : entries;
 
   return (
     <>
-      <Navbar basePath="/" />
-
-      <div className="min-h-screen px-6 pb-24 pt-28">
-        <div className="mx-auto max-w-2xl">
-
+      <div className="document-page min-h-screen px-6 pb-24 pt-28">
+        <div className="mx-auto max-w-4xl">
           {/* Header */}
-          <div className="mb-12 text-center">
+          <div className="mb-12 text-left">
             <p className="mb-2 font-mono text-xs tracking-widest text-primary uppercase">
               Projektpraxis mit KI
             </p>
@@ -779,55 +780,67 @@ export default function DevlogClient() {
           </div>
 
           <p className="mb-8 text-sm leading-relaxed text-muted-foreground">
-            Die Einträge dokumentieren damalige Projektstände, nicht automatisch den heutigen Funktionsumfang.
-            Die Code-Umsetzung erfolgte mit KI-Werkzeugen und Agenten. Mein Beitrag liegt in Anforderungen,
-            Aufgabensteuerung und der Erprobung der Ergebnisse. Ältere Zahlen und Modellnamen sind Momentaufnahmen.
-            KI-gestützte Prüfberichte sind keine unabhängigen Sicherheits- oder Rechtsgutachten.
+            Die Einträge dokumentieren damalige Projektstände, nicht automatisch
+            den heutigen Funktionsumfang. Die Code-Umsetzung erfolgte mit
+            KI-Werkzeugen und Agenten. Mein Beitrag liegt in Anforderungen,
+            Aufgabensteuerung und der Erprobung der Ergebnisse. Ältere Zahlen
+            und Modellnamen sind Momentaufnahmen. KI-gestützte Prüfberichte sind
+            keine unabhängigen Sicherheits- oder Rechtsgutachten.
           </p>
           {/* Filter tabs */}
-          <div className="mb-10 flex flex-wrap justify-center gap-2">
+          <div className="mb-10 flex flex-wrap justify-start gap-2">
             <button
+              aria-pressed={activeFilter === null}
               onClick={() => setActiveFilter(null)}
               className={`rounded-full border px-4 py-1.5 font-mono text-xs transition-all duration-200 ${
                 activeFilter === null
-                  ? "border-white/20 bg-white/10 text-white"
-                  : "border-border/30 text-muted-foreground hover:border-white/20 hover:text-foreground"
+                  ? "border-border bg-secondary text-foreground"
+                  : "border-border/30 text-muted-foreground hover:border-border hover:text-foreground"
               }`}
             >
               Alle ({entries.length})
             </button>
             {Object.entries(PROJECT_COLORS).map(([name, rgb]) => {
-              const count = entries.filter(e => e.project === name).length
-              const isActive = activeFilter === name
+              const count = entries.filter((e) => e.project === name).length;
+              const isActive = activeFilter === name;
               return (
                 <button
                   key={name}
+                  aria-pressed={isActive}
                   onClick={() => setActiveFilter(isActive ? null : name)}
                   className="rounded-full border px-4 py-1.5 font-mono text-xs transition-all duration-200"
-                  style={isActive ? {
-                    background: `rgba(${rgb}, 0.15)`,
-                    borderColor: `rgba(${rgb}, 0.6)`,
-                    color: `rgba(${rgb}, 1)`,
-                  } : {
-                    borderColor: `rgba(${rgb}, 0.25)`,
-                    color: `rgba(${rgb}, 0.55)`,
-                  }}
+                  style={
+                    isActive
+                      ? {
+                          background: `rgba(${rgb}, 0.15)`,
+                          borderColor: `rgba(${rgb}, 0.6)`,
+                          color: `rgba(${rgb}, 1)`,
+                        }
+                      : {
+                          borderColor: `rgba(${rgb}, 0.25)`,
+                          color: `rgba(${rgb}, 1)`,
+                        }
+                  }
                   onMouseEnter={(e) => {
                     if (!isActive) {
-                      (e.currentTarget as HTMLButtonElement).style.color = `rgba(${rgb}, 0.9)`
-                      ;(e.currentTarget as HTMLButtonElement).style.borderColor = `rgba(${rgb}, 0.5)`
+                      (e.currentTarget as HTMLButtonElement).style.color =
+                        `rgba(${rgb}, 1)`;
+                      (e.currentTarget as HTMLButtonElement).style.borderColor =
+                        `rgba(${rgb}, 0.5)`;
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (!isActive) {
-                      (e.currentTarget as HTMLButtonElement).style.color = `rgba(${rgb}, 0.55)`
-                      ;(e.currentTarget as HTMLButtonElement).style.borderColor = `rgba(${rgb}, 0.25)`
+                      (e.currentTarget as HTMLButtonElement).style.color =
+                        `rgba(${rgb}, 1)`;
+                      (e.currentTarget as HTMLButtonElement).style.borderColor =
+                        `rgba(${rgb}, 0.25)`;
                     }
                   }}
                 >
                   {name} ({count})
                 </button>
-              )
+              );
             })}
           </div>
 
@@ -848,12 +861,12 @@ export default function DevlogClient() {
           </div>
 
           {/* Footer */}
-          <div className="mt-16 text-center font-mono text-xs text-muted-foreground/30">
-            // {filtered.length} von {entries.length} Einträgen · {Object.keys(PROJECT_COLORS).length} Projekte
+          <div className="mt-16 text-center font-mono text-xs text-muted-foreground">
+            // {filtered.length} von {entries.length} Einträgen ·{" "}
+            {Object.keys(PROJECT_COLORS).length} Projekte
           </div>
-
         </div>
       </div>
     </>
-  )
+  );
 }

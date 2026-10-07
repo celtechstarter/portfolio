@@ -1,32 +1,59 @@
-import Link from "next/link"
-
+import { ArrowUpRight, ArrowUp } from "lucide-react";
 export function Footer() {
   return (
-    <footer className="w-full border-t border-white/5 bg-black py-8 mt-auto relative z-20">
-      <div className="container mx-auto px-6 flex flex-col items-center gap-4">
-        <p className="text-xs text-muted-foreground/50 font-mono text-center">
-          KI-gestützte Produktentwicklung & Automatisierung · Offen für eine Festanstellung · Remote bevorzugt
-        </p>
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 w-full">
-          <p className="text-sm text-muted-foreground font-mono">
-            &copy; {new Date().getFullYear()} Marcel Welk.
-          </p>
-          <nav className="flex items-center gap-8">
-            <Link
-              href="/impressum"
-              className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors"
-            >
-              Impressum
-            </Link>
-            <Link
-              href="/datenschutz"
-              className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors"
-            >
-              Datenschutz
-            </Link>
-          </nav>
+    <footer className="site-footer">
+      <div className="shell footer-grid">
+        <div className="footer-brand">
+          <span className="brand-mark">
+            M<span>W</span>
+          </span>
+          <p>Marcel Welk</p>
+          <span>Menschenzentrierte Web- &amp; KI-Lösungen.</span>
+          <small>
+            Konzeption. KI-Agenten koordinieren. Ergebnisse bewerten.
+          </small>
+        </div>
+        <nav aria-label="Entdecken">
+          <h2>Entdecken</h2>
+          <a href="/#projekte">Projekte</a>
+          <a href="/ki-workflow">Arbeitsweise</a>
+          <a href="/#ueber-mich">Über mich</a>
+          <a href="/devlog">Devlog</a>
+        </nav>
+        <nav aria-label="Kontakt und Unterlagen">
+          <h2>In Verbindung bleiben</h2>
+          <a href="/#kontakt">
+            Kontakt <ArrowUpRight size={13} />
+          </a>
+          <a
+            href="https://linkedin.com/in/marcel-welk-572a412ab/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn <ArrowUpRight size={13} />
+          </a>
+          <a
+            href="https://github.com/celtechstarter"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub <ArrowUpRight size={13} />
+          </a>
+          <a href="/lebenslauf">Lebenslauf</a>
+        </nav>
+      </div>
+      <div className="shell footer-bottom">
+        <span>
+          © {new Date().getFullYear()} Marcel Welk · Dortmund · Remote bevorzugt
+        </span>
+        <div>
+          <a href="/impressum">Impressum</a>
+          <a href="/datenschutz">Datenschutz</a>
+          <a href="#seitenanfang">
+            Nach oben <ArrowUp size={14} />
+          </a>
         </div>
       </div>
     </footer>
-  )
+  );
 }
