@@ -38,102 +38,66 @@ function SpotlightCard({ children, className = "" }: { children: React.ReactNode
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 const pipeline = [
-  {
-    step: "01",
-    title: "Strategie",
-    desc: "Anforderungen klären, Architektur planen",
-    tool: "Claude / Gemini",
-    icon: <Brain size={20} className="text-orange-400" />,
-  },
-  {
-    step: "02",
-    title: "Prototyping",
-    desc: "UI schnell zum Anfassen bringen",
-    tool: "v0.dev",
-    icon: <Wand2 size={20} className="text-orange-400" />,
-  },
-  {
-    step: "03",
-    title: "Engineering",
-    desc: "Agentic Coding, direkt im Code",
-    tool: "Claude Code / Cowork",
-    icon: <Code2 size={20} className="text-orange-400" />,
-  },
-  {
-    step: "04",
-    title: "Backend & KI-Integration",
-    desc: "Datenpipelines, KI-Features im Produkt",
-    tool: "Python / Anthropic API",
-    icon: <Bot size={20} className="text-orange-400" />,
-  },
-  {
-    step: "05",
-    title: "Deployment",
-    desc: "Live stellen, absichern, testen",
-    tool: "Vercel / Supabase",
-    icon: <Rocket size={20} className="text-orange-400" />,
-  },
+  { step: "01", title: "Anforderungen", desc: "Problem, Nutzerablauf und Prüfkriterien", tool: "Claude Cowork / ChatGPT", icon: <Brain size={20} className="text-orange-400" /> },
+  { step: "02", title: "Aufgabenverteilung", desc: "Arbeitspakete, Modelle und Anweisungen", tool: "KI-Agenten", icon: <Wand2 size={20} className="text-orange-400" /> },
+  { step: "03", title: "KI-Umsetzung", desc: "Prototypen, Funktionen und Schnittstellen", tool: "Claude Code / Lovable / n8n", icon: <Code2 size={20} className="text-orange-400" /> },
+  { step: "04", title: "Gegenprüfung", desc: "Tests, Logik und Nutzerabläufe", tool: "Weitere Modelle / Testläufe", icon: <ShieldCheck size={20} className="text-orange-400" /> },
+  { step: "05", title: "Weiterentwicklung", desc: "Veröffentlichen, Feedback und Dokumentation", tool: "GitHub / Vercel", icon: <Rocket size={20} className="text-orange-400" /> },
 ]
 
 const arsenal = [
   {
-    eyebrow: "Agentic Coding · Täglich im Einsatz",
-    title: "Claude Code & Cowork",
-    description:
-      "Mein Hauptwerkzeug für echte Projekte, nicht nur Demos: Claude Code für tiefe Codebase-Arbeit im Terminal, Cowork für Datei- und Rechercheaufgaben nebenher. Von der ersten Zeile bis zum fertigen Commit.",
-    tags: ["Claude Code", "Cowork", "VS Code"],
+    eyebrow: "Konzeption",
+    title: "Vom Problem zum Arbeitspaket",
+    description: "Ich formuliere Anforderungen, plane Nutzerabläufe und teile Aufgaben in überschaubare Schritte auf. Mein Beitrag liegt darin, das Ziel verständlich zu machen und die KI-gestützte Umsetzung daran auszurichten.",
+    tags: ["Anforderungen", "Nutzerabläufe", "Prüfkriterien"],
+    icon: <Brain size={26} />,
+  },
+  {
+    eyebrow: "Multi-Agent-Workflows",
+    title: "Werkzeuge und Agenten koordinieren",
+    description: "Claude Cowork, Claude Code und ChatGPT nutze ich auch parallel. Ich wähle Modelle passend zur Aufgabe und lasse abgegrenzte Arbeitspakete bearbeiten. Die Programmierung erfolgt mit KI; ich steuere die Aufgaben und gleiche Ergebnisse mit den Anforderungen ab.",
+    tags: ["Claude Cowork", "Claude Code", "ChatGPT"],
     icon: <Terminal size={26} />,
   },
   {
-    eyebrow: "Backend · Automatisierung",
-    title: "Python-Pipelines & Web-Scraping",
-    description:
-      "Playwright für automatisiertes Auslesen echter Webseiten, robuste Fehlerbehandlung für lange, unbeaufsichtigte Läufe, eigene Testsuite mit pytest. Kein Frontend-Bling, sondern Daten, die am Ende stimmen.",
-    tags: ["Python", "Playwright", "pytest"],
-    icon: <Server size={26} />,
-  },
-  {
-    eyebrow: "KI-Integration · Anthropic API",
-    title: "KI direkt im Produkt",
-    description:
-      "Nicht nur KI zum Bauen nutzen, sondern KI ins fertige Produkt einbauen: automatische Profil-Bewertung im Backend, ein eigener Chat-Assistent im Frontend — abgesichert gegen Prompt-Injection und mit Rate-Limiting.",
-    tags: ["Anthropic API", "Prompt Engineering", "Rate-Limiting"],
+    eyebrow: "Automatisierung & APIs",
+    title: "Abläufe verbinden",
+    description: "Ich konzipiere Abläufe mit Datenabruf, Verarbeitung und Ausgabe und setze sie KI-gestützt um. Mein n8n-Prototyp verbindet HTTP-Abruf, JavaScript-Verarbeitung, einen KI-Bericht und E-Mail-Versand. Weitergehende Automatisierungen kennzeichne ich als geplant.",
+    tags: ["n8n", "HTTP / JSON", "APIs"],
     icon: <Bot size={26} />,
   },
   {
-    eyebrow: "Backend-as-a-Service",
-    title: "Supabase & Auth",
-    description:
-      "Login-Systeme mit Magic Link und OAuth, Datenbank, serverseitig geprüfte Tokens statt Klartext-Passwortvergleich. Kein selbstgebautes Auth-Rad — sondern der Teil, den man nicht falsch machen darf.",
-    tags: ["Supabase", "Auth", "PostgreSQL"],
-    icon: <Database size={26} />,
-  },
-  {
-    eyebrow: "Security-Mindset",
-    title: "Sicherheit ist kein Nachgedanke",
-    description:
-      "Vor größeren Änderungen: Wer könnte das missbrauchen, reicht die Eingabevalidierung? Eigene Security-Audits, Cloudflare Turnstile gegen Bots, CSP-Header, Rate-Limits — nicht weil ein Kunde es verlangt, sondern weil es dazugehört.",
-    tags: ["Security-Audits", "Cloudflare Turnstile", "CSP"],
+    eyebrow: "Qualitätsprüfung",
+    title: "Tests und modellübergreifende Reviews",
+    description: "Ich lasse Tests für Funktionen, Fehlerfälle und behobene Fehler erstellen und erweitern. Weitere Modelle setze ich für Code- und Logikreviews ein. Ein Ziel von beispielsweise 80 % Testabdeckung ist eine Vorgabe, keine Behauptung über den aktuellen Stand aller Projekte. Testläufe und reproduzierbare Befunde zählen mehr als die Zustimmung eines Modells.",
+    tags: ["Testkonzeption", "Regressionstests", "KI-gestützte Reviews"],
     icon: <ShieldCheck size={26} />,
   },
   {
-    eyebrow: "UI · Beschleunigung",
-    title: "v0.dev fürs Frontend",
-    description:
-      "Der Gamechanger fürs Frontend-Tempo: KI-generierte UI-Komponenten, die ich direkt in Next.js integriere und weiterbaue — kein Figma-Klick-Overhead.",
-    tags: ["v0.dev", "Next.js", "Tailwind CSS"],
-    icon: <Wand2 size={26} />,
+    eyebrow: "Wartbarkeit",
+    title: "Refactoring und Dokumentation",
+    description: "Ich beauftrage die Überarbeitung auf klarere Zuständigkeiten, verständliche Namen und weniger Wiederholungen. Dokumentation soll Zweck, Schnittstellen und wichtige Entscheidungen erklären. Änderungen sollen bestehende Funktionen erhalten und durch passende Tests begleitet werden.",
+    tags: ["Refactoring mit KI", "Dokumentation", "Nachvollziehbarkeit"],
+    icon: <Code2 size={26} />,
   },
   {
-    eyebrow: "Sichtbarkeit · SEO & GEO",
-    title: "SEO wird GEO",
-    description:
-      "Klassisches SEO reicht nicht mehr. Ich baue Seiten auch dafür, dass KI-Suchen wie ChatGPT oder Perplexity sie verstehen und zitieren — llms.txt, sauberes JSON-LD, gezielt freigegebene KI-Crawler statt pauschal alles zu sperren.",
-    tags: ["SEO", "GEO", "JSON-LD"],
+    eyebrow: "Inhalte & Auffindbarkeit",
+    title: "Textlogik, SEO und GEO",
+    description: "Mein Prüfprozess bezieht auch sichtbare Texte, Metadaten, Links und strukturierte Daten ein. Ich lasse Widersprüche zwischen Beschreibung und Funktion suchen und Verbesserungen ausarbeiten. Daraus leite ich keine Garantie für Rankings oder Empfehlungen durch KI-Suchen ab.",
+    tags: ["Textprüfung", "SEO / GEO", "Strukturierte Daten"],
     icon: <Search size={26} />,
+  },
+  {
+    eyebrow: "Technische Datenschutzaspekte",
+    title: "Datenflüsse und Risiken hinterfragen",
+    description: "Ich lasse prüfen, welche Daten verarbeitet werden und ob Aussagen im Interface dazu passen. KI-gestützte Sicherheits- und Datenschutzchecks helfen, mögliche Probleme zu erkennen. Sie ersetzen weder eine fachliche Rechtsprüfung noch einen unabhängigen Sicherheitsnachweis.",
+    tags: ["Datenflüsse", "Risikofragen", "Offene Punkte"],
+    icon: <Database size={26} />,
   },
 ]
 
+// Eigene Projektpraxis: keine Darstellung als unabhängiger Auditdienstleister.
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function KiWorkflowClient() {
   const pipelineRef = useRef(null)
@@ -160,19 +124,19 @@ export default function KiWorkflowClient() {
               Mein Antrieb
             </p>
             <h1 className="mb-6 text-5xl md:text-6xl font-bold tracking-tight text-foreground text-balance">
-              ADHS, Hyperfokus & KI:{" "}
-              <span className="text-orange-400">Mein Weg zum Developer</span>
+              Von der Anforderung zur Anwendung:{" "}
+              <span className="text-orange-400">So arbeite ich mit KI</span>
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
-              Ehrlich: Hauptschulabschluss, keine Ausbildung, vor 5 Jahren die Kurve bekommen.
-              Heute nutze ich ADHS nicht als Hindernis, sondern als Hyperfokus-Motor.
-              KI ist mein Navigator, der mir hilft, meine PS auf die Straße zu bringen.
+              Ich strukturiere Anforderungen und koordiniere die Umsetzung mit KI-Werkzeugen und Agenten.
+              Automatisierte Tests, zusätzliche Modellreviews und praktische Nutzungsszenarien gehören zu meinem Ablauf.
+              Diesen Workflow habe ich auf Grundlage meiner Weiterbildung in eigenen Projekten entwickelt.
             </p>
 
             <div className="mt-8 inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur-md">
               <Flame size={18} className="text-orange-400 shrink-0" />
               <p className="text-sm text-muted-foreground">
-                Kein Fanboy-Ranking. Ich nehme das Tool, das für die jeweilige Aufgabe passt — Label ist mir egal.
+                Ich wähle Werkzeuge passend zu Anforderungen, Schnittstellen und dem jeweiligen Entwicklungsschritt.
               </p>
             </div>
           </motion.div>
@@ -190,7 +154,7 @@ export default function KiWorkflowClient() {
               Der Prozess
             </p>
             <h2 className="text-3xl font-bold text-foreground">
-              Interaktive Pipeline
+              Von der Anforderung zur Anwendung
             </h2>
           </motion.div>
 
@@ -249,7 +213,7 @@ export default function KiWorkflowClient() {
             className="mb-12"
           >
             <p className="mb-2 font-mono text-sm tracking-widest text-orange-400 uppercase">
-              Das Agentic Arsenal
+              Werkzeuge & Prüfschritte
             </p>
             <h2 className="text-3xl font-bold text-foreground">Mein Werkzeugkasten</h2>
           </motion.div>

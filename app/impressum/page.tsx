@@ -4,10 +4,10 @@ import ImpressumClient from "./ImpressumClient"
 export const metadata: Metadata = {
   title: "Impressum",
   description:
-    "Impressum gemäß § 5 TMG – Marcel Welk, Webdesigner und Webentwickler aus Dortmund.",
+    "Angaben zum Verantwortlichen für das Bewerbungsportfolio von Marcel Welk.",
   openGraph: {
     title: "Impressum | Marcel Welk",
-    description: "Impressum – Marcel Welk, Webdesign & Webentwicklung Dortmund.",
+    description: "Impressum zum Portfolio von Marcel Welk – Webentwicklung und KI-Integration.",
     url: "https://www.marcelwelk.de/impressum",
   },
   robots: {

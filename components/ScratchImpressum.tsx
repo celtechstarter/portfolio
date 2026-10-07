@@ -138,7 +138,7 @@ export function ScratchImpressum() {
         <h2 className="font-bold text-2xl text-white">Impressum</h2>
       </div>
       <p className="text-sm text-muted-foreground mb-8 font-mono relative z-10 border-l-2 border-primary/50 pl-4 py-1">
-        Anti-Scraping Protection: Bitte mit der Maus oder dem Finger über das graue Feld rubbeln, um die Kontaktdaten anzuzeigen.
+        Kontaktdaten anzeigen: Nutze den Button unter dem Feld oder wische mit Maus bzw. Finger über die Fläche.
       </p>
 
       <div className="relative w-full h-[180px] rounded-xl overflow-hidden border border-white/10 bg-black/80 select-none shadow-[inset_0_0_20px_rgba(0,0,0,1)] z-10">
@@ -175,7 +175,7 @@ export function ScratchImpressum() {
           className="inline-flex items-center gap-2 text-sm font-mono px-5 py-2.5 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 hover:border-primary/50 transition-all disabled:opacity-30 disabled:cursor-not-allowed group"
         >
           <Eye size={16} className="group-disabled:text-muted-foreground text-primary" />
-          Daten für Screenreader anzeigen
+          Kontaktdaten anzeigen
         </button>
       </div>
     </div>

@@ -223,7 +223,7 @@ export function ChatWidget() {
                   <p className="flex items-center gap-1.5 mt-1">
                     <span className="h-1.5 w-1.5 rounded-full" style={{ background: '#22c55e' }} />
                     <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: 10, fontFamily: 'monospace' }}>
-                      ONLINE · antwortet sofort
+                      KI-Assistent · Fragen zum Portfolio
                     </span>
                   </p>
                 </div>
@@ -520,7 +520,7 @@ export function ChatWidget() {
                     onClick={() => setOpen(false)}
                     style={{ color: COPPER, textDecoration: 'underline', cursor: 'pointer' }}
                   >
-                    Schreib Marcel direkt über das Kontaktformular.
+                    Schreib Marcel per E-Mail oder über LinkedIn.
                   </a>
                 </div>
               )}

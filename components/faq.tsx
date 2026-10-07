@@ -6,55 +6,33 @@ import { motion, AnimatePresence } from "framer-motion"
 
 const faqs = [
   {
-    question: "Wer bist du und was machst du?",
-    answer:
-      "Ich bin Marcel Welk, KI-Nerd und Webentwickler aus Dortmund. Ich baue moderne Websites und Web-Apps – mit einem starken Fokus auf KI-Integration, SEO/GEO-Optimierung und sauberen Code. Aktuell suche ich eine Festanstellung im Bereich Webentwicklung, KI oder Cloud – dieses Portfolio ist mein Bewerbungs- und Übungsprojekt.",
+    "question": "Welche berufliche Aufgabe suchst du?",
+    "answer": "Ich suche eine Festanstellung in KI-gestützter Produktentwicklung oder Automatisierung, bevorzugt remote. Mein Schwerpunkt liegt auf Anforderungsstrukturierung, Nutzerabläufen, der Koordination von KI-Werkzeugen und der Ergebnisprüfung — nicht auf einer klassischen Rolle mit überwiegend manueller Programmierung."
   },
   {
-    question: "Welche Art von Projekten machst du am liebsten?",
-    answer:
-      "Projekte mit KI-Integration: Vision-APIs wie bei Poke-Scan V2, eigene Chatbots wie MARCEL.AI, Automatisierung. Und alles, wo ich schnell von der Idee zum Live-Deployment komme. Für SEO/GEO-Analysen hab ich mir aus Neugier mal ein eigenes Scanning-Tool gebaut, das Websites automatisiert auf technische und rechtliche Schwachstellen prüft (SSL, Impressum, Barrierefreiheit, DSGVO). Die Idee, damit Kaltakquise zu machen, hab ich schnell wieder verworfen — Leute ungefragt anzuschreiben ist einfach nicht meins.",
+    "question": "Was ist dein eigener Beitrag zu den Projekten?",
+    "answer": "Ich entwickle die Idee und den Funktionsumfang, formuliere Anforderungen und teile Aufgaben auf. Die Code-Umsetzung erfolgt mit KI-Werkzeugen und Agenten. Ich koordiniere die Arbeit, erprobe Nutzerabläufe und lasse technische Befunde durch weitere Prüfungen und Tests untersuchen."
   },
   {
-    question: "Nimmst du Kundenaufträge an?",
-    answer:
-      "Nein. Ich biete keine bezahlten Dienstleistungen an – ich suche eine Festanstellung. Die Websites in meinen Referenzen sind Lernprojekte, ehrenamtliche Arbeiten oder Freundschaftsdienste, mit denen ich Erfahrung und Referenzen aufgebaut habe.",
+    "question": "Wie arbeitest du mit mehreren Agenten und Modellen?",
+    "answer": "Ich formuliere abgegrenzte Aufgaben und wähle dafür passende Werkzeuge und Modelle. Teilaufgaben laufen auch parallel; weitere Modelle setze ich zur Gegenprüfung ein. Mehrere übereinstimmende KI-Antworten sind für sich allein noch kein Nachweis — dafür braucht es überprüfbare Ergebnisse."
   },
   {
-    question: "Was kostet eine Website bei dir?",
-    answer:
-      "Nichts – ich verkaufe keine Websites. Ich kann sie bauen (siehe Projekte), aber diese Seite dient Trainings- und Übungszwecken. Wer mit mir arbeiten möchte, kann mir gerne ein Jobangebot schicken.",
+    "question": "Wie gehst du mit Tests und Qualität um?",
+    "answer": "Ich lasse automatisierte Tests für Funktionen und Fehlerfälle erstellen und erweitern. Zusätzlich beauftrage ich Prüfungen auf Code- und Textlogik, Wartbarkeit, Dokumentation, SEO/GEO und technische Datenschutzaspekte. Ein Coverage-Ziel ist eine Orientierung, keine Garantie für Fehlerfreiheit; eine KI-Prüfung ersetzt keine rechtliche Prüfung."
   },
   {
-    question: "Wie schnell setzt du Projekte um?",
-    answer:
-      "BewerbungsPilot ging in 2 Tagen von der Idee bis zum Live-Deployment – als bewusster Speed-Benchmark. Möglich macht das mein KI-Workflow: Planung mit Claude, UI-Generierung mit v0, Implementierung mit Claude Code.",
+    "question": "Wird der Therapieplatz Finder bereits genutzt?",
+    "answer": "Die Anwendung wird im ambulant betreuten Wohnen für die Arbeit mit Klient:innen erprobt. Erste Rückmeldungen beschreiben eine Erleichterung bei der Unterstützung der Therapieplatzsuche. Ein Psychotherapeut hat mir zusätzliche Verbesserungsvorschläge gegeben. Daraus leite ich keine offizielle Partnerschaft oder Wirksamkeitsgarantie ab."
   },
   {
-    question: "Was bedeutet GEO – und warum ist das wichtig?",
-    answer:
-      "GEO steht für Generative Engine Optimization. Das bedeutet: Deine Website so aufzubauen, dass KI-Systeme wie ChatGPT, Gemini oder Perplexity deine Inhalte verstehen und weiterempfehlen. Wer heute nur auf klassisches SEO setzt, verliert langfristig Sichtbarkeit.",
+    "question": "Welche technische Grundlage bringst du mit?",
+    "answer": "Meine einjährige Weiterbildung vermittelte Grundlagen in JavaScript, Python, Frontend- und Backend-Frameworks, Linux und Cloud-Technologien. Dazu kommt Gameserver- und VPS-Praxis von 2017 bis 2024. Heute liegt mein Fokus auf der KI-gestützten Umsetzung eigener Projekte."
   },
   {
-    question: "Baust du auch Websites mit KI-Funktionen?",
-    answer:
-      "Ja. Von KI-generierten Anschreiben über Bild-Analyse bis zu automatisierten Workflows – ich integriere KI dort, wo sie echten Mehrwert bringt, nicht nur als Buzzword.",
-  },
-  {
-    question: "Welche KI-Tools setzt du ein?",
-    answer:
-      "Ich nutze immer die neuesten und besten Tools – je nachdem, was das Projekt braucht. Ob Webentwicklung, Musik, Bilder, Videos oder Icons: Ich wähle das Tool, das für den jeweiligen Anwendungsfall am stärksten ist, nicht das, das ich immer schon kannte.",
-  },
-  {
-    question: "Warum sieht dieses Portfolio aus wie eine Agentur-Website?",
-    answer:
-      "Weil es gleichzeitig mein SEO/GEO-Übungsprojekt ist. Ich habe die Seite bewusst auf Sichtbarkeit für Begriffe wie Webdesign Dortmund optimiert, um klassisches SEO und Generative Engine Optimization in der Praxis zu lernen – mit strukturierten Daten, KI-Crawler-Steuerung und Datenschutz-Experimenten wie den freirubbelbaren Kontaktdaten. Das Ranking-Ergebnis ist Teil des Portfolios.",
-  },
-  {
-    question: "Wie nehme ich Kontakt auf?",
-    answer:
-      "Am einfachsten per E-Mail oder über das Kontaktformular auf dieser Seite. Ich antworte in der Regel innerhalb von 24 Stunden.",
-  },
+    "question": "Wie kann man dich erreichen?",
+    "answer": "Über die E-Mail-Adresse im Kontaktbereich oder über LinkedIn. Auf GitHub sind ausgewählte Repositories meiner KI-gestützt umgesetzten Projekte einsehbar."
+  }
 ]
 
 export function FAQ() {
@@ -90,7 +68,7 @@ export function FAQ() {
             Häufige Fragen
           </h2>
           <p className="mt-4 text-muted-foreground text-sm max-w-xl mx-auto">
-            Alles Wichtige auf einen Blick – von Preisen über KI-Tools bis zur Zusammenarbeit.
+            Antworten zu meiner Projekterfahrung, Arbeitsweise und beruflichen Ausrichtung.
           </p>
         </div>
 

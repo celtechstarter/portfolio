@@ -5,7 +5,7 @@ export function Footer() {
     <footer className="w-full border-t border-white/5 bg-black py-8 mt-auto relative z-20">
       <div className="container mx-auto px-6 flex flex-col items-center gap-4">
         <p className="text-xs text-muted-foreground/50 font-mono text-center">
-          Dies ist mein Bewerbungsportfolio. Ich suche eine Festanstellung und biete keine bezahlten Dienstleistungen an.
+          KI-gestützte Produktentwicklung & Automatisierung · Offen für eine Festanstellung · Remote bevorzugt
         </p>
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 w-full">
           <p className="text-sm text-muted-foreground font-mono">

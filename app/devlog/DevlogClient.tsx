@@ -35,7 +35,7 @@ const entries: DevlogEntry[] = [
     date: "Ende Juni 2026",
     title: "Idee & Architektur: eigene Python-Pipeline",
     description:
-      "Ausgangspunkt war die eigene, mühsame Suche nach einem ambulanten Therapieplatz in Dortmund. Entschieden, das zu automatisieren statt es manuell durchzuackern. Architektur festgelegt: ein Scraper sammelt Praxisdaten, eine KI bewertet sie automatisch, ein Mailer verschickt personalisierte Anfragen. Python-Projekt mit Playwright, Anthropic API und Google API Client aufgesetzt.",
+      "Ausgangspunkt waren die organisatorischen Hürden bei der ambulanten Therapieplatzsuche in Dortmund. Ziel war, Recherche, Kontaktaufnahme und Dokumentation zu unterstützen. Architektur festgelegt: ein Scraper sammelt Praxisdaten, eine KI bewertet sie automatisch, ein Mailer verschickt personalisierte Anfragen. Python-Projekt mit Playwright, Anthropic API und Google API Client aufgesetzt.",
   },
   {
     project: "Therapieplatz Finder",
@@ -68,9 +68,9 @@ const entries: DevlogEntry[] = [
     color: PROJECT_COLORS["Therapieplatz Finder"],
     day: 5,
     date: "10.08.2026",
-    title: "Login-System & vollständiger Security-Audit",
+    title: "Login-System & KI-gestützter Sicherheitsreview",
     description:
-      "Geteiltes Demo-Passwort durch echtes Login ersetzt: Supabase Auth mit Magic Link und Google-OAuth. Danach einen vollständigen Security-Audit von Backend und Web-App durchgeführt (Auth, API-Routen, XSS/CSRF), kritische und hohe Befunde direkt gefixt und eine dauerhafte Testsuite aufgebaut (pytest fürs Backend, Node-Tests für die Web-App).",
+      "Geteiltes Demo-Passwort durch echtes Login ersetzt: Supabase Auth mit Magic Link und Google-OAuth. Danach einen KI-gestützten Sicherheitsreview von Backend und Web-App durchgeführt (Auth, API-Routen, XSS/CSRF), kritische und hohe Befunde direkt gefixt und eine dauerhafte Testsuite aufgebaut (pytest fürs Backend, Node-Tests für die Web-App).",
     problemSolved:
       "Kontaktdaten der Praxen waren ungeschützt über die API abrufbar → Auslieferung an ein gültiges, serverseitig geprüftes Login-Token gebunden",
   },
@@ -81,7 +81,7 @@ const entries: DevlogEntry[] = [
     date: "10.–12.08.2026",
     title: "Bot-Schutz, echter E-Mail-Versand & Barrierefreiheit",
     description:
-      "Cloudflare Turnstile vor den Login gesetzt, eigener SMTP-Provider für den Auth-Versand eingerichtet. Kern-Feature gebaut: echter E-Mail-Versand über Resend, damit Anfragen wirklich bei den Praxen ankommen — inklusive sicherer Test-Karte für den Selbstversuch ohne echte Praxis zu kontaktieren. Parallel WCAG 2.1 AA umgesetzt: Kontraste, Tastaturbedienung, ARIA-Labels, Vorlesefunktion per Web Speech API.",
+      "Cloudflare Turnstile vor den Login gesetzt, eigener SMTP-Provider für den Auth-Versand eingerichtet. Kern-Feature gebaut: echter E-Mail-Versand über Resend, damit Anfragen wirklich bei den Praxen ankommen — inklusive sicherer Test-Karte für den Selbstversuch ohne echte Praxis zu kontaktieren. Parallel Maßnahmen zur Barrierearmut ergänzt: Kontraste, Tastaturbedienung, ARIA-Labels, Vorlesefunktion per Web Speech API.",
     problemSolved:
       "Magic-Link-Login war ohne Bot-Schutz missbrauchbar (Security-Audit-Befund) → Cloudflare Turnstile vor Login und Registrierung ergänzt",
   },
@@ -123,7 +123,7 @@ const entries: DevlogEntry[] = [
     color: PROJECT_COLORS["Therapieplatz Finder"],
     day: 10,
     date: "19.08.2026",
-    title: "Kompletter Sicherheits- und DSGVO-Audit",
+    title: "KI-Review zu Sicherheit und Datenverarbeitung",
     description:
       "Sechsteiligen Audit über das ganze Projekt laufen lassen: Backend-Python (Scraper/Analyzer/Mailer), Webapp-API/Supabase, Frontend-Code, DSGVO-Compliance, Barrierefreiheit/Responsive und SEO/Repo-Hygiene — dazu die Supabase-Sicherheitswarnungen direkt in der Datenbank geprüft. Alle kritischen und hohen Befunde noch am selben Tag gefixt, Ergebnis in einem priorisierten Bericht dokumentiert.",
     problemSolved:
@@ -229,7 +229,7 @@ const entries: DevlogEntry[] = [
     color: PROJECT_COLORS["Therapieplatz Finder"],
     day: 20,
     date: "26.09.2026",
-    title: "Externer Code-Review: 40 Befunde einzeln geprüft",
+    title: "Zusätzlicher KI-Code-Review: Befunde nachgeprüft",
     description:
       "Das ganze Projekt von einem zweiten KI-Modell (ChatGPT) prüfen lassen, mit einer vorher geschriebenen Anleitung zu Zweck, Zielgruppe und Regeln. Jeden der 40 Befunde selbst im Code nachgeprüft, 35 stimmten. Die wichtigsten noch am selben Tag behoben: Milo schickt Texte mit Krisenbegriffen nie an den Server, die Widerspruchsfrist wird am Monatsende richtig berechnet (31. Januar plus ein Monat ist der 28. Februar, nicht der 3. März), die Fehlerüberwachung filtert Login-Tokens und E-Mail-Adressen heraus. Im Backend prüft der Filter die Approbation jetzt dreistufig, und beim Besuch von Praxis-Websites blockiert ein SSRF-Schutz Anfragen an interne Adressen.",
     problemSolved:
@@ -443,7 +443,7 @@ const entries: DevlogEntry[] = [
     day: 8,
     title: "KI-Workflow & Authentizität",
     description:
-      "Die Unterseite /ki-workflow neu aufgebaut. Fokus auf die 'Macher-Story': Hauptschulabschluss, ADHS als Hyperfokus-Motor und KI als Navigator. Interaktive KI-Pipeline integriert (Planung ➔ Engineering ➔ Deployment). Werkzeugkasten-Logik implementiert: Multimodales Battle-Testing zwischen Grok, Nano Banana und Firefly.",
+      "Die Unterseite /ki-workflow neu aufgebaut. Arbeitsweise und KI-gestützte Entwicklung anhand einer interaktiven Pipeline dargestellt. Interaktive KI-Pipeline integriert (Planung ➔ Engineering ➔ Deployment). Werkzeugkasten-Logik implementiert: Multimodales Battle-Testing zwischen Grok, Nano Banana und Firefly.",
     problemSolved:
       "Asymmetrisches Grid wirkte unruhig → Umstellung auf striktes, symmetrisches Bento-Layout für bessere UI-Ruhe",
   },
@@ -451,9 +451,9 @@ const entries: DevlogEntry[] = [
     project: "Portfolio",
     color: PROJECT_COLORS["Portfolio"],
     day: 9,
-    title: "Master-Audit & SEO Dortmund",
+    title: "KI-gestützte Inhalts- und SEO-Prüfung",
     description:
-      "Vollständiges Portfolio-Audit durchgeführt: SEO-Fokus auf 'Webentwicklung Dortmund' geschärft. Metadata auf allen Unterseiten ergänzt (ki-workflow, devlog, impressum, datenschutz). Server/Client-Split für korrekte Next.js Metadata-Architektur implementiert. Dortmund-Keywords strategisch in Titles und Descriptions eingebaut.",
+      "KI-gestützte Portfolio-Prüfung durchgeführt: SEO-Fokus auf 'Webentwicklung Dortmund' geschärft. Metadata auf allen Unterseiten ergänzt (ki-workflow, devlog, impressum, datenschutz). Server/Client-Split für korrekte Next.js Metadata-Architektur implementiert. Dortmund-Keywords strategisch in Titles und Descriptions eingebaut.",
     problemSolved:
       "export const metadata funktioniert nicht in 'use client' Dateien → Server-Wrapper-Pattern: page.tsx als Server Component, UI-Logik in *Client.tsx ausgelagert",
   },
@@ -475,7 +475,7 @@ const entries: DevlogEntry[] = [
     date: "01.05.2026",
     title: "Security-Audit: Kontaktdaten & HTTP-Headers",
     description:
-      "Vollständiger Sicherheits-Audit durchgeführt. Kritischer Fund: Telefonnummer, E-Mail und Adresse waren als Base64 im öffentlichen GitHub-Code — Base64 ist kein Schutz, trivial decodierbar. Lösung: Server-API-Route /api/contact gebaut, Daten in Umgebungsvariablen ausgelagert (.env.local, Vercel Settings). Straßenadresse aus JSON-LD entfernt. Fehlende HTTP Security-Headers ergänzt: X-Frame-Options (Clickjacking), X-Content-Type-Options, Referrer-Policy, Permissions-Policy.",
+      "KI-gestützte Prüfung von Kontaktdaten und HTTP-Headern durchgeführt. Kritischer Fund: Telefonnummer, E-Mail und Adresse waren als Base64 im öffentlichen GitHub-Code — Base64 ist kein Schutz, trivial decodierbar. Lösung: Server-API-Route /api/contact gebaut, Daten in Umgebungsvariablen ausgelagert (.env.local, Vercel Settings). Straßenadresse aus JSON-LD entfernt. Fehlende HTTP Security-Headers ergänzt: X-Frame-Options (Clickjacking), X-Content-Type-Options, Referrer-Policy, Permissions-Policy.",
     problemSolved:
       "atob() im Client-Bundle ist faktisch öffentlich → alle sensiblen Daten auf serverseitige Env-Variablen umgestellt, API-Route liefert Daten nur auf Anfrage",
   },
@@ -517,7 +517,7 @@ const entries: DevlogEntry[] = [
     description:
       "Den Verantwortlicher-Block in der Datenschutzerklärung (Name, Adresse, E-Mail) mit dem gleichen Canvas-Rubbelfeld-Prinzip wie im Impressum geschützt. Neue Komponente ScratchVerantwortlicher gebaut – kompakt (100px), auf die drei relevanten Felder reduziert. Daten kommen weiterhin ausschließlich aus der serverseitigen /api/contact Route.",
     problemSolved:
-      "Datenschutz zeigte Kontaktdaten im Klartext im HTML-Quelltext → Rubbelfeld verhindert automatisches Auslesen durch Scraper",
+      "Datenschutz zeigte Kontaktdaten im Klartext im HTML-Quelltext → Rubbelfeld erschwert einfaches Auslesen des sichtbaren Textes; die öffentliche Kontakt-API ist dadurch nicht gegen automatisierte Abrufe geschützt",
   },
   {
     project: "Portfolio",
@@ -572,7 +572,7 @@ const entries: DevlogEntry[] = [
     date: "19.05.2026",
     title: "MARCEL.AI – eigener KI-Chatbot live",
     description:
-      "Heute war ein langer Tag voller 502 Fehler. Die Idee: Ein eigener KI-Chatbot auf der Portfolio-Seite, der Besucher direkt beantwortet wer ich bin und was ich kann. MARCEL.AI läuft jetzt unten rechts. Claude Code hat die komplette Architektur gebaut — Next.js API Route als Proxy damit der API Key nicht im Browser landet, Rate Limiting gegen Spam, Origin-Check gegen externe Aufrufe, und einen System Prompt der gegen Prompt Injection gesichert ist. Resend übernimmt die Email-Benachrichtigungen. Domain verifiziert, API Key eingetragen — wenn jemand den Chat startet kommt eine Email von noreply@marcelwelk.de an.",
+      "Heute war ein langer Tag voller 502 Fehler. Die Idee: Ein eigener KI-Chatbot auf der Portfolio-Seite, der Besucher direkt beantwortet wer ich bin und was ich kann. MARCEL.AI läuft jetzt unten rechts. Claude Code hat die komplette Architektur gebaut — Next.js API Route als Proxy damit der API Key nicht im Browser landet, Rate Limiting gegen Spam, Origin-Check gegen externe Aufrufe, und thematisch begrenzte Systemanweisungen für den Assistenten. Resend übernimmt die Email-Benachrichtigungen. Domain verifiziert, API Key eingetragen — wenn jemand den Chat startet kommt eine Email von noreply@marcelwelk.de an.",
     problemSolved:
       "Mehrere 502 Fehler hintereinander: Edge Runtime auf Vercel unterstützt @anthropic-ai/sdk nicht → export const runtime = 'nodejs' ergänzt. Falscher Modellname (claude-sonnet-4-5 existiert nicht) → auf claude-sonnet-4-6 korrigiert. Resend v6 wirft bei API-Fehlern keine Exception sondern gibt { data, error } zurück → silent fail gefixt. Email-Spam durch fehlenden Session-Check → sessionId per crypto.randomUUID() eingebaut.",
   },
@@ -768,16 +768,22 @@ export default function DevlogClient() {
           {/* Header */}
           <div className="mb-12 text-center">
             <p className="mb-2 font-mono text-xs tracking-widest text-primary uppercase">
-              Build Journal
+              Projektpraxis mit KI
             </p>
             <h1 className="mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-              Development Log
+              Entwicklungsjournal
             </h1>
             <p className="font-mono text-sm text-muted-foreground">
-              Alle Projekte · Chronologisch · Ehrlich geloggt
+              Projektverlauf · Entscheidungen · Ergebnisse
             </p>
           </div>
 
+          <p className="mb-8 text-sm leading-relaxed text-muted-foreground">
+            Die Einträge dokumentieren damalige Projektstände, nicht automatisch den heutigen Funktionsumfang.
+            Die Code-Umsetzung erfolgte mit KI-Werkzeugen und Agenten. Mein Beitrag liegt in Anforderungen,
+            Aufgabensteuerung und der Erprobung der Ergebnisse. Ältere Zahlen und Modellnamen sind Momentaufnahmen.
+            KI-gestützte Prüfberichte sind keine unabhängigen Sicherheits- oder Rechtsgutachten.
+          </p>
           {/* Filter tabs */}
           <div className="mb-10 flex flex-wrap justify-center gap-2">
             <button

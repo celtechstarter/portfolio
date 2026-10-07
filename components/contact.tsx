@@ -36,9 +36,9 @@ export function Contact() {
           className="rounded-2xl border border-border bg-card/50 p-8 text-center lg:p-12 relative overflow-hidden"
         >
           <p className="mb-3 font-mono text-xs tracking-widest text-primary uppercase relative z-10">Kontakt</p>
-          <h2 className="mb-3 text-2xl font-bold text-foreground relative z-10">Interesse geweckt?</h2>
+          <h2 className="mb-3 text-2xl font-bold text-foreground relative z-10">Gemeinsam nützliche Anwendungen entwickeln</h2>
           <p className="mb-8 text-muted-foreground relative z-10">
-            Ich freue mich über eine Nachricht — per E-Mail, GitHub oder LinkedIn.
+            Ich suche eine Festanstellung in KI-gestützter Produktentwicklung oder Automatisierung — bevorzugt remote. Mein Schwerpunkt: Anforderungen, KI-Workflows und Ergebnisprüfung. Ich freue mich über den Austausch per E-Mail oder LinkedIn.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3 relative z-10">

@@ -5,23 +5,23 @@ import { Navbar } from "@/components/navbar"
 import { ProtectedContactLinks } from "@/components/protected-contact-links"
 
 export const metadata: Metadata = {
-  title: "Lebenslauf – IT & Webentwicklung",
+  title: "Lebenslauf – KI-gestützte Produktentwicklung",
   description:
-    "Lebenslauf von Marcel Welk – Webentwickler & KI-Spezialist aus Dortmund. Projekte, Skills in Web-Entwicklung, KI-Integration, React, Next.js und modernen Deployment-Workflows.",
+    "Lebenslauf von Marcel Welk – KI-gestützte Produktentwicklung und Automatisierung aus Dortmund. Projekte, Skills in Web-Entwicklung, KI-Integration, React, Next.js und modernen Deployment-Workflows.",
   alternates: {
     canonical: 'https://www.marcelwelk.de/lebenslauf',
   },
   openGraph: {
     title: "Lebenslauf | Marcel Welk",
     description:
-      "Marcel Welk – Webentwickler & KI-Spezialist aus Dortmund. Projekte, Skills und digitale Lösungen auf einen Blick.",
+      "Marcel Welk – KI-gestützte Produktentwicklung und Automatisierung aus Dortmund. Projekte, Skills und digitale Lösungen auf einen Blick.",
     url: "https://www.marcelwelk.de/lebenslauf",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Lebenslauf Marcel Welk – Webdesign & Webentwicklung Dortmund" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Lebenslauf | Marcel Welk",
-    description: "Webentwickler & KI-Spezialist aus Dortmund – Skills, Projekte und digitale Lösungen.",
+    description: "KI-gestützte Produktentwicklung und Automatisierung aus Dortmund – Skills, Projekte und digitale Lösungen.",
     images: ["/og-image.jpg"],
   },
 }
@@ -35,7 +35,7 @@ function SectionHeader({ label, title }: { label: string; title: string }) {
         {label}
       </p>
       <div className="flex items-center gap-4">
-        <h2 className="shrink-0 text-2xl font-bold tracking-tight text-foreground">
+        <h2 className="min-w-0 text-2xl font-bold tracking-tight text-foreground break-words">
           {title}
         </h2>
         <div
@@ -217,7 +217,7 @@ export default function LebenslaufPage() {
                 <div className="flex shrink-0 justify-center md:justify-start">
                   <div className="relative h-[160px] w-[160px] rounded-full ring-2 ring-primary/30 ring-offset-4 ring-offset-background">
                     <Image
-                      src="/cel.jpg"
+                      src="/marcel-welk-portrait.png"
                       alt="Marcel Welk"
                       fill
                       sizes="160px"
@@ -231,11 +231,11 @@ export default function LebenslaufPage() {
                     Marcel Welk
                   </h1>
                   <p className="mb-3 font-mono text-sm text-primary">
-                    Webentwickler &amp; KI-Spezialist · KI-Nerd
+                    Menschenzentrierte Web- &amp; KI-Lösungen
                   </p>
                   <div className="mb-5 flex items-center justify-center gap-1.5 md:justify-start">
                     <MapPin size={13} className="text-muted-foreground" />
-                    <span className="text-sm text-muted-foreground">Dortmund, Deutschland</span>
+                    <span className="text-sm text-muted-foreground">Dortmund · Remote bevorzugt</span>
                   </div>
                   <ProtectedContactLinks />
                 </div>
@@ -247,30 +247,57 @@ export default function LebenslaufPage() {
           <section>
             <SectionHeader label="Profil" title="Über mich" />
             <p className="text-base leading-relaxed text-muted-foreground">
-              Webentwickler und KI-Spezialist aus Dortmund mit Fokus auf
-              moderne Web-Entwicklung, KI-Integration und schnelle Umsetzung
-              digitaler Projekte. Nach meiner Weiterbildung zum Cloud &amp;
-              Web-Experten bei Techstarter baue ich echte Produkte — von der
-              Idee bis zum Live-Deployment. Ich kombiniere strategische Planung
-              mit KI-Tools als Produktivitätsmultiplikator und arbeite nach dem
-              Prinzip: schnell bauen, schnell testen, schnell lernen. Aktuell
-              suche ich eine Festanstellung im Bereich Webentwicklung,
-              KI-Automatisierung, IT-Support oder Junior DevOps.
+              Ich konzipiere menschenzentrierte Webanwendungen und koordiniere ihre Umsetzung
+              mit KI-Werkzeugen und Agenten. Mein Schwerpunkt liegt auf Anforderungen,
+              Nutzerabläufen, Aufgabenverteilung und Ergebnisprüfung. Die Programmierung
+              erfolgt KI-gestützt. Aus meiner Weiterbildung bringe ich technische Grundlagen
+              mit, die ich in eigenen Projekten praktisch einsetze. Ich suche eine Festanstellung
+              in KI-gestützter Produktentwicklung oder Automatisierung, bevorzugt remote,
+              mit Schwerpunkt auf Konzeption und Workflows statt manueller Programmierung.
             </p>
           </section>
 
           {/* ── 3. Projekte ────────────────────────────────────────────────── */}
           <section>
-            <SectionHeader label="Portfolio" title="Projekte" />
+            <SectionHeader label="Portfolio" title="KI-gestützt umgesetzte Projekte" />
+            <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
+              Die folgenden Funktionen und Technologien beschreiben die Projektergebnisse.
+              Mein Beitrag umfasst Konzeption, Aufgabensteuerung, Erprobung und die Koordination von Tests und Reviews;
+              Code und technische Änderungen entstehen mit KI-Werkzeugen.
+            </p>
 
             {/* KI & App-Projekte */}
             <div className="mb-10">
               <SubSectionHeader title="KI & App Development" />
               <div className="flex flex-col gap-3">
                 <ProjectCard
+                  title="Therapieplatz Finder"
+                  year="2026–heute"
+                  badge="In Erprobung"
+                  badgeColor="green"
+                  subtitle="Unterstützung bei Recherche, Kontaktaufnahme und Dokumentation der Therapieplatzsuche"
+                  links={[{ href: "https://therapieplatz-finder.de", label: "therapieplatz-finder.de", icon: "external" }]}
+                  bullets={[
+                    "Konzeption, Planung der Nutzerabläufe und Steuerung der KI-gestützten Umsetzung",
+                    "Praxisinformationen aus mehreren Quellen aufbereitet; APIs, Suchfilter, E-Mail-Versand und Dokumentation integriert",
+                    "Automatisierte Backend- und Webapp-Tests sowie GitHub Actions zur Prüfung von Änderungen",
+                    "Erprobung im ambulant betreuten Wohnen für die Arbeit mit Klient:innen; erste positive Rückmeldungen zur Unterstützung der Suche",
+                    "Austausch mit einem Psychotherapeuten zu konkreten Verbesserungen",
+                  ]}
+                  tags={["Python", "REST APIs", "Anthropic API", "Supabase", "Testing", "Vercel"]}
+                />
+                <ProjectCard
+                  title="n8n-Automatisierung"
+                  year="2026"
+                  badge="Prototyp"
+                  badgeColor="orange"
+                  description="n8n zunächst mit Docker selbst gehostet, anschließend einen Workflow in n8n Cloud aufgebaut und ausgeführt: zeitgesteuerter HTTP-Datenabruf, JavaScript-Verarbeitung, KI-Bericht und E-Mail-Versand. Ein monatlicher Datenabgleich mit Benachrichtigung und manueller Prüfung ist als Ausbau geplant."
+                  tags={["n8n", "Docker", "HTTP", "JavaScript", "Anthropic API"]}
+                />
+                <ProjectCard
                   title="Poke-Scan V2"
-                  year="2025–2026"
-                  badge="Aktives Projekt"
+                  year="2026"
+                  badge="Veröffentlicht"
                   badgeColor="green"
                   subtitle="Pokémon-Karten Scanner mit KI-Vision Integration"
                   links={[
@@ -289,19 +316,19 @@ export default function LebenslaufPage() {
                 />
                 <ProjectCard
                   title="BewerbungsPilot"
-                  year="2025"
-                  badge="Fertig"
+                  year=""
+                  badge="Veröffentlicht"
                   badgeColor="blue"
-                  subtitle="KI-gestützter Bewerbungsgenerator — in unter 2 Tagen gebaut"
+                  subtitle="KI-gestützte Erstellung von Anschreiben-Entwürfen"
                   links={[
                     { href: "https://bewerbungspilot.vercel.app", label: "bewerbungspilot.vercel.app", icon: "external" },
                   ]}
-                  description="Lebenslauf hochladen, Stellenanzeige einfügen, fertiges Anschreiben in 5 Minuten. Vollständige Web-App als persönlicher Speed-Benchmark."
+                  description="Aus Lebenslauf und Stellenanzeige entsteht ein Entwurf, der persönlich geprüft und überarbeitet werden kann. Eigenes Projekt zur KI-gestützten Dokumentverarbeitung."
                   tags={["Next.js", "TypeScript", "KI", "Vercel"]}
                 />
                 <ProjectCard
                   title="CELDESK"
-                  year="2025–2026"
+                  year=""
                   badge="In Entwicklung"
                   badgeColor="orange"
                   description="IT-Service-Portal mit Ticketsystem, Asset-Verwaltung, Wissensdatenbank und Onboarding-Checklisten — inkl. Dashboard und Dark Mode. Eigenbau nach dem Vorbild von Zendesk."
@@ -310,9 +337,9 @@ export default function LebenslaufPage() {
                 <ProjectCard
                   title="Marcel CV Boost"
                   year="2025"
-                  badge="Fertig"
+                  badge="Veröffentlicht"
                   badgeColor="blue"
-                  description="Barrierearme Bewerbungshilfe-Plattform. Upload von Bewerbungsunterlagen, Buchungssystem für Beratungstermine und Admin-Dashboard. DSGVO-konform mit Supabase-Backend."
+                  description="Barrierearme Bewerbungshilfe-Plattform. Upload von Bewerbungsunterlagen, Buchungssystem für Beratungstermine und Admin-Dashboard. Mit Nutzeranmeldung und Supabase-Backend."
                   tags={["React", "TypeScript", "Supabase", "Tailwind CSS"]}
                 />
                 <ProjectCard
@@ -333,7 +360,7 @@ export default function LebenslaufPage() {
                 <ProjectCard
                   title="Coaching Knobling"
                   year="2026"
-                  badge="Freundschaftsprojekt"
+                  badge="Unentgeltlich"
                   badgeColor="purple"
                   subtitle="Moderner Webauftritt für ein Coaching-Unternehmen"
                   links={[
@@ -345,7 +372,7 @@ export default function LebenslaufPage() {
                 <ProjectCard
                   title="Hawaii Cards"
                   year="2025"
-                  badge="Ehrenamtlich"
+                  badge="Unentgeltlich"
                   badgeColor="purple"
                   subtitle="Landingpage und digitaler Katalog für ein Sammelkarten-Business"
                   links={[
@@ -357,7 +384,7 @@ export default function LebenslaufPage() {
                 <ProjectCard
                   title="Gesunder Fuß"
                   year="2025"
-                  badge="Ehrenamtlich"
+                  badge="Unentgeltlich"
                   badgeColor="purple"
                   subtitle="Lokaler Webauftritt für eine Praxis im Gesundheitsbereich"
                   links={[
@@ -387,8 +414,8 @@ export default function LebenslaufPage() {
                   </p>
                   <BulletList
                     items={[
-                      "Web-Entwicklung: JavaScript, TypeScript, React, Next.js",
-                      "Cloud-Infrastruktur (AWS, Azure) und Linux-Administration",
+                      "Grundlagen: JavaScript, Python sowie Frontend- und Backend-Frameworks",
+                      "Grundlagen und praktische Übungen: AWS, Azure und Linux",
                       "Virtuelle Maschinen und Container (Docker)",
                       "CI/CD, Git, Automatisierung",
                       "Infrastructure as Code (Terraform, Ansible)",
@@ -412,10 +439,18 @@ export default function LebenslaufPage() {
 
           {/* ── 5. Berufserfahrung ─────────────────────────────────────────── */}
           <section>
-            <SectionHeader label="Karriere" title="Berufserfahrung" />
+            <SectionHeader label="Praxis" title="Praktische Erfahrung & weitere Stationen" />
             <div className="relative">
               <div className="absolute left-[10px] top-0 bottom-0 w-px bg-border/50" />
               <div className="flex flex-col gap-8">
+                <div className="relative pl-9">
+                  <TimelineDot />
+                  <div className="mb-1 flex flex-wrap items-center gap-3">
+                    <h3 className="font-semibold text-foreground">Gameserver-Administration · eigene Praxis</h3>
+                    <span className="font-mono text-xs text-muted-foreground">2017–2024</span>
+                  </div>
+                  <BulletList items={["Installation und Betreuung von Gameservern und VPS-Systemen", "Updates, Backups und Monitoring", "Unterstützung bei technischen Problemen"]} />
+                </div>
                 <div className="relative pl-9">
                   <TimelineDot active />
                   <div className="mb-1 flex flex-wrap items-center gap-3">
@@ -458,9 +493,9 @@ export default function LebenslaufPage() {
                 "LPI Linux Essentials (2024)",
                 "AWS re/Start Graduate (2024)",
                 "Azure Fundamentals AZ-900 (2024)",
-                "Claude 101 – Anthropic (2026)",
-                "Claude Code 101 – Anthropic (2026)",
-                "Introduction to Claude Cowork – Anthropic (2026)",
+                "Claude 101 – Anthropic-Kursabschluss (2026)",
+                "Claude Code 101 – Anthropic-Kursabschluss (2026)",
+                "Introduction to Claude Cowork – Anthropic-Kursabschluss (2026)",
               ].map((cert) => (
                 <CertBadge key={cert}>{cert}</CertBadge>
               ))}
@@ -473,20 +508,20 @@ export default function LebenslaufPage() {
             <div className="grid gap-5 sm:grid-cols-2">
               {[
                 {
-                  title: "Web-Entwicklung",
-                  skills: ["JavaScript & TypeScript", "React & Next.js", "Tailwind CSS", "REST APIs", "Python (Grundlagen)"],
+                  title: "Grundlagen & Projekttechnologien",
+                  skills: ["JavaScript / Python: Grundlagen", "Frontend / Backend: Grundlagen", "React / Next.js: KI-Projekte", "APIs, HTTP & JSON"],
                 },
                 {
                   title: "KI & Automatisierung",
-                  skills: ["Claude (Strategie & Planung)", "Claude Code (Implementierung)", "v0.dev (UI-Generierung)", "AI Agentic Engineering", "Fast Prototyping mit KI"],
+                  skills: ["Anforderungen & Nutzerabläufe", "Claude Code / Claude Cowork", "ChatGPT / Lovable", "Multi-Agent-Workflows", "n8n-Prototypen"],
                 },
                 {
-                  title: "Cloud & DevOps",
-                  skills: ["Linux/Ubuntu Server (LPI-zertifiziert)", "Docker Container", "AWS & Azure Basics", "CI/CD mit GitHub Actions", "SSH Remote-Administration"],
+                  title: "Serverpraxis & Cloud-Grundlagen",
+                  skills: ["Linux/Ubuntu Server (praktische Erfahrung)", "Docker-Grundlagen", "AWS & Azure Basics", "GitHub Actions in KI-Projekten", "SSH Remote-Administration"],
                 },
                 {
-                  title: "Tools & Deployment",
-                  skills: ["Git & GitHub", "Vercel Deployment", "Supabase / PostgreSQL", "VPS-Server Administration"],
+                  title: "Prüfung & Weiterentwicklung",
+                  skills: ["Testkonzeption", "KI-gestützte Code- und Textreviews", "Dokumentation / Refactoring mit KI", "GitHub / Vercel"],
                 },
               ].map((category) => (
                 <div
@@ -510,11 +545,11 @@ export default function LebenslaufPage() {
             <div className="flex flex-wrap gap-4">
               {[
                 { lang: "Deutsch", level: "Muttersprache" },
-                { lang: "Englisch", level: "B1" },
+                { lang: "Englisch", level: "Gutes Lese- und Hörverständnis; mündliche Grundlagen" },
               ].map(({ lang, level }) => (
                 <div
                   key={lang}
-                  className="flex items-center gap-3 rounded-xl border border-border bg-card px-6 py-4"
+                  className="flex flex-wrap items-center gap-3 rounded-xl border border-border bg-card px-6 py-4"
                 >
                   <span className="font-semibold text-foreground">{lang}</span>
                   <span className="font-mono text-xs text-muted-foreground">{level}</span>
@@ -548,14 +583,11 @@ export default function LebenslaufPage() {
             <SectionHeader label="Methodik" title="Meine Arbeitsweise" />
             <div className="rounded-xl border border-primary/20 bg-primary/5 p-6">
               <p className="text-base leading-relaxed text-muted-foreground">
-                Ich arbeite nach dem Prinzip &quot;Fast Prototyping mit KI
-                &amp; Learning by Doing&quot;. Mein Workflow kombiniert
-                strategische Planung mit Claude, UI-Generierung über v0.dev
-                und Implementierung via Claude Code — von der Idee bis zum
-                fertigen Deployment. Ich schließe die Lücke zwischen Idee und
-                Live-Produkt so schnell wie möglich. Ehrlichkeit über den
-                eigenen Skill-Level ist mir wichtiger als aufgeblasene
-                Selbstdarstellung.
+                Ich formuliere Anforderungen, wähle Modelle und verteile Aufgaben auf KI-Werkzeuge
+                und Agenten. Ich lasse Tests, technische Reviews und Prüfungen der Inhalte erstellen
+                und erweitern. Dokumentation und KI-gestütztes Refactoring gehören ebenso dazu.
+                Prüfaufträge, gemeldete Befunde und bestätigte Ergebnisse unterscheide ich voneinander.
+                Diesen Ablauf habe ich in eigenen Projekten entwickelt und möchte ihn im Team weiter ausbauen.
               </p>
             </div>
           </section>

@@ -4,7 +4,7 @@ import DevlogClient from "./DevlogClient"
 export const metadata: Metadata = {
   title: "Devlog – Projekte & Builds",
   description:
-    "Mein Build Journal: Ehrliche Einblicke in die Entwicklung meiner Webdesign- und Webentwicklungs-Projekte aus Dortmund – von der ersten Zeile Code bis zum Live-Deployment.",
+    "Mein Build Journal: Ehrliche Einblicke in die Entwicklung meiner KI-gestützt umgesetzten Webprojekte aus Dortmund – von Anforderungen und Agentenkoordination bis zur Veröffentlichung.",
   alternates: {
     canonical: 'https://www.marcelwelk.de/devlog',
   },
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Devlog | Marcel Welk",
     description:
-      "Webdesign & Webentwicklung aus Dortmund: Ehrliche Build-Logs – so entstehen moderne digitale Lösungen.",
+      "KI-gestützte Produktentwicklung aus Dortmund: Ehrliche Build-Logs – so entstehen moderne digitale Lösungen.",
     images: ["/og-image.jpg"],
   },
 }

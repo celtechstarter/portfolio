@@ -1,53 +1,13 @@
 'use client'
 
-import { useState, useRef, useEffect } from "react"
+import { useState } from "react"
 import { Github, ExternalLink } from "lucide-react"
-import { useInView, animate } from "framer-motion"
 
-const stats = [
-  { value: 15, display: "15", label: "Public Repos" },
-  { value: 200, display: "200+", label: "Commits 2026" },
-  { value: 4, display: "4", label: "Projekte deployed" },
+const evidence = [
+  { title: "Projekte", label: "Ausgewählte Repositories" },
+  { title: "Verlauf", label: "Änderungen nachvollziehen" },
+  { title: "KI-Workflow", label: "Umsetzung mit Agenten" },
 ]
-
-function AnimatedCounter({ value, display, label }: { value: number; display: string; label: string }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true })
-  const [count, setCount] = useState(display)
-  const hasAnimated = useRef(false)
-
-  useEffect(() => {
-    if (isInView && !hasAnimated.current) {
-      hasAnimated.current = true
-      const suffix = display.endsWith("+") ? "+" : ""
-      const controls = animate(0, value, {
-        duration: 1.5,
-        ease: "easeOut",
-        onUpdate(latest) {
-          setCount(Math.round(latest).toString() + suffix)
-        },
-        onComplete() {
-          setCount(display)
-        },
-      })
-      return () => controls.stop()
-    }
-  }, [isInView, value, display])
-
-  return (
-    <div ref={ref} className="rounded-xl border border-border/20 bg-card/30 px-6 py-8 text-center">
-      <p className="font-mono text-3xl font-bold sm:text-4xl md:text-5xl text-primary">
-        {count}
-      </p>
-      <p
-        className="mt-2 font-mono text-xs tracking-wider"
-        style={{ color: "rgba(255,255,255,0.35)" }}
-      >
-        {label}
-      </p>
-    </div>
-  )
-}
 
 export function GitHubActivity() {
   const [imgError, setImgError] = useState(false)
@@ -58,17 +18,20 @@ export function GitHubActivity() {
         {/* Header */}
         <div className="mb-16 text-center">
           <p className="mb-2 font-mono text-sm tracking-widest text-primary uppercase">
-            Open Source
+            Einblicke in die Projektarbeit
           </p>
           <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl text-balance">
             GitHub Aktivität
           </h2>
         </div>
 
-        {/* Animated Stats */}
+        {/* Project evidence without stale hardcoded metrics */}
         <div className="mb-10 grid grid-cols-3 gap-4 sm:gap-6">
-          {stats.map((stat) => (
-            <AnimatedCounter key={stat.label} value={stat.value} display={stat.display} label={stat.label} />
+          {evidence.map((item) => (
+            <div key={item.title} className="rounded-xl border border-border/20 bg-card/30 px-3 sm:px-6 py-8 text-center">
+              <p className="font-mono text-sm sm:text-xl font-bold text-primary">{item.title}</p>
+              <p className="mt-2 text-xs text-muted-foreground">{item.label}</p>
+            </div>
           ))}
         </div>
 
@@ -79,7 +42,7 @@ export function GitHubActivity() {
         <div>
           {imgError ? (
             <div className="flex items-center justify-center rounded-xl py-12 font-mono text-sm border border-primary/20 text-white/25">
-              GitHub Aktivität laden...
+              Aktivitätsgrafik derzeit nicht verfügbar. Den aktuellen Verlauf findest du direkt auf GitHub.
             </div>
           ) : (
             <img // eslint-disable-line @next/next/no-img-element

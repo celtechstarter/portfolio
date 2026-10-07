@@ -4,10 +4,10 @@ import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 
 const nodes = [
-  { id: "01", title: "Planung", desc: "Strategie & Architektur" },
-  { id: "02", title: "Realisierung", desc: "Code & Engineering" },
-  { id: "03", title: "Veredelung", desc: "Assets & Design" },
-  { id: "04", title: "Deployment", desc: "Live auf Vercel" },
+  { id: "01", title: "Konzeption", desc: "Nutzerbedarf & Anforderungen" },
+  { id: "02", title: "KI-Umsetzung", desc: "Aufgaben & Agenten koordinieren" },
+  { id: "03", title: "Prüfung", desc: "Tests, Reviews & Nutzerabläufe" },
+  { id: "04", title: "Deployment", desc: "Veröffentlichen & weiterentwickeln" },
 ]
 
 export function WorkflowSteps() {
@@ -22,7 +22,7 @@ export function WorkflowSteps() {
             Der Workflow
           </p>
           <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl text-balance">
-            Mein Entwicklungs-Workflow
+            Mein KI-gestützter Arbeitsablauf
           </h2>
         </div>
 

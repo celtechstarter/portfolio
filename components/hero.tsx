@@ -1,9 +1,9 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef } from "react"
 import Image from "next/image"
-import { ArrowDown, Github, ChevronDown, ChevronUp, Info, Cpu } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import { ArrowDown, Github, ChevronDown, ChevronUp, Cpu } from "lucide-react"
+import { motion } from "framer-motion"
 
 interface MagneticButtonProps {
   children: React.ReactNode
@@ -48,7 +48,7 @@ function MagneticButton({ children, className, href, target, rel }: MagneticButt
 }
 
 export function Hero() {
-  const slogan = "Builder. Problemlöser. KINerd."
+  const slogan = "Menschenzentrierte Web- & KI-Lösungen."
 
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
@@ -75,10 +75,10 @@ export function Hero() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
               </span>
-              <span className="text-[13px] font-medium text-emerald-400">Verfügbar für neue Herausforderungen</span>
+              <span className="text-[13px] font-medium text-emerald-400">Offen für eine Festanstellung</span>
             </div>
             <div className="flex flex-wrap justify-center gap-2">
-              {['Webentwicklung', 'KI-Automatisierung', 'Agentic Engineering', 'Rapid Prototyping', 'Barrierefreiheit (WCAG)', 'GEO & SEO', 'Cloud & DevOps Basics', 'IT-Support'].map((tag) => (
+              {['KI-Produktentwicklung', 'Automatisierung', 'Prototyping', 'APIs', 'Multi-Agent-Workflows', 'Testkonzeption'].map((tag) => (
                 <span
                   key={tag}
                   className="rounded-md border border-border/30 bg-black/20 px-2 py-1 font-mono text-xs text-muted-foreground transition-all duration-300 hover:border-primary/50 hover:bg-primary/5 hover:text-primary"
@@ -88,7 +88,8 @@ export function Hero() {
               ))}
             </div>
           </div>
-          <p className="text-xs text-muted-foreground/60">Dortmund · Remote bevorzugt, vor Ort möglich</p>
+          <p className="text-xs text-muted-foreground">Werkzeuge: Claude Code · Claude Cowork · ChatGPT · Lovable · n8n</p>
+          <p className="text-xs text-muted-foreground/60">Dortmund · Remote bevorzugt</p>
         </motion.div>
 
         {/* Profilbild */}
@@ -100,7 +101,7 @@ export function Hero() {
         >
           <div className="relative h-[150px] w-[150px] rounded-full ring-2 ring-primary/40 ring-offset-4 ring-offset-background shadow-[0_0_40px_rgba(249,115,22,0.2)]">
             <Image
-              src="/cel.jpg"
+              src="/marcel-welk-portrait.png"
               alt="Marcel Welk"
               fill
               className="rounded-full object-cover"
@@ -110,18 +111,11 @@ export function Hero() {
         </motion.div>
 
         {/* AI Typing Slogan */}
-        <div className="mb-4 h-6 flex justify-center items-center">
-          <p className="font-mono text-sm tracking-widest text-primary uppercase flex items-center">
-            {slogan.split("").map((char, index) => (
-              <motion.span
-                key={index}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.05, delay: 0.5 + index * 0.05 }}
-              >
-                {char}
-              </motion.span>
-            ))}
+        <div className="mb-4 min-h-6 flex justify-center items-center">
+          <p className="font-mono text-sm tracking-widest text-primary uppercase">
+            <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.5 }}>
+              {slogan}
+            </motion.span>
             <motion.span
               animate={{ opacity: [1, 0] }}
               transition={{ repeat: Infinity, duration: 0.8, delay: 0.5 }}
@@ -145,7 +139,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 1.0 }}
           className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty"
         >
-          Webentwickler &amp; KI-Spezialist aus Dortmund — von der Idee bis zum fertigen Deployment.
+          Ich konzipiere menschenzentrierte Webanwendungen und steuere ihre Umsetzung mit KI-Werkzeugen und Agenten — von der Anforderung bis zur nutzbaren Lösung.
         </motion.p>
 
         <motion.div 
@@ -195,78 +189,33 @@ export function Hero() {
 }
 
 function AboutToggle() {
-  const [paretoOpen, setParetoOpen] = useState(false)
+
 
   return (
     <details className="group mx-auto mt-12 max-w-lg relative z-20">
       <summary className="flex cursor-pointer items-center justify-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary list-none">
         <span className="group-open:hidden inline-flex items-center gap-1.5">
-          Mehr anzeigen
+          Über mich
           <ChevronDown size={14} />
         </span>
         <span className="hidden group-open:inline-flex items-center gap-1.5">
-          Weniger anzeigen
+          Über mich schließen
           <ChevronUp size={14} />
         </span>
       </summary>
 
       <div className="mt-6 space-y-4 text-left text-sm leading-relaxed text-muted-foreground animate-in fade-in slide-in-from-top-2 duration-300 relative z-20">
         <p>
-          Mein Kopf arbeitet am besten wenn er an fünf Sachen gleichzeitig denkt. Das klingt chaotisch, ist es manchmal auch, aber genau das macht mich gut in dem was ich tue. Ich mach abends den Rechner aus, leg mich hin, und nach zwei Stunden fällt mir plötzlich ein wie ich das Problem von vorhin lösen kann. Dann steh ich wieder auf, setz mich an den PC und bin im Tunnel. Im positiven Sinn. Da fließen tausend Ideen gleichzeitig und ich muss die alle festhalten bevor sie wieder weg sind.
+          Ich bin Marcel Welk aus Dortmund. Mein Schwerpunkt ist KI-gestützte Produktentwicklung: Ich strukturiere Anforderungen, plane verständliche Nutzerabläufe und koordiniere die Umsetzung mit KI-Werkzeugen. So entstehen Webanwendungen und Automatisierungen, die konkrete Aufgaben erleichtern.
         </p>
-
         <p>
-          Mein Werkzeug dafür: KI. Ob Claude, ChatGPT, Gemini, DeepSeek oder Open Source Modelle wie Llama und Kimi, ist mir erstmal egal. Ich schau mir an, welches Modell für mein aktuelles Problem oder Projekt am meisten Sinn macht, was es kostet und wo die Stärken liegen. Dann nehme ich einfach das richtige Werkzeug. Sich in neue Tools und Modelle einzuarbeiten ist für mich kein Aufwand, sondern normal. Das Feld ändert sich ständig und genau das finde ich gut.
+          Ich teile Aufgaben in überschaubare Arbeitspakete auf, formuliere Anweisungen und wähle Modelle passend zur Aufgabe. Claude Cowork, Claude Code und ChatGPT nutze ich auch parallel für Umsetzung, Gegenprüfung und Fehlersuche. Die Programmierung erfolgt KI-gestützt; mein Beitrag liegt in Konzeption, Steuerung und der Bewertung der Ergebnisse anhand der Anforderungen.
         </p>
-
         <p>
-          Und dann passiert was Interessantes. Beim Schreiben meiner Gedanken fallen mir meistens schon die Lösungen ein. Die KI ist dabei weniger Codegenerator und mehr Sparringspartner. Ich nutze oft mehrere KIs parallel mit dem gleichen Problem, weil jedes Modell anders denkt. Am Ende vom Tag nehme ich mir von allem das Beste, kombiniere es und baue daraus etwas das besser ist als jede einzelne Antwort.
+          Mein Therapieplatz Finder unterstützt Menschen bei Recherche, Kontaktaufnahme und Dokumentation während der Therapieplatzsuche. Die Anwendung wird derzeit im ambulant betreuten Wohnen für die Arbeit mit Klient:innen erprobt. Rückmeldungen aus dieser Erprobung und der Austausch mit einem Psychotherapeuten helfen mir, die Anwendung weiterzuentwickeln.
         </p>
-
         <p>
-          Mein Arbeitsprinzip: Schnell bauen, schnell testen, schnell lernen. Mein Senior-Trainer Suheib hat mir mal das Pareto Prinzip erklärt — und zwar so: Er selbst wollte früher in seiner Ausbildung alles wissen, jede Codezeile auswendig können. Bis sein damaliger IT-Senior ihm sagte: Du musst nicht alles wissen. Hauptsache du weißt wie du durch Recherche ans Ziel kommst. Wenn du die Grundlagen verstehst, kannst du alles andere leicht umsetzen. Das hat Suheib an mich weitergegeben und ich hab es für mich weitergedreht. Nicht Perfektion, sondern Impact. Erst den Kern treffen, dann schauen ob mehr nötig ist. Meistens reicht der Kern.{" "}
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              setParetoOpen(!paretoOpen);
-            }}
-            className="inline-flex items-center gap-1 rounded border border-primary/30 px-1.5 py-0.5 text-xs text-primary/70 hover:border-primary hover:text-primary transition-colors font-mono relative z-30"
-            aria-expanded={paretoOpen}
-          >
-            <Info size={10} />
-            Was ist das?
-          </button>
-        </p>
-
-        <div className="overflow-hidden">
-          <AnimatePresence>
-            {paretoOpen && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="rounded-xl border border-primary/20 bg-primary/5 backdrop-blur-md p-5 text-xs leading-relaxed space-y-3 my-4 shadow-[inset_0_0_20px_rgba(249,115,22,0.05)]">
-                  <p className="font-medium text-primary">Das Pareto Prinzip (die 80/20 Regel)</p>
-                  <p className="text-muted-foreground">
-                    Das Pareto Prinzip sagt, dass man mit 20% des Aufwands 80% des Ergebnisses erreicht. In der IT bedeutet das: 20% des Codes sind für 80% der Funktionalität verantwortlich. 20% der Bugs verursachen 80% der Abstürze. Wer die richtigen 20% findet, spart massiv Zeit.
-                  </p>
-                  <p className="text-muted-foreground">
-                    Ich wende das doppelt an: Die 20% der 20% finden, also den absoluten Kern. Inspiriert hat mich dabei auch die Arbeitsweise von Peter Steinberger, dem Gründer von PSPDFKit und OpenClaw, der heute bei OpenAI arbeitet. Sein Ansatz: Nicht jede Codezeile selber lesen, sondern KI Agenten orchestrieren und sich auf Architektur und das Gesamtbild konzentrieren. Schnell ausliefern statt endlos perfektionieren. Diese Denkweise hab ich für mich übernommen.
-                  </p>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-
-        <p>
-          Für meine eigenen Projekte heißt das: Code auf GitHub pushen. Wenn es funktioniert, gut. Wenn nicht, dann kommt der Teil der mir am meisten Spaß macht. Problemlösung. Wie krieg ich das hin? Woran liegt es? Da geh ich voll drauf. Das ist so was von mein Ding. In Teams und professionellen Umgebungen arbeite ich natürlich strukturierter, das sind verschiedene Welten.
-        </p>
-
-        <p>
-          Ich setze meine Projekte auf verschiedenen Wegen um. Lokal mit VSCode und Claude Code, für Server-Sachen kenne ich mich mit Linux und SSH aus. Docker hab ich mir in meiner Weiterbildung als Grundlage angeeignet und zuhause selbst genutzt, um mir n8n zu hosten und auszuprobieren. Deployed wird über Vercel, Code liegt auf GitHub. Ich probiere ständig neue Tools aus und lerne dabei. Nicht weil ich muss, sondern weil ich Bock drauf habe.
+          Aus meiner Weiterbildung bringe ich Grundlagen in JavaScript, Python, Frontend- und Backend-Frameworks sowie Cloud-Technologien mit. Darauf und auf meiner Gameserver- und VPS-Praxis von 2017 bis 2024 habe ich meinen eigenen KI-Workflow aufgebaut. Ich suche eine Festanstellung in KI-gestützter Produktentwicklung oder Automatisierung, bevorzugt remote — mit Fokus auf Konzeption, Workflows und Qualitätssicherung statt manueller Programmierung.
         </p>
       </div>
     </details>

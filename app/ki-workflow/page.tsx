@@ -4,14 +4,14 @@ import KiWorkflowClient from "./KiWorkflowClient"
 export const metadata: Metadata = {
   title: "KI-Workflow & Automatisierung",
   description:
-    "Wie ich als Webdesigner und Webentwickler aus Dortmund KI-Agenten, moderne Tools und digitale Lösungen einsetze, um Projekte von der Idee bis zum Deployment zu bringen.",
+    "Von Anforderungen zur nutzbaren Anwendung: meine Arbeitsweise mit KI, APIs, Automatisierung, Tests und Deployment.",
   alternates: {
     canonical: 'https://www.marcelwelk.de/ki-workflow',
   },
   openGraph: {
     title: "KI-Workflow | Marcel Welk",
     description:
-      "Ehrlicher Einblick in meinen Workflow: ADHS als Hyperfokus-Motor, KI als Navigator. Webdesign & Webentwicklung aus Dortmund – effizient und modern.",
+      "So verbinde ich Nutzeranforderungen, KI-gestützte Entwicklung und die Prüfung von Ergebnissen in eigenen Webprojekten.",
     url: "https://www.marcelwelk.de/ki-workflow",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "KI-Workflow – Marcel Welk Dortmund" }],
   },
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "KI-Workflow | Marcel Welk",
     description:
-      "Webdesign & Webentwicklung aus Dortmund: So nutze ich KI-Agenten, v0.app und moderne Tools für digitale Lösungen.",
+      "Menschenzentrierte Web- und KI-Lösungen: Anforderungen strukturieren, Funktionen entwickeln und Ergebnisse prüfen.",
     images: ["/og-image.jpg"],
   },
 }

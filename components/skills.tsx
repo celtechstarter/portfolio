@@ -54,35 +54,35 @@ const skillIcons: SkillIcon[] = [
 
 const skillCategories: SkillCategory[] = [
   {
-    title: "KI & Automatisierung",
+    title: "Produkt & KI-Workflows",
     icon: <Bot size={24} />,
-    skills: ["Gemini & Claude Agenten", "KI-Integration (APIs)", "Agentic Workflows", "Prompt Engineering"],
+    skills: ["Anforderungen strukturieren", "Nutzerabläufe planen", "Multi-Agent-Workflows", "n8n-Prototypen"],
   },
   {
-    title: "Webentwicklung",
+    title: "Technische Grundlagen",
     icon: <Code2 size={24} />,
-    skills: ["Next.js & React", "TypeScript & JavaScript", "Tailwind CSS", "Python Grundlagen"],
+    skills: ["JavaScript & Python: Grundlagen", "Frontend & Backend: Grundlagen", "APIs, HTTP & JSON", "React / Next.js: KI-Projekte"],
   },
   {
-    title: "Cloud & DevOps",
+    title: "Prüfung & Betrieb",
     icon: <Cloud size={24} />,
-    skills: ["Linux / VPS Administration", "CI/CD Pipelines", "Docker Basics", "AWS & Azure Basics"],
+    skills: ["Testfälle & KI-gestützte Reviews", "Dokumentation & Refactoring mit KI", "Linux / VPS: praktische Erfahrung", "AWS, Azure & Docker: Grundlagen"],
   },
   {
     title: "Meine Werkzeuge",
     icon: <Monitor size={24} />,
-    skills: ["Claude Code (CLI)", "Cowork", "VS Code", "v0.app (AI UI/UX)", "Canva", "Vercel (Deployment)"],
+    skills: ["Claude Code", "Claude Cowork", "ChatGPT", "Lovable", "n8n", "GitHub & Vercel"],
   },
 ]
 
 const certificates: Certificate[] = [
-  { title: "Cloud & Web Expert", issuer: "Techstarter" },
+  { title: "Cloud- und Webentwicklung", issuer: "Techstarter · Weiterbildung" },
   { title: "Linux Essentials", issuer: "Linux Professional Institute", url: "https://cs.lpi.org/caf/Xamman/certification/verify/LPI000601206/68tg2avpp5" },
-  { title: "AWS re/Start", issuer: "Amazon Web Services", url: "https://www.credly.com/badges/4ede2f7b-4d7f-4be0-983a-848926348c38/linked_in_profile" },
+  { title: "AWS re/Start Graduate", issuer: "Amazon Web Services", url: "https://www.credly.com/badges/4ede2f7b-4d7f-4be0-983a-848926348c38/linked_in_profile" },
   { title: "Azure Fundamentals", issuer: "Microsoft", url: "https://learn.microsoft.com/de-de/users/marcelwelk-5271/credentials/9641b0c7905438cd" },
-  { title: "Claude 101", issuer: "Anthropic", url: "https://verify.skilljar.com/c/wax4356idoe9" },
-  { title: "Claude Code 101", issuer: "Anthropic", url: "https://verify.skilljar.com/c/mc26kuoa47b2" },
-  { title: "Claude Cowork", issuer: "Anthropic", url: "https://verify.skilljar.com/c/5uwkjhqir3ix" },
+  { title: "Claude 101", issuer: "Anthropic · Kursabschluss", url: "https://verify.skilljar.com/c/wax4356idoe9" },
+  { title: "Claude Code 101", issuer: "Anthropic · Kursabschluss", url: "https://verify.skilljar.com/c/mc26kuoa47b2" },
+  { title: "Introduction to Claude Cowork", issuer: "Anthropic · Kursabschluss", url: "https://verify.skilljar.com/c/5uwkjhqir3ix" },
 ]
 
 export function Skills() {
@@ -97,13 +97,17 @@ export function Skills() {
       <div className="relative z-10 mx-auto max-w-6xl">
         <div className="mb-16 text-center">
           <p className="mb-2 font-mono text-sm tracking-widest text-primary uppercase">
-            Technologien
+            Grundlagen & Projektwerkzeuge
           </p>
           <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl text-balance">
-            Skills & Tools
+            Kompetenzen & Werkzeuge
           </h2>
         </div>
 
+        <p className="mb-8 text-center text-sm text-muted-foreground">
+          Die Technologien unten kommen in meiner Weiterbildung oder meinen KI-gestützt umgesetzten Projekten vor.
+          Mein Schwerpunkt liegt auf Konzeption, KI-gestützter Umsetzung und Ergebnisprüfung.
+        </p>
         {/* Infinite Scrolling Marquee */}
         <div className="mb-24 relative w-full overflow-hidden flex items-center">
           <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
@@ -132,7 +136,7 @@ export function Skills() {
 
         {/* Neural Network Skill Categories */}
         <div className="mb-24">
-          <h3 className="text-xl font-semibold text-center mb-12">Mein Tech-Stack</h3>
+          <h3 className="text-xl font-semibold text-center mb-12">Mein Beitrag und meine technische Grundlage</h3>
           
           <div className="relative flex flex-col md:flex-row items-stretch justify-center gap-12 md:gap-8">
             {/* Desktop connecting line */}
@@ -183,7 +187,7 @@ export function Skills() {
           <div className="mb-8 flex items-center justify-center gap-3">
             <Award size={20} className="text-primary" />
             <h3 className="text-xl font-semibold text-foreground">
-              Zertifikate
+              Weiterbildung & Zertifikate
             </h3>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

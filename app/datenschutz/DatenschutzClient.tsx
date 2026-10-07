@@ -38,10 +38,10 @@ export default function DatenschutzClient() {
         >
           <div className="mb-8 flex items-center gap-3 text-primary">
             <ShieldCheck size={32} />
-            <h1 className="font-bold text-3xl text-white">Datenschutzerklärung</h1>
+            <h1 className="min-w-0 font-bold text-2xl sm:text-3xl text-white [overflow-wrap:anywhere]">Datenschutzerklärung</h1>
           </div>
 
-          <div className="prose prose-invert prose-orange max-w-none space-y-4 text-muted-foreground text-sm leading-relaxed">
+          <div className="prose prose-invert prose-orange max-w-none space-y-4 text-muted-foreground text-sm leading-relaxed [overflow-wrap:anywhere]">
 
             <p>
               Diese Datenschutzerklärung klärt dich über Art, Umfang und Zweck der Verarbeitung personenbezogener Daten auf dieser Website auf. Sie gilt für alle Seiten unter dieser Domain. Verantwortlich im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:

@@ -4,10 +4,10 @@ import DatenschutzClient from "./DatenschutzClient"
 export const metadata: Metadata = {
   title: "Datenschutzerklärung",
   description:
-    "Datenschutzerklärung für die Website von Marcel Welk, Webdesigner und Webentwickler aus Dortmund. DSGVO-konform und transparent.",
+    "Informationen zur Datenverarbeitung auf dem Bewerbungsportfolio von Marcel Welk.",
   openGraph: {
     title: "Datenschutzerklärung | Marcel Welk",
-    description: "DSGVO-konforme Datenschutzerklärung – Marcel Welk, Webdesign & Webentwicklung Dortmund.",
+    description: "Datenschutzerklärung zum Portfolio von Marcel Welk.",
     url: "https://www.marcelwelk.de/datenschutz",
   },
   robots: {

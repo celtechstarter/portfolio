@@ -4,7 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import { ExternalLink, Github, Sparkles, Brain, Briefcase, Send, Lock, Headset, Construction, X, Globe, HeartPulse } from "lucide-react"
 
-type ProjectStatus = "aktiv" | "fertig" | "in_arbeit"
+type ProjectStatus = "aktiv" | "fertig" | "in_arbeit" | "erprobung"
 
 interface Project {
   title: string
@@ -26,19 +26,19 @@ const aiProjects: Project[] = [
   {
     title: "Therapieplatz Finder",
     description:
-      "Findet automatisiert einen ambulanten Therapieplatz in Dortmund: eigene Scraping-Pipeline sammelt hunderte Praxen aus mehreren Quellen, eine KI prüft Kassenzulassung, Schwerpunkt und freie Plätze. Personalisierte Anfrage-Mails gehen automatisch raus, eine Mappe sammelt Nachweise für die Krankenkasse — begleitet von Milo, einem eigenen KI-Assistenten. Login-geschützt, barrierefrei nach WCAG 2.1 AA und DSGVO-konform gebaut, mit CI-Pipeline, scharfer Content-Security-Policy und Sentry-Fehlermonitoring produktionsreif abgesichert.",
-    tags: ["Python", "Playwright", "Anthropic API", "Supabase", "Resend", "Cloudflare Turnstile", "Sentry", "GitHub Actions CI", "SEO/GEO", "Vercel"],
+      "Unterstützt die ambulante Therapieplatzsuche mit Praxisinformationen, Suchfiltern, E-Mail-Versand und einer Dokumentation der Kontaktversuche. Mein Beitrag: Konzeption, Nutzerabläufe und Steuerung der KI-gestützten Umsetzung einschließlich Datenaufbereitung, Tests und Veröffentlichung. Die Anwendung wird im ambulant betreuten Wohnen für die Arbeit mit Klient:innen erprobt; erste Rückmeldungen beschreiben eine Erleichterung bei der Unterstützung der Suche.",
+    tags: ["Python", "Anthropic API", "Supabase", "Resend", "GitHub Actions", "Vercel"],
     icon: <HeartPulse size={24} />,
     image: "/projects/therapieplatzfinder.png",
     video: "/projects/therapieplatzfinder.webm",
     liveUrl: "https://therapieplatz-finder.de",
     githubPrivate: true,
-    status: "aktiv",
+    status: "erprobung",
   },
   {
     title: "Poke-Scan V2",
     description:
-      "Pokémon-Karten per Foto scannen und Marktwert ermitteln. KI-Vision API ersetzt klassisches OCR — die KI sieht die Karte wie ein Mensch, nicht nur den Text.",
+      "Webanwendung zur Erkennung von Pokémon-Karten anhand eines Fotos und zur Anzeige von Preisinformationen. Mein Beitrag: Anforderungen, KI-gestützte Umsetzung mit mehreren Vision-Modellen und Koordination automatisierter Prüfungen.",
     tags: ["React", "TypeScript", "KI Vision", "Vercel"],
     icon: <Sparkles size={24} />,
     image: "/projects/pokescan.png",
@@ -50,7 +50,7 @@ const aiProjects: Project[] = [
   {
     title: "BewerbungsPilot",
     description:
-      "Lebenslauf hochladen, Stellenanzeige einfügen — fertiges Anschreiben in unter 5 Minuten. Gebaut als persönlicher Speed-Benchmark: Idee bis Deployment in 2 Tagen.",
+      "Erstellt aus Lebenslauf und Stellenanzeige einen Anschreiben-Entwurf zur persönlichen Prüfung und Überarbeitung. Eigenes Projekt zur KI-gestützten Verarbeitung von Dokumenten und zur schnellen Erprobung eines vollständigen Nutzerablaufs.",
     tags: ["React", "TypeScript", "KI", "Vercel"],
     icon: <Send size={24} />,
     image: "/projects/bewerbungspilot.png",
@@ -70,7 +70,7 @@ const aiProjects: Project[] = [
   {
     title: "CELDESK",
     description:
-      "Eigenbau IT-Helpdesk mit Ticketsystem, Asset-Verwaltung und Wissensdatenbank. Zeigt dass ich nicht nur Webseiten baue sondern auch interne IT-Tools verstehe.",
+      "Eigenbau IT-Helpdesk mit Ticketsystem, Asset-Verwaltung und Wissensdatenbank. Lernprojekt zur praktischen Auseinandersetzung mit Supportabläufen und internen IT-Werkzeugen.",
     tags: ["React", "TypeScript", "Supabase", "Tailwind CSS"],
     icon: <Headset size={24} />,
     image: "/projects/celdesk.png",
@@ -80,7 +80,7 @@ const aiProjects: Project[] = [
   {
     title: "Marcel CV Boost",
     description:
-      "Bewerbungshilfe-Plattform mit Terminbuchung und Admin-Dashboard. DSGVO-konform mit Supabase-Backend — mein erstes Projekt mit echtem Auth-System.",
+      "Bewerbungshilfe-Plattform mit Terminbuchung und Admin-Dashboard. Mit Supabase-Backend und Nutzeranmeldung — mein erstes Projekt mit einem Auth-System.",
     tags: ["React", "TypeScript", "Supabase", "Tailwind CSS"],
     icon: <Briefcase size={24} />,
     image: "/projects/cvboost.png",
@@ -101,36 +101,36 @@ const webProjects: Project[] = [
     video: "/projects/coachknobling.webm",
     liveUrl: "https://coaching-knobling.vercel.app/",
     status: "fertig",
-    badge: "Lernprojekt",
+    badge: "Unentgeltliches Webprojekt",
   },
   {
     title: "Hawaii Cards",
     description:
-      "Landingpage und digitaler Katalog für ein Sammelkarten-Business — ehrenamtlich umgesetzt. Fokus auf visuelles Design und Mobile-First.",
+      "Landingpage und digitaler Katalog für ein Sammelkarten-Business — unentgeltlich umgesetzt. Fokus auf visuelles Design und Mobile-First.",
     tags: ["Webentwicklung", "Responsive Design", "Asset-Optimierung"],
     icon: <Globe size={24} />,
     image: "/projects/hawaiicards.png",
     video: "/projects/hawaiicards.webm",
     liveUrl: "https://hawaii-cards.vercel.app/",
     status: "fertig",
-    badge: "Lernprojekt",
+    badge: "Unentgeltliches Webprojekt",
   },
   {
     title: "Gesunder Fuß",
     description:
-      "Lokaler Webauftritt für eine Gesundheitspraxis — ehrenamtlich umgesetzt. Fokus auf lokale SEO und übersichtliche Navigation.",
+      "Lokaler Webauftritt für eine Gesundheitspraxis — unentgeltlich umgesetzt. Fokus auf lokale SEO und übersichtliche Navigation.",
     tags: ["Lokale SEO", "Clean Design", "Mobile First"],
     icon: <Globe size={24} />,
     image: "/projects/gesunderfuss.png",
     video: "/projects/gesunderfuss.webm",
     liveUrl: "https://gesunderfuss.vercel.app/",
     status: "fertig",
-    badge: "Lernprojekt",
+    badge: "Unentgeltliches Webprojekt",
   },
 ]
 
 function StatusBadge({ status }: { status: ProjectStatus }) {
-  if (status === "aktiv") {
+  if (status === "aktiv" || status === "erprobung") {
     return (
       <div className="flex items-center gap-1.5">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -140,7 +140,7 @@ function StatusBadge({ status }: { status: ProjectStatus }) {
           </circle>
           <circle cx="7" cy="7" r="3.5" fill="#1D9E75" />
         </svg>
-        <span className="font-mono text-xs" style={{ color: "#1D9E75" }}>aktiv</span>
+        <span className="font-mono text-xs" style={{ color: "#1D9E75" }}>{status === "erprobung" ? "In Erprobung" : "Veröffentlicht"}</span>
       </div>
     )
   }
@@ -152,7 +152,7 @@ function StatusBadge({ status }: { status: ProjectStatus }) {
           <circle cx="7" cy="7" r="6" stroke="#378ADD" strokeWidth="1.5" />
           <path d="M4.5 7L6.5 9L9.5 5" stroke="#378ADD" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-        <span className="font-mono text-xs" style={{ color: "#378ADD" }}>fertig</span>
+        <span className="font-mono text-xs" style={{ color: "#378ADD" }}>Veröffentlicht</span>
       </div>
     )
   }
@@ -164,7 +164,7 @@ function StatusBadge({ status }: { status: ProjectStatus }) {
           <animateTransform attributeName="transform" type="rotate" from="0 7 7" to="360 7 7" dur="2.5s" repeatCount="indefinite" />
         </circle>
       </svg>
-      <span className="font-mono text-xs" style={{ color: "#EF9F27" }}>in arbeit</span>
+      <span className="font-mono text-xs" style={{ color: "#EF9F27" }}>In Entwicklung</span>
     </div>
   )
 }
@@ -183,9 +183,13 @@ export function Projects() {
               KI & App Development
             </p>
             <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl text-balance">
-              Eigene Projekte & Tools
+              KI-gestützt umgesetzte Projekte
             </h2>
           </div>
+          <p className="mb-8 text-sm text-muted-foreground text-center max-w-3xl mx-auto">
+            Ich konzipiere Funktionen, koordiniere KI-Werkzeuge und Agenten und erprobe die Ergebnisse.
+            Die Code-Umsetzung erfolgt KI-gestützt. Die Technologie-Tags beschreiben den jeweiligen Projektaufbau.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {aiProjects.map((project) => (
               <ProjectCard
