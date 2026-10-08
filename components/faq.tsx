@@ -27,7 +27,7 @@ const faqs = [
   {
     question: "Welche technische Grundlage bringst du mit?",
     answer:
-      "Meine einjährige Weiterbildung vermittelte Grundlagen in JavaScript, Python, Frontend- und Backend-Frameworks, Linux und Cloud-Technologien. Dazu kommt Gameserver- und VPS-Praxis von 2017 bis 2024. Heute liegt mein Fokus auf der KI-gestützten Umsetzung eigener Projekte.",
+      "Meine einjährige Weiterbildung vermittelte Kenntnisse in JavaScript, Python, Frontend- und Backend-Frameworks, Linux und Cloud-Technologien. Dazu kommt Gameserver- und VPS-Praxis von 2017 bis 2024. Heute liegt mein Fokus auf der KI-gestützten Umsetzung eigener Projekte.",
   },
   {
     question: "Wie kann man dich erreichen?",

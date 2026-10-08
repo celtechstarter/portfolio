@@ -274,15 +274,26 @@ export default function LebenslaufPage() {
           <section>
             <SectionHeader label="Profil" title="Über mich" />
             <p className="text-base leading-relaxed text-muted-foreground">
-              Ich konzipiere menschenzentrierte Webanwendungen und koordiniere
-              ihre Umsetzung mit KI-Werkzeugen und Agenten. Mein Schwerpunkt
-              liegt auf Anforderungen, Nutzerabläufen, Aufgabenverteilung und
-              Ergebnisprüfung. Die Programmierung erfolgt KI-gestützt. Aus
-              meiner Weiterbildung bringe ich technische Grundlagen mit, die ich
-              in eigenen Projekten praktisch einsetze. Ich suche eine
-              Festanstellung in KI-gestützter Produktentwicklung oder
-              Automatisierung, bevorzugt remote, mit Schwerpunkt auf Konzeption
-              und Workflows statt manueller Programmierung.
+              Ich entwickle menschenzentrierte Web- und AI-Lösungen, die reale Probleme vereinfachen und Menschen im Alltag weiterhelfen.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+              Dabei verbinde ich Webentwicklung, KI-Integration und Automatisierung mit einem pragmatischen Blick auf Nutzer, Abläufe und verständliche digitale Produkte.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+              Ein Beispiel dafür ist eine von mir entwickelte Anwendung, die Menschen bei der Suche nach passenden Psychotherapieangeboten unterstützt. Solche Projekte zeigen für mich, welchen Wert Technologie haben kann, wenn sie nicht nur technisch funktioniert, sondern ein konkretes Problem löst.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+              Ich setze digitale Lösungen von der Idee über Konzeption und Entwicklung bis zu API-Integration, Testing, Deployment und laufender Optimierung um.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+              Technisch arbeite ich unter anderem mit React, Next.js, TypeScript, JavaScript, Python, REST APIs, Supabase, PostgreSQL, Docker, Git und n8n. KI-Modelle, Coding Agents und moderne AI-Tools nutze ich produktiv in Entwicklung und Automatisierung.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+              Mein Schwerpunkt liegt auf:<br />
+              Web Development · AI Integration · Automation · APIs · Testing · Deployment
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+              Ich interessiere mich besonders für Projekte, bei denen Technologie einen echten Nutzen schafft – für Menschen, Teams oder Organisationen.
             </p>
           </section>
 
@@ -509,8 +520,8 @@ export default function LebenslaufPage() {
                   </p>
                   <BulletList
                     items={[
-                      "Grundlagen: JavaScript, Python sowie Frontend- und Backend-Frameworks",
-                      "Grundlagen und praktische Übungen: AWS, Azure und Linux",
+                      "JavaScript, Python sowie Frontend- und Backend-Frameworks",
+                      "Praktische Übungen: AWS, Azure und Linux",
                       "Virtuelle Maschinen und Container (Docker)",
                       "CI/CD, Git, Automatisierung",
                       "Infrastructure as Code (Terraform, Ansible)",
@@ -549,7 +560,7 @@ export default function LebenslaufPage() {
                   <TimelineDot />
                   <div className="mb-1 flex flex-wrap items-center gap-3">
                     <h3 className="font-semibold text-foreground">
-                      Gameserver-Administration · eigene Praxis
+                      Gameserver-Administration · praktische Erfahrung
                     </h3>
                     <span className="font-mono text-xs text-muted-foreground">
                       2017–2024
@@ -640,8 +651,8 @@ export default function LebenslaufPage() {
                 {
                   title: "Grundlagen & Projekttechnologien",
                   skills: [
-                    "JavaScript / Python: Grundlagen",
-                    "Frontend / Backend: Grundlagen",
+                    "JavaScript / Python",
+                    "Frontend / Backend",
                     "React / Next.js: KI-Projekte",
                     "APIs, HTTP & JSON",
                   ],
@@ -657,11 +668,11 @@ export default function LebenslaufPage() {
                   ],
                 },
                 {
-                  title: "Serverpraxis & Cloud-Grundlagen",
+                  title: "Serverpraxis & Cloud",
                   skills: [
-                    "Linux/Ubuntu Server (praktische Erfahrung)",
-                    "Docker-Grundlagen",
-                    "AWS & Azure Basics",
+                    "Linux/Ubuntu Server",
+                    "Docker",
+                    "AWS & Azure",
                     "GitHub Actions in KI-Projekten",
                     "SSH Remote-Administration",
                   ],
@@ -701,7 +712,7 @@ export default function LebenslaufPage() {
                 { lang: "Deutsch", level: "Muttersprache" },
                 {
                   lang: "Englisch",
-                  level: "Gutes Lese- und Hörverständnis; mündliche Grundlagen",
+                  level: "Gutes Lese- und Hörverständnis; Sprechen wird weiter ausgebaut",
                 },
               ].map(({ lang, level }) => (
                 <div
@@ -717,26 +728,6 @@ export default function LebenslaufPage() {
             </div>
           </section>
 
-          {/* ── 9. Interessen ──────────────────────────────────────────────── */}
-          <section>
-            <SectionHeader label="Persönliches" title="Interessen" />
-            <div className="flex flex-wrap gap-2.5">
-              {[
-                "Gameserver-Administration",
-                "Pokémon-Karten sammeln",
-                "Gartenarbeit (Hochbeete, Gewächshaus)",
-                "PCs & Laptops reparieren",
-              ].map((interest) => (
-                <span
-                  key={interest}
-                  className="rounded-full bg-secondary px-4 py-2 text-sm text-muted-foreground"
-                >
-                  {interest}
-                </span>
-              ))}
-            </div>
-          </section>
-
           {/* ── 10. Arbeitsweise ───────────────────────────────────────────── */}
           <section>
             <SectionHeader label="Methodik" title="Meine Arbeitsweise" />
@@ -748,7 +739,7 @@ export default function LebenslaufPage() {
                 erweitern. Dokumentation und KI-gestütztes Refactoring gehören
                 ebenso dazu. Prüfaufträge, gemeldete Befunde und bestätigte
                 Ergebnisse unterscheide ich voneinander. Diesen Ablauf habe ich
-                in eigenen Projekten entwickelt und möchte ihn im Team weiter
+                in Projekten entwickelt und möchte ihn im Team weiter
                 ausbauen.
               </p>
             </div>

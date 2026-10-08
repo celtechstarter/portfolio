@@ -152,7 +152,7 @@ export default function RootLayout({
                   "n8n",
                   "Testkonzeption",
                   "SEO/GEO",
-                  "Grundlagen der Cloud- und Webentwicklung",
+                  "Weiterbildung in Cloud- und Webentwicklung",
                 ],
                 knowsLanguage: ["de", "en"],
                 hasOccupation: {

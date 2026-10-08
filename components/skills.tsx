@@ -63,11 +63,11 @@ const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    title: "Technische Grundlagen",
+    title: "Technische Kenntnisse",
     icon: <Code2 size={24} />,
     skills: [
-      "JavaScript & Python: Grundlagen",
-      "Frontend & Backend: Grundlagen",
+      "JavaScript & Python",
+      "Frontend & Backend",
       "APIs, HTTP & JSON",
       "React / Next.js: KI-Projekte",
     ],
@@ -78,8 +78,8 @@ const skillCategories: SkillCategory[] = [
     skills: [
       "Testfälle & KI-gestützte Reviews",
       "Dokumentation & Refactoring mit KI",
-      "Linux / VPS: praktische Erfahrung",
-      "AWS, Azure & Docker: Grundlagen",
+      "Linux / VPS",
+      "AWS, Azure & Docker",
     ],
   },
   {
@@ -147,7 +147,7 @@ export function Skills() {
           </div>
           <p>
             Konzeption, Agentenkoordination und Ergebnisprüfung. Technische
-            Grundlagen aus meiner Weiterbildung verbinde ich mit eigener
+            Kenntnisse aus meiner Weiterbildung verbinde ich mit eigener
             KI-gestützter Projektpraxis.
           </p>
         </div>
@@ -235,7 +235,7 @@ export function Skills() {
         <div className="certificates">
           <div className="section-heading">
             <h3>Weiterbildung & Zertifikate</h3>
-            <p>Technische Grundlagen und gezielte Weiterbildung.</p>
+            <p>Technische Kenntnisse und gezielte Weiterbildung.</p>
           </div>
           <div className="certificate-grid">
             {certificates.map((cert) => (

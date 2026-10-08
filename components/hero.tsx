@@ -110,7 +110,7 @@ export function Hero() {
                 Psychotherapeuten helfen mir, die Anwendung weiterzuentwickeln.
               </p>
               <p>
-                Aus meiner Weiterbildung bringe ich Grundlagen in JavaScript,
+                Aus meiner Weiterbildung bringe ich Kenntnisse in JavaScript,
                 Python, Frontend- und Backend-Frameworks sowie
                 Cloud-Technologien mit. Darauf und auf meiner Gameserver- und
                 VPS-Praxis von 2017 bis 2024 habe ich meinen eigenen KI-Workflow
